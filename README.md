@@ -2,7 +2,9 @@
 
 OpsDesk turns an employee's IT question into a reviewed answer and, when needed, a traceable work order. It connects a web workspace and a **clearly labelled simulated Alexa+ assistant** to the same support workflow through real MCP tools.
 
-**Status:** independently reimplemented starting 28 September 2026; hackathon preparation, not yet submitted. Notifications are recorded locally. Demo guidance and identities are fictional.
+**Status:** independently reimplemented starting 28 September 2026; a Devpost draft has been saved, not yet formally submitted. Notifications are recorded locally. Demo guidance and identities are fictional.
+
+[Watch the public 132-second demo](https://www.youtube.com/watch?v=ZQHXHj61xAc) · [Devpost project preview](https://devpost.com/software/opsdesk-it-support-with-evidence-and-accountable-actions)
 
 ![Actual simulated-assistant workflow with English model response and MCP protocol](docs/images/mcp-workflow.png)
 

@@ -20,4 +20,6 @@ The prepared English-captioned demonstration is **132 seconds**, with a 30-secon
 
 “智能支持” = Assistant; “工单记录” = Work orders; “运行与知识” = Operations; “理解与分类” = Intake; “知识检索” = Evidence; “会话记忆” = Recall; “影响分级” = Priority; “生成建议” = Draft; “最终审查” = Review; “负责人” = Assignee; “待分配” = Unassigned; “审查已完成” = Review complete; “无需工单” = No work order needed; “工单操作已排队” = Work-order actions queued; “已连接” = Connected; “升级通知” = Escalation record.
 
-The main live response and new engineer notes are in English. Every demonstrated incident is synthetic. This is a simulated Alexa+ web interface calling real MCP tools, not an official device integration. A public video URL and an actual final submission confirmation still need to be recorded.
+The main live response and new engineer notes are in English. Every demonstrated incident is synthetic. This is a simulated Alexa+ web interface calling real MCP tools, not an official device integration.
+
+Published demo: https://www.youtube.com/watch?v=ZQHXHj61xAc (OpsDesk Demo channel, 28 September 2026). The Devpost draft is saved; final competition submission is still pending entrant confirmation.

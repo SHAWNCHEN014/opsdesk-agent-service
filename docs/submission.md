@@ -1,6 +1,8 @@
 # Submission draft — OpsDesk
 
-Status: prepared locally; not submitted. All links and final eligibility declarations must be completed using the entrant's own accounts.
+Status: saved as a Devpost draft on 28 September 2026; not formally submitted. The public demo is published. Entrant eligibility declarations and final rules acceptance are pending the entrant's explicit confirmation.
+
+Project preview: https://devpost.com/software/opsdesk-it-support-with-evidence-and-accountable-actions
 
 ## Name and tagline
 
@@ -65,6 +67,7 @@ Validate the conversational flow with an official Alexa+ client when access is a
 - Primary track: Alexa+; clearly labelled simulated experience plus real MCP HTTP server.
 - Mini challenges: none. No AWS runtime or extra qualifying open-source contribution is claimed.
 - GitHub repository URL: https://github.com/SHAWNCHEN014/opsdesk-agent-service
-- Public YouTube/Vimeo demo URL: pending upload of the reviewed English-captioned demonstration.
+- Public YouTube demo URL: https://www.youtube.com/watch?v=ZQHXHj61xAc
+- Friction log URL: https://github.com/SHAWNCHEN014/opsdesk-agent-service/blob/main/docs/developer-feedback.md
 - Entrant and eligibility:本人确认，不能由代码测试代替。
 - Final submission confirmation URL/screenshot/time: retain after successful submission; only then update the resume heading to competition participation.
