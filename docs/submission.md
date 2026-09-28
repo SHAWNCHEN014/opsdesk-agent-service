@@ -38,6 +38,18 @@ We had audited an earlier reference-based prototype before implementation. This 
 
 Refer to `docs/verification.md` for actual test counts and runtime evidence. The tested scenarios are synthetic. We make no production user, savings, accuracy uplift or award claims. Escalations are local records in the demonstration, not sent emails. The history summary is bounded and extractive, not an additional summarisation model.
 
+## Accomplishments we are proud of
+
+The complete handoff is inspectable: an employee request passes through evidence retrieval and final-text review, a durable action creates a work order, and an engineer's resolution is visible through the same authenticated MCP status tool. Twenty behaviour tests passed. A recorded real-model run covered three synthetic FAQ, individual-incident and widespread-incident scenarios with MySQL, Redis and vector retrieval active. We also verified the Docker demo separately.
+
+## What we learned
+
+Natural-language classification needs a policy boundary: asking how to request access should not create the same operational action as reporting an actual outage. Answer generation and durable action execution also have different completion states. Exposing those states, evidence sources and review replacements made failures easier to explain. A small synthetic evaluation is useful for finding regressions, but does not establish production accuracy.
+
+## What's next
+
+Validate the conversational flow with an official Alexa+ client when access is available, add enterprise identity integration, expand bilingual retrieval and review evaluations, and harden notification delivery. These are planned improvements, not completed capabilities.
+
 ## Product feedback
 
 **MCP Python SDK:** Used for both the external Streamable HTTP interface and internal stdio action tools. Protocol negotiation and tool discovery worked in real runtime tests. Dictionary return formats required a JSON-content fallback in our client. The stateless HTTP server and async lifespan made onboarding practical; we would use it again for interoperable tool interfaces. Access to a broadly available official Alexa+ test client would improve end-to-end device validation.
