@@ -52,7 +52,7 @@ Refer to `docs/verification.md` for actual test counts and runtime evidence. The
 
 - Primary track: Alexa+; clearly labelled simulated experience plus real MCP HTTP server.
 - Mini challenges: none. No AWS runtime or extra qualifying open-source contribution is claimed.
-- GitHub repository URL: pending publication.
+- GitHub repository URL: https://github.com/SHAWNCHEN014/opsdesk-agent-service
 - Public YouTube/Vimeo demo URL: pending upload of the reviewed English-captioned demonstration.
 - Entrant and eligibility:本人确认，不能由代码测试代替。
 - Final submission confirmation URL/screenshot/time: retain after successful submission; only then update the resume heading to competition participation.
