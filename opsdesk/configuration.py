@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Literal
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -11,7 +12,7 @@ class Configuration(BaseSettings):
 
     database_url: str = "sqlite:///./var/service.db"
     redis_url: str = ""
-    model_mode: str = "demo"
+    model_mode: Literal["demo", "ollama"] = "demo"
     model_name: str = "qwen3:8b"
     ollama_url: str = "http://127.0.0.1:11434"
     model_timeout: float = 120
@@ -20,13 +21,14 @@ class Configuration(BaseSettings):
     vector_directory: str = "./var/vectors"
     ledger_file: str = "./var/it-ledger.xlsx"
     origin: str = "http://127.0.0.1:8085"
+    mcp_client_url: str = ""
     mcp_token: str = "local-mcp-demo"
     employee_password: str = "local-demo-only"
     engineer_password: str = "engineer-demo-only"
     worker_enabled: bool = True
-    action_transport: str = "mcp"
+    action_transport: Literal["mcp", "direct"] = "mcp"
     max_action_attempts: int = 3
-    notification_mode: str = "record"
+    notification_mode: Literal["record", "smtp"] = "record"
     notification_limit: int = 30
     smtp_host: str = ""
     smtp_port: int = 587

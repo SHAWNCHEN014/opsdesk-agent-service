@@ -1,0 +1,42 @@
+{
+  "classification": [
+    ["如何申请业务系统权限？", "FAQ", "P3"],
+    ["VPN 的连接流程是什么？", "FAQ", "P3"],
+    ["新员工在哪里领取电脑？", "FAQ", "P3"],
+    ["How do I reset my password?", "FAQ", "P3"],
+    ["What is the company-wide outage procedure?", "FAQ", "P3"],
+    ["Where is the approved software catalogue?", "FAQ", "P3"],
+    ["请帮我开通财务系统权限", "REQUEST", "P2"],
+    ["我要申请一台工作电脑", "REQUEST", "P2"],
+    ["请帮我安装批准的应用", "REQUEST", "P2"],
+    ["Please grant access to the approved reporting system", "REQUEST", "P2"],
+    ["I need a monitor for my desk", "REQUEST", "P2"],
+    ["Request a licensed software installation", "REQUEST", "P2"],
+    ["电脑无法开机，仅影响我本人", "INCIDENT", "P2"],
+    ["VPN 连接失败，只有我受影响", "INCIDENT", "P2"],
+    ["我的账号无法登录", "INCIDENT", "P2"],
+    ["My printer is not working", "INCIDENT", "P2"],
+    ["The application failed on my laptop", "INCIDENT", "P2"],
+    ["I cannot connect to office Wi-Fi", "INCIDENT", "P2"],
+    ["全员无法访问核心业务系统，服务中断", "INCIDENT", "P1"],
+    ["全公司网络中断", "INCIDENT", "P1"],
+    ["核心业务大面积报错", "INCIDENT", "P1"],
+    ["All employees cannot access the core business system", "INCIDENT", "P1"],
+    ["The entire company network is unavailable", "INCIDENT", "P1"],
+    ["Company-wide service outage reported", "INCIDENT", "P1"]
+  ],
+  "retrieval": [
+    ["忘记密码如何重置", "access.md"],
+    ["申请访问权限需要哪些审批", "access.md"],
+    ["VPN 无法连接错误码", "connectivity.md"],
+    ["office Wi-Fi drops", "connectivity.md"],
+    ["电脑无法开机电源检查", "devices.md"],
+    ["printer queue paused", "devices.md"],
+    ["安装软件许可和批准", "software.md"],
+    ["application error version reproduction steps", "software.md"],
+    ["全员无法访问核心业务系统", "incidents.md"],
+    ["outage restoration timeline", "incidents.md"],
+    ["聊天中哪些敏感信息不应该发送", "privacy.md"],
+    ["support communication privacy", "privacy.md"]
+  ]
+}

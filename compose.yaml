@@ -1,0 +1,54 @@
+name: opsdesk-independent
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: opsdesk
+      MYSQL_USER: opsdesk
+      MYSQL_PASSWORD: ${OPSDESK_DB_PASSWORD:-local-database-demo}
+      MYSQL_ROOT_PASSWORD: ${OPSDESK_DB_ROOT_PASSWORD:-local-root-demo}
+    ports: ["127.0.0.1:13308:3306"]
+    volumes: ["mysql_data:/var/lib/mysql"]
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+  redis:
+    image: redis:7.2-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports: ["127.0.0.1:16381:6379"]
+    volumes: ["redis_data:/data"]
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 15
+  web:
+    build: .
+    ports: ["127.0.0.1:8085:8085"]
+    environment:
+      OPSDESK_DATABASE_URL: mysql+pymysql://opsdesk:${OPSDESK_DB_PASSWORD:-local-database-demo}@mysql:3306/opsdesk?charset=utf8mb4
+      OPSDESK_REDIS_URL: redis://redis:6379/0
+      OPSDESK_MODEL_MODE: ${OPSDESK_MODEL_MODE:-demo}
+      OPSDESK_MODEL_NAME: ${OPSDESK_MODEL_NAME:-qwen3:8b}
+      OPSDESK_OLLAMA_URL: http://host.docker.internal:11434
+      OPSDESK_VECTOR_SEARCH: ${OPSDESK_VECTOR_SEARCH:-false}
+      OPSDESK_EMBED_MODEL: ${OPSDESK_EMBED_MODEL:-nomic-embed-text-v2-moe}
+      OPSDESK_ORIGIN: http://127.0.0.1:8085
+      OPSDESK_MCP_CLIENT_URL: http://127.0.0.1:8085
+      OPSDESK_LEDGER_FILE: /service/var/it-ledger.xlsx
+      OPSDESK_VECTOR_DIRECTORY: /service/var/vectors
+      OPSDESK_MCP_TOKEN: ${OPSDESK_MCP_TOKEN:-local-mcp-demo}
+      OPSDESK_EMPLOYEE_PASSWORD: ${OPSDESK_EMPLOYEE_PASSWORD:-local-demo-only}
+      OPSDESK_ENGINEER_PASSWORD: ${OPSDESK_ENGINEER_PASSWORD:-engineer-demo-only}
+      OPSDESK_NOTIFICATION_MODE: record
+    volumes: ["service_data:/service/var"]
+    depends_on:
+      mysql: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    extra_hosts: ["host.docker.internal:host-gateway"]
+volumes:
+  mysql_data:
+  redis_data:
+  service_data:

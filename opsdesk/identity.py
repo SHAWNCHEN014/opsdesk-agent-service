@@ -36,7 +36,7 @@ class Authentication:
 
     def resolve(self, cookies, authorization=""):
         with self.database.session() as db:
-            if authorization.startswith("Bearer ") and hmac.compare_digest(authorization[7:], self.config.mcp_token):
+            if self.config.mcp_token and authorization.startswith("Bearer ") and hmac.compare_digest(authorization[7:], self.config.mcp_token):
                 return db.scalar(select(Identity).where(Identity.username == "employee"))
             token = cookies.get("opsdesk_session", "")
             grant = db.get(AccessGrant, hashlib.sha256(token.encode()).hexdigest()) if token else None
