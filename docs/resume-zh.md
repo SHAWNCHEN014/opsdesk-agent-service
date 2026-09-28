@@ -1,10 +1,12 @@
 # OpsDesk 独立新版：中文简历与面试素材
 
-截至 2026-09-28，代码、测试与演示已准备；比赛尚未最终提交。项目时间按真实开发日期填写，起点为 2026-09-28。旧原型的 25 项测试、100 条分类、15 条检索数字不属于这个版本。
+2026-09-28 已正式提交 **Build, Ship, Shape: Amazon Developer Hackathon 的 Alexa+ 赛道**，Devpost 显示「Project submitted!」及「Submitted to」。这是已投稿参赛记录，没有获奖或入围结论。项目时间按真实开发日期填写，起点为 2026-09-28。旧原型的 25 项测试、100 条分类、15 条检索数字不属于这个版本。
+
+[参赛项目页](https://devpost.com/software/opsdesk-it-support-with-evidence-and-accountable-actions)｜[公开演示](https://www.youtube.com/watch?v=ZQHXHj61xAc)｜[公开源码](https://github.com/SHAWNCHEN014/opsdesk-agent-service)｜[提交记录](submission-record.md)
 
 ## 现在可用的简历正文
 
-**OpsDesk 企业 IT 智能服务台｜个人开发（AI 辅助）｜Agent 应用开发**  
+**OpsDesk 企业 IT 智能服务台｜Amazon 开发者黑客松参赛项目（Alexa+ 赛道）｜Agent 应用开发**  
 **2026.09—至今｜Python、FastAPI、Ollama、MySQL、Redis、Chroma、RAG、MCP、Docker Compose**
 
 **项目简介：** 面向企业 IT 支持场景，将员工自然语言问题转化为有知识依据的答复、故障分级与可追踪工单，支持工程师处理及外部助理查询。
@@ -20,17 +22,17 @@
 - 使用 Ollama、Chroma、BM25、Redis 和 MySQL 提供有依据的支持建议；通过双传输 MCP 与持久化队列完成工单、Excel 台账和重大事故升级记录，支持重试、死信、审计及工程师交接。
 - 完成 20 项行为测试与真实模型三类流程联调，验证外部 MCP 2025-11-25 接口、SSE 展示、Docker 启动和处理记录查询；使用 24 条规则、12 条检索合成样例做回归。
 
-## 成功提交后才能替换的项目标题
+## 参赛标题与证明
 
 **OpsDesk 企业 IT 智能服务台｜Amazon 开发者黑客松参赛项目（Alexa+ 赛道）｜Agent 应用开发**
 
-对应正式赛事名：**Build, Ship, Shape: Amazon Developer Hackathon**。需要保存最终提交成功页面、项目链接和时间。报名或草稿不能替代最终提交；没有获奖、入围、官方合作或线上落地记录时不写这些表述。
+对应正式赛事名：**Build, Ship, Shape: Amazon Developer Hackathon**。投稿 ID 为 **1203162**，提交成功状态核实时间为 **2026-09-28 11:51:45 UTC**（墨尔本当天 21:51:45）。成功截图、页面文本和记录已保存至桌面资源库的「验证证据」。没有获奖、入围、官方合作或线上落地记录时不写这些表述。也可按版面缩短为「Amazon 开发者黑客松参赛作品」。
 
 ## 面试：项目动机
 
 “我关注的是员工只描述一个现象，而 IT 工程师需要影响范围、依据和处理记录之间的衔接问题。我做了一个本地可复现的智能服务台：咨询只给指引，真实故障才进入工单，重大中断记录升级。参赛方向选择 Alexa+ 的模拟助理路径，用真实 MCP 把自然语言入口接到同一业务闭环。”
 
-提交前将最后一句说成“按该赛道准备”；提交后可说“作为该赛道参赛作品提交”。不声称已接入官方 Alexa 设备。
+现在可说“作为 Alexa+ 赛道参赛作品提交”。演示使用网页模拟助理与真实 MCP，未接入官方 Alexa 设备。
 
 ## 面试：是不是多 Agent？
 

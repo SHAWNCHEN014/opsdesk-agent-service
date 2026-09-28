@@ -1,8 +1,8 @@
 # Submission draft — OpsDesk
 
-Status: saved as a Devpost draft on 28 September 2026; not formally submitted. The public demo is published. Entrant eligibility declarations and final rules acceptance are pending the entrant's explicit confirmation.
+Status: formally submitted on 28 September 2026. Devpost displayed “Project submitted!” and “Submitted to”. The entrant explicitly confirmed eligibility, rights to submit, official rules and Devpost terms before the declarations and final submission.
 
-Project preview: https://devpost.com/software/opsdesk-it-support-with-evidence-and-accountable-actions
+Submitted project: https://devpost.com/software/opsdesk-it-support-with-evidence-and-accountable-actions
 
 ## Name and tagline
 
@@ -62,12 +62,12 @@ Validate the conversational flow with an official Alexa+ client when access is a
 
 **FastAPI, SQLAlchemy, MySQL, Redis, openpyxl, pypdf, Docker Compose:** Used for authenticated APIs, durable records, history caching, workbook export, text extraction and local service isolation. These worked through the tested workflows. Local account auth, a single API worker and text-only PDF extraction are deliberate demo limits, requiring further work for enterprise deployment.
 
-## Submission fields to complete
+## Submitted fields and record
 
 - Primary track: Alexa+; clearly labelled simulated experience plus real MCP HTTP server.
 - Mini challenges: none. No AWS runtime or extra qualifying open-source contribution is claimed.
 - GitHub repository URL: https://github.com/SHAWNCHEN014/opsdesk-agent-service
 - Public YouTube demo URL: https://www.youtube.com/watch?v=ZQHXHj61xAc
 - Friction log URL: https://github.com/SHAWNCHEN014/opsdesk-agent-service/blob/main/docs/developer-feedback.md
-- Entrant and eligibility:本人确认，不能由代码测试代替。
-- Final submission confirmation URL/screenshot/time: retain after successful submission; only then update the resume heading to competition participation.
+- Entrant declarations: explicitly confirmed by the entrant before submission.
+- Submission ID: 1203162. Confirmation verified at 2026-09-28 11:51:45 UTC; screenshot and page text retained locally. See `submission-record.md`. This is participation, not an award or judging result.

@@ -22,4 +22,4 @@ The prepared English-captioned demonstration is **132 seconds**, with a 30-secon
 
 The main live response and new engineer notes are in English. Every demonstrated incident is synthetic. This is a simulated Alexa+ web interface calling real MCP tools, not an official device integration.
 
-Published demo: https://www.youtube.com/watch?v=ZQHXHj61xAc (OpsDesk Demo channel, 28 September 2026). The Devpost draft is saved; final competition submission is still pending entrant confirmation.
+Published demo: https://www.youtube.com/watch?v=ZQHXHj61xAc (OpsDesk Demo channel, 28 September 2026). The project was formally submitted to the hackathon on the same date; see `submission-record.md`.
