@@ -10,4 +10,4 @@ Requirements: FAQ without a ticket; personal fault with a work order; widespread
 
 All demonstration identities, knowledge and evaluation cases are synthetic. Model weights and third-party libraries are downloaded from their own providers and retain their licenses. Keep real timestamps, source hashes, test outputs and the final comparison audit. A similarity score alone is not a legal clearance.
 
-Competition status: development, not submitted. Participation wording on the resume is added only after a confirmed final submission.
+Competition status: formally submitted on 2026-09-28 to Build, Ship, Shape: Amazon Developer Hackathon, Alexa+ track. Devpost confirmed successful submission before participation wording was added to the resume. See [submission record](submission-record.md); no award or finalist status is claimed.
