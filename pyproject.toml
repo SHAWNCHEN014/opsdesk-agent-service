@@ -1,0 +1,9 @@
+[project]
+name = "opsdesk-service"
+version = "1.0.0"
+description = "An IT service desk with task-graph agents and an external MCP interface"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
