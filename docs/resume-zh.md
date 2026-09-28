@@ -6,7 +6,8 @@
 
 ## 现在可用的简历正文
 
-**OpsDesk 企业 IT 智能服务台｜Amazon 开发者黑客松参赛项目（Alexa+ 赛道）｜Agent 应用开发**  
+**OpsDesk 企业 IT 智能服务台｜Amazon 开发者黑客松参赛项目（Alexa+ 赛道）｜Agent 应用开发**
+
 **2026.09—至今｜Python、FastAPI、Ollama、MySQL、Redis、Chroma、RAG、MCP、Docker Compose**
 
 **项目简介：** 面向企业 IT 支持场景，将员工自然语言问题转化为有知识依据的答复、故障分级与可追踪工单，支持工程师处理及外部助理查询。
