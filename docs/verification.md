@@ -13,8 +13,11 @@ Measured on 28 September 2026. These results belong to the independently authore
 | Synthetic rule regression | 24/24 intent and 24/24 priority labels | Deterministic fallback only; authored examples, not model/production accuracy |
 | Hybrid retrieval regression | 12 queries; HitRate@4 = 1.0, MRR = 0.9583 | All 12 used vectors alongside BM25; small synthetic corpus |
 | Dependency inventory | 100 installed distributions, 133 archived licence files | Isolated Python environment; original notices and file hashes retained |
+| Docker image workflow | Passed on separate host port 8086 | Demo mode, SQLite test file, internal/external MCP, work-order updates and workbook; separate from the real-model run |
 
 The real workflow verifier also replayed request IDs, verified exactly two tickets for its selected three requests, downloaded the Excel workbook, updated an engineer's ticket through investigation/resolution and checked that the external MCP status tool returned the resolved state. Notification receipts used `record`, not SMTP delivery.
+
+Desktop and narrow-layout browser checks covered login, progress, a simulated MCP incident, ticket history and engineer diagnostics. An English procedure question revealed a model misclassification; the guard was expanded and a regression added. One safe English draft was conservatively rejected by the review model and visibly replaced. This is a known usefulness limitation of the current review fallback, not hidden as a successful original answer.
 
 ## Reproduce
 

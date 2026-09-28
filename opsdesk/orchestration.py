@@ -107,6 +107,7 @@ class ServiceTeam:
                 # Explicit questions about policy are not evidence of an actual outage.
                 if fallback.intent == "FAQ" and re.search(r"如何|怎么|流程|政策|how\b|where\b|policy|procedure", message, re.I):
                     result.intent = "FAQ"
+                    result.reason = "Procedural-question policy: requesting instructions does not request execution."
                 if fallback.intent == "INCIDENT" and fallback.scope == "organization":
                     result.intent, result.scope = "INCIDENT", "organization"
                 return result

@@ -4,6 +4,8 @@ OpsDesk turns an employee's IT question into a reviewed answer and, when needed,
 
 **Status:** independently reimplemented starting 28 September 2026; hackathon preparation, not yet submitted. Notifications are recorded locally. Demo guidance and identities are fictional.
 
+![Actual simulated-assistant workflow with English model response and MCP protocol](docs/images/mcp-workflow.png)
+
 ## What works
 
 - Knowledge questions return document evidence without creating tickets.

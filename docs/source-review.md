@@ -10,4 +10,6 @@ The highest initial file token similarity was the tiny SVG favicon (0.6326); man
 
 The comparison excludes dependency/runtime directories and compares selected text-source types. Hashes, paths and methodology are retained in the local reports. Scores are evidence for review, not legal clearance; contracts or independently applicable third-party rights cannot be decided by token similarity.
 
+The final snapshot compared 48 selected new text files against 74 selected files in each reference tree. Both comparisons again found zero identical files and zero matching normalized functions at the stated size threshold. Runtime data and original reference source are excluded from distribution.
+
 The root MIT licence covers the newly authored work. Dependency/model/container terms remain separate, as described in `THIRD_PARTY_NOTICES.md`. The earlier restricted prototype and its source archive are not included in the new repository or distribution bundle.
