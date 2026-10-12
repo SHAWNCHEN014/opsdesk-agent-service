@@ -1,6 +1,6 @@
 from typing import Literal
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class IntakeResult(BaseModel):
@@ -45,3 +45,9 @@ class WorkOrderUpdate(BaseModel):
     phase: Literal["INVESTIGATING", "RESOLVED"]
     note: str = Field(min_length=1, max_length=2000)
     expected_revision: int = Field(ge=0)
+
+
+class ManualRetryInput(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    # Codes carry a recovery reason without storing free text or credentials.
+    reason: Literal["issue_resolved", "dependency_restored", "operator_reviewed"] = "operator_reviewed"

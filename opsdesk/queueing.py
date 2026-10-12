@@ -14,7 +14,7 @@ from sqlalchemy.orm import aliased
 
 from opsdesk.actions import ActionHandlers
 from opsdesk.configuration import PROJECT
-from opsdesk.storage import ActionHistory, QueuedAction, new_id, timestamp
+from opsdesk.storage import ActionHistory, Identity, QueuedAction, new_id, timestamp
 
 
 logger = logging.getLogger(__name__)
@@ -173,11 +173,34 @@ class ActionWorker:
             if self.observations["state"] != "failed":
                 self.observations["state"] = "stopped"
 
-    def retry(self, action_id):
+    def retry(self, action_id, *, actor_id=None, reason="operator_reviewed"):
+        failure = None
         with self.database.session.begin() as db:
-            row = db.get(QueuedAction, action_id)
-            if row is None or row.phase != "DEAD":
-                raise ValueError("Only failed actions can be retried")
-            if row.depends_on and db.get(QueuedAction, row.depends_on).phase != "DONE":
-                raise ValueError("Retry and complete the dependency first")
-            row.phase, row.tries, row.due, row.last_error = "READY", 0, timestamp(), ""
+            actor = db.get(Identity, actor_id) if actor_id is not None else None
+            actor_detail = {"kind": "identity" if actor_id is not None else "system", "id": actor_id, "role": actor.role if actor else None}
+            row = db.scalar(select(QueuedAction).where(QueuedAction.id == action_id).with_for_update())
+            before = {"phase": row.phase, "tries": row.tries} if row else None
+            parent = db.get(QueuedAction, row.depends_on) if row and row.depends_on else None
+            if actor_id is not None and (actor is None or actor.role != "engineer"):
+                outcome, failure = "forbidden", PermissionError("Engineer role required")
+            elif reason not in {"issue_resolved", "dependency_restored", "operator_reviewed"}:
+                outcome, failure = "invalid_reason", ValueError("Unsupported recovery reason")
+            elif row is None:
+                outcome, failure = "action_missing", ValueError("Action not found")
+            elif row.phase != "DEAD":
+                outcome, failure = "not_dead", ValueError("Only failed actions can be retried")
+            elif row.depends_on and (parent is None or parent.phase != "DONE"):
+                outcome, failure = "dependency_incomplete", ValueError("Retry and complete the dependency first")
+            else:
+                row.phase, row.tries, row.due, row.last_error = "READY", 0, timestamp(), ""
+                row.lease, row.lease_until = "", None
+                outcome = "queued"
+            after = {"phase": row.phase, "tries": row.tries} if row else None
+            db.add(ActionHistory(action_id=action_id, attempt=before["tries"] if before else 0,
+                result="MANUAL_RETRY_REJECTED" if failure else "MANUAL_RETRY_ACCEPTED", transport="manual",
+                detail={"actor": actor_detail, "reason": reason if outcome != "invalid_reason" else "invalid",
+                        "outcome": outcome, "before": before, "after": after}))
+        # Rejections must commit their audit before propagating the safe error.
+        # An audit-write failure rolls back any queued state change atomically.
+        if failure:
+            raise failure

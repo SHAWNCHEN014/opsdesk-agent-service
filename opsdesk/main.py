@@ -14,9 +14,10 @@ from mcp.client.streamable_http import streamable_http_client
 from mcp.server.fastmcp import Context, FastMCP
 from mcp.server.transport_security import TransportSecuritySettings
 from sqlalchemy import select, text, update
+from sqlalchemy.exc import SQLAlchemyError
 
 from opsdesk.configuration import PROJECT, Configuration
-from opsdesk.contracts import SignInInput, SupportInput, WorkOrderUpdate
+from opsdesk.contracts import ManualRetryInput, SignInInput, SupportInput, WorkOrderUpdate
 from opsdesk.guidance import GuidanceCatalog
 from opsdesk.history import ConversationMemory
 from opsdesk.identity import Authentication
@@ -134,11 +135,16 @@ def create_app(config=None):
 
     @app.get("/api/health")
     def health():
-        with database.session() as db:
-            db.execute(text("SELECT 1"))
+        try:
+            with database.session() as db:
+                db.execute(text("SELECT 1"))
+            database_status = {"status": "ok"}
+        except SQLAlchemyError as exc:
+            logger.warning("Health database unavailable: %s", type(exc).__name__)
+            database_status = {"status": "unavailable", "error": type(exc).__name__}
         status = worker_status()
-        unavailable = status["enabled"] and not status["alive"]
-        payload = {"status": "degraded" if unavailable else "ok", "project": "OpsDesk", "model_mode": config.model_mode, "worker": status}
+        unavailable = database_status["status"] != "ok" or (status["enabled"] and not status["alive"])
+        payload = {"status": "degraded" if unavailable else "ok", "project": "OpsDesk", "model_mode": config.model_mode, "worker": status, "database": database_status}
         return JSONResponse(payload, status_code=503) if unavailable else payload
 
     @app.post("/api/login")
@@ -247,11 +253,16 @@ def create_app(config=None):
             return {"database": database.engine.dialect.name, "redis": redis_ok, "memory": memory.observations, "model_mode": config.model_mode, "model": config.model_name, "vector": knowledge.vector_state, "segments": len(knowledge.rows()), "skills": guidance.describe(), "actions": [{"id": job.id, "kind": job.kind, "phase": job.phase, "tries": job.tries, "error": job.last_error} for job in actions], "audits": [{"action_id": item.action_id, "attempt": item.attempt, "result": item.result, "transport": item.transport, "detail": item.detail} for item in audits], "receipts": [{"kind": item.kind, "detail": item.detail} for item in receipts], "worker": worker_status(), "mcp": {"endpoint": "/mcp/", "simulation": True}}
 
     @app.post("/api/actions/{action_id}/retry")
-    def retry(action_id: str, user=Depends(engineer)):
+    def retry(action_id: str, body: ManualRetryInput | None = None, user=Depends(account)):
         try:
-            worker.retry(action_id)
+            worker.retry(action_id, actor_id=user.id, reason=(body or ManualRetryInput()).reason)
+        except PermissionError as exc:
+            raise HTTPException(403, str(exc))
         except ValueError as exc:
             raise HTTPException(409, str(exc))
+        except SQLAlchemyError as exc:
+            logger.warning("Manual recovery audit unavailable: %s", type(exc).__name__)
+            raise HTTPException(503, "Recovery audit unavailable; action unchanged")
         return {"queued": True}
 
     @app.get("/api/knowledge")
