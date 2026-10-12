@@ -1,0 +1,91 @@
+{
+  "scope": "Tracked defects closed only for documented offline scenarios; original audit remains historical",
+  "defects": [
+    {
+      "id": "QA-SEC-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "输出审查绕过及审查失败回退；Phase 2A"
+    },
+    {
+      "id": "QA-SEC-02",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "Excel公式注入；Phase 2A"
+    },
+    {
+      "id": "QA-RAG-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "陈旧向量片段；Phase 2A"
+    },
+    {
+      "id": "QA-GATE-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "评估退出门禁；Phase 2A"
+    },
+    {
+      "id": "QA-REL-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "Worker异常及恢复；Phase 2B"
+    },
+    {
+      "id": "QA-REL-02",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "依赖候选饥饿；Phase 2B"
+    },
+    {
+      "id": "QA-OBS-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "人工恢复审计；Phase 2C"
+    },
+    {
+      "id": "QA-HEALTH-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "数据库异常非结构化健康响应；Phase 2C"
+    }
+  ],
+  "residual_risks": [
+    "direct线程永久阻塞及硬关闭时限尚未解决",
+    "SMTP发送后提交失败可能产生重复通知",
+    "单进程原型的恢复、索引版本及数据库竞态仍需真实验收",
+    "覆盖率包含Mock执行，不说明真实模型语义质量或基础设施正确性"
+  ],
+  "not_run": [
+    {
+      "id": "real_mysql_redis",
+      "status": "not_run",
+      "reason": "本轮未提供/连接专用真实服务；SQLite不验证MySQL行锁和Redis恢复"
+    },
+    {
+      "id": "real_ollama_chroma",
+      "status": "not_run",
+      "reason": "默认离线profile禁止网络；模型与向量使用替身"
+    },
+    {
+      "id": "mcp_subprocess_faults",
+      "status": "not_run",
+      "reason": "本轮未做stdio子进程超时/崩溃恢复演练"
+    },
+    {
+      "id": "docker_deployment",
+      "status": "not_run",
+      "reason": "未启动容器或操作数据卷"
+    },
+    {
+      "id": "load_soak",
+      "status": "not_run",
+      "reason": "未建立负载与长稳基线"
+    },
+    {
+      "id": "remote_ci",
+      "status": "not_run",
+      "reason": "只配置并本地验证工作流；没有push或远程运行"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+# Minimal offline QA environment; runtime installs still use requirements.txt.
+# Reuse the existing freeze for direct and transitive version constraints.
+-c requirements.txt
+fastapi
+SQLAlchemy
+PyMySQL
+redis
+httpx
+pydantic-settings
+mcp
+openpyxl
+pypdf
+python-multipart
+PyYAML
+pytest
+coverage==7.16.2

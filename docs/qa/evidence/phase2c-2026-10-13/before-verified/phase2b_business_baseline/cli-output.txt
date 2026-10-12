@@ -1,0 +1,36 @@
+{
+  "gate": {
+    "status": "failed",
+    "exit_code": 1,
+    "reasons": [
+      "pytest_failed"
+    ],
+    "scope": "offline deterministic checks only; not a production release approval"
+  },
+  "pytest": {
+    "tests": 138,
+    "passed": 125,
+    "failed": 13,
+    "errors": 0,
+    "skipped": 0
+  },
+  "coverage": {
+    "status": "completed",
+    "scope": "opsdesk/*.py in Pytest process; model/vector stubs and temporary SQLite",
+    "line": {
+      "covered": 1023,
+      "total": 1258,
+      "percent": 81.31955484896662
+    },
+    "branch": {
+      "covered": 210,
+      "total": 306,
+      "percent": 68.62745098039215
+    },
+    "partial_branches": 46,
+    "combined_percent": 78.83631713554988,
+    "threshold": null,
+    "gate_policy": "Measurement required; no invented percentage threshold"
+  }
+}
+Reports: /private<REPLICA>/artifacts/qa/ci

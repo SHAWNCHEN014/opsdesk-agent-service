@@ -1,0 +1,317 @@
+...........................................................FFFFF.FFFFFFF [ 58%]
+F..................................................                      [100%]
+=================================== FAILURES ===================================
+_______ test_health_database_failure_is_safe_structured_503[connection] ________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10dfc8470>, '1f51e0c9835f45e280aaf7bdaa903659', 'b67eb1b870364a89b3f049e4e070cd36')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10e0ca8d0>
+failure = 'connection'
+
+    @pytest.mark.parametrize("failure", ["connection", "query"])
+    def test_health_database_failure_is_safe_structured_503(runtime, monkeypatch, failure):
+        app = create_app(runtime[0])
+        error = OperationalError("synthetic SELECT", None, ValueError("password=synthetic-private-token"))
+        def broken(*_): raise error
+        with TestClient(app, raise_server_exceptions=False) as client:
+            if failure == "connection":
+                monkeypatch.setattr(app.state.database, "session", broken)
+            else:
+                event.listen(app.state.database.engine, "before_cursor_execute", broken)
+            try: response = client.get("/api/health")
+            finally:
+                if failure == "query": event.remove(app.state.database.engine, "before_cursor_execute", broken)
+>           assert response.status_code == 503
+E           assert 500 == 503
+E            +  where 500 = <Response [500 Internal Server Error]>.status_code
+
+<REPO>/tests/quality/test_health_database.py:22: AssertionError
+__________ test_health_database_failure_is_safe_structured_503[query] __________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10dede2a0>, '13fbda99b69847e9bce95d2856550e6e', 'c1906d0ddbdd45d1a8fe9f8f3b258a5b')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10e13fbc0>
+failure = 'query'
+
+    @pytest.mark.parametrize("failure", ["connection", "query"])
+    def test_health_database_failure_is_safe_structured_503(runtime, monkeypatch, failure):
+        app = create_app(runtime[0])
+        error = OperationalError("synthetic SELECT", None, ValueError("password=synthetic-private-token"))
+        def broken(*_): raise error
+        with TestClient(app, raise_server_exceptions=False) as client:
+            if failure == "connection":
+                monkeypatch.setattr(app.state.database, "session", broken)
+            else:
+                event.listen(app.state.database.engine, "before_cursor_execute", broken)
+            try: response = client.get("/api/health")
+            finally:
+                if failure == "query": event.remove(app.state.database.engine, "before_cursor_execute", broken)
+>           assert response.status_code == 503
+E           assert 500 == 503
+E            +  where 500 = <Response [500 Internal Server Error]>.status_code
+
+<REPO>/tests/quality/test_health_database.py:22: AssertionError
+__________ test_health_database_recovers_and_worker_disabled_is_valid __________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10dcbb5c0>, '038008c8f76c4e96add46161c6985d52', '46d175e267d2459291e9525255844a0d')
+
+    def test_health_database_recovers_and_worker_disabled_is_valid(runtime):
+        app = create_app(runtime[0])
+        def broken(*_): raise OperationalError("synthetic", None, ValueError("private"))
+        with TestClient(app, raise_server_exceptions=False) as client:
+            event.listen(app.state.database.engine, "before_cursor_execute", broken)
+>           try: assert client.get("/api/health").status_code == 503
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: assert 500 == 503
+E            +  where 500 = <Response [500 Internal Server Error]>.status_code
+E            +    where <Response [500 Internal Server Error]> = get('/api/health')
+E            +      where get = <starlette.testclient.TestClient object at 0x10e2304d0>.get
+
+<REPO>/tests/quality/test_health_database.py:34: AssertionError
+___ test_authenticated_retry_records_actor_reason_time_and_preserves_history ___
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10dff8650>, 'e5925920b3ac44d9b459158cb877f450', 'b11f5880f0924478a1f1c98fb0cc36cb')
+
+    def test_authenticated_retry_records_actor_reason_time_and_preserves_history(runtime):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            session.add(ActionHistory(action_id=action_id, attempt=3, result="FAILED", transport="direct", detail={"error": "synthetic"}))
+        before = timestamp()
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            response = client.post(f"/api/actions/{action_id}/retry", json={"reason": "issue_resolved"})
+            assert response.status_code == 200 and response.json() == {"queued": True}
+            diagnostic = client.get("/api/diagnostics").json()
+        rows = audit_rows(db)
+>       assert len(rows) == 2 and rows[0]["result"] == "FAILED"
+E       AssertionError: assert (1 == 2)
+E        +  where 1 = len([{'action_id': '9bfaa17205f143d49d788ea75c962ab1', 'attempt': 3, 'result': 'FAILED', 'transport': 'direct', ...}])
+
+<REPO>/tests/quality/test_retry_audit.py:47: AssertionError
+____________ test_employee_and_anonymous_cannot_retry[employee-403] ____________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10e24c110>, 'bef4c98725324ce1bfaa42ef974432c0', '76e91fc306e34a0fa8738e768b93cce9')
+role = 'employee', expected = 403
+
+    @pytest.mark.parametrize("role,expected", [("employee", 403), (None, 401)])
+    def test_employee_and_anonymous_cannot_retry(runtime, role, expected):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        app = create_app(config)
+        with TestClient(app) as client:
+            if role: sign_in(client, config, role)
+            assert client.post(f"/api/actions/{action_id}/retry").status_code == expected
+        assert next(a for a in snapshot(db)["actions"] if a["id"] == action_id)["phase"] == "DEAD"
+        rows = audit_rows(db)
+        if role:
+>           assert len(rows) == 1 and rows[0]["result"] == "MANUAL_RETRY_REJECTED"
+E           assert (0 == 1)
+E            +  where 0 = len([])
+
+<REPO>/tests/quality/test_retry_audit.py:76: AssertionError
+______ test_rejected_retries_are_audited_without_queue_mutation[missing] _______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10df974a0>, '2c0a7471019a43aabc4dedff2370c326', '47713cfd4446432a8406ce4e5b7486a2')
+scenario = 'missing'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+<REPO>/tests/quality/test_retry_audit.py:100: IndexError
+______ test_rejected_retries_are_audited_without_queue_mutation[not-dead] ______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10e0ca330>, '51565793dedd43bb88fa79287540022c', '45fed61378ea4b4ea030188e8a380433')
+scenario = 'not-dead'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+<REPO>/tests/quality/test_retry_audit.py:100: IndexError
+_____ test_rejected_retries_are_audited_without_queue_mutation[dependency] _____
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10e3031a0>, '3d957c90d1bf4073be52406fa403923c', '00537ffda0a84b0dbda56241b40cd73c')
+scenario = 'dependency'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+<REPO>/tests/quality/test_retry_audit.py:100: IndexError
+_____ test_rejected_retries_are_audited_without_queue_mutation[duplicate] ______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10e430fe0>, 'a3b6f60c2ffa46c99b6c25ce3d218f19', 'b5cd9f1613c64b12950011a0ca43cccc')
+scenario = 'duplicate'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+<REPO>/tests/quality/test_retry_audit.py:100: IndexError
+___________ test_retry_reason_and_actor_input_are_restricted[body0] ____________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10e300050>, 'c4dc86c73d5847e88f0510382594ed82', '3e0b0b5a7630495688e2aa23af896f6e')
+body = {'reason': 'password=synthetic-secret token=synthetic-token'}
+
+    @pytest.mark.parametrize("body", [{"reason": "password=synthetic-secret token=synthetic-token"},
+        {"reason": "issue_resolved", "actor_id": "spoofed"}])
+    def test_retry_reason_and_actor_input_are_restricted(runtime, body):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        with TestClient(create_app(config)) as client:
+            sign_in(client, config, "engineer")
+>           assert client.post(f"/api/actions/{action_id}/retry", json=body).status_code == 422
+E           AssertionError: assert 200 == 422
+E            +  where 200 = <Response [200 OK]>.status_code
+E            +    where <Response [200 OK]> = post('/api/actions/ab0d6bd44ddb4fd98122ba57f7c5d06a/retry', json={'reason': 'password=synthetic-secret token=synthetic-token'})
+E            +      where post = <starlette.testclient.TestClient object at 0x10e4d9160>.post
+
+<REPO>/tests/quality/test_retry_audit.py:114: AssertionError
+___________ test_retry_reason_and_actor_input_are_restricted[body1] ____________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10e50ce90>, '33154efd575f4a4e81d58459a4838368', '895c33b042dc4939959ad795a9428f03')
+body = {'reason': 'issue_resolved', 'actor_id': 'spoofed'}
+
+    @pytest.mark.parametrize("body", [{"reason": "password=synthetic-secret token=synthetic-token"},
+        {"reason": "issue_resolved", "actor_id": "spoofed"}])
+    def test_retry_reason_and_actor_input_are_restricted(runtime, body):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        with TestClient(create_app(config)) as client:
+            sign_in(client, config, "engineer")
+>           assert client.post(f"/api/actions/{action_id}/retry", json=body).status_code == 422
+E           AssertionError: assert 200 == 422
+E            +  where 200 = <Response [200 OK]>.status_code
+E            +    where <Response [200 OK]> = post('/api/actions/ad8704fe9a6447f3ae3bb04106a17bf4/retry', json={'reason': 'issue_resolved', 'actor_id': 'spoofed'})
+E            +      where post = <starlette.testclient.TestClient object at 0x10e58c440>.post
+
+<REPO>/tests/quality/test_retry_audit.py:114: AssertionError
+_______________ test_retry_audit_write_failure_rolls_back_action _______________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10dcbb470>, 'f09820294d8649b5a0f1f5e4d2a67fa4', '2759fee8aa5b4a6aa38e9e46100cf4eb')
+
+    def test_retry_audit_write_failure_rolls_back_action(runtime):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        app = create_app(config)
+        def fail_audit(session, *_):
+            if any(isinstance(row, ActionHistory) for row in session.new):
+                raise OperationalError("synthetic", None, ValueError("password=synthetic-secret token=synthetic-token"))
+        with TestClient(app, raise_server_exceptions=False) as client:
+            sign_in(client, config, "engineer")
+            event.listen(app.state.database.session, "before_flush", fail_audit)
+            try: response = client.post(f"/api/actions/{action_id}/retry")
+            finally: event.remove(app.state.database.session, "before_flush", fail_audit)
+>       assert response.status_code == 503 and response.json()["detail"] == "Recovery audit unavailable; action unchanged"
+E       assert (200 == 503)
+E        +  where 200 = <Response [200 OK]>.status_code
+
+<REPO>/tests/quality/test_retry_audit.py:131: AssertionError
+______ test_trusted_internal_retry_is_explicitly_system_not_fake_engineer ______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-mvth5v....service.SupportService object at 0x10e60bfe0>, '5e89aa1186624008b00d074be96d9df9', 'ab234efa24ec419897048e5750c73572')
+
+    def test_trusted_internal_retry_is_explicitly_system_not_fake_engineer(runtime):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        ActionWorker(db, config).retry(action_id)
+        rows = audit_rows(db)
+>       assert len(rows) == 1 and rows[0]["detail"]["actor"] == {"kind": "system", "id": None, "role": None}
+E       assert (0 == 1)
+E        +  where 0 = len([])
+
+<REPO>/tests/quality/test_retry_audit.py:143: AssertionError
+=============================== warnings summary ===============================
+../../../../../../..<REPO>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <REPO>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../../../../../..<REPO>/tests/quality/test_health_database.py::test_health_database_failure_is_safe_structured_503[connection]
+FAILED ../../../../../../..<REPO>/tests/quality/test_health_database.py::test_health_database_failure_is_safe_structured_503[query]
+FAILED ../../../../../../..<REPO>/tests/quality/test_health_database.py::test_health_database_recovers_and_worker_disabled_is_valid
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_authenticated_retry_records_actor_reason_time_and_preserves_history
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_employee_and_anonymous_cannot_retry[employee-403]
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[missing]
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[not-dead]
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[dependency]
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[duplicate]
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_retry_reason_and_actor_input_are_restricted[body0]
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_retry_reason_and_actor_input_are_restricted[body1]
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_retry_audit_write_failure_rolls_back_action
+FAILED ../../../../../../..<REPO>/tests/quality/test_retry_audit.py::test_trusted_internal_retry_is_explicitly_system_not_fake_engineer
+13 failed, 110 passed, 1 warning in 12.49s

@@ -1,0 +1,25 @@
+{
+  "pytest_exit_code": 0,
+  "tests": 109,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "coverage": {
+    "covered_lines": 1017,
+    "num_statements": 1258,
+    "percent_covered": 78.38874680306905,
+    "percent_covered_display": "78",
+    "missing_lines": 241,
+    "excluded_lines": 0,
+    "percent_statements_covered": 80.84260731319554,
+    "percent_statements_covered_display": "81",
+    "num_branches": 306,
+    "num_partial_branches": 47,
+    "covered_branches": 209,
+    "missing_branches": 97,
+    "percent_branches_covered": 68.30065359477125,
+    "percent_branches_covered_display": "68"
+  },
+  "coverage_scope": "opsdesk only; pytest process; branch measurement enabled",
+  "profile": "temporary SQLite, demo, vector/model stubs; no real infrastructure"
+}

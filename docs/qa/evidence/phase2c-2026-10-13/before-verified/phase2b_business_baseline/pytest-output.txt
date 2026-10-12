@@ -1,0 +1,317 @@
+...........................................................FFF.......... [ 52%]
+.....FF.FFFFFFFF..................................................       [100%]
+=================================== FAILURES ===================================
+_______ test_health_database_failure_is_safe_structured_503[connection] ________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e564980>, '75a7f539e7944ed7b3d6787f0a41e04c', 'f8f35ffd5a914ff5bb3607492c152df8')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10e565d60>
+failure = 'connection'
+
+    @pytest.mark.parametrize("failure", ["connection", "query"])
+    def test_health_database_failure_is_safe_structured_503(runtime, monkeypatch, failure):
+        app = create_app(runtime[0])
+        error = OperationalError("synthetic SELECT", None, ValueError("password=[REDACTED]
+        def broken(*_): raise error
+        with TestClient(app, raise_server_exceptions=False) as client:
+            if failure == "connection":
+                monkeypatch.setattr(app.state.database, "session", broken)
+            else:
+                event.listen(app.state.database.engine, "before_cursor_execute", broken)
+            try: response = client.get("/api/health")
+            finally:
+                if failure == "query": event.remove(app.state.database.engine, "before_cursor_execute", broken)
+>           assert response.status_code == 503
+E           assert 500 == 503
+E            +  where 500 = <Response [500 Internal Server Error]>.status_code
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_health_database.py:22: AssertionError
+__________ test_health_database_failure_is_safe_structured_503[query] __________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e70bf20>, 'cdc57abe4a5246f6b7fc187c4912ea0f', 'b3fe7c3d9bf746f182e4b4dc7c35ae7d')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10e8259d0>
+failure = 'query'
+
+    @pytest.mark.parametrize("failure", ["connection", "query"])
+    def test_health_database_failure_is_safe_structured_503(runtime, monkeypatch, failure):
+        app = create_app(runtime[0])
+        error = OperationalError("synthetic SELECT", None, ValueError("password=[REDACTED]
+        def broken(*_): raise error
+        with TestClient(app, raise_server_exceptions=False) as client:
+            if failure == "connection":
+                monkeypatch.setattr(app.state.database, "session", broken)
+            else:
+                event.listen(app.state.database.engine, "before_cursor_execute", broken)
+            try: response = client.get("/api/health")
+            finally:
+                if failure == "query": event.remove(app.state.database.engine, "before_cursor_execute", broken)
+>           assert response.status_code == 503
+E           assert 500 == 503
+E            +  where 500 = <Response [500 Internal Server Error]>.status_code
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_health_database.py:22: AssertionError
+__________ test_health_database_recovers_and_worker_disabled_is_valid __________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e8d3f50>, 'b84e2684fa5d40078b585a5e33a15fef', '55b9405efe58483e9657887e994a827e')
+
+    def test_health_database_recovers_and_worker_disabled_is_valid(runtime):
+        app = create_app(runtime[0])
+        def broken(*_): raise OperationalError("synthetic", None, ValueError("private"))
+        with TestClient(app, raise_server_exceptions=False) as client:
+            event.listen(app.state.database.engine, "before_cursor_execute", broken)
+>           try: assert client.get("/api/health").status_code == 503
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AssertionError: assert 500 == 503
+E            +  where 500 = <Response [500 Internal Server Error]>.status_code
+E            +    where <Response [500 Internal Server Error]> = get('/api/health')
+E            +      where get = <starlette.testclient.TestClient object at 0x10e9169f0>.get
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_health_database.py:34: AssertionError
+___ test_authenticated_retry_records_actor_reason_time_and_preserves_history ___
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e8cd9d0>, 'daf1a3dfc4a74e8d9b1c43a63ee1db46', 'c16e1d7b733540a190caac87c5951865')
+
+    def test_authenticated_retry_records_actor_reason_time_and_preserves_history(runtime):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            session.add(ActionHistory(action_id=action_id, attempt=3, result="FAILED", transport="direct", detail={"error": "synthetic"}))
+        before = timestamp()
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            response = client.post(f"/api/actions/{action_id}/retry", json={"reason": "issue_resolved"})
+            assert response.status_code == 200 and response.json() == {"queued": True}
+            diagnostic = client.get("/api/diagnostics").json()
+        rows = audit_rows(db)
+>       assert len(rows) == 2 and rows[0]["result"] == "FAILED"
+E       AssertionError: assert (1 == 2)
+E        +  where 1 = len([{'action_id': '53372a9da1ce4d018161e0a591e3984c', 'attempt': 3, 'result': 'FAILED', 'transport': 'direct', ...}])
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:47: AssertionError
+____________ test_employee_and_anonymous_cannot_retry[employee-403] ____________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e9c1190>, 'fa8c267dcc664482a895ebc1bf7d951e', '5253ff17f0a54f218cd7355ce746f9de')
+role = 'employee', expected = 403
+
+    @pytest.mark.parametrize("role,expected", [("employee", 403), (None, 401)])
+    def test_employee_and_anonymous_cannot_retry(runtime, role, expected):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        app = create_app(config)
+        with TestClient(app) as client:
+            if role: sign_in(client, config, role)
+            assert client.post(f"/api/actions/{action_id}/retry").status_code == expected
+        assert next(a for a in snapshot(db)["actions"] if a["id"] == action_id)["phase"] == "DEAD"
+        rows = audit_rows(db)
+        if role:
+>           assert len(rows) == 1 and rows[0]["result"] == "MANUAL_RETRY_REJECTED"
+E           assert (0 == 1)
+E            +  where 0 = len([])
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:76: AssertionError
+______ test_rejected_retries_are_audited_without_queue_mutation[missing] _______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e70bdd0>, 'adfd707df934458d93f28fa636a4d693', 'c5692a00831b4a799645727160e123cf')
+scenario = 'missing'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:100: IndexError
+______ test_rejected_retries_are_audited_without_queue_mutation[not-dead] ______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10ea32c90>, '4289de8c016342259b223ebcbceefb72', '2d0903d10f8948f59595860f4e344e5d')
+scenario = 'not-dead'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:100: IndexError
+_____ test_rejected_retries_are_audited_without_queue_mutation[dependency] _____
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e590980>, '5549854e5e3e427ca19f9f861202937a', 'ca7cb37de95d4eda91b5847ab63f3662')
+scenario = 'dependency'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:100: IndexError
+_____ test_rejected_retries_are_audited_without_queue_mutation[duplicate] ______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10ec6fe60>, 'd85fb5740de240a8ae41ac2373ddeefa', '63676a6489604dd6acf0564bd601a032')
+scenario = 'duplicate'
+
+    @pytest.mark.parametrize("scenario", ["missing", "not-dead", "dependency", "duplicate"])
+    def test_rejected_retries_are_audited_without_queue_mutation(runtime, scenario):
+        config, db, _, _, owner, engineer = runtime
+        action_id = dead_action(db, owner)
+        with db.session.begin() as session:
+            if scenario == "not-dead": session.get(QueuedAction, action_id).phase = "RUNNING"
+            if scenario == "dependency":
+                child = session.scalar(select(QueuedAction).where(QueuedAction.kind == "export_ledger"))
+                child.phase = "DEAD"
+                action_id = child.id
+        if scenario == "missing": action_id = "nonexistent"
+        app = create_app(config)
+        with TestClient(app) as client:
+            sign_in(client, config, "engineer")
+            if scenario == "duplicate": assert client.post(f"/api/actions/{action_id}/retry").status_code == 200
+            before = snapshot(db)["actions"]
+            assert client.post(f"/api/actions/{action_id}/retry", json={"reason": "dependency_restored"}).status_code == 409
+        assert snapshot(db)["actions"] == before
+>       row = audit_rows(db)[-1]
+              ^^^^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:100: IndexError
+___________ test_retry_reason_and_actor_input_are_restricted[body0] ____________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10ec83ec0>, '1b4c5657ade143a09cf49f9a8f00fbac', '9abd4d8a452447b1a6ca2ded32a1c722')
+body = {'reason': 'password=[REDACTED] token=[REDACTED]
+
+    @pytest.mark.parametrize("body", [{"reason": "password=[REDACTED] token=[REDACTED],
+        {"reason": "issue_resolved", "actor_id": "spoofed"}])
+    def test_retry_reason_and_actor_input_are_restricted(runtime, body):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        with TestClient(create_app(config)) as client:
+            sign_in(client, config, "engineer")
+>           assert client.post(f"/api/actions/{action_id}/retry", json=body).status_code == 422
+E           AssertionError: assert 200 == 422
+E            +  where 200 = <Response [200 OK]>.status_code
+E            +    where <Response [200 OK]> = post('/api/actions/dc06939bc2704120874f495d753e64db/retry', json={'reason': 'password=[REDACTED] token=[REDACTED]
+E            +      where post = <starlette.testclient.TestClient object at 0x10ed5f1d0>.post
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:114: AssertionError
+___________ test_retry_reason_and_actor_input_are_restricted[body1] ____________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10e5cfe60>, 'f5f164d8bb3048c5b7ef50afd108f6e4', '41b427f89bc541f28a7b1543b378c256')
+body = {'reason': 'issue_resolved', 'actor_id': 'spoofed'}
+
+    @pytest.mark.parametrize("body", [{"reason": "password=[REDACTED] token=[REDACTED],
+        {"reason": "issue_resolved", "actor_id": "spoofed"}])
+    def test_retry_reason_and_actor_input_are_restricted(runtime, body):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        with TestClient(create_app(config)) as client:
+            sign_in(client, config, "engineer")
+>           assert client.post(f"/api/actions/{action_id}/retry", json=body).status_code == 422
+E           AssertionError: assert 200 == 422
+E            +  where 200 = <Response [200 OK]>.status_code
+E            +    where <Response [200 OK]> = post('/api/actions/e7e7d6a0bb5d48faab831f9685d6b117/retry', json={'reason': 'issue_resolved', 'actor_id': 'spoofed'})
+E            +      where post = <starlette.testclient.TestClient object at 0x10edea1e0>.post
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:114: AssertionError
+_______________ test_retry_audit_write_failure_rolls_back_action _______________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10ebe39b0>, '151c7984ff2044efa8fd3e739c374fdf', '79c3ee0169254e31970cd75aadbf4e1a')
+
+    def test_retry_audit_write_failure_rolls_back_action(runtime):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        app = create_app(config)
+        def fail_audit(session, *_):
+            if any(isinstance(row, ActionHistory) for row in session.new):
+                raise OperationalError("synthetic", None, ValueError("password=[REDACTED] token=[REDACTED]
+        with TestClient(app, raise_server_exceptions=False) as client:
+            sign_in(client, config, "engineer")
+            event.listen(app.state.database.session, "before_flush", fail_audit)
+            try: response = client.post(f"/api/actions/{action_id}/retry")
+            finally: event.remove(app.state.database.session, "before_flush", fail_audit)
+>       assert response.status_code == 503 and response.json()["detail"] == "Recovery audit unavailable; action unchanged"
+E       assert (200 == 503)
+E        +  where 200 = <Response [200 OK]>.status_code
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:131: AssertionError
+______ test_trusted_internal_retry_is_explicitly_system_not_fake_engineer ______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-bc0esp....service.SupportService object at 0x10eb6d2e0>, '3ce4c1c4ffa7419a9db5a94d654bc743', 'eb694d2e00bf4ccc8f5c3bb27624ea46')
+
+    def test_trusted_internal_retry_is_explicitly_system_not_fake_engineer(runtime):
+        config, db, _, _, owner, _ = runtime
+        action_id = dead_action(db, owner)
+        ActionWorker(db, config).retry(action_id)
+        rows = audit_rows(db)
+>       assert len(rows) == 1 and rows[0]["detail"]["actor"] == {"kind": "system", "id": None, "role": None}
+E       assert (0 == 1)
+E        +  where 0 = len([])
+
+../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py:143: AssertionError
+=============================== warnings summary ===============================
+../../../../../../../Users/shawn/Desktop/OpsDesk/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /Users/shawn/Desktop/OpsDesk/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_health_database.py::test_health_database_failure_is_safe_structured_503[connection]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_health_database.py::test_health_database_failure_is_safe_structured_503[query]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_health_database.py::test_health_database_recovers_and_worker_disabled_is_valid
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_authenticated_retry_records_actor_reason_time_and_preserves_history
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_employee_and_anonymous_cannot_retry[employee-403]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[missing]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[not-dead]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[dependency]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_rejected_retries_are_audited_without_queue_mutation[duplicate]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_retry_reason_and_actor_input_are_restricted[body0]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_retry_reason_and_actor_input_are_restricted[body1]
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_retry_audit_write_failure_rolls_back_action
+FAILED ../opsdesk-gate-proof-fhmkyemd/repo/tests/quality/test_retry_audit.py::test_trusted_internal_retry_is_explicitly_system_not_fake_engineer
+13 failed, 125 passed, 1 warning in 14.05s

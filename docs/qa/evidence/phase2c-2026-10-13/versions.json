@@ -1,0 +1,8 @@
+{
+  "phase2b_source_baseline": "6012e8898cc17eb20160bdb0321e12ad3206cbba",
+  "start_head": "97f30fb33c56fbf00f04061a6a30b4d071e8a8a4",
+  "phase2c_source_commit": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
+  "local_only": true,
+  "remote_push": false,
+  "report_commit_note": "The later evidence/document commit does not alter the tested business source; use git log for its identity."
+}

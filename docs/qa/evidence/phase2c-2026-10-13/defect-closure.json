@@ -1,0 +1,36 @@
+{
+  "source_commit": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
+  "status": "closed_for_documented_offline_scenarios",
+  "defects": [
+    {
+      "id": "QA-OBS-01",
+      "root_cause": "retry mutated queue state without attributable ActionHistory; API ignored body and rejected role before audit",
+      "before_failed": 10,
+      "after_cases_passed": 11,
+      "tests": "tests/quality/test_retry_audit.py",
+      "fix": "Identity-bound audit in same SQL transaction; safe reason enum; persist rejection before raising; rollback state when audit unavailable",
+      "limitations": [
+        "anonymous/invalid body rejected before attributable audit",
+        "system internal call deliberately distinguishable from authenticated engineer",
+        "SQL outage cannot durably write an audit to unavailable SQL",
+        "real MySQL row locks and concurrent retries not verified"
+      ]
+    },
+    {
+      "id": "QA-HEALTH-01",
+      "root_cause": "health SELECT/connection SQLAlchemy error escaped into plain HTTP 500",
+      "before_failed": 3,
+      "after_cases_passed": 3,
+      "tests": "tests/quality/test_health_database.py",
+      "fix": "SQLAlchemyError caught; database unavailable and exception type only; HTTP503; healthy recovery200",
+      "limitations": [
+        "process startup Database.ensure failures excluded",
+        "model/vector/Redis probes not added"
+      ]
+    }
+  ],
+  "evidence_before": "before-final/phase2b_business_baseline",
+  "evidence_after": "after-commit",
+  "schemas_changed": false,
+  "historical_actions_deleted": false
+}

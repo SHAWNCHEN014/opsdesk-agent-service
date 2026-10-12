@@ -1,0 +1,17 @@
+{
+  "preserved_runs": {
+    "before": "Original first red run: 123 total,110 passed,13 failed; legacy Phase2A runner subgroup labels do not classify Phase2C tests correctly; use JUnit case IDs",
+    "after-business": "123 total,121 passed,2 failures in new TestClient.is_closed assumption; actual DB503 assertions passed; corrected harness and retained evidence",
+    "unified-first": "Same two harness failures; real gate exit1, preserved",
+    "unified-after": "138 passed; later test consistency and whitespace edits reverified in verified-precommit/after-commit",
+    "fresh-qa-environment": "Independent minimal venv,138 passed,pip check0,Chroma absent; whitespace-only newtest EOF normalization afterward, semantic assertions unchanged",
+    "precommit-check": "138 passed before source commit; formerly a prematurely named after-commit directory, renamed without rewriting its contents; Git metadata correctly shows dirty source",
+    "before-verified": "Intermediate frozen red confirmation prior to final newtest EOF cleanup",
+    "before-final": "Final regression files byte-identical to verified-precommit/after-commit; Phase2B business baseline restored only inside temporary replica",
+    "verified-precommit": "138 passed before local source commit",
+    "after-commit": "138 passed on committed source with clean source Git status"
+  },
+  "historical_reports_rewritten": false,
+  "test_assertions_weakened": false,
+  "original_109_files_or_gold_modified": false
+}

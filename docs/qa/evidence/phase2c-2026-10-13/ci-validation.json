@@ -1,0 +1,43 @@
+{
+  "platform": "GitHub Actions",
+  "workflow": ".github/workflows/qa.yml",
+  "remote_ci": "not_verified_not_pushed",
+  "remote_push_performed": false,
+  "repository_visibility_changed": false,
+  "branch_protection_changed": false,
+  "local_fresh_environment": {
+    "result": {
+      "status": "passed",
+      "exit_code": 0,
+      "reasons": [],
+      "scope": "offline deterministic checks only; not a production release approval"
+    },
+    "pytest": {
+      "tests": 138,
+      "passed": 138,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "baseline109": {
+      "required": 109,
+      "present": 109,
+      "passed": 109,
+      "missing_or_duplicate": []
+    },
+    "python": "3.12.14",
+    "system": "Darwin"
+  },
+  "failure_proofs": "gate-proofs/proof-summary.json",
+  "failure_scope": "exact workflow CLI in local replicas; not a hosted GitHub Actions result",
+  "action_refs": {
+    "checkout_v7": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+    "setup_python_v7": "5fda3b95a4ea91299a34e894583c3862153e4b97",
+    "upload_artifact_v7": "cf430e030ddbb5b0abf93d22962f4752f3646cd9"
+  },
+  "sources": [
+    "https://github.com/actions/checkout",
+    "https://github.com/actions/setup-python",
+    "https://github.com/actions/upload-artifact"
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "exit_code": 0,
+  "output": "No broken requirements found.",
+  "profile": "new temporary QA venv; not a Linux/remote CI rebuild"
+}

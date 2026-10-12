@@ -1,0 +1,520 @@
+FFFFF.....FFFFFFFF...................................................... [ 52%]
+..................................................................       [100%]
+=================================== FAILURES ===================================
+_____________ test_baseline_gate_passes_with_all_original_samples ______________
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_baseline_gate_passes_with0')
+
+    def test_baseline_gate_passes_with_all_original_samples(tmp_path):
+>       process, report = run_evaluator(tmp_path, baseline_cases())
+                                                  ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+______ test_completed_but_failing_evaluation_returns_one[intent-mismatch] ______
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_completed_but_failing_eva0')
+fault = 'intent'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+>       cases = baseline_cases()
+                ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_____ test_completed_but_failing_evaluation_returns_one[priority-mismatch] _____
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_completed_but_failing_eva1')
+fault = 'priority'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+>       cases = baseline_cases()
+                ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+______ test_completed_but_failing_evaluation_returns_one[retrieval-miss] _______
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_completed_but_failing_eva2')
+fault = 'retrieval'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+>       cases = baseline_cases()
+                ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+______ test_completed_but_failing_evaluation_returns_one[rank-threshold] _______
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_completed_but_failing_eva3')
+fault = 'mrr'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+>       cases = baseline_cases()
+                ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+______________ test_invalid_threshold_cannot_pass[nan-threshold] _______________
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_invalid_threshold_cannot_0')
+args = ('--min-mrr', 'nan')
+
+    @pytest.mark.parametrize("args", [("--min-mrr", "nan"), ("--min-hit-at-4", "1.1")], ids=["nan-threshold", "out-of-range"])
+    def test_invalid_threshold_cannot_pass(tmp_path, args):
+>       process, _ = run_evaluator(tmp_path, baseline_cases(), args)
+                                             ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_______________ test_invalid_threshold_cannot_pass[out-of-range] _______________
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_invalid_threshold_cannot_1')
+args = ('--min-hit-at-4', '1.1')
+
+    @pytest.mark.parametrize("args", [("--min-mrr", "nan"), ("--min-hit-at-4", "1.1")], ids=["nan-threshold", "out-of-range"])
+    def test_invalid_threshold_cannot_pass(tmp_path, args):
+>       process, _ = run_evaluator(tmp_path, baseline_cases(), args)
+                                             ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:110: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+__________ test_cannot_complete_evaluation_is_not_a_pass[bad-config] ___________
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_cannot_complete_evaluatio0')
+config = {'OPSDESK_MODEL_MODE': 'invalid-mode'}, fault = None
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+>       process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+                                                  ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+________ test_cannot_complete_evaluation_is_not_a_pass[missing-corpus] _________
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_cannot_complete_evaluatio1')
+config = {'OPSDESK_KNOWLEDGE_DIRECTORY': 'missing-knowledge'}, fault = None
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+>       process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+                                                  ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_ test_cannot_complete_evaluation_is_not_a_pass[required-vectors-unavailable] __
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_cannot_complete_evaluatio2')
+config = {'OPSDESK_VECTOR_SEARCH': 'true'}, fault = 'vector-unavailable'
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+>       process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+                                                  ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+____ test_cannot_complete_evaluation_is_not_a_pass[hybrid-degraded-to-bm25] ____
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_cannot_complete_evaluatio3')
+config = {'OPSDESK_VECTOR_SEARCH': 'true'}, fault = 'vector-degraded'
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+>       process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+                                                  ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+______ test_cannot_complete_evaluation_is_not_a_pass[retrieval-exception] ______
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_cannot_complete_evaluatio4')
+config = {}, fault = 'query-failure'
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+>       process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+                                                  ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+_______________ test_report_write_failure_cannot_return_success ________________
+
+tmp_path = PosixPath('/private<PATH>/pytest/test_report_write_failure_cann0')
+
+    def test_report_write_failure_cannot_return_success(tmp_path):
+        blocked_output = tmp_path / "output-is-a-directory"
+        blocked_output.mkdir()
+>       process, report = run_evaluator(tmp_path, baseline_cases(), args=("--output", str(blocked_output)))
+                                                  ^^^^^^^^^^^^^^^^
+
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:131: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py:64: in baseline_cases
+    return json.loads(BASELINE.read_text(encoding="utf-8"))
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = PosixPath('<PATH>/evaluation/cases.json')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '<PATH>/evaluation/cases.json'
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py:1013: FileNotFoundError
+=============================== warnings summary ===============================
+../../../../../../../Users/shawn/Desktop/OpsDesk/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  /Users/shawn/Desktop/OpsDesk/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_baseline_gate_passes_with_all_original_samples
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_completed_but_failing_evaluation_returns_one[intent-mismatch]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_completed_but_failing_evaluation_returns_one[priority-mismatch]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_completed_but_failing_evaluation_returns_one[retrieval-miss]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_completed_but_failing_evaluation_returns_one[rank-threshold]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_invalid_threshold_cannot_pass[nan-threshold]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_invalid_threshold_cannot_pass[out-of-range]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_cannot_complete_evaluation_is_not_a_pass[bad-config]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_cannot_complete_evaluation_is_not_a_pass[missing-corpus]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_cannot_complete_evaluation_is_not_a_pass[required-vectors-unavailable]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_cannot_complete_evaluation_is_not_a_pass[hybrid-degraded-to-bm25]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_cannot_complete_evaluation_is_not_a_pass[retrieval-exception]
+FAILED ../opsdesk-gate-proof-plyrihva/repo/tests/qa/test_evaluation_gate.py::test_report_write_failure_cannot_return_success
+13 failed, 125 passed, 1 warning in 10.76s

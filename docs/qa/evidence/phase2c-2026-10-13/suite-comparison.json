@@ -1,0 +1,131 @@
+{
+  "before": {
+    "path": "before-final/phase2b_business_baseline",
+    "counts": {
+      "tests": 138,
+      "passed": 125,
+      "failed": 13,
+      "errors": 0,
+      "skipped": 0
+    },
+    "groups": {
+      "tests.qa.test_evaluation_gate": {
+        "passed": 18
+      },
+      "tests.qa.test_final_review": {
+        "passed": 23
+      },
+      "tests.qa.test_ledger_text": {
+        "passed": 12
+      },
+      "tests.qa.test_stale_vectors": {
+        "passed": 6
+      },
+      "tests.quality.test_health_database": {
+        "failed": 3
+      },
+      "tests.quality.test_quality_gate": {
+        "passed": 15
+      },
+      "tests.quality.test_retry_audit": {
+        "failed": 10,
+        "passed": 1
+      },
+      "tests.reliability.test_queue_scheduling": {
+        "passed": 12
+      },
+      "tests.reliability.test_worker_recovery": {
+        "passed": 18
+      },
+      "tests.test_service": {
+        "passed": 20
+      }
+    },
+    "baseline109": {
+      "required": 109,
+      "present": 109,
+      "passed": 109,
+      "missing_or_duplicate": []
+    }
+  },
+  "after": {
+    "path": "after-commit",
+    "git": {
+      "head": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
+      "dirty_source": []
+    },
+    "gate": {
+      "status": "passed",
+      "exit_code": 0,
+      "reasons": [],
+      "scope": "offline deterministic checks only; not a production release approval"
+    },
+    "counts": {
+      "tests": 138,
+      "passed": 138,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "groups": {
+      "tests.qa.test_evaluation_gate": {
+        "passed": 18
+      },
+      "tests.qa.test_final_review": {
+        "passed": 23
+      },
+      "tests.qa.test_ledger_text": {
+        "passed": 12
+      },
+      "tests.qa.test_stale_vectors": {
+        "passed": 6
+      },
+      "tests.quality.test_health_database": {
+        "passed": 3
+      },
+      "tests.quality.test_quality_gate": {
+        "passed": 15
+      },
+      "tests.quality.test_retry_audit": {
+        "passed": 11
+      },
+      "tests.reliability.test_queue_scheduling": {
+        "passed": 12
+      },
+      "tests.reliability.test_worker_recovery": {
+        "passed": 18
+      },
+      "tests.test_service": {
+        "passed": 20
+      }
+    },
+    "baseline109": {
+      "required": 109,
+      "present": 109,
+      "passed": 109,
+      "missing_or_duplicate": []
+    }
+  },
+  "new_cases": {
+    "manual_retry_audit": 11,
+    "health_database": 3,
+    "gate_infrastructure": 15
+  },
+  "tests_and_gold_identical": {
+    "evaluation/cases.json": true,
+    "tests/conftest.py": true,
+    "tests/qa/test_evaluation_gate.py": true,
+    "tests/qa/test_final_review.py": true,
+    "tests/qa/test_ledger_text.py": true,
+    "tests/qa/test_stale_vectors.py": true,
+    "tests/quality/test_health_database.py": true,
+    "tests/quality/test_quality_gate.py": true,
+    "tests/quality/test_retry_audit.py": true,
+    "tests/reliability/conftest.py": true,
+    "tests/reliability/helpers.py": true,
+    "tests/reliability/test_queue_scheduling.py": true,
+    "tests/reliability/test_worker_recovery.py": true,
+    "tests/test_service.py": true
+  },
+  "failure_assertions_are_not_defect_count": true
+}
