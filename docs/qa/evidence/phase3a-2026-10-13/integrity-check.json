@@ -1,0 +1,10 @@
+{
+  "original_tests_gold_historical_records_checked": 287,
+  "changed": [],
+  "new_dataset_identical_across_real_runs": true,
+  "default_ci_unchanged": true,
+  "real_model_digest_stable": true,
+  "source_unchanged_during_real_run": true,
+  "phase3a_tested_source_commit": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
+  "scope": "Exact bytes/IDs, not a claim of semantic correctness"
+}

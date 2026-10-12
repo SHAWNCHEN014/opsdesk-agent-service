@@ -1,0 +1,8 @@
+{
+  "server_originally_running": false,
+  "owned_pid": 66430,
+  "owned_command_verified": true,
+  "sent_signal": "SIGTERM",
+  "listener_remaining": false,
+  "scope": "Stopped only server started for Phase3A; original model files and production data were not edited"
+}

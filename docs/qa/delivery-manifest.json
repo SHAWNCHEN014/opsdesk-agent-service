@@ -1,8 +1,8 @@
 {
   "generated_on": "2026-10-13",
-  "source_documents_at_commit": "a4208a811d82cd02ba34cd94bb55236227fbbf13",
-  "tested_business_commit": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
-  "note": "Manifest excludes itself; merged reports retain historical statements unchanged. GitHub Actions records determine post-push CI state.",
+  "phase3a_tested_business_commit": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
+  "phase2c_tested_business_commit": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
+  "note": "Excludes itself. Historical source reports unchanged. Phase3A local commits not pushed; real gate remains failed and 22 independent human reviews pending.",
   "files": [
     {
       "path": "docs/qa/OPSDesk_QA_AUDIT.md",
@@ -30,14 +30,29 @@
       "sha256": "f8101e71aa73686d34c3ac06509514b830f22c79b2b57b7578b84a6822af4557"
     },
     {
+      "path": "docs/qa/PHASE3A_REAL_AI_EVALUATION.md",
+      "bytes": 26919,
+      "sha256": "f164c17bda9bcabce7373702c0e4af318afdfbbb1ea2fd6a678acae9461ae657"
+    },
+    {
       "path": "docs/qa/README.md",
-      "bytes": 3306,
-      "sha256": "f4987d09a139bd7c90360fe01f43a4159adbdb35556549194416b8f74181a2b1"
+      "bytes": 5588,
+      "sha256": "4fe725c2bf5ec154ea84fa11fef791afb12d0278254bae8a850711c29786e56c"
     },
     {
       "path": "docs/qa/DELIVERY_BUNDLE.md",
-      "bytes": 117965,
-      "sha256": "7f258410c444ad781809ea17d387e8b21716ed2e266f878f7f6ec3a2c977a709"
+      "bytes": 145161,
+      "sha256": "69b191ec52aa573c532a957fc023ebc61e245ef1190bec51076fbc29ed2e4ada"
+    },
+    {
+      "path": "docs/qa/quality-status.json",
+      "bytes": 4284,
+      "sha256": "0a178fb54a5df38a1af04f0a5bf7379724e29a44029ea404419476526851e37e"
+    },
+    {
+      "path": "docs/qa/evidence/phase3a-2026-10-13/manifest.json",
+      "bytes": 17997,
+      "sha256": "0130629b1b81103716a5302c9f5db698d56863ab435696d87663e010789e97fa"
     }
   ]
 }

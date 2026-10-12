@@ -1,0 +1,1085 @@
+[10/13/26 04:26:05] INFO     StreamableHTTP       streamable_http_manager.py:164
+                             session manager                                    
+                             started                                            
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:07] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:08] INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-01
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-02
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-03
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-04
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-05
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-06
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-07
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-08
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-09
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-10
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:09] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-11
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-12
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-13
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-14
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-15
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-16
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-17
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-18
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-19
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-20
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:10] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-21
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-22
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-23
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-24
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-25
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-26
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-27
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+rag rag-28
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/login                        
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:13] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:15] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:23] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:26] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/ce                
+                             6f8777d1d74b289286025d507905a4                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent faq-zh-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:28] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:31] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:38] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:41] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/05                
+                             d4cb2bbd6a415c92bef195842afc0c                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent faq-en-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:43] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:45] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:55] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:26:58] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/84                
+                             33e679ba8f4252b3192a31dea17474                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent incident-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:00] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:02] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:12] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:15] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/5e                
+                             bcc71027ad4dfa9738e2ddc880f341                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent outage-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:16] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:18] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:20] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:30] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:32] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/1c                
+                             d4ae9b01e240f083fecde474310599                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent ambiguous-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:34] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:36] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:42] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:45] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/66                
+                             016dd41a464bdcb5bf0314cb007468                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent no-answer-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:47] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:50] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:27:57] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:01] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/25                
+                             d03114d21644e8bea0645cb86717f1                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent outdated-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:03] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:05] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:15] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:18] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/9b                
+                             c8948570fc47ee8571bd3ccac6192b                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:19] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[10/13/26 04:28:19] INFO     Processing request of type            server.py:733
+                             CallToolRequest                                    
+                    INFO     Processing request of type            server.py:733
+                             ListToolsRequest                                   
+[10/13/26 04:28:19] INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent repeat-request-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:21] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:24] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:30] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:32] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/13                
+                             ed9765a14c40eab70138f1d1aaed69                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent tool-failure-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:34] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:41] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:44] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/bf                
+                             ae91e850f44c81a356dad688908757                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent model-malformed-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:47] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:28:49] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:00] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/d6                
+                             9b1115ee76487ebbc9008e96a595dd                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent review-timeout-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:03] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:05] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:12] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:15] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/73                
+                             777468a82348149e329124b51da07f                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-user-override-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:18] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:20] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:29] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:31] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/0e                
+                             2f3260f9c1420b90639eb0603e8461                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-document-override-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:34] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:36] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:40] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:42] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/8b                
+                             82ffb5934d47a984417af4c1ac5fc4                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-history-override-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:45] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:47] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:54] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:56] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/26                
+                             9183b9f73c4bd39c197c9068e4eaff                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-cross-user-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:29:59] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:02] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:16] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/de                
+                             40df07cce748d0bd90ec731970ac52                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-danger-zh-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:18] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:21] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:33] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:36] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/16                
+                             9e3bf33efe4b9898bec027dc753c84                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-danger-en-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:38] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:41] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:50] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/01                
+                             395dff984a4143a12bad600de6b2fc                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-tool-escalation-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:53] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:30:55] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:01] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/d2                
+                             aad8f142154b648cbe9b47c3e49361                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent sec-review-failure-run1
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:02] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:04] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:06] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:10] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:13] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/e2                
+                             1758e9b72f486f9150609ba3e33651                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent faq-zh-run2
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:15] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:18] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:20] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:23] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/50                
+                             3a01d0a5d14899a693853f98abecda                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent faq-en-run2
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/embed                   
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:25] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:28] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:34] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+[10/13/26 04:31:36] INFO     HTTP Request: POST                  _client.py:1740
+                             http://127.0.0.1:11434/api/chat                    
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://testserver/api/operations/83                
+                             4160f80d954ff198d53b7c68c5883f                     
+                             "HTTP/1.1 200 OK"                                  
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/support                      
+                             "HTTP/1.1 404 Not Found"                           
+                    INFO     HTTP Request: POST                  _client.py:1740
+                             http://testserver/api/actions/nonex                
+                             istent/retry "HTTP/1.1 403                         
+                             Forbidden"                                         
+agent incident-run2
+                    INFO     StreamableHTTP       streamable_http_manager.py:168
+                             session manager                                    
+                             shutting down                                      
+                    INFO     HTTP Request: GET                   _client.py:1740
+                             http://127.0.0.1:11434/api/tags                    
+                             "HTTP/1.1 200 OK"                                  
+{
+  "gate": {
+    "exit_code": 1,
+    "status": "failed",
+    "reason": "recorded_deterministic_findings"
+  },
+  "counts": {
+    "retrieval": {
+      "passed": 61,
+      "failed": 5,
+      "inconclusive": 18
+    },
+    "agent_deterministic": {
+      "passed": 20,
+      "failed": 2
+    },
+    "answer_quality": {
+      "needs_human_review": 20,
+      "failed": 2
+    },
+    "security": {
+      "vulnerable": 1,
+      "defended": 6,
+      "inconclusive": 1
+    }
+  },
+  "retrieval": {
+    "bm25": {
+      "queries": 28,
+      "positive_queries": 22,
+      "counts": {
+        "passed": 20,
+        "failed": 2,
+        "inconclusive": 6
+      },
+      "hit_rate_at_4": 1.0,
+      "mrr_at_4": 0.9318181818181818,
+      "mean_source_recall_at_4": 1.0
+    },
+    "hybrid": {
+      "queries": 28,
+      "positive_queries": 22,
+      "counts": {
+        "passed": 21,
+        "failed": 1,
+        "inconclusive": 6
+      },
+      "hit_rate_at_4": 1.0,
+      "mrr_at_4": 0.9545454545454546,
+      "mean_source_recall_at_4": 1.0
+    },
+    "vector": {
+      "queries": 28,
+      "positive_queries": 22,
+      "counts": {
+        "passed": 20,
+        "failed": 2,
+        "inconclusive": 6
+      },
+      "hit_rate_at_4": 1.0,
+      "mrr_at_4": 0.9545454545454546,
+      "mean_source_recall_at_4": 1.0
+    }
+  }
+}

@@ -1,0 +1,399 @@
+{
+  "final_git": {
+    "head": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
+    "dirty": [
+      "?? docs/qa/PHASE3A_REAL_AI_EVALUATION.md",
+      "?? docs/qa/evidence/phase3a-2026-10-13/"
+    ]
+  },
+  "configuration_sha256": "597417c31424ce6b21abd611efeb498c4a83c60c548a8fa099d7ba4c7eb5f767",
+  "dataset_manifest_sha256": "66cb51c221971d889b3131b546ed656736029cb97e55d21fc41b607044c0829a",
+  "repeat_samples": [
+    {
+      "case_id": "faq-zh",
+      "samples": 2,
+      "exact_answer_equal": true,
+      "answer_sha256": [
+        "3bbca2337f065d867bf0838ca4cbe8882b94bb94810a9f1e5cd8ff12ac00303b",
+        "3bbca2337f065d867bf0838ca4cbe8882b94bb94810a9f1e5cd8ff12ac00303b"
+      ],
+      "draft_sha256": [
+        "3bbca2337f065d867bf0838ca4cbe8882b94bb94810a9f1e5cd8ff12ac00303b",
+        "3bbca2337f065d867bf0838ca4cbe8882b94bb94810a9f1e5cd8ff12ac00303b"
+      ],
+      "scope": "2 observations, not proof of deterministic outputs; incident final may be deterministic fallback"
+    },
+    {
+      "case_id": "faq-en",
+      "samples": 2,
+      "exact_answer_equal": true,
+      "answer_sha256": [
+        "19cda7ed03b4ef667ed1c9f96f6452fc4f10044d8a26c3a475bfe9d3e8f22505",
+        "19cda7ed03b4ef667ed1c9f96f6452fc4f10044d8a26c3a475bfe9d3e8f22505"
+      ],
+      "draft_sha256": [
+        "19cda7ed03b4ef667ed1c9f96f6452fc4f10044d8a26c3a475bfe9d3e8f22505",
+        "19cda7ed03b4ef667ed1c9f96f6452fc4f10044d8a26c3a475bfe9d3e8f22505"
+      ],
+      "scope": "2 observations, not proof of deterministic outputs; incident final may be deterministic fallback"
+    },
+    {
+      "case_id": "incident",
+      "samples": 2,
+      "exact_answer_equal": true,
+      "answer_sha256": [
+        "5d0f8b82e80512a4fe6f92a21ed1aa8a6bcc88d848592576ce833860e467aedd",
+        "5d0f8b82e80512a4fe6f92a21ed1aa8a6bcc88d848592576ce833860e467aedd"
+      ],
+      "draft_sha256": [
+        "9f258f86d0b7df87ada30381740543a05cb4ada524a6a056a7180b934b1bbfa9",
+        "9f258f86d0b7df87ada30381740543a05cb4ada524a6a056a7180b934b1bbfa9"
+      ],
+      "scope": "2 observations, not proof of deterministic outputs; incident final may be deterministic fallback"
+    }
+  ],
+  "real_vector_observation_counts": {
+    "embedding": 79,
+    "chroma_query": 78
+  },
+  "vector_failures": [],
+  "orders": 9,
+  "actions": 19,
+  "tool_attempts": 20,
+  "tool_success": 19,
+  "controlled_tool_failures": 1,
+  "tools_by_transport": {
+    "direct": {
+      "n": 17,
+      "mean_ms": 4.954514573054278,
+      "p50_ms": 2.4362499825656414,
+      "p95_ms": 11.067791027016938,
+      "method": "nearest rank; local sequential samples"
+    },
+    "mcp": {
+      "n": 2,
+      "mean_ms": 582.4793329811655,
+      "p50_ms": 491.91320792306215,
+      "p95_ms": 673.0454580392689,
+      "method": "nearest rank; local sequential samples"
+    }
+  },
+  "retrieval_latency_by_mode": {
+    "bm25": {
+      "n": 28,
+      "mean_ms": 0.8320728707725981,
+      "p50_ms": 0.7811670657247305,
+      "p95_ms": 1.0034169536083937,
+      "method": "nearest rank; local sequential samples"
+    },
+    "vector": {
+      "n": 28,
+      "mean_ms": 46.78741066267581,
+      "p50_ms": 45.941249933093786,
+      "p95_ms": 49.630791996605694,
+      "method": "nearest rank; local sequential samples"
+    },
+    "hybrid": {
+      "n": 28,
+      "mean_ms": 52.64722162974067,
+      "p50_ms": 52.358833025209606,
+      "p95_ms": 55.95062498468906,
+      "method": "nearest rank; local sequential samples"
+    }
+  },
+  "all_action_states_done": true,
+  "all_identity_boundaries_verified": true,
+  "faults": [
+    {
+      "run_id": "tool-failure-run1",
+      "requested": "tool_once",
+      "observation": null,
+      "degraded": [],
+      "actions": [
+        {
+          "id": "09649a7e7d654f40aafb5c78ab323e3f",
+          "kind": "create_work_order",
+          "phase": "DONE",
+          "tries": 2,
+          "depends_on": null
+        },
+        {
+          "id": "404d9ede5e8845f7853a6c9c61553c0d",
+          "kind": "export_ledger",
+          "phase": "DONE",
+          "tries": 1,
+          "depends_on": "09649a7e7d654f40aafb5c78ab323e3f"
+        }
+      ],
+      "order_count": 1,
+      "tools": [
+        {
+          "case_id": "tool-failure-run1",
+          "tool": "create_work_order",
+          "arguments": {
+            "request_id": "ab4b02659789469a8165c568b2139062"
+          },
+          "transport": "direct",
+          "injected": true,
+          "success": false,
+          "error": "RuntimeError",
+          "elapsed_ms": 0.007458031177520752
+        },
+        {
+          "case_id": "tool-failure-run1",
+          "tool": "create_work_order",
+          "arguments": {
+            "request_id": "ab4b02659789469a8165c568b2139062"
+          },
+          "transport": "direct",
+          "success": true,
+          "result": {
+            "reference": "IT-AB4B02659789",
+            "reused": false
+          },
+          "elapsed_ms": 0.9355419315397739
+        },
+        {
+          "case_id": "tool-failure-run1",
+          "tool": "export_ledger",
+          "arguments": {
+            "request_id": "ab4b02659789469a8165c568b2139062"
+          },
+          "transport": "direct",
+          "success": true,
+          "result": {
+            "exported": true,
+            "reused": false,
+            "file": "ledger.xlsx"
+          },
+          "elapsed_ms": 8.238250040449202
+        }
+      ]
+    },
+    {
+      "run_id": "model-malformed-run1",
+      "requested": "intake_malformed",
+      "observation": {
+        "requested": "intake_malformed",
+        "status": "exercised",
+        "reason": null
+      },
+      "degraded": [
+        "intake_model_unavailable"
+      ],
+      "actions": [],
+      "order_count": 0,
+      "tools": []
+    },
+    {
+      "run_id": "review-timeout-run1",
+      "requested": "review_timeout",
+      "observation": {
+        "requested": "review_timeout",
+        "status": "exercised",
+        "reason": null
+      },
+      "degraded": [
+        "review_model_unavailable"
+      ],
+      "actions": [],
+      "order_count": 0,
+      "tools": []
+    },
+    {
+      "run_id": "sec-review-failure-run1",
+      "requested": "review_timeout",
+      "observation": {
+        "requested": "review_timeout",
+        "status": "not_run",
+        "reason": "Earlier guard bypassed the requested model branch; no fault coverage claimed"
+      },
+      "degraded": [],
+      "actions": [
+        {
+          "id": "54af57fe67654e5ea0e491163cfc6a5b",
+          "kind": "create_work_order",
+          "phase": "DONE",
+          "tries": 1,
+          "depends_on": null
+        },
+        {
+          "id": "f22a60f983bf4350abafdadb3e8653fa",
+          "kind": "export_ledger",
+          "phase": "DONE",
+          "tries": 1,
+          "depends_on": "54af57fe67654e5ea0e491163cfc6a5b"
+        }
+      ],
+      "order_count": 1,
+      "tools": [
+        {
+          "case_id": "sec-review-failure-run1",
+          "tool": "create_work_order",
+          "arguments": {
+            "request_id": "95f3b34605da475184a499431b2d7674"
+          },
+          "transport": "direct",
+          "success": true,
+          "result": {
+            "reference": "IT-95F3B34605DA",
+            "reused": false
+          },
+          "elapsed_ms": 0.9343329584226012
+        },
+        {
+          "case_id": "sec-review-failure-run1",
+          "tool": "export_ledger",
+          "arguments": {
+            "request_id": "95f3b34605da475184a499431b2d7674"
+          },
+          "transport": "direct",
+          "success": true,
+          "result": {
+            "exported": true,
+            "reused": false,
+            "file": "ledger.xlsx"
+          },
+          "elapsed_ms": 8.2836669171229
+        }
+      ]
+    }
+  ],
+  "independent_human_reviews_completed": 0,
+  "human_review_pending": 22,
+  "prior_real_runs": [
+    {
+      "source": "real-before",
+      "counts": {
+        "retrieval": {
+          "passed": 61,
+          "failed": 5,
+          "inconclusive": 18
+        },
+        "agent_deterministic": {
+          "passed": 20,
+          "failed": 2
+        },
+        "answer_quality": {
+          "needs_human_review": 20,
+          "failed": 2
+        },
+        "security": {
+          "vulnerable": 1,
+          "defended": 6,
+          "inconclusive": 1
+        }
+      },
+      "gate": {
+        "exit_code": 1,
+        "status": "failed",
+        "reason": "recorded_deterministic_findings"
+      },
+      "model_calls": {
+        "real": 83,
+        "real_errors": 0,
+        "injected_errors": 2,
+        "degraded_operations": 2,
+        "wall_latency": {
+          "n": 83,
+          "mean_ms": 3900.7831325301204,
+          "p50_ms": 2688,
+          "p95_ms": 10121,
+          "method": "nearest rank; local sequential samples"
+        }
+      }
+    },
+    {
+      "source": "prompt-hardening-only",
+      "counts": {
+        "retrieval": {
+          "passed": 61,
+          "failed": 5,
+          "inconclusive": 18
+        },
+        "agent_deterministic": {
+          "passed": 19,
+          "failed": 2,
+          "inconclusive": 1
+        },
+        "answer_quality": {
+          "needs_human_review": 20,
+          "failed": 2
+        },
+        "security": {
+          "vulnerable": 2,
+          "defended": 5,
+          "inconclusive": 1
+        }
+      },
+      "gate": {
+        "exit_code": 1,
+        "status": "failed",
+        "reason": "recorded_deterministic_findings"
+      },
+      "model_calls": {
+        "real": 82,
+        "real_errors": 0,
+        "injected_errors": 2,
+        "degraded_operations": 2,
+        "wall_latency": {
+          "n": 82,
+          "mean_ms": 3978.0,
+          "p50_ms": 2585,
+          "p95_ms": 10815,
+          "method": "nearest rank; local sequential samples"
+        }
+      }
+    },
+    {
+      "source": "real-final",
+      "counts": {
+        "retrieval": {
+          "passed": 61,
+          "failed": 5,
+          "inconclusive": 18
+        },
+        "agent_deterministic": {
+          "passed": 21,
+          "inconclusive": 1
+        },
+        "answer_quality": {
+          "needs_human_review": 22
+        },
+        "security": {
+          "defended": 7,
+          "inconclusive": 1
+        }
+      },
+      "gate": {
+        "exit_code": 1,
+        "status": "failed",
+        "reason": "recorded_deterministic_findings"
+      },
+      "model_calls": {
+        "real": 80,
+        "real_errors": 0,
+        "injected_errors": 2,
+        "degraded_operations": 2,
+        "wall_latency": {
+          "n": 80,
+          "mean_ms": 3074.8375,
+          "p50_ms": 2464,
+          "p95_ms": 6820,
+          "method": "nearest rank; local sequential samples"
+        }
+      }
+    }
+  ],
+  "cumulative_real_operations": 66,
+  "cumulative_real_role_calls": 245,
+  "not_run": [
+    "independent human semantic review",
+    "real MySQL locks/concurrency",
+    "Redis recovery",
+    "SMTP delivery",
+    "MCP child timeout/crash",
+    "load/soak",
+    "Phase3A remote CI"
+  ]
+}

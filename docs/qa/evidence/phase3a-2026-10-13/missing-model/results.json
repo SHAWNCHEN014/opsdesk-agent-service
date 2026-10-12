@@ -1,0 +1,1155 @@
+{
+  "started_at": "2026-10-12T17:51:42.961347+00:00",
+  "profile": "real_ai_full",
+  "git": {
+    "head": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
+    "dirty": [
+      "?? docs/qa/PHASE3A_REAL_AI_EVALUATION.md",
+      "?? docs/qa/evidence/phase3a-2026-10-13/"
+    ]
+  },
+  "source_sha256": {
+    ".github/workflows/qa.yml": "2a059911c271f6171ad89e3721d97362538c6f7fd6281acae6d27157710cf04c",
+    "docs/qa/quality-status.json": "e238de308b6960ee82e60858f184d963c6aaa9e690066ec94e0bf4b6ff021a51",
+    "evaluation/cases.json": "f5e42b84431271860b43d4fef811a412488379f0651c1933a6c2f188d0e1a4a1",
+    "evaluation/real_ai/v1/cases.json": "7ffd9cf395c738238ef96c11d49d5fe66dbc73f40208c9cb5afe03f51f3af344",
+    "evaluation/real_ai/v1/manifest.json": "66cb51c221971d889b3131b546ed656736029cb97e55d21fc41b607044c0829a",
+    "knowledge/access.md": "0a9624d82a47efa7ffe9ccd57c9c762fdc5715d9a988087bf7f1335c1938f02a",
+    "knowledge/connectivity.md": "6c7fd7a14c7c1bdc9bb27578b05a71d2c766fbdafe22e857c68935371205d333",
+    "knowledge/devices.md": "bbae1a68360a06c4b8d13951d61869a3eb5bf99f2d41576667de8d2b4559eeab",
+    "knowledge/incidents.md": "b252c18f0eba288b08f5012c76355be5670222649cb2d7de7e45587f5c66888d",
+    "knowledge/privacy.md": "7a7c181ec5a3863356028880ae21df46d29b9d25f9c0c3588993fa961f816a50",
+    "knowledge/software.md": "9d0f31c1cef72d5132320ea7586eab100fc23bdef9ceeba708e362400bc2fcb6",
+    "opsdesk/__init__.py": "a3d6285ac123ca01385f07aaa584ec673c4124a6c5b462a68c2a0cc03ee7f9c7",
+    "opsdesk/action_server.py": "53e176cd065e80acc378ecd89f89163f026845f65d4f25b844ae46c45aebb20f",
+    "opsdesk/actions.py": "fb3b09eef4de43afcc84e75f2b7597ffb53faf48594dec20c4a1409d705332e8",
+    "opsdesk/configuration.py": "23583311e0335bb55894126b7ef18e28374f320519a3c93be14c3a7b65dcec6b",
+    "opsdesk/contracts.py": "3d41c58ce7b8eea47f5a3019c8940b00373537a272f99b34498a09599529a76b",
+    "opsdesk/guidance.py": "beaa468d8d30abefab887dcbf0bac8e05960f6ebdea4e46c451e4de3514cbca9",
+    "opsdesk/history.py": "7f33998402ccb1bf9fb61a7a15cb58aaec03f0a9a1a8b07c73ea2ac2515973c2",
+    "opsdesk/identity.py": "1f1cc85902644cd4a6fe99058978804d7acb95739971ab35512b2d92c6c0737e",
+    "opsdesk/inference.py": "ac7c3e8be33cf2b230bf3c55e16f6f0e99ecdaba1bb188be318c6b666960326a",
+    "opsdesk/main.py": "488a1e29988f337a31a8e746ba251b72095a38152f949b7caec4f8c01f958954",
+    "opsdesk/orchestration.py": "abe024ed51f89364685d127f6a4c1dc88d33c0576df378b86ac1af792ed69071",
+    "opsdesk/queueing.py": "3690b3ca6bdac4d482b1d7da53e96fb8c04d961cc18d7b92978644b9d7e76261",
+    "opsdesk/redaction.py": "1ae9f9f3b3f93943a9e66e8536c61414b976bd2bf7b471e0cda88ddc4c8e4322",
+    "opsdesk/retrieval.py": "04799fc29ba33284b123ef1c63dbbcc80fe61e0c894399584eb68924064ff16b",
+    "opsdesk/service.py": "9883de6b5ebde3e78a16972f3b35140d9ec1b26f09cb0a689f1b2ff9a187e7c2",
+    "opsdesk/storage.py": "4b30c7f084282c0ba853d31af396316bee2b6ecf9a3603f94086913cfa7f94ac",
+    "pyproject.toml": "c92c952468abc1b305b9d82835cd2d393959099eea71443cd5fe9352291e26f1",
+    "requirements-dev.txt": "354cbd809d1b106319431b7f0736ec67ba91bf9cdc2ed74206bfdb3550f016ae",
+    "requirements.txt": "ea406a64073b6495d5cb7a30e4de910f51b1fa7aa1debcc89d1a6b46717fe674",
+    "scripts/archive_licenses.py": "b2a31837595784f53cacdb6e27461be5e6c6784b2c54c7342b108663133da8a0",
+    "scripts/evaluate.py": "085127d0c289edad9ceeaf9ba809bf694a6fb3a633711b54cd91395bc1e416c5",
+    "scripts/qa/ai_metrics.py": "e0289111da9096e80208c7d9ce363f0b10cfc9f28ca59c31ace38e8f088452f2",
+    "scripts/qa/baseline_cases.json": "7b711fe4437401cf64db4892e59dfb485f063fda9bf6ffd9b530dbc74246d7f0",
+    "scripts/qa/offline_guard.py": "7effde87fe9a18cfe74af6d6a14c3be3e57784da85b96b9c21fe15e944faaad8",
+    "scripts/qa/real_ai.py": "9a514821b93fac1a443ae3b784835a6fbaf1802e073bdceee9d511729c0b71b7",
+    "scripts/qa/run_checks.py": "ac58ee4406097cf90fe35098c5322a528b783c073238a5ddcd4c245e236e9ddc",
+    "scripts/review_origin.py": "1050bd98578e103bd1714b68232ed505100a4194ee2c7d1b4611863435777ba4",
+    "scripts/verify_live.py": "7b3b28f6ab139d1d528f9d57624f702bc0014962ff501447da152753a25e63a5",
+    "skills/access-request/SKILL.md": "ff62cad9e9f6af8864da572b455251b2e5eaf80123eb1e7039e7a08c3f6ce6cb",
+    "skills/connectivity-support/SKILL.md": "42103f3ca7b844ab89f131727034aa7e3ab0b76b49da94b22c37fc72e69a0ffd",
+    "skills/device-support/SKILL.md": "14d6d60ebbefeb91879be8eb8d72e2d9bee86d445fc7048c29d23b564997845f",
+    "skills/knowledge-answer/SKILL.md": "d4de7cc88f50d7836274e32ab8678a71fc746a265d2572688b7c37470b9a0b14",
+    "skills/outage-response/SKILL.md": "1b0aef00997b6c6364cf273913564e686f3964de551b90c2d6bea3d4b7e538ee",
+    "skills/software-request/SKILL.md": "956b23f9a910e94f5a2d386e748dae00e24f203a116565c2e63a20e9ed63a267",
+    "tests/ai/test_action_claims.py": "2eafead4023d8d98ae544c9afbbd42a4984522dd9c66b042fe37c2888f9b22ad",
+    "tests/ai/test_evaluation_contract.py": "c597314a2c1c9ed0437732a7670c11039c8265345e26585bbd62b3043e705893",
+    "tests/ai/test_prompt_boundary.py": "06fda9a12b4eb5fdd45bdc50e0c90b8c24e751514d2bda27ad398206b72b14e5",
+    "tests/conftest.py": "3f6f59af1ff23886154cba939051b5cbdca5409b273173d7c9c91621fd27cefb",
+    "tests/qa/test_evaluation_gate.py": "c3defd684aef783b9b71d50adfb43637016882ee6e456b72d2ccbf5f908a9a59",
+    "tests/qa/test_final_review.py": "554cf26d6e48dbe6c5dc26b27a1a10db86891bb6b6b5ab858ffc5194015f86c1",
+    "tests/qa/test_ledger_text.py": "36ee7ae8486f1a2c789eb59d90f20ea6d2b08099858e26b67247cae4acce9832",
+    "tests/qa/test_stale_vectors.py": "bc807016081708ceb94d087c5a5e5c47589796a3bdb21bbb3e193694102e4abb",
+    "tests/quality/test_health_database.py": "3cf3cb78496bc8f2073097d43b37e311474aa1f328b41d7b4e092a3cd50e4e96",
+    "tests/quality/test_quality_gate.py": "9d18e0189ffb538bbb404dedc196ddc4aa4be041994c7043a3547109cb4317e3",
+    "tests/quality/test_retry_audit.py": "fab42249533521fa3e3e7a7ca6d646e595e3c84a7cae2dd9b33543c15609be75",
+    "tests/reliability/conftest.py": "aa34cc9b25ebe83637f2d508472e4b3eee5274f81396f5b9d8e2e3026faf5f7a",
+    "tests/reliability/helpers.py": "1583a27476c447424e0068f51053728b89828dc3625feb757222fa5ce0644662",
+    "tests/reliability/test_queue_scheduling.py": "ea4d0a41611c56f87769c2a76618587dcd01f9b3c68338d5e4c9c99459a61b1a",
+    "tests/reliability/test_worker_recovery.py": "968967f58b7f40bb9d724d7bcad0135517cb9e9d1917eef4f5743f08cbb9228c",
+    "tests/test_service.py": "f6a328b989d31336eb4d486528d086b60ca530c24239013890432eda0c00a952"
+  },
+  "retrieval": [],
+  "agent": [],
+  "not_run": [
+    "real_rag",
+    "real_llm",
+    "real_agent",
+    "security"
+  ],
+  "dataset": {
+    "version": 1,
+    "files": {
+      "cases.json": "7ffd9cf395c738238ef96c11d49d5fe66dbc73f40208c9cb5afe03f51f3af344",
+      "knowledge/access.md": "4f9a29cadf473b358189658c23c3ab2ff63de255257929c171aa8d5b8543578d",
+      "knowledge/attack-reference.md": "efff309fb309195dbc4007401f80da6b6ea442eb956462e5529ac113826cf3e0",
+      "knowledge/backup.md": "34a62115747bcf92b601d3b11ceb149c4607d528fb884c7d5881490e27916b5c",
+      "knowledge/calibration.md": "f31ef68b37a14044c7a566c8c316b9e673b273399108f8d165d67ad58be67b61",
+      "knowledge/laptop.md": "c4c80a3903ee6109df91d43c0e20f002a94798815d837e3fa53a3207a470f2c8",
+      "knowledge/mfa-current.md": "324c2c8b01f66c6dad6fc0636f514863f8a8a312ba900ee7c0a2bfc6277fc5a3",
+      "knowledge/mfa-retired.md": "87622b28975a0423f51d3e167f2e2ca21c06a9e775688e57bdc91d43894456ff",
+      "knowledge/outage.md": "d35576aacf33df3bead6c2ed9fde023a00739c655bd079c1eef0494864ead08f",
+      "knowledge/phishing.md": "d19c140e704ef8622e4694e298adf37ed31bfa8c277c7c5decdb3604fe199ac6",
+      "knowledge/printer.md": "7ecb9fee67bc3e7cc0f87ce558ea63997a1ad3224f598d082afa2a537607e610",
+      "knowledge/software.md": "db8332986b077dc1b930853fcc561c1c6290af09da1421e4761a74e69996159f",
+      "knowledge/vpn.md": "a7baded76b81d631ffc7daffa401c5a198b5823e0fcb6ccf02f65718936bdc0d",
+      "knowledge/wifi.md": "05dbba1999a03f4b0eae7ecf3e4dcb95758bd28acfe300e8e900001ca5f3405f"
+    }
+  },
+  "planned_cases": [
+    {
+      "suite": "rag",
+      "id": "rag-01-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-01-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-01-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-02-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-02-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-02-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-03-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-03-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-03-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-04-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-04-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-04-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-05-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-05-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-05-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-06-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-06-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-06-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-07-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-07-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-07-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-08-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-08-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-08-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-09-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-09-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-09-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-10-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-10-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-10-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-11-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-11-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-11-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-12-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-12-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-12-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-13-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-13-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-13-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-14-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-14-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-14-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-15-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-15-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-15-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-16-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-16-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-16-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-17-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-17-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-17-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-18-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-18-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-18-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-19-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-19-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-19-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-20-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-20-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-20-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-21-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-21-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-21-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-22-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-22-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-22-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-23-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-23-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-23-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-24-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-24-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-24-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-25-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-25-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-25-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-26-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-26-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-26-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-27-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-27-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-27-hybrid"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-28-bm25"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-28-vector"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-28-hybrid"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-zh-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-en-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "incident-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "outage-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "ambiguous-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "no-answer-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "outdated-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "repeat-request-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "tool-failure-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "model-malformed-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "review-timeout-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-user-override-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-document-override-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-history-override-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-cross-user-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-danger-zh-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-danger-en-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-tool-escalation-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-review-failure-run1"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-zh-run2"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-en-run2"
+    },
+    {
+      "suite": "agent",
+      "id": "incident-run2"
+    }
+  ],
+  "configuration": {
+    "chat": "fixture-model-not-installed",
+    "embedding": "nomic-embed-text-v2-moe",
+    "temperature": 0,
+    "context": 4096,
+    "chat_predict": {
+      "draft": 512,
+      "structured": 240
+    },
+    "ollama_url": "http://127.0.0.1:11434",
+    "repeated_cases": 3,
+    "concurrency": "one case at a time; existing graph overlaps ready nodes",
+    "knowledge_root": "evaluation/real_ai/v1/knowledge",
+    "runtime_isolation": "new SQLite/Chroma/Excel; .env not loaded; no Redis/SMTP",
+    "TTFT": "not available: buffered non-streaming model calls"
+  },
+  "configuration_sha256": "762cf5446079e2b3c107d0f09b54413ee03d9600808abdcaa6505ae6182c7a43",
+  "environment_error": "ValueError",
+  "retrieval_metrics": {},
+  "counts": {
+    "retrieval": {},
+    "agent_deterministic": {},
+    "answer_quality": {},
+    "security": {}
+  },
+  "performance": {
+    "confirmation_ms": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    },
+    "full_answer_ms": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    },
+    "retrieval_ms": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    },
+    "tool_ms": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    }
+  },
+  "model_calls": {
+    "real": 0,
+    "real_errors": 0,
+    "injected_errors": 0,
+    "degraded_operations": 0,
+    "wall_latency": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    }
+  },
+  "model_server_timing": {
+    "total_duration": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    },
+    "load_duration": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    },
+    "prompt_eval_duration": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    },
+    "eval_duration": {
+      "n": 0,
+      "mean_ms": null,
+      "p50_ms": null,
+      "p95_ms": null
+    }
+  },
+  "not_run_cases": [
+    {
+      "suite": "rag",
+      "id": "rag-01-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-01-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-01-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-02-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-02-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-02-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-03-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-03-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-03-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-04-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-04-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-04-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-05-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-05-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-05-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-06-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-06-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-06-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-07-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-07-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-07-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-08-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-08-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-08-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-09-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-09-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-09-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-10-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-10-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-10-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-11-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-11-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-11-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-12-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-12-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-12-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-13-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-13-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-13-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-14-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-14-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-14-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-15-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-15-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-15-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-16-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-16-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-16-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-17-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-17-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-17-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-18-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-18-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-18-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-19-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-19-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-19-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-20-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-20-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-20-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-21-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-21-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-21-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-22-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-22-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-22-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-23-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-23-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-23-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-24-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-24-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-24-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-25-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-25-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-25-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-26-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-26-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-26-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-27-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-27-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-27-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-28-bm25",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-28-vector",
+      "status": "not_run"
+    },
+    {
+      "suite": "rag",
+      "id": "rag-28-hybrid",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-zh-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-en-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "incident-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "outage-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "ambiguous-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "no-answer-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "outdated-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "repeat-request-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "tool-failure-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "model-malformed-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "review-timeout-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-user-override-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-document-override-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-history-override-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-cross-user-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-danger-zh-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-danger-en-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-tool-escalation-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "sec-review-failure-run1",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-zh-run2",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "faq-en-run2",
+      "status": "not_run"
+    },
+    {
+      "suite": "agent",
+      "id": "incident-run2",
+      "status": "not_run"
+    }
+  ],
+  "not_run_fault_branches": [],
+  "gate": {
+    "exit_code": 2,
+    "status": "incomplete",
+    "reason": "precondition_or_execution_incomplete"
+  },
+  "finished_at": "2026-10-12T17:51:43.133945+00:00"
+}

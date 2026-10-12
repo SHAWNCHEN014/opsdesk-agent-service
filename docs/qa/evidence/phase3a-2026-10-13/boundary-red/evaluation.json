@@ -1,0 +1,328 @@
+{
+  "at": "2026-10-12T17:49:56.106701+00:00",
+  "scope": "Small self-authored synthetic regression set. Classification tests deterministic rules, not model accuracy. Retrieval is measured at segment ranks up to 4, matching expected source. No held-out or production claim.",
+  "status": "passed",
+  "gate": {
+    "passed": true,
+    "criteria": {
+      "intent_accuracy": 1.0,
+      "priority_accuracy": 1.0,
+      "min_hit_at_4": 1.0,
+      "min_mrr": 0.9
+    },
+    "failures": []
+  },
+  "dataset_sha256": "f5e42b84431271860b43d4fef811a412488379f0651c1933a6c2f188d0e1a4a1",
+  "profile": "bm25",
+  "knowledge_sha256": "f1de6329749c0d01c80d05bd6e20c4d4aad142c61b1ff12a1871e0f77a0f9575",
+  "classification_size": 24,
+  "intent_correct": 24,
+  "priority_correct": 24,
+  "retrieval_size": 12,
+  "hit_at_4": 1.0,
+  "mrr": 0.9444444444444445,
+  "vector_queries": 0,
+  "classification": [
+    {
+      "text": "如何申请业务系统权限？",
+      "expected_intent": "FAQ",
+      "actual_intent": "FAQ",
+      "expected_priority": "P3",
+      "actual_priority": "P3"
+    },
+    {
+      "text": "VPN 的连接流程是什么？",
+      "expected_intent": "FAQ",
+      "actual_intent": "FAQ",
+      "expected_priority": "P3",
+      "actual_priority": "P3"
+    },
+    {
+      "text": "新员工在哪里领取电脑？",
+      "expected_intent": "FAQ",
+      "actual_intent": "FAQ",
+      "expected_priority": "P3",
+      "actual_priority": "P3"
+    },
+    {
+      "text": "How do I reset my password?",
+      "expected_intent": "FAQ",
+      "actual_intent": "FAQ",
+      "expected_priority": "P3",
+      "actual_priority": "P3"
+    },
+    {
+      "text": "What is the company-wide outage procedure?",
+      "expected_intent": "FAQ",
+      "actual_intent": "FAQ",
+      "expected_priority": "P3",
+      "actual_priority": "P3"
+    },
+    {
+      "text": "Where is the approved software catalogue?",
+      "expected_intent": "FAQ",
+      "actual_intent": "FAQ",
+      "expected_priority": "P3",
+      "actual_priority": "P3"
+    },
+    {
+      "text": "请帮我开通财务系统权限",
+      "expected_intent": "REQUEST",
+      "actual_intent": "REQUEST",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "我要申请一台工作电脑",
+      "expected_intent": "REQUEST",
+      "actual_intent": "REQUEST",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "请帮我安装批准的应用",
+      "expected_intent": "REQUEST",
+      "actual_intent": "REQUEST",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "Please grant access to the approved reporting system",
+      "expected_intent": "REQUEST",
+      "actual_intent": "REQUEST",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "I need a monitor for my desk",
+      "expected_intent": "REQUEST",
+      "actual_intent": "REQUEST",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "Request a licensed software installation",
+      "expected_intent": "REQUEST",
+      "actual_intent": "REQUEST",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "电脑无法开机，仅影响我本人",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "VPN 连接失败，只有我受影响",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "我的账号无法登录",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "My printer is not working",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "The application failed on my laptop",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "I cannot connect to office Wi-Fi",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P2",
+      "actual_priority": "P2"
+    },
+    {
+      "text": "全员无法访问核心业务系统，服务中断",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P1",
+      "actual_priority": "P1"
+    },
+    {
+      "text": "全公司网络中断",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P1",
+      "actual_priority": "P1"
+    },
+    {
+      "text": "核心业务大面积报错",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P1",
+      "actual_priority": "P1"
+    },
+    {
+      "text": "All employees cannot access the core business system",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P1",
+      "actual_priority": "P1"
+    },
+    {
+      "text": "The entire company network is unavailable",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P1",
+      "actual_priority": "P1"
+    },
+    {
+      "text": "Company-wide service outage reported",
+      "expected_intent": "INCIDENT",
+      "actual_intent": "INCIDENT",
+      "expected_priority": "P1",
+      "actual_priority": "P1"
+    }
+  ],
+  "retrieval": [
+    {
+      "query": "忘记密码如何重置",
+      "expected": "access.md",
+      "ranking": [
+        "access.md",
+        "privacy.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "申请访问权限需要哪些审批",
+      "expected": "access.md",
+      "ranking": [
+        "access.md",
+        "devices.md",
+        "software.md",
+        "incidents.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "VPN 无法连接错误码",
+      "expected": "connectivity.md",
+      "ranking": [
+        "connectivity.md",
+        "devices.md",
+        "privacy.md",
+        "software.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "office Wi-Fi drops",
+      "expected": "connectivity.md",
+      "ranking": [
+        "connectivity.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "电脑无法开机电源检查",
+      "expected": "devices.md",
+      "ranking": [
+        "devices.md",
+        "connectivity.md",
+        "software.md",
+        "privacy.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "printer queue paused",
+      "expected": "devices.md",
+      "ranking": [
+        "devices.md",
+        "incidents.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "安装软件许可和批准",
+      "expected": "software.md",
+      "ranking": [
+        "software.md",
+        "devices.md",
+        "connectivity.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "application error version reproduction steps",
+      "expected": "software.md",
+      "ranking": [
+        "software.md",
+        "connectivity.md",
+        "privacy.md",
+        "access.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "全员无法访问核心业务系统",
+      "expected": "incidents.md",
+      "ranking": [
+        "incidents.md",
+        "connectivity.md",
+        "access.md",
+        "privacy.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "outage restoration timeline",
+      "expected": "incidents.md",
+      "ranking": [
+        "incidents.md",
+        "connectivity.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    },
+    {
+      "query": "聊天中哪些敏感信息不应该发送",
+      "expected": "privacy.md",
+      "ranking": [
+        "access.md",
+        "software.md",
+        "privacy.md"
+      ],
+      "rank": 3,
+      "vector_used": false
+    },
+    {
+      "query": "support communication privacy",
+      "expected": "privacy.md",
+      "ranking": [
+        "privacy.md",
+        "software.md"
+      ],
+      "rank": 1,
+      "vector_used": false
+    }
+  ]
+}

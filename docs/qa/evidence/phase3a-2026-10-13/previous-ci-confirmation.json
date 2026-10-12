@@ -1,0 +1,69 @@
+{
+  "run_url": "https://github.com/SHAWNCHEN014/opsdesk-agent-service/actions/runs/38281086641",
+  "head_sha": "2edce8ec53b0d62d98a2efdf27576676af93bd8e",
+  "conclusion": "success",
+  "environment": {
+    "python": "3.12.15",
+    "system": "Linux",
+    "dependencies": {
+      "pytest": "9.1.1",
+      "coverage": "7.16.2",
+      "SQLAlchemy": "2.0.54",
+      "FastAPI": "0.141.1",
+      "httpx": "0.28.1",
+      "openpyxl": "3.1.5",
+      "mcp": "1.30.0",
+      "anyio": "4.15.1",
+      "PyMySQL": "1.2.3"
+    }
+  },
+  "pytest": {
+    "tests": 138,
+    "passed": 138,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "baseline109": {
+    "required": 109,
+    "present": 109,
+    "passed": 109,
+    "missing_or_duplicate": []
+  },
+  "coverage": {
+    "status": "completed",
+    "scope": "opsdesk/*.py in Pytest process; model/vector stubs and temporary SQLite",
+    "line": {
+      "covered": 1053,
+      "total": 1289,
+      "percent": 81.6912335143522
+    },
+    "branch": {
+      "covered": 217,
+      "total": 314,
+      "percent": 69.10828025477707
+    },
+    "partial_branches": 47,
+    "combined_percent": 79.2264504054897,
+    "threshold": null,
+    "gate_policy": "Measurement required; no invented percentage threshold"
+  },
+  "gate": {
+    "status": "passed",
+    "exit_code": 0,
+    "reasons": [],
+    "scope": "offline deterministic checks only; not a production release approval"
+  },
+  "artifacts": {
+    "summary.json": "173071664a5c296a582c09e852f8e49626c19ca072ba09bd86a7a1a886ea8e9c",
+    "coverage.txt": "2c96cce0382f401e8d442856a6bbd24f9110b234462d3c278284ab65b40e6d76",
+    "pytest-output.txt": "1c44b9d97560427e9777d37a7cb6d57489a7452632c3fb06323dfc56da65b3ab",
+    "quality-report.md": "e82c1255bbebac4f4deefc6fea821d0845279224d62937508c06aa7148e8d2f2",
+    "coverage.json": "bc6930ce49961d1d25669e372a32b7c334771b58f157d79bcf3fa1389e37ee82",
+    "coverage.xml": "39923679c177d5ee596fcacb1a811f999b2b8d8a091151eeacfcaeac3cf74d6b",
+    "junit.xml": "be2232140ec76e9f2605842fa325666817df83af108078bf843573faf212f3af",
+    "evaluation.json": "e29b98cf163a1844922b2a5c9b1d5a69d6084ce9cb8b7d4a0fc4a2c8a5e683fe"
+  },
+  "scope": "GitHub Ubuntu offline job; not a real model/database test or configured branch protection",
+  "registry_note": "Downloaded summary retains Phase2C historical remote_ci not_run registry entry. This separate record establishes the subsequent real CI execution."
+}

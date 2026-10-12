@@ -1,0 +1,68 @@
+{
+  "defect_id": "QA-AI-FRESHNESS-01",
+  "status": "open",
+  "source": "rag-first/results.json",
+  "findings": [
+    {
+      "case_id": "rag-21",
+      "mode": "bm25",
+      "query": "2026年MFA恢复还用Desk-17纸质表单吗？",
+      "ranked_sources": [
+        "mfa-retired.md",
+        "mfa-current.md",
+        "backup.md",
+        "outage.md"
+      ],
+      "reason": "retired_source_top1"
+    },
+    {
+      "case_id": "rag-21",
+      "mode": "vector",
+      "query": "2026年MFA恢复还用Desk-17纸质表单吗？",
+      "ranked_sources": [
+        "mfa-retired.md",
+        "mfa-current.md",
+        "backup.md",
+        "outage.md"
+      ],
+      "reason": "retired_source_top1"
+    },
+    {
+      "case_id": "rag-22",
+      "mode": "bm25",
+      "query": "What is the current MFA recovery process, rather than the retired paper form?",
+      "ranked_sources": [
+        "mfa-retired.md",
+        "mfa-current.md",
+        "access.md",
+        "backup.md"
+      ],
+      "reason": "retired_source_top1"
+    },
+    {
+      "case_id": "rag-22",
+      "mode": "vector",
+      "query": "What is the current MFA recovery process, rather than the retired paper form?",
+      "ranked_sources": [
+        "mfa-retired.md",
+        "mfa-current.md",
+        "backup.md",
+        "outage.md"
+      ],
+      "reason": "retired_source_top1"
+    },
+    {
+      "case_id": "rag-22",
+      "mode": "hybrid",
+      "query": "What is the current MFA recovery process, rather than the retired paper form?",
+      "ranked_sources": [
+        "mfa-retired.md",
+        "mfa-current.md",
+        "backup.md",
+        "outage.md"
+      ],
+      "reason": "retired_source_top1"
+    }
+  ],
+  "boundary": "source ranking freshness; not equivalent to generated answer correctness"
+}

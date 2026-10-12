@@ -1,5 +1,5 @@
 {
-  "scope": "Tracked defects closed only for documented offline scenarios; original audit remains historical",
+  "scope": "Default offline defect ledger; real AI results and human-review limits are recorded separately in Phase3A",
   "defects": [
     {
       "id": "QA-SEC-01",
@@ -48,13 +48,43 @@
       "status": "closed_offline",
       "blocking": true,
       "summary": "数据库异常非结构化健康响应；Phase 2C"
+    },
+    {
+      "id": "QA-AI-ACTION-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "明确工单叙述与真实队列副作用矛盾；8项离线回归及固定真实样例复跑，非完整语义保证"
+    },
+    {
+      "id": "QA-AI-PROMPT-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "明确系统规则覆盖命令被服从；明确命令边界修复，固定真实样例复跑，非全面防注入"
+    },
+    {
+      "id": "QA-AI-PRIVACY-TEXT-01",
+      "status": "closed_offline",
+      "blocking": true,
+      "summary": "明确跨用户私有内容请求的回复边界；未观察数据库越权，修复文字边界并复跑固定样例"
+    },
+    {
+      "id": "QA-AI-FRESHNESS-01",
+      "status": "open",
+      "blocking": false,
+      "blocking_profiles": [
+        "real_rag",
+        "real_ai_full"
+      ],
+      "summary": "真实检索5次废止文档排第一；保持失败证据，需有效期/替代关系设计，不用关键词改金标强行通过"
     }
   ],
   "residual_risks": [
     "direct线程永久阻塞及硬关闭时限尚未解决",
     "SMTP发送后提交失败可能产生重复通知",
     "单进程原型的恢复、索引版本及数据库竞态仍需真实验收",
-    "覆盖率包含Mock执行，不说明真实模型语义质量或基础设施正确性"
+    "覆盖率包含Mock执行，不说明真实模型语义质量或基础设施正确性",
+    "真实AI正例HitRate@4=1不代表语义正确或知识时效合格；真实门禁因5次废止来源首位失败",
+    "22条最终真实答案的独立人工Rubric尚未完成；单模型/小合成集不代表泛化或全面注入防护"
   ],
   "not_run": [
     {
@@ -65,7 +95,7 @@
     {
       "id": "real_ollama_chroma",
       "status": "not_run",
-      "reason": "默认离线profile禁止网络；模型与向量使用替身"
+      "reason": "本次默认offline profile不运行真实模型；Phase3A另有真实结果，见PHASE3A_REAL_AI_EVALUATION.md"
     },
     {
       "id": "mcp_subprocess_faults",
@@ -85,7 +115,17 @@
     {
       "id": "remote_ci",
       "status": "not_run",
-      "reason": "只配置并本地验证工作流；没有push或远程运行"
+      "reason": "Phase3A新版本按要求未push，远程CI未运行；历史2edce8e的138项Linux通过记录见Phase3A previous-ci-confirmation.json"
     }
-  ]
+  ],
+  "real_ai_snapshot": {
+    "tested_commit": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
+    "results": "evidence/phase3a-2026-10-13/real-final/results.json",
+    "gate": "failed",
+    "exit_code": 1,
+    "retrieval_failed": 5,
+    "agent_passed": 21,
+    "agent_inconclusive": 1,
+    "human_review_pending": 22
+  }
 }

@@ -1,0 +1,20 @@
+Name                       Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------
+opsdesk/__init__.py            0      0      0      0   100%
+opsdesk/action_server.py      21     21      2      0     0%   1-33
+opsdesk/actions.py           107     17     36      8    80%   42, 55, 73->72, 90, 96, 99-109, 111, 125
+opsdesk/configuration.py      39      0      2      1    98%   45->exit
+opsdesk/contracts.py          35      0      0      0   100%
+opsdesk/guidance.py           18      2      6      2    83%   13, 16
+opsdesk/history.py            43     18     10      3    53%   14-15, 18, 22-28, 38-45
+opsdesk/identity.py           40      5      8      1    83%   40, 48-51
+opsdesk/inference.py          43     34     10      0    17%   12-34, 38-44, 48-54
+opsdesk/main.py              260     50     48      9    78%   58, 83, 120, 158-160, 164, 180->exit, 192-195, 199-209, 213, 217, 223->225, 232, 234, 245-248, 270-273, 277-284, 288-292, 296-298
+opsdesk/orchestration.py     140     12     40      6    90%   69, 78, 80, 112->115, 116, 118-120, 137-138, 150-152
+opsdesk/queueing.py          172     23     64      8    84%   31, 62->60, 77->74, 92-95, 97, 99-111, 143, 147, 171, 187
+opsdesk/redaction.py           6      0      2      0   100%
+opsdesk/retrieval.py         150     38     52      3    75%   69-71, 76->exit, 85-102, 105-119, 148-149
+opsdesk/service.py           103     16     28      5    82%   39, 50->56, 62-66, 90-95, 98->exit, 100->exit, 104-106, 120
+opsdesk/storage.py           112      0      6      1    99%   128->133
+----------------------------------------------------------------------
+TOTAL                       1289    236    314     47    79%

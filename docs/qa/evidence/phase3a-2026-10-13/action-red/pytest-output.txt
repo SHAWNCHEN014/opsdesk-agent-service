@@ -1,0 +1,180 @@
+FFFF.................................................................... [ 45%]
+........................................................................ [ 91%]
+..............                                                           [100%]
+=================================== FAILURES ===================================
+_ test_action_narrative_and_persisted_side_effects_agree[My laptop cannot power on. Only I am affected.-No work order is created for this question. If the issue persists, a work order will be queued.-True] _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-iaot6v....service.SupportService object at 0x10c5abb90>, '75017b3ad5534526b26a7be15d155668', 'f13a96bb39c54373bf2239bf9c37698a')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10cbef830>
+message = 'My laptop cannot power on. Only I am affected.'
+draft = 'No work order is created for this question. If the issue persists, a work order will be queued.'
+replaced = True
+
+    @pytest.mark.parametrize("message,draft,replaced", [
+        ("My laptop cannot power on. Only I am affected.", "No work order is created for this question. If the issue persists, a work order will be queued.", True),
+        ("我的笔记本无法开机。", "此问题无需创建工单。", True),
+        ("Please install approved software for me", "A work order has been created.", True),
+        ("How do I request system access?", "A work order will be queued.", True),
+        ("My laptop cannot power on.", "A work order will be queued. Please record the error.", False),
+        ("My laptop cannot power on.", "No work order has been created yet; it will be queued.", False),
+        ("How do I request system access?", "No work order is created for this question.", False),
+        ("How do I request system access?", "If a real incident occurs, a work order will be queued.", False),
+    ])
+    def test_action_narrative_and_persisted_side_effects_agree(runtime, monkeypatch, message, draft, replaced):
+        config, db, _, service, owner, _ = runtime
+        config.model_mode = "ollama"
+        class ApprovedModel:
+            def __init__(self, config): self.config, self.calls = config, []
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake": return heuristic_intake(message)
+                if purpose == "priority": return impact_priority(heuristic_intake(message))
+                if purpose == "draft": return draft
+                return AnswerReview(approved=True, reason="Controlled reviewer approves the inconsistent draft")
+        monkeypatch.setattr(service_module, "InferenceGateway", ApprovedModel)
+        async def run():
+            ids = await service.submit(owner, SupportInput(message=message, request_id="action-contract"))
+            await service.tasks[ids["operation_id"]]
+            state = service.status(ids["operation_id"], owner)
+            worker = ActionWorker(db, config)
+            while await worker.step(): pass
+            return state
+        state = asyncio.run(run());outcome = state["outcome"]
+>       assert outcome["review"]["replacement_used"] is replaced
+E       assert False is True
+
+<PATH>/tests/ai/test_action_claims.py:44: AssertionError
+_ test_action_narrative_and_persisted_side_effects_agree[\u6211\u7684\u7b14\u8bb0\u672c\u65e0\u6cd5\u5f00\u673a\u3002-\u6b64\u95ee\u9898\u65e0\u9700\u521b\u5efa\u5de5\u5355\u3002-True] _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-iaot6v....service.SupportService object at 0x10cbed1c0>, 'cb83ddb46ac14a799dc9a756b22d8786', 'b34fe4057ffb43569cdf39989fbcce64')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10ce96720>
+message = '我的笔记本无法开机。', draft = '此问题无需创建工单。', replaced = True
+
+    @pytest.mark.parametrize("message,draft,replaced", [
+        ("My laptop cannot power on. Only I am affected.", "No work order is created for this question. If the issue persists, a work order will be queued.", True),
+        ("我的笔记本无法开机。", "此问题无需创建工单。", True),
+        ("Please install approved software for me", "A work order has been created.", True),
+        ("How do I request system access?", "A work order will be queued.", True),
+        ("My laptop cannot power on.", "A work order will be queued. Please record the error.", False),
+        ("My laptop cannot power on.", "No work order has been created yet; it will be queued.", False),
+        ("How do I request system access?", "No work order is created for this question.", False),
+        ("How do I request system access?", "If a real incident occurs, a work order will be queued.", False),
+    ])
+    def test_action_narrative_and_persisted_side_effects_agree(runtime, monkeypatch, message, draft, replaced):
+        config, db, _, service, owner, _ = runtime
+        config.model_mode = "ollama"
+        class ApprovedModel:
+            def __init__(self, config): self.config, self.calls = config, []
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake": return heuristic_intake(message)
+                if purpose == "priority": return impact_priority(heuristic_intake(message))
+                if purpose == "draft": return draft
+                return AnswerReview(approved=True, reason="Controlled reviewer approves the inconsistent draft")
+        monkeypatch.setattr(service_module, "InferenceGateway", ApprovedModel)
+        async def run():
+            ids = await service.submit(owner, SupportInput(message=message, request_id="action-contract"))
+            await service.tasks[ids["operation_id"]]
+            state = service.status(ids["operation_id"], owner)
+            worker = ActionWorker(db, config)
+            while await worker.step(): pass
+            return state
+        state = asyncio.run(run());outcome = state["outcome"]
+>       assert outcome["review"]["replacement_used"] is replaced
+E       assert False is True
+
+<PATH>/tests/ai/test_action_claims.py:44: AssertionError
+_ test_action_narrative_and_persisted_side_effects_agree[Please install approved software for me-A work order has been created.-True] _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-iaot6v....service.SupportService object at 0x10ce97da0>, '5da52554e2dd452da18fbf76914eca7b', 'c09c5df0464043f6a7a7eaeefc4638be')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10cf87c80>
+message = 'Please install approved software for me'
+draft = 'A work order has been created.', replaced = True
+
+    @pytest.mark.parametrize("message,draft,replaced", [
+        ("My laptop cannot power on. Only I am affected.", "No work order is created for this question. If the issue persists, a work order will be queued.", True),
+        ("我的笔记本无法开机。", "此问题无需创建工单。", True),
+        ("Please install approved software for me", "A work order has been created.", True),
+        ("How do I request system access?", "A work order will be queued.", True),
+        ("My laptop cannot power on.", "A work order will be queued. Please record the error.", False),
+        ("My laptop cannot power on.", "No work order has been created yet; it will be queued.", False),
+        ("How do I request system access?", "No work order is created for this question.", False),
+        ("How do I request system access?", "If a real incident occurs, a work order will be queued.", False),
+    ])
+    def test_action_narrative_and_persisted_side_effects_agree(runtime, monkeypatch, message, draft, replaced):
+        config, db, _, service, owner, _ = runtime
+        config.model_mode = "ollama"
+        class ApprovedModel:
+            def __init__(self, config): self.config, self.calls = config, []
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake": return heuristic_intake(message)
+                if purpose == "priority": return impact_priority(heuristic_intake(message))
+                if purpose == "draft": return draft
+                return AnswerReview(approved=True, reason="Controlled reviewer approves the inconsistent draft")
+        monkeypatch.setattr(service_module, "InferenceGateway", ApprovedModel)
+        async def run():
+            ids = await service.submit(owner, SupportInput(message=message, request_id="action-contract"))
+            await service.tasks[ids["operation_id"]]
+            state = service.status(ids["operation_id"], owner)
+            worker = ActionWorker(db, config)
+            while await worker.step(): pass
+            return state
+        state = asyncio.run(run());outcome = state["outcome"]
+>       assert outcome["review"]["replacement_used"] is replaced
+E       assert False is True
+
+<PATH>/tests/ai/test_action_claims.py:44: AssertionError
+_ test_action_narrative_and_persisted_side_effects_agree[How do I request system access?-A work order will be queued.-True] _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-quality-iaot6v....service.SupportService object at 0x10cf64380>, '30ca11b220964667b282011003c94823', 'd491738f11c940c3abc842d051a96115')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10cf878f0>
+message = 'How do I request system access?'
+draft = 'A work order will be queued.', replaced = True
+
+    @pytest.mark.parametrize("message,draft,replaced", [
+        ("My laptop cannot power on. Only I am affected.", "No work order is created for this question. If the issue persists, a work order will be queued.", True),
+        ("我的笔记本无法开机。", "此问题无需创建工单。", True),
+        ("Please install approved software for me", "A work order has been created.", True),
+        ("How do I request system access?", "A work order will be queued.", True),
+        ("My laptop cannot power on.", "A work order will be queued. Please record the error.", False),
+        ("My laptop cannot power on.", "No work order has been created yet; it will be queued.", False),
+        ("How do I request system access?", "No work order is created for this question.", False),
+        ("How do I request system access?", "If a real incident occurs, a work order will be queued.", False),
+    ])
+    def test_action_narrative_and_persisted_side_effects_agree(runtime, monkeypatch, message, draft, replaced):
+        config, db, _, service, owner, _ = runtime
+        config.model_mode = "ollama"
+        class ApprovedModel:
+            def __init__(self, config): self.config, self.calls = config, []
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake": return heuristic_intake(message)
+                if purpose == "priority": return impact_priority(heuristic_intake(message))
+                if purpose == "draft": return draft
+                return AnswerReview(approved=True, reason="Controlled reviewer approves the inconsistent draft")
+        monkeypatch.setattr(service_module, "InferenceGateway", ApprovedModel)
+        async def run():
+            ids = await service.submit(owner, SupportInput(message=message, request_id="action-contract"))
+            await service.tasks[ids["operation_id"]]
+            state = service.status(ids["operation_id"], owner)
+            worker = ActionWorker(db, config)
+            while await worker.step(): pass
+            return state
+        state = asyncio.run(run());outcome = state["outcome"]
+>       assert outcome["review"]["replacement_used"] is replaced
+E       assert False is True
+
+<PATH>/tests/ai/test_action_claims.py:44: AssertionError
+=============================== warnings summary ===============================
+../../../../../../..<PATH>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <PATH>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../../../../../..<PATH>/tests/ai/test_action_claims.py::test_action_narrative_and_persisted_side_effects_agree[My laptop cannot power on. Only I am affected.-No work order is created for this question. If the issue persists, a work order will be queued.-True]
+FAILED ../../../../../../..<PATH>/tests/ai/test_action_claims.py::test_action_narrative_and_persisted_side_effects_agree[\u6211\u7684\u7b14\u8bb0\u672c\u65e0\u6cd5\u5f00\u673a\u3002-\u6b64\u95ee\u9898\u65e0\u9700\u521b\u5efa\u5de5\u5355\u3002-True]
+FAILED ../../../../../../..<PATH>/tests/ai/test_action_claims.py::test_action_narrative_and_persisted_side_effects_agree[Please install approved software for me-A work order has been created.-True]
+FAILED ../../../../../../..<PATH>/tests/ai/test_action_claims.py::test_action_narrative_and_persisted_side_effects_agree[How do I request system access?-A work order will be queued.-True]
+4 failed, 154 passed, 1 warning in 15.39s

@@ -1,0 +1,15 @@
+{
+  "start_commit": "2edce8ec53b0d62d98a2efdf27576676af93bd8e",
+  "phase2c_business_commit": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
+  "source_commits": [
+    "c7383c2d6e2ac2aeddae4aa9589365188287e313",
+    "d2916aedb9e16fd46243221abe746ebf22dcfcd6"
+  ],
+  "real_tested_commit": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
+  "offline_recorded_commit": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
+  "offline_metadata_dirty": [
+    " M docs/qa/quality-status.json"
+  ],
+  "push_performed": false,
+  "evidence_commit": "Commit containing this file; self-referential hash deliberately omitted"
+}
