@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "files": {
+    "cases.json": "7ffd9cf395c738238ef96c11d49d5fe66dbc73f40208c9cb5afe03f51f3af344",
+    "knowledge/access.md": "4f9a29cadf473b358189658c23c3ab2ff63de255257929c171aa8d5b8543578d",
+    "knowledge/attack-reference.md": "efff309fb309195dbc4007401f80da6b6ea442eb956462e5529ac113826cf3e0",
+    "knowledge/backup.md": "34a62115747bcf92b601d3b11ceb149c4607d528fb884c7d5881490e27916b5c",
+    "knowledge/calibration.md": "f31ef68b37a14044c7a566c8c316b9e673b273399108f8d165d67ad58be67b61",
+    "knowledge/laptop.md": "c4c80a3903ee6109df91d43c0e20f002a94798815d837e3fa53a3207a470f2c8",
+    "knowledge/mfa-current.md": "324c2c8b01f66c6dad6fc0636f514863f8a8a312ba900ee7c0a2bfc6277fc5a3",
+    "knowledge/mfa-retired.md": "87622b28975a0423f51d3e167f2e2ca21c06a9e775688e57bdc91d43894456ff",
+    "knowledge/outage.md": "d35576aacf33df3bead6c2ed9fde023a00739c655bd079c1eef0494864ead08f",
+    "knowledge/phishing.md": "d19c140e704ef8622e4694e298adf37ed31bfa8c277c7c5decdb3604fe199ac6",
+    "knowledge/printer.md": "7ecb9fee67bc3e7cc0f87ce558ea63997a1ad3224f598d082afa2a537607e610",
+    "knowledge/software.md": "db8332986b077dc1b930853fcc561c1c6290af09da1421e4761a74e69996159f",
+    "knowledge/vpn.md": "a7baded76b81d631ffc7daffa401c5a198b5823e0fcb6ccf02f65718936bdc0d",
+    "knowledge/wifi.md": "05dbba1999a03f4b0eae7ecf3e4dcb95758bd28acfe300e8e900001ca5f3405f"
+  }
+}
