@@ -1,5 +1,6 @@
 import asyncio
 import json
+import logging
 from contextlib import asynccontextmanager
 from pathlib import Path
 from urllib.parse import urlparse
@@ -24,6 +25,9 @@ from opsdesk.redaction import clean_text
 from opsdesk.retrieval import KnowledgeIndex
 from opsdesk.service import SupportService
 from opsdesk.storage import ActionHistory, Database, DeliveryReceipt, QueuedAction, SupportRequest, WorkOrder, timestamp
+
+
+logger = logging.getLogger(__name__)
 
 
 def create_app(config=None):
@@ -69,25 +73,44 @@ def create_app(config=None):
 
     @asynccontextmanager
     async def lifespan(app):
-        database.initialize()
-        database.seed_identities(config)
-        service.recover()
-        knowledge.seed()
-        if config.vector_search:
-            await knowledge.restore_vectors()
-        async with public_mcp.session_manager.run():
-            job = asyncio.create_task(worker.run()) if config.worker_enabled else None
-            yield
-            await service.close()
-            worker.stopping = True
-            if job:
-                job.cancel()
-                await asyncio.gather(job, return_exceptions=True)
-        database.engine.dispose()
+        try:
+            database.initialize()
+            database.seed_identities(config)
+            service.recover()
+            knowledge.seed()
+            if config.vector_search:
+                await knowledge.restore_vectors()
+            async with public_mcp.session_manager.run():
+                job = asyncio.create_task(worker.run()) if config.worker_enabled else None
+                app.state.worker_task = job
+
+                def worker_done(task):
+                    if not task.cancelled():
+                        error = task.exception()
+                        if error is not None:
+                            logger.error("Background worker failed: %s", type(error).__name__)
+
+                if job:
+                    job.add_done_callback(worker_done)
+                try:
+                    yield
+                finally:
+                    worker.stopping = True
+                    if job:
+                        job.cancel()
+                        await asyncio.gather(job, return_exceptions=True)
+                    await service.close()
+        finally:
+            database.engine.dispose()
 
     app = FastAPI(title="OpsDesk independent service desk", version="1.0.0", lifespan=lifespan)
     app.state.config, app.state.database, app.state.service = config, database, service
     app.state.knowledge, app.state.worker = knowledge, worker
+    app.state.worker_task = None
+
+    def worker_status():
+        job = app.state.worker_task
+        return {"enabled": config.worker_enabled, "alive": job is not None and not job.done(), **worker.observations}
 
     @app.middleware("http")
     async def boundary(request, call_next):
@@ -113,7 +136,10 @@ def create_app(config=None):
     def health():
         with database.session() as db:
             db.execute(text("SELECT 1"))
-        return {"status": "ok", "project": "OpsDesk", "model_mode": config.model_mode}
+        status = worker_status()
+        unavailable = status["enabled"] and not status["alive"]
+        payload = {"status": "degraded" if unavailable else "ok", "project": "OpsDesk", "model_mode": config.model_mode, "worker": status}
+        return JSONResponse(payload, status_code=503) if unavailable else payload
 
     @app.post("/api/login")
     def login(body: SignInInput, response: Response):
@@ -218,7 +244,7 @@ def create_app(config=None):
             actions = list(db.scalars(select(QueuedAction).order_by(QueuedAction.due.desc()).limit(30)))
             audits = list(db.scalars(select(ActionHistory).order_by(ActionHistory.id.desc()).limit(30)))
             receipts = list(db.scalars(select(DeliveryReceipt).order_by(DeliveryReceipt.created.desc()).limit(20)))
-            return {"database": database.engine.dialect.name, "redis": redis_ok, "memory": memory.observations, "model_mode": config.model_mode, "model": config.model_name, "vector": knowledge.vector_state, "segments": len(knowledge.rows()), "skills": guidance.describe(), "actions": [{"id": job.id, "kind": job.kind, "phase": job.phase, "tries": job.tries, "error": job.last_error} for job in actions], "audits": [{"action_id": item.action_id, "attempt": item.attempt, "result": item.result, "transport": item.transport, "detail": item.detail} for item in audits], "receipts": [{"kind": item.kind, "detail": item.detail} for item in receipts], "mcp": {"endpoint": "/mcp/", "simulation": True}}
+            return {"database": database.engine.dialect.name, "redis": redis_ok, "memory": memory.observations, "model_mode": config.model_mode, "model": config.model_name, "vector": knowledge.vector_state, "segments": len(knowledge.rows()), "skills": guidance.describe(), "actions": [{"id": job.id, "kind": job.kind, "phase": job.phase, "tries": job.tries, "error": job.last_error} for job in actions], "audits": [{"action_id": item.action_id, "attempt": item.attempt, "result": item.result, "transport": item.transport, "detail": item.detail} for item in audits], "receipts": [{"kind": item.kind, "detail": item.detail} for item in receipts], "worker": worker_status(), "mcp": {"endpoint": "/mcp/", "simulation": True}}
 
     @app.post("/api/actions/{action_id}/retry")
     def retry(action_id: str, user=Depends(engineer)):
