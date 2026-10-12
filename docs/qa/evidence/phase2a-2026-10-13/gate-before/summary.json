@@ -1,0 +1,52 @@
+{
+  "at": "2026-10-12T15:23:43.865256+00:00",
+  "source_sha256": "601d8302fdebb18374870e192d8772a84bb74495723ca8c169a14272cd95065a",
+  "baseline_dataset_sha256": "f5e42b84431271860b43d4fef811a412488379f0651c1933a6c2f188d0e1a4a1",
+  "source": "original",
+  "invocation": "runpy PROJECT redirection",
+  "profile": "temporary SQLite / BM25 / deterministic rules / no .env or network",
+  "cases": [
+    {
+      "case": "baseline",
+      "expected_exit_code": 0,
+      "actual_exit_code": 0,
+      "status": null,
+      "expectation_met": true
+    },
+    {
+      "case": "priority-mismatch",
+      "expected_exit_code": 1,
+      "actual_exit_code": 0,
+      "status": null,
+      "expectation_met": false
+    },
+    {
+      "case": "retrieval-miss",
+      "expected_exit_code": 1,
+      "actual_exit_code": 0,
+      "status": null,
+      "expectation_met": false
+    },
+    {
+      "case": "mrr-threshold",
+      "expected_exit_code": 1,
+      "actual_exit_code": 0,
+      "status": null,
+      "expectation_met": false
+    },
+    {
+      "case": "missing-data",
+      "expected_exit_code": 2,
+      "actual_exit_code": 1,
+      "status": null,
+      "expectation_met": false
+    },
+    {
+      "case": "empty-data",
+      "expected_exit_code": 2,
+      "actual_exit_code": 1,
+      "status": null,
+      "expectation_met": false
+    }
+  ]
+}

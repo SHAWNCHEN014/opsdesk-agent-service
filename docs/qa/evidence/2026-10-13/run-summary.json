@@ -1,0 +1,98 @@
+{
+  "audit_date": "2026-10-13",
+  "timezone": "Australia/Melbourne",
+  "started_at": "2026-10-13T00:36:30.322990+11:00",
+  "finished_at": "2026-10-13T00:36:37.814606+11:00",
+  "repository_commit": "925185f7238595733b115b0239ede8d669b37bb4",
+  "python": "3.12.14",
+  "versions": {
+    "pytest": "9.1.1",
+    "fastapi": "0.141.1",
+    "starlette": "1.7.0",
+    "httpx": "0.28.1",
+    "mcp": "1.30.0",
+    "chromadb": "1.5.9",
+    "SQLAlchemy": "2.0.54",
+    "redis": "7.4.1"
+  },
+  "business_code_modified": false,
+  "environment": "Existing venv; temporary working directory and SQLite; inherited OPSDESK_* removed; no existing var data modified.",
+  "test_results": {
+    "pytest": {
+      "passed": 20,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "warnings": 1,
+      "pytest_seconds": 1.26,
+      "external_services": false
+    },
+    "existing_evaluator": {
+      "mode": "demo / BM25 only",
+      "intent_correct": 24,
+      "priority_correct": 24,
+      "classification_size": 24,
+      "retrieval_size": 12,
+      "hit_at_4": 1.0,
+      "mrr": 0.9444444444444445,
+      "vector_queries": 0,
+      "output_adapter": "Copied identical evaluation input; redirected script PROJECT root only to avoid overwriting historical output."
+    },
+    "existing_live_script": {
+      "passed": true,
+      "mode": "demo / SQLite / no Redis / no vectors / real HTTP and stdio MCP / record notification",
+      "synthetic_scenarios": 3,
+      "actual_llm_calls": 0,
+      "total_seconds": 4.36
+    }
+  },
+  "not_executed": {
+    "real_ollama_chroma_mysql_redis_workflows": "Configured local ports unavailable; no real-model run claimed.",
+    "docker_image_or_compose": "Docker server unavailable; isolated native demo was executed.",
+    "coverage": "coverage and pytest-cov not installed; coverage unknown.",
+    "browser_automation": "No automated browser test exists; HTTP workflow only.",
+    "load_or_soak": "Not executed."
+  },
+  "service_probes": [
+    {
+      "host": "127.0.0.1",
+      "port": 8085,
+      "available": false,
+      "observed": "TCP connection refused"
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 8086,
+      "available": false,
+      "observed": "TCP connection refused"
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 11434,
+      "available": false,
+      "observed": "TCP connection refused"
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 13308,
+      "available": false,
+      "observed": "TCP connection refused"
+    },
+    {
+      "host": "127.0.0.1",
+      "port": 16381,
+      "available": false,
+      "observed": "TCP connection refused"
+    }
+  ],
+  "pip_check": {
+    "exit_code": 0,
+    "result": "No broken requirements found."
+  },
+  "notes": [
+    "Existing 20 cases are not added to the 7 one-off audit probes.",
+    "Historical September 28 hybrid/model reports are preserved and not presented as current run results.",
+    "JUnit copy omits machine hostname; raw report remains under ignored artifacts directory.",
+    "No dependencies installed, no business/test code changed, no uploads performed."
+  ]
+}

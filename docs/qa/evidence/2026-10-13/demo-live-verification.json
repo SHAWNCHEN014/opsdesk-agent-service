@@ -1,0 +1,616 @@
+{
+  "base": "http://127.0.0.1:52268",
+  "started_utc": "2026-10-12T13:36:33.205852+00:00",
+  "scenarios": [
+    {
+      "operation_id": "7e146d6b21dd4cb09dc9c99606206d03",
+      "intent": "FAQ",
+      "priority": "P3",
+      "transport": "web",
+      "protocol": null,
+      "duration_ms": 18,
+      "outcome": {
+        "intake": {
+          "intent": "FAQ",
+          "category": "ACCESS",
+          "scope": "individual",
+          "summary": "如何申请业务系统访问权限？",
+          "reason": "根据问题描述识别意图与影响范围 / Deterministic demo classification"
+        },
+        "priority": {
+          "level": "P3",
+          "explanation": "知识咨询不触发工单 / Knowledge question"
+        },
+        "priority_advice": {},
+        "answer": "知识咨询无需创建工单。 / No work order is needed for this question.\n\n# 账号与权限申请 / Account and access\n权限申请须说明所需系统、业务用途、期限和直属主管审批记录。IT 核实后按最小权限原则分配，禁止代用他人账号。Access requests need the system, business purpose, expiry and manager approval. IT grants the minimum access required; never use another person's account.\n忘记密码时使用企业身份平台的自助重置入口；身份验证失败则联系 IT。不得在聊天中发送密码、验证码或恢复码。For a forgotten password, use the identity portal's self-service reset. If verification fails, contact IT. Never disclose passwords, one-time codes or recovery codes in chat.\n登录失败请记录时间、系统名称和去除个人信息的错误提示。连续失败应暂停重复尝试，确认账号是否锁定。Login troubleshooting: capture the time, system and a redacted error message. Pause repeated attempts and check whether the account is locked.",
+        "review": {
+          "approved": true,
+          "replacement_used": false,
+          "reason": "Final answer passed credential and destructive-command checks"
+        },
+        "evidence": [
+          {
+            "segment_id": "b9bc3311c1145cd2724b8ea025ed161b5f1ddb2683b89a226c5b4d24f7170b70",
+            "source": "access.md",
+            "title": "账号与权限申请 / Account and access",
+            "excerpt": "# 账号与权限申请 / Account and access\n权限申请须说明所需系统、业务用途、期限和直属主管审批记录。IT 核实后按最小权限原则分配，禁止代用他人账号。Access requests need the system, business purpose, expiry and manager approval. IT grants the minimum access required; never use another person's account.\n忘记密码时使用企业身份平台的自助重置入口；身份验证失败则联系 IT。不得在聊天中发送密码、验证码或恢复码。For a forgotten password, use the identity portal's self-service reset. If verification fails, contact IT. Never disclose passwords, one-time codes or recovery codes in chat.\n登录失败请记录时间、系统名称和去除个人信息的错误提示。连续失败应暂停重复尝试，确认账号是否锁定。Login troubleshooting: capture the time, system and a redacted error message. Pause repeated attempts and check whether the account is locked.",
+            "score": 0.025277,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "c5eb48b2256b630494b222cfbb66495ef60401e0ffd795a2e5e2dc40e78672d7",
+            "source": "incidents.md",
+            "title": "服务中断与事故响应 / Outage response",
+            "excerpt": "# 服务中断与事故响应 / Outage response\n全员无法访问核心业务系统时登记受影响服务、开始时间、影响范围及现有告警。按 P1 创建事故工单并记录升级通知，不等待个人反复尝试。For an outage preventing all employees from accessing a core business service, record the service, onset, scope and alerts. Queue a P1 incident and escalation receipt.\n值班工程师先确认影响，联系服务负责人，保留时间线；恢复后验证关键流程并记录解决措施。不要承诺未经验证的恢复时间。The engineer verifies impact, contacts the service owner and keeps a timeline. Verify key workflows after recovery and record the resolution. Never promise an unverified recovery time.\n仅咨询事故流程不代表发生事故，不创建工单。单人故障为 P2，知识咨询为 P3；只有真实广泛中断为 P1。Questions about incident procedure are P3 and need no ticket. Individual incidents are P2; actual widespread outages are P1.",
+            "score": 0.02381,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "5cb3fa2dbaf51b2defa7f5cf608cbce4da8718740b1affc70785cb3ea55b1675",
+            "source": "connectivity.md",
+            "title": "网络与 VPN 排查 / Network and VPN",
+            "excerpt": "# 网络与 VPN 排查 / Network and VPN\nVPN 无法连接时先确认普通网页能否访问，再检查企业 VPN 客户端版本和登录状态。记录错误码与出现时间，重连一次；持续失败交给 IT。If VPN cannot connect, first check ordinary internet access, then the approved VPN client version and sign-in state. Record the error code and time, reconnect once and contact IT if it persists.\n办公 Wi-Fi 掉线时确认连接的是批准的网络，比较附近同事是否同样受影响。不要绕过认证或更改公司防火墙规则。For office Wi-Fi drops, check the approved network and whether nearby coworkers are affected. Do not bypass authentication or change company firewall rules.\n多人无法联网应登记楼层、网络名称、开始时间和影响人数，按团队故障处理。若全公司核心服务中断则按高优先级事故处理。For network problems affecting several people, capture location, network, onset and scope. A company-wide core-service outage requires urgent incident response.",
+            "score": 0.023256,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "13371656397125161eaf6f868ad30962b37faa239ae8f56dab1ddbdc0a412e9f",
+            "source": "privacy.md",
+            "title": "支持沟通与隐私 / Support communication and privacy",
+            "excerpt": "# 支持沟通与隐私 / Support communication and privacy\n员工只提交排查所需的最少信息：系统名、时间、错误类型和影响范围。工单和会话只向本人或授权工程师展示。Submit only the system, time, error type and scope needed for support. Conversations and tickets are restricted to their owner or authorised engineers.\n聊天与文档导入会先遮盖常见密码、密钥、邮箱和手机号码，但正则规则无法识别所有秘密。请在提交前自行去除敏感内容。Common passwords, keys, email addresses and phone numbers are redacted before storage. Pattern rules cannot detect every secret; remove sensitive content before submitting.\n演示环境使用虚构 IT 指引，不能直接作为公司的真实制度。系统只记录模拟通知，除非管理员配置真实 SMTP。Demo guidance is fictional, not a real company policy. Notifications are recorded locally unless an administrator configures SMTP.",
+            "score": 0.022727,
+            "channels": [
+              "bm25"
+            ]
+          }
+        ],
+        "skills": [
+          "knowledge-answer"
+        ],
+        "trace": [
+          {
+            "node": "intake",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 1,
+            "at": "2026-10-12T13:36:34.303687+00:00"
+          },
+          {
+            "node": "evidence",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 2,
+            "at": "2026-10-12T13:36:34.305851+00:00"
+          },
+          {
+            "node": "recall",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 1,
+            "at": "2026-10-12T13:36:34.306476+00:00"
+          },
+          {
+            "node": "priority",
+            "dependencies": [
+              "intake"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.306797+00:00"
+          },
+          {
+            "node": "draft",
+            "dependencies": [
+              "intake",
+              "evidence",
+              "recall",
+              "priority"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.306902+00:00"
+          },
+          {
+            "node": "review",
+            "dependencies": [
+              "draft"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 1,
+            "at": "2026-10-12T13:36:34.307458+00:00"
+          }
+        ],
+        "memory": {
+          "source": "sql",
+          "compacted": false
+        },
+        "model_mode": "demo",
+        "degraded": [],
+        "model_calls": []
+      }
+    },
+    {
+      "operation_id": "54242e2f07394bc58d077d4411e91db3",
+      "intent": "INCIDENT",
+      "priority": "P2",
+      "transport": "web",
+      "protocol": null,
+      "duration_ms": 10,
+      "outcome": {
+        "intake": {
+          "intent": "INCIDENT",
+          "category": "DEVICE",
+          "scope": "individual",
+          "summary": "我的电脑无法开机，只有我受影响。",
+          "reason": "根据问题描述识别意图与影响范围 / Deterministic demo classification"
+        },
+        "priority": {
+          "level": "P2",
+          "explanation": "单人故障或服务申请进入常规工单 / Individual incident or service request"
+        },
+        "priority_advice": {},
+        "answer": "此问题按 P2 排队创建工单；可在工单页面查看执行结果。 / A work order will be queued.\n\n# 设备报修与领用 / Device repair and provision\n电脑故障需要设备资产编号、症状和发生时间。不能开机时检查批准的电源和连接；不要拆机或格式化磁盘。Laptop repair requests need the asset identifier, symptoms and time. If it will not turn on, check approved power connections. Do not open the hardware or format the drive.\n打印机无法打印时确认设备在线、队列是否暂停、是否只影响本人。取消自己的重复任务后再试一次；不要删除同事的任务。For printing failures, check whether the printer is online, the queue paused and others affected. Cancel only your own duplicate jobs and retry once.\n申请电脑或显示器需要岗位用途、交付地点、主管批准和期望日期。IT 完成库存与资产登记后安排领用。Requests for laptops or monitors need the role, location, manager approval and desired date. IT records inventory and assignment before delivery.",
+        "review": {
+          "approved": true,
+          "replacement_used": false,
+          "reason": "Final answer passed credential and destructive-command checks"
+        },
+        "evidence": [
+          {
+            "segment_id": "c8028b148645dda647a033e4721f8836a2696a28db130388f7bd9c02621d06de",
+            "source": "devices.md",
+            "title": "设备报修与领用 / Device repair and provision",
+            "excerpt": "# 设备报修与领用 / Device repair and provision\n电脑故障需要设备资产编号、症状和发生时间。不能开机时检查批准的电源和连接；不要拆机或格式化磁盘。Laptop repair requests need the asset identifier, symptoms and time. If it will not turn on, check approved power connections. Do not open the hardware or format the drive.\n打印机无法打印时确认设备在线、队列是否暂停、是否只影响本人。取消自己的重复任务后再试一次；不要删除同事的任务。For printing failures, check whether the printer is online, the queue paused and others affected. Cancel only your own duplicate jobs and retry once.\n申请电脑或显示器需要岗位用途、交付地点、主管批准和期望日期。IT 完成库存与资产登记后安排领用。Requests for laptops or monitors need the role, location, manager approval and desired date. IT records inventory and assignment before delivery.",
+            "score": 0.02439,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "c5eb48b2256b630494b222cfbb66495ef60401e0ffd795a2e5e2dc40e78672d7",
+            "source": "incidents.md",
+            "title": "服务中断与事故响应 / Outage response",
+            "excerpt": "# 服务中断与事故响应 / Outage response\n全员无法访问核心业务系统时登记受影响服务、开始时间、影响范围及现有告警。按 P1 创建事故工单并记录升级通知，不等待个人反复尝试。For an outage preventing all employees from accessing a core business service, record the service, onset, scope and alerts. Queue a P1 incident and escalation receipt.\n值班工程师先确认影响，联系服务负责人，保留时间线；恢复后验证关键流程并记录解决措施。不要承诺未经验证的恢复时间。The engineer verifies impact, contacts the service owner and keeps a timeline. Verify key workflows after recovery and record the resolution. Never promise an unverified recovery time.\n仅咨询事故流程不代表发生事故，不创建工单。单人故障为 P2，知识咨询为 P3；只有真实广泛中断为 P1。Questions about incident procedure are P3 and need no ticket. Individual incidents are P2; actual widespread outages are P1.",
+            "score": 0.02381,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "5cb3fa2dbaf51b2defa7f5cf608cbce4da8718740b1affc70785cb3ea55b1675",
+            "source": "connectivity.md",
+            "title": "网络与 VPN 排查 / Network and VPN",
+            "excerpt": "# 网络与 VPN 排查 / Network and VPN\nVPN 无法连接时先确认普通网页能否访问，再检查企业 VPN 客户端版本和登录状态。记录错误码与出现时间，重连一次；持续失败交给 IT。If VPN cannot connect, first check ordinary internet access, then the approved VPN client version and sign-in state. Record the error code and time, reconnect once and contact IT if it persists.\n办公 Wi-Fi 掉线时确认连接的是批准的网络，比较附近同事是否同样受影响。不要绕过认证或更改公司防火墙规则。For office Wi-Fi drops, check the approved network and whether nearby coworkers are affected. Do not bypass authentication or change company firewall rules.\n多人无法联网应登记楼层、网络名称、开始时间和影响人数，按团队故障处理。若全公司核心服务中断则按高优先级事故处理。For network problems affecting several people, capture location, network, onset and scope. A company-wide core-service outage requires urgent incident response.",
+            "score": 0.023256,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "13371656397125161eaf6f868ad30962b37faa239ae8f56dab1ddbdc0a412e9f",
+            "source": "privacy.md",
+            "title": "支持沟通与隐私 / Support communication and privacy",
+            "excerpt": "# 支持沟通与隐私 / Support communication and privacy\n员工只提交排查所需的最少信息：系统名、时间、错误类型和影响范围。工单和会话只向本人或授权工程师展示。Submit only the system, time, error type and scope needed for support. Conversations and tickets are restricted to their owner or authorised engineers.\n聊天与文档导入会先遮盖常见密码、密钥、邮箱和手机号码，但正则规则无法识别所有秘密。请在提交前自行去除敏感内容。Common passwords, keys, email addresses and phone numbers are redacted before storage. Pattern rules cannot detect every secret; remove sensitive content before submitting.\n演示环境使用虚构 IT 指引，不能直接作为公司的真实制度。系统只记录模拟通知，除非管理员配置真实 SMTP。Demo guidance is fictional, not a real company policy. Notifications are recorded locally unless an administrator configures SMTP.",
+            "score": 0.022727,
+            "channels": [
+              "bm25"
+            ]
+          }
+        ],
+        "skills": [
+          "device-support"
+        ],
+        "trace": [
+          {
+            "node": "evidence",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 1,
+            "at": "2026-10-12T13:36:34.318321+00:00"
+          },
+          {
+            "node": "intake",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.317351+00:00"
+          },
+          {
+            "node": "recall",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.318562+00:00"
+          },
+          {
+            "node": "priority",
+            "dependencies": [
+              "intake"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.318746+00:00"
+          },
+          {
+            "node": "draft",
+            "dependencies": [
+              "intake",
+              "evidence",
+              "recall",
+              "priority"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.318823+00:00"
+          },
+          {
+            "node": "review",
+            "dependencies": [
+              "draft"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.319019+00:00"
+          }
+        ],
+        "memory": {
+          "source": "sql",
+          "compacted": false
+        },
+        "model_mode": "demo",
+        "degraded": [],
+        "model_calls": []
+      }
+    },
+    {
+      "operation_id": "cfbe32e7d9604ecea17d38e7df8be65c",
+      "intent": "INCIDENT",
+      "priority": "P1",
+      "transport": "mcp",
+      "protocol": "2025-11-25",
+      "duration_ms": 57,
+      "outcome": {
+        "intake": {
+          "intent": "INCIDENT",
+          "category": "OUTAGE",
+          "scope": "organization",
+          "summary": "全员无法访问核心业务系统，服务中断。",
+          "reason": "根据问题描述识别意图与影响范围 / Deterministic demo classification"
+        },
+        "priority": {
+          "level": "P1",
+          "explanation": "服务中断影响多名员工，需要优先响应 / Widespread incident"
+        },
+        "priority_advice": {},
+        "answer": "此问题按 P1 排队创建工单；可在工单页面查看执行结果。 / A work order will be queued.\n\n# 服务中断与事故响应 / Outage response\n全员无法访问核心业务系统时登记受影响服务、开始时间、影响范围及现有告警。按 P1 创建事故工单并记录升级通知，不等待个人反复尝试。For an outage preventing all employees from accessing a core business service, record the service, onset, scope and alerts. Queue a P1 incident and escalation receipt.\n值班工程师先确认影响，联系服务负责人，保留时间线；恢复后验证关键流程并记录解决措施。不要承诺未经验证的恢复时间。The engineer verifies impact, contacts the service owner and keeps a timeline. Verify key workflows after recovery and record the resolution. Never promise an unverified recovery time.\n仅咨询事故流程不代表发生事故，不创建工单。单人故障为 P2，知识咨询为 P3；只有真实广泛中断为 P1。Questions about incident procedure are P3 and need no ticket. Individual incidents are P2; actual widespread outages are P1.",
+        "review": {
+          "approved": true,
+          "replacement_used": false,
+          "reason": "Final answer passed credential and destructive-command checks"
+        },
+        "evidence": [
+          {
+            "segment_id": "c5eb48b2256b630494b222cfbb66495ef60401e0ffd795a2e5e2dc40e78672d7",
+            "source": "incidents.md",
+            "title": "服务中断与事故响应 / Outage response",
+            "excerpt": "# 服务中断与事故响应 / Outage response\n全员无法访问核心业务系统时登记受影响服务、开始时间、影响范围及现有告警。按 P1 创建事故工单并记录升级通知，不等待个人反复尝试。For an outage preventing all employees from accessing a core business service, record the service, onset, scope and alerts. Queue a P1 incident and escalation receipt.\n值班工程师先确认影响，联系服务负责人，保留时间线；恢复后验证关键流程并记录解决措施。不要承诺未经验证的恢复时间。The engineer verifies impact, contacts the service owner and keeps a timeline. Verify key workflows after recovery and record the resolution. Never promise an unverified recovery time.\n仅咨询事故流程不代表发生事故，不创建工单。单人故障为 P2，知识咨询为 P3；只有真实广泛中断为 P1。Questions about incident procedure are P3 and need no ticket. Individual incidents are P2; actual widespread outages are P1.",
+            "score": 0.025436,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "5cb3fa2dbaf51b2defa7f5cf608cbce4da8718740b1affc70785cb3ea55b1675",
+            "source": "connectivity.md",
+            "title": "网络与 VPN 排查 / Network and VPN",
+            "excerpt": "# 网络与 VPN 排查 / Network and VPN\nVPN 无法连接时先确认普通网页能否访问，再检查企业 VPN 客户端版本和登录状态。记录错误码与出现时间，重连一次；持续失败交给 IT。If VPN cannot connect, first check ordinary internet access, then the approved VPN client version and sign-in state. Record the error code and time, reconnect once and contact IT if it persists.\n办公 Wi-Fi 掉线时确认连接的是批准的网络，比较附近同事是否同样受影响。不要绕过认证或更改公司防火墙规则。For office Wi-Fi drops, check the approved network and whether nearby coworkers are affected. Do not bypass authentication or change company firewall rules.\n多人无法联网应登记楼层、网络名称、开始时间和影响人数，按团队故障处理。若全公司核心服务中断则按高优先级事故处理。For network problems affecting several people, capture location, network, onset and scope. A company-wide core-service outage requires urgent incident response.",
+            "score": 0.02381,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "b9bc3311c1145cd2724b8ea025ed161b5f1ddb2683b89a226c5b4d24f7170b70",
+            "source": "access.md",
+            "title": "账号与权限申请 / Account and access",
+            "excerpt": "# 账号与权限申请 / Account and access\n权限申请须说明所需系统、业务用途、期限和直属主管审批记录。IT 核实后按最小权限原则分配，禁止代用他人账号。Access requests need the system, business purpose, expiry and manager approval. IT grants the minimum access required; never use another person's account.\n忘记密码时使用企业身份平台的自助重置入口；身份验证失败则联系 IT。不得在聊天中发送密码、验证码或恢复码。For a forgotten password, use the identity portal's self-service reset. If verification fails, contact IT. Never disclose passwords, one-time codes or recovery codes in chat.\n登录失败请记录时间、系统名称和去除个人信息的错误提示。连续失败应暂停重复尝试，确认账号是否锁定。Login troubleshooting: capture the time, system and a redacted error message. Pause repeated attempts and check whether the account is locked.",
+            "score": 0.023256,
+            "channels": [
+              "bm25"
+            ]
+          },
+          {
+            "segment_id": "13371656397125161eaf6f868ad30962b37faa239ae8f56dab1ddbdc0a412e9f",
+            "source": "privacy.md",
+            "title": "支持沟通与隐私 / Support communication and privacy",
+            "excerpt": "# 支持沟通与隐私 / Support communication and privacy\n员工只提交排查所需的最少信息：系统名、时间、错误类型和影响范围。工单和会话只向本人或授权工程师展示。Submit only the system, time, error type and scope needed for support. Conversations and tickets are restricted to their owner or authorised engineers.\n聊天与文档导入会先遮盖常见密码、密钥、邮箱和手机号码，但正则规则无法识别所有秘密。请在提交前自行去除敏感内容。Common passwords, keys, email addresses and phone numbers are redacted before storage. Pattern rules cannot detect every secret; remove sensitive content before submitting.\n演示环境使用虚构 IT 指引，不能直接作为公司的真实制度。系统只记录模拟通知，除非管理员配置真实 SMTP。Demo guidance is fictional, not a real company policy. Notifications are recorded locally unless an administrator configures SMTP.",
+            "score": 0.022727,
+            "channels": [
+              "bm25"
+            ]
+          }
+        ],
+        "skills": [
+          "outage-response"
+        ],
+        "trace": [
+          {
+            "node": "evidence",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 1,
+            "at": "2026-10-12T13:36:34.338644+00:00"
+          },
+          {
+            "node": "intake",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.337844+00:00"
+          },
+          {
+            "node": "recall",
+            "dependencies": [],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.338862+00:00"
+          },
+          {
+            "node": "priority",
+            "dependencies": [
+              "intake"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.338989+00:00"
+          },
+          {
+            "node": "draft",
+            "dependencies": [
+              "intake",
+              "evidence",
+              "recall",
+              "priority"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.339404+00:00"
+          },
+          {
+            "node": "review",
+            "dependencies": [
+              "draft"
+            ],
+            "phase": "complete",
+            "elapsed_ms": 0,
+            "at": "2026-10-12T13:36:34.340011+00:00"
+          }
+        ],
+        "memory": {
+          "source": "sql",
+          "compacted": false
+        },
+        "model_mode": "demo",
+        "degraded": [],
+        "model_calls": []
+      }
+    }
+  ],
+  "runtime": {
+    "database": "sqlite",
+    "redis": false,
+    "memory": {
+      "hits": 0,
+      "sql_reads": 3,
+      "cache_errors": 0
+    },
+    "model_mode": "demo",
+    "model": "qwen3:8b",
+    "vector": {
+      "enabled": false,
+      "ready": false,
+      "count": 0
+    },
+    "segments": 6,
+    "skills": [
+      {
+        "name": "access-request",
+        "description": "Collect a minimal approved access request.",
+        "intents": [
+          "REQUEST",
+          "INCIDENT"
+        ]
+      },
+      {
+        "name": "connectivity-support",
+        "description": "Separate VPN, internet and local Wi-Fi symptoms.",
+        "intents": [
+          "INCIDENT"
+        ]
+      },
+      {
+        "name": "device-support",
+        "description": "Scope device repair or equipment provision.",
+        "intents": [
+          "REQUEST",
+          "INCIDENT"
+        ]
+      },
+      {
+        "name": "knowledge-answer",
+        "description": "Answer procedural questions with document evidence and no ticket.",
+        "intents": [
+          "FAQ"
+        ]
+      },
+      {
+        "name": "outage-response",
+        "description": "Record impact and escalation for an actual broad incident.",
+        "intents": [
+          "INCIDENT"
+        ]
+      },
+      {
+        "name": "software-request",
+        "description": "Prepare an approved application installation request.",
+        "intents": [
+          "REQUEST",
+          "INCIDENT"
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "35e343ac8bc2457c8d4bbb3a1239aa88",
+        "kind": "notify_escalation",
+        "phase": "DONE",
+        "tries": 1,
+        "error": ""
+      },
+      {
+        "id": "3473882b60d8480facac3f24bcadfc73",
+        "kind": "export_ledger",
+        "phase": "DONE",
+        "tries": 1,
+        "error": ""
+      },
+      {
+        "id": "f28354d3bba34df6bea0beb56e7ec92f",
+        "kind": "create_work_order",
+        "phase": "DONE",
+        "tries": 1,
+        "error": ""
+      },
+      {
+        "id": "77ddb92f2ebe4073a091007ec9c0810d",
+        "kind": "export_ledger",
+        "phase": "DONE",
+        "tries": 1,
+        "error": ""
+      },
+      {
+        "id": "4b700ed222f24855a19fbbb2d5ced0a7",
+        "kind": "create_work_order",
+        "phase": "DONE",
+        "tries": 1,
+        "error": ""
+      }
+    ],
+    "audits": [
+      {
+        "action_id": "35e343ac8bc2457c8d4bbb3a1239aa88",
+        "attempt": 1,
+        "result": "DONE",
+        "transport": "mcp",
+        "detail": {
+          "mode": "record",
+          "status": "recorded",
+          "reused": false
+        }
+      },
+      {
+        "action_id": "3473882b60d8480facac3f24bcadfc73",
+        "attempt": 1,
+        "result": "DONE",
+        "transport": "mcp",
+        "detail": {
+          "exported": true,
+          "reused": false,
+          "file": "ledger.xlsx"
+        }
+      },
+      {
+        "action_id": "f28354d3bba34df6bea0beb56e7ec92f",
+        "attempt": 1,
+        "result": "DONE",
+        "transport": "mcp",
+        "detail": {
+          "reference": "IT-CFBE32E7D960",
+          "reused": false
+        }
+      },
+      {
+        "action_id": "77ddb92f2ebe4073a091007ec9c0810d",
+        "attempt": 1,
+        "result": "DONE",
+        "transport": "mcp",
+        "detail": {
+          "exported": true,
+          "reused": false,
+          "file": "ledger.xlsx"
+        }
+      },
+      {
+        "action_id": "4b700ed222f24855a19fbbb2d5ced0a7",
+        "attempt": 1,
+        "result": "DONE",
+        "transport": "mcp",
+        "detail": {
+          "reference": "IT-54242E2F0739",
+          "reused": false
+        }
+      }
+    ],
+    "receipts": [
+      {
+        "kind": "escalation",
+        "detail": {
+          "mode": "record",
+          "status": "recorded"
+        }
+      },
+      {
+        "kind": "ledger",
+        "detail": {
+          "file": "ledger.xlsx"
+        }
+      },
+      {
+        "kind": "ledger",
+        "detail": {
+          "file": "ledger.xlsx"
+        }
+      }
+    ],
+    "mcp": {
+      "endpoint": "/mcp/",
+      "simulation": true
+    }
+  },
+  "work_orders": [
+    {
+      "id": "411d429ecabc4e9c96edf305bc4d4690",
+      "reference": "IT-CFBE32E7D960",
+      "phase": "OPEN",
+      "revision": 0,
+      "assignee": "",
+      "notes": [],
+      "created": "2026-10-12T13:36:35.775818",
+      "operation_id": "cfbe32e7d9604ecea17d38e7df8be65c",
+      "summary": "全员无法访问核心业务系统，服务中断。",
+      "priority": "P1",
+      "category": "OUTAGE"
+    },
+    {
+      "id": "da5672c6ab2a47a39ac5aa2918dfc190",
+      "reference": "IT-54242E2F0739",
+      "phase": "OPEN",
+      "revision": 0,
+      "assignee": "",
+      "notes": [],
+      "created": "2026-10-12T13:36:34.824128",
+      "operation_id": "54242e2f07394bc58d077d4411e91db3",
+      "summary": "我的电脑无法开机，只有我受影响。",
+      "priority": "P2",
+      "category": "DEVICE"
+    }
+  ],
+  "total_seconds": 4.36,
+  "passed": true
+}

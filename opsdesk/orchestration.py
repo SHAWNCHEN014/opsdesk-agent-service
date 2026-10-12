@@ -82,10 +82,14 @@ class TaskGraph:
 
 
 def final_text_check(answer):
-    # Negative guidance is allowed; an imperative after it is checked separately.
-    answer = re.sub(r"(?:不要|不得|禁止|never|do not|don't)\s*[^。.!\n;；]*", "", answer, flags=re.I)
-    forbidden = r"(?:disable|关闭|禁用).{0,25}(?:antivirus|防火墙|杀毒|security monitoring)|(?:共享|发送给我|告诉我|send me|share).{0,25}(?:密码|验证码|password|mfa code)|(?:curl\s+\S+\s*\|\s*(?:sh|bash))|rm\s+-rf\s+/"
-    return not re.search(forbidden, answer, flags=re.I)
+    # Negation must attach to the dangerous action, not an earlier reassurance.
+    # Do not erase a sentence: it can contain a second, positive imperative.
+    forbidden = r"(?:\bdisable\b|\bturn\s+off\b|关闭|禁用|停用)[^。.!?\n;；,，]{0,40}?(?:antivirus|firewall|防火墙|杀毒|security monitoring)|(?:共享|发送给我|告诉我|\bsend me\b|\bshare\b)[^。.!?\n;；,，]{0,40}?(?:密码|验证码|password|mfa code)|(?:curl\s+\S+\s*\|\s*(?:sh|bash))|rm\s+-rf\s+/"
+    negation = r"(?:不要|不得|禁止|请勿|切勿|勿|\bnever\s+|\bdo\s+not\s+|\bdon't\s+)\s*(?:(?:直接|自行|擅自|随意|再|执行|运行)\s*|(?:run|execute|try\s+to)\s+)?$"
+    for action in re.finditer(forbidden, answer, flags=re.I):
+        if not re.search(negation, answer[:action.start()], flags=re.I):
+            return False
+    return True
 
 
 class ServiceTeam:
@@ -160,6 +164,7 @@ class ServiceTeam:
                     approved, reason = result.approved, result.reason
                 except Exception:
                     degraded.append("review_model_unavailable")
+                    approved, reason = False, "Final model review unavailable; draft approval is uncertain"
             if not approved:
                 text = "建议先核实错误提示、发生时间和影响范围，再通过企业批准的 IT 渠道排查。不要提供密码、验证码或执行未经确认的命令。\nPlease use your approved IT channel. Do not disclose credentials or run unverified commands."
                 reason = "Unsafe or unsupported draft replaced: " + reason

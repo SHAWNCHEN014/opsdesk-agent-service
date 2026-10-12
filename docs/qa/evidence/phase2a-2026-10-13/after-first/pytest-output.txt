@@ -1,0 +1,43 @@
+...........................................F............................ [ 96%]
+...                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_exported_summary_is_literal_and_preserves_text[crlf-prefix] _______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-8dzynn....service.SupportService object at 0x10e275fa0>, 'f1cbf7bda8e446cba36e03c153b1b0ec', '5f4cb4ac306045b1b6c0cb31ef93fef6')
+text = '\r\n=1+1'
+
+    @pytest.mark.parametrize("text", [
+        '=HYPERLINK("https://example.invalid","电脑无法开机")',
+        "+SUM(1,2)", "-1+2", "@SUM(1,2)",
+        '\t=HYPERLINK("https://example.invalid","tab")', "\r\n=1+1", " =1+1",
+        "#DIV/0!", "电脑无法开机 & <排查> \"说明\" 😀", "第一行\n第二行\t字段",
+    ], ids=["equals", "plus", "minus", "at", "tab-prefix", "crlf-prefix", "space-prefix", "excel-error-token", "unicode-xml", "multiline"])
+    def test_exported_summary_is_literal_and_preserves_text(runtime, text):
+        config, db, _, _, owner, _ = runtime
+        operation = persist_incident(db, owner, text)
+        tools = ActionHandlers(db, config)
+        tools.create_work_order(operation)
+        assert not tools.export_ledger(operation)["reused"]
+        assert tools.export_ledger(operation)["reused"]
+        workbook = load_workbook(config.ledger_file, data_only=False)
+        try:
+            sheet = workbook.active
+            assert sheet.max_row == 2 and sheet.max_column == 6
+            assert sheet.cell(2, 4).data_type == "s"
+>           assert sheet.cell(2, 4).value == text
+E           AssertionError: assert '\n=1+1' == '\r\n=1+1'
+E             
+E             - 
+E             + 
+E               =1+1
+
+<REPO>/tests/qa/test_ledger_text.py:42: AssertionError
+=============================== warnings summary ===============================
+../../../../../../..<REPO>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <REPO>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../../../../../..<REPO>/tests/qa/test_ledger_text.py::test_exported_summary_is_literal_and_preserves_text[crlf-prefix]
+1 failed, 74 passed, 1 warning in 6.74s

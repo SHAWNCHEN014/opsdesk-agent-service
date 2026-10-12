@@ -1,0 +1,81 @@
+{
+  "audit_date": "2026-10-13",
+  "kind": "one-off audit probes, not added permanent test cases",
+  "probes": [
+    {
+      "id": "QA-SEC-01",
+      "expected": "Dangerous final answer rejected even if model review unavailable",
+      "observed": {
+        "pattern_check_approved": true,
+        "answer_unchanged": true,
+        "review": {
+          "approved": true,
+          "replacement_used": false,
+          "reason": "Final answer passed credential and destructive-command checks"
+        },
+        "degraded": [
+          "review_model_unavailable"
+        ]
+      },
+      "scope": "Controlled scripted model; real ServiceTeam implementation; no Ollama/network; no dangerous action executed."
+    },
+    {
+      "id": "QA-SEC-02",
+      "expected": "Untrusted ticket summary exported as literal text",
+      "observed": {
+        "summary_cell_data_type": "f",
+        "interpreted_as_formula": true
+      },
+      "scope": "Temporary workbook inspected with openpyxl; workbook never opened in Excel; no external link visited."
+    },
+    {
+      "id": "QA-REL-01",
+      "expected": "Transient claim failure does not permanently kill unmonitored worker",
+      "observed": {
+        "background_run_terminated": true,
+        "exception_type": "RuntimeError"
+      },
+      "scope": "Injected claim exception; not a live MySQL outage."
+    },
+    {
+      "id": "QA-OBS-01",
+      "expected": "Manual recovery is represented by an attributable audit event",
+      "observed": {
+        "phase_after_retry": "READY",
+        "audit_rows_before": 0,
+        "audit_rows_after": 0
+      },
+      "scope": "Current retry() function; absence of explicit retry audit observed."
+    },
+    {
+      "id": "QA-RAG-01",
+      "expected": "Missing SQL segment from vector results handled or falls back safely",
+      "observed": {
+        "search_raised": "KeyError"
+      },
+      "scope": "Fake vector response and embedding adapter; real fusion/lookup code; no Chroma/Ollama contacted."
+    },
+    {
+      "id": "QA-REL-02",
+      "expected": "Runnable parents found even when older blocked children fill candidate window",
+      "observed": {
+        "ready_rows": 60,
+        "claim_returned_action": false
+      },
+      "scope": "Temporary SQLite: 30 ready parents and 30 older blocked ledger children; no busy loop or load generator."
+    },
+    {
+      "id": "QA-GATE-01",
+      "expected": "A specified regression mismatch can fail an automation gate",
+      "observed": {
+        "process_exit_code": 0,
+        "priority_correct": 23,
+        "classification_size": 24
+      },
+      "scope": "Original evaluator with one intentionally incorrect expected label in a temporary copy; no production sample or historical report changed."
+    }
+  ],
+  "count": 7,
+  "business_code_modified": false,
+  "external_services_used": false
+}

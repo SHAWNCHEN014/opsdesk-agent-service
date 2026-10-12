@@ -14,6 +14,10 @@ from opsdesk.inference import embed, embedding_identity
 from opsdesk.storage import DocumentSegment
 
 
+class StaleVectorIndexError(ValueError):
+    """Vector results reference segments absent from this SQL snapshot."""
+
+
 def terms(value):
     normalized = unicodedata.normalize("NFKC", value).lower()
     pieces = re.findall(r"[a-z0-9]+|[\u4e00-\u9fff]+", normalized)
@@ -135,6 +139,7 @@ class KnowledgeIndex:
     async def search(self, query, limit=4):
         rows = self.rows()
         if not rows: return []
+        lookup = {row.id: row for row in rows}
         channels = {"bm25": self.lexical(query, rows)}
         if self.config.vector_search and self.vector_state.get("ready"):
             try:
@@ -144,7 +149,12 @@ class KnowledgeIndex:
                     raise ValueError("Vector model changed")
                 vector = (await embed(self.config, ["search_query: " + query]))[0]
                 result = self.collection.query(query_embeddings=[vector], n_results=min(8, len(rows)))
-                channels["vector"] = list(zip(result["ids"][0], result["distances"][0]))
+                ranking = list(zip(result["ids"][0], result["distances"][0]))
+                if any(key not in lookup for key, _ in ranking):
+                    self.vector_state.update(ready=False, error="Vector index contains missing segments; rebuild required")
+                    raise StaleVectorIndexError("Vector results differ from the current SQL snapshot")
+                # Only publish a complete, validated vector ranking.
+                channels["vector"] = ranking
             except Exception as exc:
                 self.vector_state["last_query_error"] = type(exc).__name__
         scores, origins = Counter(), {}
@@ -152,7 +162,6 @@ class KnowledgeIndex:
             for rank, (key, _) in enumerate(ranking[:12], 1):
                 scores[key] += 1 / (40 + rank)
                 origins.setdefault(key, []).append(channel)
-        lookup = {row.id: row for row in rows}
         requested = set(terms(query))
         for key in scores:
             affinity = len(requested & set(terms(lookup[key].title))) / max(1, len(requested))

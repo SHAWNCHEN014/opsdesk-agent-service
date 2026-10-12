@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+  File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "<REPO>/docs/qa/evidence/phase2a-2026-10-13/before-source/scripts/evaluate.py", line 34, in main
+    report = {"at": datetime.now(timezone.utc).isoformat(), "scope": "Small self-authored synthetic regression set. Classification tests the deterministic fallback only, not model accuracy. Retrieval reflects the explicitly recorded runtime channels. No held-out or production claim.", "classification_size": len(classification), "intent_correct": sum(item["expected_intent"] == item["actual_intent"] for item in classification), "priority_correct": sum(item["expected_priority"] == item["actual_priority"] for item in classification), "retrieval_size": len(retrieval), "hit_at_4": sum(item["rank"] is not None for item in retrieval) / len(retrieval), "mrr": sum(1 / item["rank"] if item["rank"] else 0 for item in retrieval) / len(retrieval), "vector_queries": sum(item["vector_used"] for item in retrieval), "classification": classification, "retrieval": retrieval}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~
+ZeroDivisionError: division by zero

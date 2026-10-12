@@ -1,0 +1,38 @@
+{
+  "historical_files_unchanged": {
+    "tests/test_service.py": true,
+    "tests/conftest.py": true,
+    "evaluation/cases.json": true,
+    "docs/qa/OPSDesk_QA_AUDIT.md": true,
+    "docs/qa/AI_EVALUATION_ROADMAP.md": true,
+    "docs/qa/evidence/2026-10-13/bm25-evaluation.json": true,
+    "docs/qa/evidence/2026-10-13/demo-live-verification.json": true,
+    "docs/qa/evidence/2026-10-13/pytest-output.txt": true,
+    "docs/qa/evidence/2026-10-13/manifest.json": true,
+    "docs/qa/evidence/2026-10-13/pytest.xml": true,
+    "docs/qa/evidence/2026-10-13/run-summary.json": true,
+    "docs/qa/evidence/2026-10-13/audit-probes.json": true
+  },
+  "original_source_matches_HEAD": {
+    "opsdesk/orchestration.py": true,
+    "opsdesk/actions.py": true,
+    "opsdesk/retrieval.py": true,
+    "scripts/evaluate.py": true
+  },
+  "frozen_tests_and_gold_identical": {
+    "evaluation/cases.json": true,
+    "tests/conftest.py": true,
+    "tests/qa/test_evaluation_gate.py": true,
+    "tests/qa/test_final_review.py": true,
+    "tests/qa/test_ledger_text.py": true,
+    "tests/qa/test_stale_vectors.py": true,
+    "tests/test_service.py": true
+  },
+  "only_source_differences": [
+    "opsdesk/actions.py",
+    "opsdesk/orchestration.py",
+    "opsdesk/retrieval.py",
+    "scripts/evaluate.py"
+  ],
+  "git_diff_check_exit": 0
+}

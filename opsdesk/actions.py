@@ -5,12 +5,28 @@ import smtplib
 import tempfile
 from datetime import timedelta
 from email.message import EmailMessage
+from io import BytesIO
 from pathlib import Path
+from zipfile import ZipFile
 
 from openpyxl import Workbook, load_workbook
 from sqlalchemy import func, select
 
 from opsdesk.storage import DeliveryReceipt, SupportRequest, WorkOrder, new_id, timestamp
+
+
+def _save_literal_workbook(workbook, path):
+    workbook.save(path)
+    # ElementTree can emit literal CR bytes, which an XML reader normalizes.
+    # Numeric references preserve CR/CRLF exactly without changing cell text.
+    output = BytesIO()
+    with ZipFile(path) as source, ZipFile(output, "w") as target:
+        for info in source.infolist():
+            content = source.read(info.filename)
+            if info.filename.startswith("xl/worksheets/") and info.filename.endswith(".xml"):
+                content = content.replace(b"\r", b"&#13;")
+            target.writestr(info, content)
+    Path(path).write_bytes(output.getvalue())
 
 
 class ActionHandlers:
@@ -51,10 +67,15 @@ class ActionHandlers:
             existing = any(values[0] == request_id for values in sheet.iter_rows(min_row=2, values_only=True))
             if not existing:
                 sheet.append(row)
+                # Force literal strings without changing visible text. openpyxl
+                # otherwise interprets '=' strings and Excel error tokens.
+                for cell, value in zip(sheet[sheet.max_row], row):
+                    if isinstance(value, str):
+                        cell.data_type = "s"
                 fd, temporary = tempfile.mkstemp(suffix=".xlsx", dir=path.parent)
                 os.close(fd)
                 try:
-                    workbook.save(temporary)
+                    _save_literal_workbook(workbook, temporary)
                     os.replace(temporary, path)
                 finally:
                     Path(temporary).unlink(missing_ok=True)

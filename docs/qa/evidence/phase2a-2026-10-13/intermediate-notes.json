@@ -1,0 +1,22 @@
+{
+  "intermediate_runs": [
+    {
+      "run": "before",
+      "note": "First 75-case suite before any business edits."
+    },
+    {
+      "run": "after-first",
+      "note": "74/75 passed; CRLF fidelity still failed. Assertion kept unchanged."
+    },
+    {
+      "run": "before-final",
+      "note": "79-case baseline run before completing vector-degraded adapter. Local /api/tags connection attempt possible; not used as offline proof."
+    }
+  ],
+  "authoritative_comparison": [
+    "before-verified",
+    "after"
+  ],
+  "same_test_hashes": true,
+  "retained_history": true
+}

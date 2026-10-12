@@ -1,0 +1,21 @@
+{
+  "head": "925185f7238595733b115b0239ede8d669b37bb4",
+  "sha256": {
+    "opsdesk/orchestration.py": "7f67297bb5866bed14ff075036ad3d703a585006566f64716a2a66acca53fdcb",
+    "opsdesk/actions.py": "f73611a62da3ecc5c16c8ab16b55a9e99463a31afcd75463d86fde5bfa187316",
+    "opsdesk/retrieval.py": "aea2f6c74b135887a38ac3089495e9a30a37d2120dcd8316f1d022bff1b19b9f",
+    "scripts/evaluate.py": "601d8302fdebb18374870e192d8772a84bb74495723ca8c169a14272cd95065a",
+    "tests/test_service.py": "f6a328b989d31336eb4d486528d086b60ca530c24239013890432eda0c00a952",
+    "tests/conftest.py": "3f6f59af1ff23886154cba939051b5cbdca5409b273173d7c9c91621fd27cefb",
+    "evaluation/cases.json": "f5e42b84431271860b43d4fef811a412488379f0651c1933a6c2f188d0e1a4a1",
+    "docs/qa/OPSDesk_QA_AUDIT.md": "560f332850eaf058c972b66b81dd29b10c4068a22098c3d8aee79b2306d00f9f",
+    "docs/qa/AI_EVALUATION_ROADMAP.md": "0f62154aa463409e7f700dc3ebe79443786a482aac09cccc4ad79d3a825fb702",
+    "docs/qa/evidence/2026-10-13/bm25-evaluation.json": "915c5c6a1852ef881694189f72ab02157bbdbd530b3829a5dfdeefacea02ac7f",
+    "docs/qa/evidence/2026-10-13/demo-live-verification.json": "ca53e267c48e8f98f1bea86999a4f3986d27c83d0df7786b31bdc49675dba6ba",
+    "docs/qa/evidence/2026-10-13/pytest-output.txt": "da5cc4adb4f9b1aca04f9bdcfbe67616db44987f54fe68d8d617c722de5d0e43",
+    "docs/qa/evidence/2026-10-13/manifest.json": "a56f1306ca5161103a3a3ab0b73fffe764161ae6067aa250d6f17420135dc6f1",
+    "docs/qa/evidence/2026-10-13/pytest.xml": "3daaf41d11f8a9e124f6007e8e5339a3edd8f57f00983167e2c06a807ea36817",
+    "docs/qa/evidence/2026-10-13/run-summary.json": "21c0fa6f2b6dc0724a10a844686000d70428635cc96e1ba92bbf62207ed15191",
+    "docs/qa/evidence/2026-10-13/audit-probes.json": "35782d77db8a85f5a56191f9cc090ea2d25cecb1e55f3b97b7e97e751f5b1769"
+  }
+}

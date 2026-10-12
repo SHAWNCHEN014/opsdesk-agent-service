@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "audit-probes.json",
+      "bytes": 2845,
+      "sha256": "35782d77db8a85f5a56191f9cc090ea2d25cecb1e55f3b97b7e97e751f5b1769"
+    },
+    {
+      "path": "bm25-evaluation.json",
+      "bytes": 8054,
+      "sha256": "915c5c6a1852ef881694189f72ab02157bbdbd530b3829a5dfdeefacea02ac7f"
+    },
+    {
+      "path": "demo-live-verification.json",
+      "bytes": 32420,
+      "sha256": "ca53e267c48e8f98f1bea86999a4f3986d27c83d0df7786b31bdc49675dba6ba"
+    },
+    {
+      "path": "pytest-output.txt",
+      "bytes": 601,
+      "sha256": "da5cc4adb4f9b1aca04f9bdcfbe67616db44987f54fe68d8d617c722de5d0e43"
+    },
+    {
+      "path": "pytest.xml",
+      "bytes": 2674,
+      "sha256": "3daaf41d11f8a9e124f6007e8e5339a3edd8f57f00983167e2c06a807ea36817"
+    },
+    {
+      "path": "run-summary.json",
+      "bytes": 3087,
+      "sha256": "21c0fa6f2b6dc0724a10a844686000d70428635cc96e1ba92bbf62207ed15191"
+    }
+  ]
+}
