@@ -101,6 +101,10 @@ The authenticated HTTP endpoint is `/mcp/`, implementing MCP **2025-11-25** over
 
 Internal action tools run separately using `python -m opsdesk.action_server` over stdio. They accept persisted operation IDs and validate eligibility. There is no arbitrary shell-execution tool. The default notification mode is `record`; SMTP must be explicitly configured. SMTP can duplicate delivery if the process dies after sending and before receipt commit, so this project does not claim exactly-once email delivery.
 
+## Quality engineering deliveries
+
+[QA delivery index](docs/qa/README.md) · [All audit and closure reports in one file](docs/qa/DELIVERY_BUNDLE.md) · [Latest Phase 2C report](docs/qa/PHASE2C_QUALITY_GATE.md). Latest measured offline regression: **138 passed**, including the original 109 cases; line coverage **81.69%**, branch coverage **69.11%**. Real model/database validation and remote CI status are reported separately. Historical reports keep their original findings and dates.
+
 ## Verification
 
 ```bash

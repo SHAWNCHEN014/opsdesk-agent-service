@@ -1,0 +1,43 @@
+{
+  "generated_on": "2026-10-13",
+  "source_documents_at_commit": "a4208a811d82cd02ba34cd94bb55236227fbbf13",
+  "tested_business_commit": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
+  "note": "Manifest excludes itself; merged reports retain historical statements unchanged. GitHub Actions records determine post-push CI state.",
+  "files": [
+    {
+      "path": "docs/qa/OPSDesk_QA_AUDIT.md",
+      "bytes": 29983,
+      "sha256": "560f332850eaf058c972b66b81dd29b10c4068a22098c3d8aee79b2306d00f9f"
+    },
+    {
+      "path": "docs/qa/AI_EVALUATION_ROADMAP.md",
+      "bytes": 21463,
+      "sha256": "0f62154aa463409e7f700dc3ebe79443786a482aac09cccc4ad79d3a825fb702"
+    },
+    {
+      "path": "docs/qa/PHASE2A_DEFECT_CLOSURE.md",
+      "bytes": 20417,
+      "sha256": "2889ea5b0a3feaac19a379b71e2aefcf4e5067c0cbc3d53d4983948f3ace285e"
+    },
+    {
+      "path": "docs/qa/PHASE2B_RELIABILITY_CLOSURE.md",
+      "bytes": 22278,
+      "sha256": "f73544b8e84582cb4eeb6cb437bbc483f9c5db337c9df6a7a1a626ef9e8358da"
+    },
+    {
+      "path": "docs/qa/PHASE2C_QUALITY_GATE.md",
+      "bytes": 22421,
+      "sha256": "f8101e71aa73686d34c3ac06509514b830f22c79b2b57b7578b84a6822af4557"
+    },
+    {
+      "path": "docs/qa/README.md",
+      "bytes": 3306,
+      "sha256": "f4987d09a139bd7c90360fe01f43a4159adbdb35556549194416b8f74181a2b1"
+    },
+    {
+      "path": "docs/qa/DELIVERY_BUNDLE.md",
+      "bytes": 117965,
+      "sha256": "7f258410c444ad781809ea17d387e8b21716ed2e266f878f7f6ec3a2c977a709"
+    }
+  ]
+}
