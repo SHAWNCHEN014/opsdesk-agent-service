@@ -1,0 +1,1121 @@
+<?xml version='1.0' encoding='utf-8'?>
+<testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="19" skipped="0" tests="109" time="13.082" timestamp="2026-10-13T02:58:41.945551+11:00"><testcase classname="tests.qa.test_evaluation_gate" name="test_baseline_gate_passes_with_all_original_samples" time="0.259" /><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[intent-mismatch]" time="0.252" /><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[priority-mismatch]" time="0.250" /><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[retrieval-miss]" time="0.270" /><testcase classname="tests.qa.test_evaluation_gate" name="test_completed_but_failing_evaluation_returns_one[rank-threshold]" time="0.254" /><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[missing-file]" time="0.221" /><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[bad-json]" time="0.236" /><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[empty-dataset]" time="0.222" /><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[invalid-label]" time="0.220" /><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_or_missing_input_returns_incomplete[malformed-row]" time="0.223" /><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_threshold_cannot_pass[nan-threshold]" time="0.222" /><testcase classname="tests.qa.test_evaluation_gate" name="test_invalid_threshold_cannot_pass[out-of-range]" time="0.220" /><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[bad-config]" time="0.244" /><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[missing-corpus]" time="0.269" /><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[required-vectors-unavailable]" time="0.300" /><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[hybrid-degraded-to-bm25]" time="0.317" /><testcase classname="tests.qa.test_evaluation_gate" name="test_cannot_complete_evaluation_is_not_a_pass[retrieval-exception]" time="0.277" /><testcase classname="tests.qa.test_evaluation_gate" name="test_report_write_failure_cannot_return_success" time="0.301" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[normal-zh]" time="0.001" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[normal-en]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-firewall]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-password]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-en]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-shell]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_safe_and_negated_advice_is_allowed[negated-delete]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[direct]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[reassurance-zh]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[reassurance-en]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[mixed-zh]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[mixed-en]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[not-forget]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[shell]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_dangerous_advice_is_rejected[delete]" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_negation_does_not_cover_a_second_action_without_punctuation" time="0.000" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[approved]" time="0.083" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[approved-negation]" time="0.080" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[original-bypass]" time="0.066" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[uncertain-danger]" time="0.073" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[benign-timeout]" time="0.068" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[invalid-review]" time="0.066" /><testcase classname="tests.qa.test_final_review" name="test_team_publishes_only_reviewed_draft_or_safe_replacement[rejected]" time="0.065" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[equals]" time="0.076" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[plus]" time="0.075" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[minus]" time="0.072" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[at]" time="0.076" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[tab-prefix]" time="0.072" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[crlf-prefix]" time="0.072" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[space-prefix]" time="0.072" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[excel-error-token]" time="0.072" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[unicode-xml]" time="0.072" /><testcase classname="tests.qa.test_ledger_text" name="test_exported_summary_is_literal_and_preserves_text[multiline]" time="0.075" /><testcase classname="tests.qa.test_ledger_text" name="test_append_keeps_existing_row_and_work_order_status" time="0.084" /><testcase classname="tests.qa.test_ledger_text" name="test_carriage_returns_survive_a_later_append" time="0.077" /><testcase classname="tests.qa.test_stale_vectors" name="test_stale_ids_fall_back_to_exact_bm25_and_disable_index[unknown-id]" time="0.066" /><testcase classname="tests.qa.test_stale_vectors" name="test_stale_ids_fall_back_to_exact_bm25_and_disable_index[mixed-valid-stale]" time="0.065" /><testcase classname="tests.qa.test_stale_vectors" name="test_stale_ids_fall_back_to_exact_bm25_and_disable_index[deleted-id]" time="0.067" /><testcase classname="tests.qa.test_stale_vectors" name="test_valid_hybrid_preserves_rrf_and_title_reranking" time="0.066" /><testcase classname="tests.qa.test_stale_vectors" name="test_vector_timeout_preserves_bm25_and_records_error" time="0.064" /><testcase classname="tests.qa.test_stale_vectors" name="test_empty_sql_corpus_does_not_query_vectors" time="0.066" /><testcase classname="tests.reliability.test_queue_scheduling" name="test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates" time="0.085"><properties><property name="reliability_evidence" value="{&quot;original_audit_fixture&quot;: {&quot;ready&quot;: 60, &quot;parents&quot;: 30, &quot;older_blocked_children&quot;: 30}, &quot;first_claim&quot;: null, &quot;claim_sql_count&quot;: 32, &quot;before&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;00637259c5f747eb8c573dbf38dcbebc&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;035c4e30b6f64e8f9a00e4da6caefe43&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;0557e048ab434eb4b42c3377e00c8398&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;080cdc6b3d2c4ffd9f7bfd030315a235&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;0a614f98e3ec4317b65561b9572593be&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;1590edec29164ab58bab61ff03657b7e&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;1712f7d244c44de6a6e3460508bdc8f0&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;23fee30a974c46f38f4820ab715609c1&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;29ca5fee81514eca935e0e6896578273&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;3185eb7a8b6544e582767dad425ae4f6&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;3802926a4044435b9feecfdb84ced3c6&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;396ed4b7734a41b7b14368725ca40afd&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;3aadb1a9d909456fa6aa89085502d359&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;3d25a2d1a4ee4dac819c6c4bd8dde998&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;3d627f38cba34e97b720268a2b6d2bed&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;40cde2b833e54abe8ed33e95d33a7883&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;4ef8628ab1b34115850791b160a49034&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;5707ef0737a3468aa70558a7b5732c2c&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;58ac4bff752b4ec698ba792fa4ed9496&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;5921761b6a4a45c98dd379b171bfec32&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;5a6dad732aeb4449ade1d5c29266d563&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;5d567016e02f4bf0b5f808f5914d2313&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;5f8fb9505c2a4cb8a6ff0941401e0ffe&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;6c415c6d214f4ff1b18c7dab21b5346f&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;78a8aab5419049ca9e542afb03b1f71e&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;79b1feaf004549deb1d948b4794e0209&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;79d6bcc5a77b4b098ae256c51410ca16&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;7d8e42df094d447cab80d940ed6762c5&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;802b8faea8c84c6fb13fb460ed3a4c7e&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;84dc94f8be134796acaa57080fd151e8&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;876689ff2a304dedb824128e040d79e7&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;8b7af778538b428886b811288cd467a7&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;8e4ac769fa574406a9d3da29f21c574a&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;8f020c0d86cd4d21b1423db7b5185fa6&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;8f17aab78dbf49d086ea1f2b96866b78&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;960e801f81a64a319ef54d60687acfa0&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;9bba5f21b6264e8b9b61ea86aae39f84&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;9ef21a44157d4a4cb4009728b835bbd0&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;aa561de45a6c4d958cb1a7d13e81bb4c&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;b998224e3ecb455b9a78c81b74439d26&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;ba04334aa4724959a284dd94dd9d0236&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;bff66a5f1bd64217ab0a8ae827a69b83&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;c000a6c2302c453a870dfcee9ca04551&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;c15358391af94dff83d3013e1efb61d8&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;c27031b4847e4e899fafc0aa6d486afb&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;c5b69062e22f4251aa46faefe965cb6d&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;c98aa74342df49538359d23330dacdca&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;d936724c66e44527b6b23c6c6c814a6a&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;d9e90a5464214a6382dc60855c1ab6b8&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;de9c2b899f144912a744d27686396891&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;deb4cef2d2aa4e92afa2180156278c84&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;e44ee28daeeb4b01ac357fe70b35fb35&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;e9b66df6bb184005abb653edf5499f7e&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;eab99cab8e2f4544ad8cbc2b8f3a3003&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;ee0d594905d24521aa62d2876573e21c&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;f0ea673f20414719bcfdc599a1b6661d&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;f56494bbf2e04a3297ff32e1e4dd11a9&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;f803dc1f1acb452f82665f5d28d7f3f2&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;f8794088404a419c9eae3841251c7ec4&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;f8a165f0da18445cb410a34e38252b49&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}}" /></properties><failure message="assert (None is not None)">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e58f4d0&gt;, '3061ddc3cd574f1b86f4d84e6d4fa9f9', '006d33b253474c9e84e4be5a74a77c75')
+record = &lt;function record.&lt;locals&gt;.save at 0x10e65ec00&gt;
+
+    def test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates(runtime, record):
+        config, db, _, _, owner, _ = runtime
+        requests = [operation(db, owner) for _ in range(30)]
+        now = timestamp()
+        with db.session.begin() as session:
+            session.execute(update(QueuedAction).where(QueuedAction.kind == "create_work_order").values(due=now - timedelta(seconds=1)))
+            session.execute(update(QueuedAction).where(QueuedAction.kind == "export_ledger").values(due=now - timedelta(seconds=10)))
+        worker = ActionWorker(db, config)
+        before = snapshot(db)
+        statements = []
+        def observed(*args):
+            statements.append(args[2])
+        event.listen(db.engine, "before_cursor_execute", observed)
+        try:
+            first = worker.claim()
+        finally:
+            event.remove(db.engine, "before_cursor_execute", observed)
+            record({"original_audit_fixture": {"ready": 60, "parents": 30, "older_blocked_children": 30}, "first_claim": first, "claim_sql_count": len(statements), "before": before})
+&gt;       assert first is not None and first["kind"] == "create_work_order"
+E       assert (None is not None)
+
+&lt;REPO&gt;/tests/reliability/test_queue_scheduling.py:33: AssertionError</failure></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_dead_dependency_cleanup_does_not_block_independent_runnable_action" time="0.090"><properties><property name="reliability_evidence" value="{&quot;dead_parents&quot;: 30, &quot;blocked_children&quot;: 60, &quot;first_claim&quot;: null}" /></properties><failure message="assert (None)">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e39be90&gt;, 'ad382f6210ba4d6abbcc7cc53210ddf8', 'd489c94a3a9e4474949156332263fb86')
+record = &lt;function record.&lt;locals&gt;.save at 0x10e709300&gt;
+
+    def test_dead_dependency_cleanup_does_not_block_independent_runnable_action(runtime, record):
+        config, db, _, _, owner, _ = runtime
+        for _ in range(30):
+            operation(db, owner, "P1")
+        now = timestamp()
+        with db.session.begin() as session:
+            session.execute(update(QueuedAction).where(QueuedAction.kind == "create_work_order").values(phase="DEAD", tries=config.max_action_attempts))
+            session.execute(update(QueuedAction).where(QueuedAction.depends_on.is_not(None)).values(due=now - timedelta(seconds=10)))
+        independent = operation(db, owner)
+        worker = ActionWorker(db, config)
+        first = worker.claim()
+        record({"dead_parents": 30, "blocked_children": 60, "first_claim": first})
+&gt;       assert first and first["request_id"] == independent and first["kind"] == "create_work_order"
+E       assert (None)
+
+&lt;REPO&gt;/tests/reliability/test_queue_scheduling.py:67: AssertionError</failure></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_child_requires_done_parent_and_dead_parent_blocks_child[READY]" time="0.067"><properties><property name="reliability_evidence" value="{&quot;parent_phase&quot;: &quot;READY&quot;, &quot;claimed&quot;: null, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;27a10f906e4b4126845b1a191efc4b38&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;c73ac4a1b1ed48c4ba02627d33f84632&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_child_requires_done_parent_and_dead_parent_blocks_child[RUNNING]" time="0.070"><properties><property name="reliability_evidence" value="{&quot;parent_phase&quot;: &quot;RUNNING&quot;, &quot;claimed&quot;: null, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;70e125a921f54b71a16be5616dc5b59b&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;RUNNING&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: true, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;c9a7bc333b814d638e564b5f25654081&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_child_requires_done_parent_and_dead_parent_blocks_child[DONE]" time="0.075"><properties><property name="reliability_evidence" value="{&quot;parent_phase&quot;: &quot;DONE&quot;, &quot;claimed&quot;: {&quot;id&quot;: &quot;70e47dab09cb4d5da8357be0ecb7a14b&quot;, &quot;request_id&quot;: &quot;e6b1620ff5694286b712a911e1445987&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;lease&quot;: &quot;d81249ff7d6f490a9661f5544e5be193&quot;}, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;447978bda52c4657abee0dd8ee1d4e86&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;70e47dab09cb4d5da8357be0ecb7a14b&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 1, &quot;receipts&quot;: 1, &quot;audits&quot;: [{&quot;action&quot;: &quot;70e47dab09cb4d5da8357be0ecb7a14b&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}]}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_child_requires_done_parent_and_dead_parent_blocks_child[DEAD]" time="0.070"><properties><property name="reliability_evidence" value="{&quot;parent_phase&quot;: &quot;DEAD&quot;, &quot;claimed&quot;: null, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;1f8a1b74137a4cd487097cb1732ceb7c&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DEAD&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;2b935978a4434ebf838cd0178cd44613&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DEAD&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;Dependency failed; retry parent first&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_empty_or_future_due_queue_is_not_claimed" time="0.104"><properties><property name="reliability_evidence" value="{&quot;future_due_after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;70f9986be98b4197a365f72f94003669&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;8260da48e0e14c99baef3b1221a3f930&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_exhausted_ready_action_never_gets_an_extra_attempt" time="0.077"><properties><property name="reliability_evidence" value="{&quot;claimed&quot;: {&quot;id&quot;: &quot;2d90553d31c74aafa891549f5bd73bc1&quot;, &quot;request_id&quot;: &quot;d4fc4248ad054b899b39560ad592a75a&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;lease&quot;: &quot;2c1eb6851d93404b8a86ff16ed6e2789&quot;}, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;2d90553d31c74aafa891549f5bd73bc1&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;RUNNING&quot;, &quot;tries&quot;: 4, &quot;leased&quot;: true, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;8870274567134d0c903c3f6b9203e33b&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}}" /></properties><failure message="AssertionError: assert {'id': '2d90553d31c74aafa891549f5bd73bc1', 'request_id': 'd4fc4248ad054b899b39560ad592a75a', 'kind': 'create_work_order', 'lease': '2c1eb6851d93404b8a86ff16ed6e2789'} is None">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e77aea0&gt;, 'c078d6f339dd43f4899bea600f2b6287', 'efed1aca7cc34c1ea87fa87ef9b784f0')
+record = &lt;function record.&lt;locals&gt;.save at 0x10e453ba0&gt;
+
+    def test_exhausted_ready_action_never_gets_an_extra_attempt(runtime, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        with db.session.begin() as session:
+            session.scalar(select(QueuedAction).where(QueuedAction.kind == "create_work_order")).tries = config.max_action_attempts
+        worker = ActionWorker(db, config)
+        claimed = worker.claim()
+        state = snapshot(db)
+        record({"claimed": claimed, "after": state})
+&gt;       assert claimed is None
+E       AssertionError: assert {'id': '2d90553d31c74aafa891549f5bd73bc1', 'request_id': 'd4fc4248ad054b899b39560ad592a75a', 'kind': 'create_work_order', 'lease': '2c1eb6851d93404b8a86ff16ed6e2789'} is None
+
+&lt;REPO&gt;/tests/reliability/test_queue_scheduling.py:129: AssertionError</failure></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_expired_lease_respects_budget_and_dependency[last-allowed-attempt]" time="0.090"><properties><property name="reliability_evidence" value="{&quot;clock&quot;: &quot;simulated&quot;, &quot;exhausted&quot;: false, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;249eb05e74164f89bcd56bfe95d7315c&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;851857cf976e40ceb9c4e285b97f6464&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 3, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 1, &quot;receipts&quot;: 1, &quot;audits&quot;: [{&quot;action&quot;: &quot;851857cf976e40ceb9c4e285b97f6464&quot;, &quot;attempt&quot;: 2, &quot;result&quot;: &quot;LEASE_EXPIRED&quot;}, {&quot;action&quot;: &quot;851857cf976e40ceb9c4e285b97f6464&quot;, &quot;attempt&quot;: 3, &quot;result&quot;: &quot;DONE&quot;}, {&quot;action&quot;: &quot;249eb05e74164f89bcd56bfe95d7315c&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}]}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_expired_lease_respects_budget_and_dependency[budget-exhausted]" time="0.082"><properties><property name="reliability_evidence" value="{&quot;clock&quot;: &quot;simulated&quot;, &quot;exhausted&quot;: true, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;43bc2bcd3e4148bfae84f699f718e6b4&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DEAD&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;Dependency failed; retry parent first&quot;}, {&quot;id&quot;: &quot;860d0e2e47c8430f8953cebc291d0cfc&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DEAD&quot;, &quot;tries&quot;: 3, &quot;leased&quot;: false, &quot;error&quot;: &quot;Lease expired before completion&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: [{&quot;action&quot;: &quot;860d0e2e47c8430f8953cebc291d0cfc&quot;, &quot;attempt&quot;: 3, &quot;result&quot;: &quot;LEASE_EXPIRED&quot;}]}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_two_serial_workers_claim_distinct_actions_and_stale_lease_is_fenced" time="0.097"><properties><property name="reliability_evidence" value="{&quot;execution&quot;: &quot;serial SQLite claims, not MySQL concurrency&quot;, &quot;claims_distinct&quot;: true, &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;7e4ebb9e9834434fa42e09518db7cd5b&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;bc5caacce5434baa99e366f4cf0fb86e&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;bff92c2d79024ec197c32c074f28c765&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;d357b98745234b7b96b474eb0f1cfba5&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 2, &quot;receipts&quot;: 2, &quot;audits&quot;: [{&quot;action&quot;: &quot;bc5caacce5434baa99e366f4cf0fb86e&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}, {&quot;action&quot;: &quot;bff92c2d79024ec197c32c074f28c765&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}, {&quot;action&quot;: &quot;d357b98745234b7b96b474eb0f1cfba5&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}, {&quot;action&quot;: &quot;7e4ebb9e9834434fa42e09518db7cd5b&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}]}}" /></properties></testcase><testcase classname="tests.reliability.test_queue_scheduling" name="test_action_failures_dead_letter_then_manual_dependency_recovery" time="0.094"><properties><property name="reliability_evidence" value="{&quot;clock&quot;: &quot;simulated&quot;, &quot;dead_letter&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;83e30639d96f4d3ea8633d79b99b3b9f&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DEAD&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;Dependency failed; retry parent first&quot;}, {&quot;id&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DEAD&quot;, &quot;tries&quot;: 3, &quot;leased&quot;: false, &quot;error&quot;: &quot;Synthetic tool rejection&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: [{&quot;action&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;FAILED&quot;}, {&quot;action&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;attempt&quot;: 2, &quot;result&quot;: &quot;FAILED&quot;}, {&quot;action&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;attempt&quot;: 3, &quot;result&quot;: &quot;FAILED&quot;}]}, &quot;after_manual_dependency_recovery&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;83e30639d96f4d3ea8633d79b99b3b9f&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 1, &quot;receipts&quot;: 1, &quot;audits&quot;: [{&quot;action&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;FAILED&quot;}, {&quot;action&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;attempt&quot;: 2, &quot;result&quot;: &quot;FAILED&quot;}, {&quot;action&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;attempt&quot;: 3, &quot;result&quot;: &quot;FAILED&quot;}, {&quot;action&quot;: &quot;99a7828a889f40b5af40175a6eef6f2b&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}, {&quot;action&quot;: &quot;83e30639d96f4d3ea8633d79b99b3b9f&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}]}, &quot;manual_actor_audit&quot;: &quot;not implemented&quot;}" /></properties></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_claim_database_recovers_and_completes_real_actions[busy]" time="0.073"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;busy&quot;, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;315c976a9b5c421a9279bbdc1e412b2a&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;fc4baf0ae30d4495b8f28d47338b6532&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) synthetic-private-error-text&#10;[SQL: synthetic]&#10;(Background on this error at: https://sqlalche.me/e/20/e3q8)">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e3780b0&gt;, '9df1ee959ab84013a6649b85b6438162', '9338ce181a0f4677aa8551183c2a5dc5')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e794470&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e7154e0&gt;, kind = 'busy'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) &lt;= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+&gt;       asyncio.run(scenario())
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) &lt;= 2:
+&gt;           raise db_error(kind)
+E           sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) synthetic-private-error-text
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:46: OperationalError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_claim_database_recovers_and_completes_real_actions[deadlock]" time="0.077"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;deadlock&quot;, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;283af141c3ff4f6b8cdfbf8efd949c43&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;48a0f0f916bf4234bce35e4ec2fc7422&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1213, 'synthetic-private-error-text')&#10;[SQL: synthetic]&#10;(Background on this error at: https://sqlalche.me/e/20/e3q8)">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e7525d0&gt;, '168f51c345394a38b29ed5ce4dd771eb', '5ab8ca5716cc4934b359c07093b3bd8e')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e3f3a40&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e83bd80&gt;, kind = 'deadlock'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) &lt;= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+&gt;       asyncio.run(scenario())
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) &lt;= 2:
+&gt;           raise db_error(kind)
+E           sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1213, 'synthetic-private-error-text')
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:46: OperationalError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_claim_database_recovers_and_completes_real_actions[disconnect]" time="0.073"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;disconnect&quot;, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;7500b2f9dddc44e29b1ad9d534e9430c&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;8f70147c933c49fcb15046d4dbc7300e&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, 'synthetic-private-error-text')&#10;[SQL: synthetic]&#10;(Background on this error at: https://sqlalche.me/e/20/e3q8)">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e655f70&gt;, '195e520d3a144fc8b44f48104548a06f', 'cc32272019ef4519a4ee9d8961d1f403')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e85e6c0&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e8728e0&gt;, kind = 'disconnect'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) &lt;= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+&gt;       asyncio.run(scenario())
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) &lt;= 2:
+&gt;           raise db_error(kind)
+E           sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, 'synthetic-private-error-text')
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:46: OperationalError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_claim_database_recovers_and_completes_real_actions[pool]" time="0.068"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;pool&quot;, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;2265e5ea01ad4cc48baf4f55752dd842&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;34b89981c7f7410c8bf9f64f40039ac3&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="sqlalchemy.exc.TimeoutError: synthetic-private-error-text">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e85d5e0&gt;, 'e2e72253e710448580fc9247ee4e51a6', '6cc4cd453b9441a4bc96b66bc2e8f006')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e85ef30&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e86b420&gt;, kind = 'pool'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) &lt;= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+&gt;       asyncio.run(scenario())
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) &lt;= 2:
+&gt;           raise db_error(kind)
+E           sqlalchemy.exc.TimeoutError: synthetic-private-error-text
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:46: TimeoutError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_repeated_transient_errors_use_capped_backoff" time="0.067"><properties><property name="reliability_evidence" value="{&quot;fault_count&quot;: 9, &quot;scheduled_delays_not_wall_time&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;af0b6341e8b54b04927b0a503731420e&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;d08817ba8fa0413da965360a5a5e9c52&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}}" /></properties><failure message="sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) synthetic-private-error-text&#10;[SQL: synthetic]&#10;(Background on this error at: https://sqlalche.me/e/20/e3q8)">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e85c2f0&gt;, '3f88705e28ac411387e3debb94e6d2b3', 'fdfbaa36876f49ca9036d82d75c24e41')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e8b7f80&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e8f2340&gt;
+
+    def test_repeated_transient_errors_use_capped_backoff(runtime, monkeypatch, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        real_claim, delays, calls = worker.claim, [], 0
+    
+        def flaky():
+            nonlocal calls
+            calls += 1
+            if calls &lt;= 9:
+                raise db_error("busy")
+            return real_claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        try:
+&gt;           asyncio.run(asyncio.wait_for(worker.run(), 2))
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+&lt;REPO&gt;/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        nonlocal calls
+        calls += 1
+        if calls &lt;= 9:
+&gt;           raise db_error("busy")
+E           sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) synthetic-private-error-text
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:84: OperationalError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_permanent_database_or_programming_error_stops_without_retry[schema]" time="0.067"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;schema&quot;, &quot;claim_calls&quot;: 1, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;451889d2fa48491fa4aa456f19fef202&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;d94fac1635b34e13ad16c69b5e4e1a32&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="AttributeError: 'ActionWorker' object has no attribute 'observations'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e8b7fe0&gt;, '7d694624e584492eb9078bf5d7a36554', 'f41cb473d9444dddb1ae73f1a26eb791')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e7528a0&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e86aca0&gt;
+caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x10e85e9f0&gt;
+kind = 'schema'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+&gt;       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:121: AttributeError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_permanent_database_or_programming_error_stops_without_retry[auth]" time="0.067"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;auth&quot;, &quot;claim_calls&quot;: 1, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;3336db48ada2425da0c89b33a80e56cc&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;5d038c3e70594b9da6ad02f8a2c42252&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="AttributeError: 'ActionWorker' object has no attribute 'observations'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e8b5160&gt;, '741be348eedf47e8a10bd7cb4507998b', 'b0ab62cd7a1d46dca3f7a0d0b67b5cc6')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e8d70b0&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e882480&gt;
+caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x10e8d7680&gt;
+kind = 'auth'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+&gt;       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:121: AttributeError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_permanent_database_or_programming_error_stops_without_retry[constraint]" time="0.067"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;constraint&quot;, &quot;claim_calls&quot;: 1, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;7312655b83a8460688ee51bbb83d783f&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;b017deadf9d246ed8833c14b16f2abe5&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="AttributeError: 'ActionWorker' object has no attribute 'observations'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e92c1a0&gt;, '7d2f5de470fe40009b18c76b36d2f8f9', 'c5bd05fb996b4f8d887735ee1e10fb7d')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e8d5e80&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e929260&gt;
+caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x10e884c80&gt;
+kind = 'constraint'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+&gt;       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:121: AttributeError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_permanent_database_or_programming_error_stops_without_retry[programming]" time="0.068"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;programming&quot;, &quot;claim_calls&quot;: 1, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;4d7a58ddc0874e67af7bca4d7e3f87be&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;eb37d07a96354735b96c1c821881fc58&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="AttributeError: 'ActionWorker' object has no attribute 'observations'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e3f21b0&gt;, '566a58565a744219ad961dfce4facb1f', '0e9b2d2ba23447fc9ac8c173eb5f737e')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e92d1f0&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e960040&gt;
+caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x10e85ff80&gt;
+kind = 'programming'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+&gt;       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:121: AttributeError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_permanent_database_or_programming_error_stops_without_retry[unknown]" time="0.072"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;unknown&quot;, &quot;claim_calls&quot;: 1, &quot;delays&quot;: [], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;4b16d1e1ef8f475a86545d3d94bcd0a3&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;771f19f1391e4c3a8d1261d63f4f88fe&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;worker&quot;: null}" /></properties><failure message="AttributeError: 'ActionWorker' object has no attribute 'observations'">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e8b55e0&gt;, '8520aa88ea604946848167cd7f4c01a3', '7efad113e25a43aa918efaa80a6c5ffa')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10e89c6e0&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e90b920&gt;
+caplog = &lt;_pytest.logging.LogCaptureFixture object at 0x10e89c710&gt;
+kind = 'unknown'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+&gt;       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:121: AttributeError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_finish_database_fault_recovers_without_duplicate_side_effects[before-commit]" time="2.078"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;before-commit&quot;, &quot;clock&quot;: &quot;simulated lease expiry&quot;, &quot;delays&quot;: [], &quot;dispatches&quot;: [{&quot;kind&quot;: &quot;create_work_order&quot;, &quot;reused&quot;: false}], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;26aec90a13e44d01a35d217574472c01&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;(pymysql.err.OperationalError) (2003, 'synthetic-private-error-text')\n[SQL: synthetic]\n(Background on this error at: https://sqlalche.me/e/20/e3q8)&quot;}, {&quot;id&quot;: &quot;28dcf747559f4b34b2449849df9ada6e&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 1, &quot;receipts&quot;: 0, &quot;audits&quot;: [{&quot;action&quot;: &quot;26aec90a13e44d01a35d217574472c01&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;FAILED&quot;}]}}" /></properties><failure message="TimeoutError">fut = &lt;coroutine object ActionWorker.run at 0x10e71fdc0&gt;, timeout = 2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout &lt;= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout &lt;= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+&gt;           return await fut
+                   ^^^^^^^^^
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+&lt;REPO&gt;/opsdesk/queueing.py:99: in run
+    await asyncio.sleep(0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+delay = 0.4, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay &lt;= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+&gt;           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:665: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e89ccb0&gt;, 'c2d9063619d94aea9779e430a3f03f03', '25de748423af4c6db8dac4008dd1c0b5')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10ecb1880&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10ed4d4e0&gt;, when = 'before-commit'
+
+    @pytest.mark.parametrize("when", ["before-commit", "after-commit"])
+    def test_finish_database_fault_recovers_without_duplicate_side_effects(runtime, monkeypatch, record, when):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        clock = Clock()
+        monkeypatch.setattr(queueing, "timestamp", clock)
+        worker = ActionWorker(db, config)
+        finish, invoke, injected, delays, dispatched = worker.finish, worker.invoke, False, [], []
+    
+        async def observed_invoke(action):
+            result = await invoke(action)
+            dispatched.append({"kind": action["kind"], "reused": result.get("reused")})
+            return result
+    
+        def flaky_finish(action, **kwargs):
+            nonlocal injected
+            if action["kind"] == "create_work_order" and not injected:
+                injected = True
+                if when == "after-commit":
+                    finish(action, **kwargs)
+                raise db_error("disconnect")
+            result = finish(action, **kwargs)
+            if all(a["phase"] == "DONE" for a in snapshot(db)["actions"]):
+                worker.stopping = True
+            return result
+    
+        async def pause(delay):
+            delays.append(delay)
+            clock.advance(91)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "invoke", observed_invoke)
+        monkeypatch.setattr(worker, "finish", flaky_finish)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        try:
+&gt;           asyncio.run(asyncio.wait_for(worker.run(), 2))
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:162: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x10e9c8980&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_finish_database_fault_recovers_without_duplicate_side_effects[after-commit]" time="0.084"><properties><property name="reliability_evidence" value="{&quot;fault&quot;: &quot;after-commit&quot;, &quot;clock&quot;: &quot;simulated lease expiry&quot;, &quot;delays&quot;: [], &quot;dispatches&quot;: [{&quot;kind&quot;: &quot;create_work_order&quot;, &quot;reused&quot;: false}, {&quot;kind&quot;: &quot;export_ledger&quot;, &quot;reused&quot;: false}], &quot;after&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;4efc7154b68143a395a3a9def08e19f5&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;7d890f5645e3434ebcc1c36c3be879b5&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 1, &quot;receipts&quot;: 1, &quot;audits&quot;: [{&quot;action&quot;: &quot;4efc7154b68143a395a3a9def08e19f5&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}, {&quot;action&quot;: &quot;7d890f5645e3434ebcc1c36c3be879b5&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}]}}" /></properties><failure message="assert [] == [0.4]&#10;  &#10;  Right contains one more item: 0.4&#10;  Use -v to get more diff">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e3f21b0&gt;, 'b08c8a961e5849bd9931333be9b8202b', 'c4a89fb029214dac848577cfd14dd65e')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10ecb33b0&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10e929ee0&gt;, when = 'after-commit'
+
+    @pytest.mark.parametrize("when", ["before-commit", "after-commit"])
+    def test_finish_database_fault_recovers_without_duplicate_side_effects(runtime, monkeypatch, record, when):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        clock = Clock()
+        monkeypatch.setattr(queueing, "timestamp", clock)
+        worker = ActionWorker(db, config)
+        finish, invoke, injected, delays, dispatched = worker.finish, worker.invoke, False, [], []
+    
+        async def observed_invoke(action):
+            result = await invoke(action)
+            dispatched.append({"kind": action["kind"], "reused": result.get("reused")})
+            return result
+    
+        def flaky_finish(action, **kwargs):
+            nonlocal injected
+            if action["kind"] == "create_work_order" and not injected:
+                injected = True
+                if when == "after-commit":
+                    finish(action, **kwargs)
+                raise db_error("disconnect")
+            result = finish(action, **kwargs)
+            if all(a["phase"] == "DONE" for a in snapshot(db)["actions"]):
+                worker.stopping = True
+            return result
+    
+        async def pause(delay):
+            delays.append(delay)
+            clock.advance(91)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "invoke", observed_invoke)
+        monkeypatch.setattr(worker, "finish", flaky_finish)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        try:
+            asyncio.run(asyncio.wait_for(worker.run(), 2))
+        finally:
+            record({"fault": when, "clock": "simulated lease expiry", "delays": delays, "dispatches": dispatched, "after": snapshot(db)})
+&gt;       assert delays == [.4]
+E       assert [] == [0.4]
+E         
+E         Right contains one more item: 0.4
+E         Use -v to get more diff
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:165: AssertionError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_cancel_during_backoff_then_restart_completes_pending_queue" time="0.571"><failure message="TimeoutError">fut = &lt;coroutine object Event.wait at 0x10e937bc0&gt;, timeout = 0.5
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout &lt;= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout &lt;= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+&gt;           return await fut
+                   ^^^^^^^^^
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;asyncio.locks.Event object at 0x10ec87ce0 [unset]&gt;
+
+    async def wait(self):
+        """Block until the internal flag is true.
+    
+        If the internal flag is true on entry, return True
+        immediately.  Otherwise, block until another coroutine calls
+        set() to set the flag to true, then return True.
+        """
+        if self._value:
+            return True
+    
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+        try:
+&gt;           await fut
+E           asyncio.exceptions.CancelledError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/locks.py:212: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10dd15130&gt;, 'ff0498a2eecd446e94d18ec75cf088db', 'f81a8c001cb1416c8f488a37c46b0d10')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10ec870b0&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10ece7100&gt;
+
+    def test_cancel_during_backoff_then_restart_completes_pending_queue(runtime, monkeypatch, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+    
+        async def scenario():
+            entered = asyncio.Event()
+    
+            def broken():
+                raise db_error("busy")
+    
+            async def pause(delay):
+                entered.set()
+                await asyncio.Event().wait()
+    
+            monkeypatch.setattr(worker, "claim", broken)
+            monkeypatch.setattr(worker, "_pause", pause, raising=False)
+            job = asyncio.create_task(worker.run())
+            try:
+                await asyncio.wait_for(entered.wait(), .5)
+                job.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await job
+                assert worker.observations["state"] == "stopped"
+                before = snapshot(db)
+                assert all(a["phase"] == "READY" and a["tries"] == 0 for a in before["actions"])
+                restarted = ActionWorker(db, config)
+                stop_after_terminal(restarted, db, monkeypatch)
+                await asyncio.wait_for(restarted.run(), 2)
+                assert all(a["phase"] == "DONE" for a in snapshot(db)["actions"])
+                record({"cancelled_during": "backoff", "before_restart": before, "after_restart": snapshot(db)})
+            finally:
+                job.cancel()
+                await asyncio.gather(job, return_exceptions=True)
+&gt;       asyncio.run(scenario())
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:194: in scenario
+    await asyncio.wait_for(entered.wait(), .5)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = &lt;Timeout [expired]&gt;
+exc_type = &lt;class 'asyncio.exceptions.CancelledError'&gt;
+exc_val = CancelledError(), exc_tb = &lt;traceback object at 0x10e983600&gt;
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -&gt; Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() &lt;= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+&gt;               raise TimeoutError from exc_val
+E               TimeoutError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/timeouts.py:115: TimeoutError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_cancel_inflight_preserves_lease_and_restarts_after_expiry" time="0.099"><properties><property name="reliability_evidence" value="{&quot;cancelled_during&quot;: &quot;async invocation&quot;, &quot;clock&quot;: &quot;simulated&quot;, &quot;before_restart&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;0d9115bf27664eec809df1ca12184967&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;RUNNING&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: true, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;2d4a50d5fe9b4165b060a6e38f75c2b9&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;READY&quot;, &quot;tries&quot;: 0, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 0, &quot;receipts&quot;: 0, &quot;audits&quot;: []}, &quot;after_restart&quot;: {&quot;actions&quot;: [{&quot;id&quot;: &quot;0d9115bf27664eec809df1ca12184967&quot;, &quot;kind&quot;: &quot;create_work_order&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 2, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}, {&quot;id&quot;: &quot;2d4a50d5fe9b4165b060a6e38f75c2b9&quot;, &quot;kind&quot;: &quot;export_ledger&quot;, &quot;phase&quot;: &quot;DONE&quot;, &quot;tries&quot;: 1, &quot;leased&quot;: false, &quot;error&quot;: &quot;&quot;}], &quot;work_orders&quot;: 1, &quot;receipts&quot;: 1, &quot;audits&quot;: [{&quot;action&quot;: &quot;0d9115bf27664eec809df1ca12184967&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;LEASE_EXPIRED&quot;}, {&quot;action&quot;: &quot;0d9115bf27664eec809df1ca12184967&quot;, &quot;attempt&quot;: 2, &quot;result&quot;: &quot;DONE&quot;}, {&quot;action&quot;: &quot;2d4a50d5fe9b4165b060a6e38f75c2b9&quot;, &quot;attempt&quot;: 1, &quot;result&quot;: &quot;DONE&quot;}]}}" /></properties></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_cancel_waits_for_owned_direct_thread_before_restarting" time="0.084"><failure message="AssertionError: Cancelled worker must not leave its direct thread unowned&#10;assert False&#10; +  where False = is_set()&#10; +    where is_set = &lt;threading.Event at 0x10ecf73b0: unset&gt;.is_set">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10e440890&gt;, '8f2b97949cbd498797dbb1611f332e14', '9c582e2a7270408988fc41f0cdee60c6')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10ed3c440&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10eb127a0&gt;
+
+    def test_cancel_waits_for_owned_direct_thread_before_restarting(runtime, monkeypatch, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        dispatch = worker.handlers.dispatch
+        started, release, finished = threading.Event(), threading.Event(), threading.Event()
+    
+        def blocked(kind, request_id):
+            result = dispatch(kind, request_id)
+            if kind == "create_work_order":
+                started.set()
+                try:
+                    assert release.wait(2), "Test must release its own thread"
+                finally:
+                    finished.set()
+            return result
+    
+        monkeypatch.setattr(worker.handlers, "dispatch", blocked)
+    
+        async def scenario():
+            job = asyncio.create_task(worker.run())
+            async def unblock():
+                await asyncio.sleep(.05)
+                release.set()
+            unblock_job = None
+            try:
+                assert await asyncio.to_thread(started.wait, 1)
+                unblock_job = asyncio.create_task(unblock())
+                job.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await job
+                assert finished.is_set(), "Cancelled worker must not leave its direct thread unowned"
+                before = snapshot(db)
+                assert before["work_orders"] == 1 and any(a["phase"] == "RUNNING" for a in before["actions"])
+                clock = Clock()
+                clock.advance(91)
+                monkeypatch.setattr(queueing, "timestamp", clock)
+                restarted = ActionWorker(db, config)
+                assert await restarted.step() and await restarted.step()
+                state = snapshot(db)
+                assert state["work_orders"] == state["receipts"] == 1
+                assert all(a["phase"] == "DONE" for a in state["actions"])
+                record({"cancelled_during": "real local direct thread", "thread_joined_before_return": True, "before_restart": before, "after_restart": state})
+            finally:
+                release.set()
+                await asyncio.to_thread(finished.wait, 2)
+                job.cancel()
+                await asyncio.gather(job, return_exceptions=True)
+                if unblock_job:
+                    unblock_job.cancel()
+                    await asyncio.gather(unblock_job, return_exceptions=True)
+&gt;       asyncio.run(scenario())
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:308: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def scenario():
+        job = asyncio.create_task(worker.run())
+        async def unblock():
+            await asyncio.sleep(.05)
+            release.set()
+        unblock_job = None
+        try:
+            assert await asyncio.to_thread(started.wait, 1)
+            unblock_job = asyncio.create_task(unblock())
+            job.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await job
+&gt;           assert finished.is_set(), "Cancelled worker must not leave its direct thread unowned"
+E           AssertionError: Cancelled worker must not leave its direct thread unowned
+E           assert False
+E            +  where False = is_set()
+E            +    where is_set = &lt;threading.Event at 0x10ecf73b0: unset&gt;.is_set
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:288: AssertionError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_app_lifespan_cleans_worker_and_database[normal-close]" time="0.087"><properties><property name="reliability_evidence" value="{&quot;body_error&quot;: false, &quot;worker_done&quot;: true, &quot;database_disposed&quot;: true}" /></properties></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_app_lifespan_cleans_worker_and_database[exceptional-close]" time="0.080"><failure message="assert (False)&#10; +  where False = is_set()&#10; +    where is_set = &lt;asyncio.locks.Event object at 0x10ebc0890 [unset]&gt;.is_set">runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-qnuona....service.SupportService object at 0x10eb1bce0&gt;, '568f135fa3bc486b971f6f132d62fb82', '86791499441f4d4d805934c40760188c')
+monkeypatch = &lt;_pytest.monkeypatch.MonkeyPatch object at 0x10eb3c530&gt;
+record = &lt;function record.&lt;locals&gt;.save at 0x10ec0b420&gt;, body_error = True
+
+    @pytest.mark.parametrize("body_error", [False, True], ids=["normal-close", "exceptional-close"])
+    def test_app_lifespan_cleans_worker_and_database(runtime, monkeypatch, record, body_error):
+        config = runtime[0]
+        config.worker_enabled = True
+        app = create_app(config)
+        worker = app.state.worker
+        dispose, disposed = app.state.database.engine.dispose, []
+        monkeypatch.setattr(app.state.database.engine, "dispose", lambda: (disposed.append(True), dispose())[-1])
+    
+        async def scenario():
+            entered, exited = asyncio.Event(), asyncio.Event()
+            captured = []
+    
+            async def held():
+                captured.append(asyncio.current_task())
+                entered.set()
+                try:
+                    await asyncio.Event().wait()
+                finally:
+                    exited.set()
+    
+            monkeypatch.setattr(worker, "run", held)
+            try:
+                try:
+                    async with app.router.lifespan_context(app):
+                        await asyncio.wait_for(entered.wait(), .5)
+                        if body_error:
+                            raise ValueError("Synthetic lifespan body failure")
+                except* ValueError as errors:
+                    # MCP's AnyIO task group wraps the original body error. Accept
+                    # that documented shape without masking unrelated exceptions.
+                    assert body_error
+                    pending = list(errors.exceptions)
+                    while pending:
+                        error = pending.pop()
+                        if isinstance(error, BaseExceptionGroup):
+                            pending.extend(error.exceptions)
+                        else:
+                            assert str(error) == "Synthetic lifespan body failure"
+                assert exited.is_set() and captured[0].done()
+                assert disposed
+                record({"body_error": body_error, "worker_done": captured[0].done(), "database_disposed": bool(disposed)})
+            finally:
+                for task in captured:
+                    task.cancel()
+                await asyncio.gather(*captured, return_exceptions=True)
+                dispose()
+&gt;       asyncio.run(scenario())
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:358: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def scenario():
+        entered, exited = asyncio.Event(), asyncio.Event()
+        captured = []
+    
+        async def held():
+            captured.append(asyncio.current_task())
+            entered.set()
+            try:
+                await asyncio.Event().wait()
+            finally:
+                exited.set()
+    
+        monkeypatch.setattr(worker, "run", held)
+        try:
+            try:
+                async with app.router.lifespan_context(app):
+                    await asyncio.wait_for(entered.wait(), .5)
+                    if body_error:
+                        raise ValueError("Synthetic lifespan body failure")
+            except* ValueError as errors:
+                # MCP's AnyIO task group wraps the original body error. Accept
+                # that documented shape without masking unrelated exceptions.
+                assert body_error
+                pending = list(errors.exceptions)
+                while pending:
+                    error = pending.pop()
+                    if isinstance(error, BaseExceptionGroup):
+                        pending.extend(error.exceptions)
+                    else:
+                        assert str(error) == "Synthetic lifespan body failure"
+&gt;           assert exited.is_set() and captured[0].done()
+E           assert (False)
+E            +  where False = is_set()
+E            +    where is_set = &lt;asyncio.locks.Event object at 0x10ebc0890 [unset]&gt;.is_set
+
+&lt;REPO&gt;/tests/reliability/test_worker_recovery.py:350: AssertionError</failure></testcase><testcase classname="tests.reliability.test_worker_recovery" name="test_fatal_background_worker_is_visible_then_fresh_app_recovers" time="0.122"><failure message="AssertionError('assert 200 == 503\n +  where 200 = &lt;Response [200 OK]&gt;.status_code') [single exception in ExceptionGroup]">+ Exception Group Traceback (most recent call last):
+  |   File "&lt;REPO&gt;/tests/reliability/test_worker_recovery.py", line 394, in test_fatal_background_worker_is_visible_then_fresh_app_recovers
+  |     asyncio.run(scenario())
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+  |     return runner.run(main)
+  |            ^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+  |     return future.result()
+  |            ^^^^^^^^^^^^^^^
+  |   File "&lt;REPO&gt;/tests/reliability/test_worker_recovery.py", line 370, in scenario
+  |     async with app.router.lifespan_context(app):
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "&lt;REPO&gt;/opsdesk/main.py", line 78, in lifespan
+  |     async with public_mcp.session_manager.run():
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "&lt;REPO&gt;/.venv/lib/python3.12/site-packages/mcp/server/streamable_http_manager.py", line 161, in run
+  |     async with anyio.create_task_group() as tg:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "&lt;REPO&gt;/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "&lt;REPO&gt;/.venv/lib/python3.12/site-packages/mcp/server/streamable_http_manager.py", line 166, in run
+    |     yield  # Let the application run
+    |     ^^^^^
+    |   File "&lt;REPO&gt;/opsdesk/main.py", line 80, in lifespan
+    |     yield
+    |   File "&lt;REPO&gt;/tests/reliability/test_worker_recovery.py", line 379, in scenario
+    |     assert health.status_code == 503
+    | AssertionError: assert 200 == 503
+    |  +  where 200 = &lt;Response [200 OK]&gt;.status_code
+    +------------------------------------</failure></testcase><testcase classname="tests.test_service" name="test_impact_policy[\u5982\u4f55\u7533\u8bf7\u4e1a\u52a1\u7cfb\u7edf\u8bbf\u95ee\u6743\u9650\uff1f-FAQ-P3]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[\u6211\u7684\u7535\u8111\u65e0\u6cd5\u5f00\u673a\uff0c\u53ea\u6709\u6211\u53d7\u5f71\u54cd-INCIDENT-P2]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[\u5168\u5458\u65e0\u6cd5\u8bbf\u95ee\u6838\u5fc3\u4e1a\u52a1\u7cfb\u7edf\uff0c\u670d\u52a1\u4e2d\u65ad-INCIDENT-P1]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[Please install the approved software for me-REQUEST-P2]" time="0.000" /><testcase classname="tests.test_service" name="test_impact_policy[What is the company-wide outage procedure?-FAQ-P3]" time="0.000" /><testcase classname="tests.test_service" name="test_faq_has_evidence_but_no_work_order" time="0.081" /><testcase classname="tests.test_service" name="test_request_replay_conflict_and_ownership" time="0.081" /><testcase classname="tests.test_service" name="test_double_submission_and_action_idempotency" time="0.098" /><testcase classname="tests.test_service" name="test_worker_lease_recovery_and_stale_completion" time="0.083" /><testcase classname="tests.test_service" name="test_retry_budget_dead_letter_and_manual_retry" time="0.089" /><testcase classname="tests.test_service" name="test_sensitive_text_is_not_persisted" time="0.083" /><testcase classname="tests.test_service" name="test_memory_is_bounded_and_sql_fallback" time="0.091" /><testcase classname="tests.test_service" name="test_final_answer_review_targets_generated_text" time="0.000" /><testcase classname="tests.test_service" name="test_graph_parallel_roles_and_dependency_order" time="0.001" /><testcase classname="tests.test_service" name="test_web_auth_origin_roles_sse_and_edit_conflict" time="0.213" /><testcase classname="tests.test_service" name="test_document_import_replacement_and_redaction" time="0.072" /><testcase classname="tests.test_service" name="test_long_document_segments_remain_bounded" time="0.073" /><testcase classname="tests.test_service" name="test_unsafe_generated_draft_is_replaced" time="0.075" /><testcase classname="tests.test_service" name="test_english_procedure_question_overrides_model_request_label" time="0.073" /><testcase classname="tests.test_service" name="test_external_mcp_protocol_auth_and_tools" time="0.158" /></testsuite></testsuites>

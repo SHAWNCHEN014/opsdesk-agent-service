@@ -1,0 +1,3365 @@
+[
+  {
+    "case": "test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates",
+    "observed": {
+      "original_audit_fixture": {
+        "ready": 60,
+        "parents": 30,
+        "older_blocked_children": 30
+      },
+      "first_claim": {
+        "id": "03b941195b0d4f8c80b9819e27fbbbb9",
+        "request_id": "4b32c7bc12b94494b551a3a0cf3e20ca",
+        "kind": "create_work_order",
+        "lease": "a51d24a945db4c38b2a242b916292eae"
+      },
+      "claim_sql_count": 5,
+      "before": {
+        "actions": [
+          {
+            "id": "038339a376754ca1aaf32e84eaf1a9b2",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "03b941195b0d4f8c80b9819e27fbbbb9",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "0606991033b247928a5c8904779c3bb7",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "0b1494c4450c4386a545da5695725564",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "0e9b544086a04652ae92d32e305b9ce1",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1283eef79dde4b3a9fe33fc5d7932623",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "14ce71e349e049258201c137656f6496",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "19d6617fd46f43d887b75a0a04fad749",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1b4a0ff8e3774ed6b0ec1e9e48236591",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1c8eee576a0f422696f7ca01664dadfb",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1f0099a896594fc0aa853430e1fea956",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "22f1d8743fb34e10858b43c46408007e",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "27132e9ea9e24bf6bed4db7a606a882f",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "27e753d9907b4f55a14bdc03c4c552bd",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "2ba49f7fb63545c990b9a0dcd618baa0",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "3229b2c641d24e90a0718f411e6b12ef",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "488b5d167d37496185604dcb835c4579",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "49aa0e6400f046a9b91562038a77efa8",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "4a1d8ed0f800404e931f6898c7add188",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "543c091712dc4cdcbcd2aec194092aa0",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "56a90c563c5c4ef49cc7e7e231bc1e74",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "60b298e3a2364191a662df9e7ecf298b",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "6d8728e2524d46858dc3c3f5b6bd8ac9",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "6f4ee900a8b84343929f4f1598971c13",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "6f9ae11f43cd4f05946be81b7b7826e1",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7136b2d898ac47cbbef5aabf66915f24",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7734a2fda8be48ba8925375fa084f5db",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7bfaaf24265d426db5d4b9d12ec69676",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7edd1f83a08a4c3ba07e451cfbae44a2",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "86b1894220834f33a70b81e8d678ec70",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "91c29668bcfd431ba4bcad74abb921ac",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "94902d4076c644889eccbcb7310dcfb5",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "98df46b85780456f9def14f59333d119",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "9db234a57f0844c7b99fbd5c102907bb",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "9f4c1b26e91f471cb540c5659af32be8",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "a3bb110f84e04c04a3f4037e348fc857",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "aaec9921eb904e2ebcac8750bea32f80",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "ac4dd9d0a8d64f75b69b28541d56a792",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "ad75195a5a3049809eb7d0652e942385",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "bda0a4a7077444c98fb81527b9c9d088",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "bfecd7d8694c4f5e84aa1a70a1ee3ca6",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "c0bde9fcfa9e422d99b1ef6475777a90",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "c7fb4e8e5b1d4c8babb7f0527daba6f5",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "c8931cfeef2849a9942326101b6a1e1e",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "cb2fedc4d3014500901985ca64c57f05",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "ccb97b88cb924ec89d43c4472f790140",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d1fcff308e7147fda28163c24ab2b0c4",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d34aadef794b487889333258e6b4aac5",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d8a542210f6c4915beea089edeff1104",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d8d110a9bb0f41c2ac5cc2770a42a50c",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "dd479046e03544d082c3b96d386437fe",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "dee2cc0eec9c4eeebd7aa4eb71a54b14",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "df6705476bd14019b7527f4a41cbb0c0",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "df840eb1ccf141a9b176e15085537233",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "e54c9a57f67c4c18a4358bcd9f33ae0a",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f3b7942e40534d44b5c6d611adb481c3",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f52e5c2509a0422782a2b5c9350886da",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f82f9aeefdde4f458a7451daf84a41c2",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "fc179071e0954234a6db22d3c8050a18",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "fe0a5ef00e86427d87c241ea2ee47048",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      }
+    }
+  },
+  {
+    "case": "test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates",
+    "observed": {
+      "after_draining": {
+        "actions": [
+          {
+            "id": "038339a376754ca1aaf32e84eaf1a9b2",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "03b941195b0d4f8c80b9819e27fbbbb9",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "0606991033b247928a5c8904779c3bb7",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "0b1494c4450c4386a545da5695725564",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "0e9b544086a04652ae92d32e305b9ce1",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1283eef79dde4b3a9fe33fc5d7932623",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "14ce71e349e049258201c137656f6496",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "19d6617fd46f43d887b75a0a04fad749",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1b4a0ff8e3774ed6b0ec1e9e48236591",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1c8eee576a0f422696f7ca01664dadfb",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1f0099a896594fc0aa853430e1fea956",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "22f1d8743fb34e10858b43c46408007e",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "27132e9ea9e24bf6bed4db7a606a882f",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "27e753d9907b4f55a14bdc03c4c552bd",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "2ba49f7fb63545c990b9a0dcd618baa0",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "3229b2c641d24e90a0718f411e6b12ef",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "488b5d167d37496185604dcb835c4579",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "49aa0e6400f046a9b91562038a77efa8",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "4a1d8ed0f800404e931f6898c7add188",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "543c091712dc4cdcbcd2aec194092aa0",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "56a90c563c5c4ef49cc7e7e231bc1e74",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "60b298e3a2364191a662df9e7ecf298b",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "6d8728e2524d46858dc3c3f5b6bd8ac9",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "6f4ee900a8b84343929f4f1598971c13",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "6f9ae11f43cd4f05946be81b7b7826e1",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7136b2d898ac47cbbef5aabf66915f24",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7734a2fda8be48ba8925375fa084f5db",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7bfaaf24265d426db5d4b9d12ec69676",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "7edd1f83a08a4c3ba07e451cfbae44a2",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "86b1894220834f33a70b81e8d678ec70",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "91c29668bcfd431ba4bcad74abb921ac",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "94902d4076c644889eccbcb7310dcfb5",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "98df46b85780456f9def14f59333d119",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "9db234a57f0844c7b99fbd5c102907bb",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "9f4c1b26e91f471cb540c5659af32be8",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "a3bb110f84e04c04a3f4037e348fc857",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "aaec9921eb904e2ebcac8750bea32f80",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "ac4dd9d0a8d64f75b69b28541d56a792",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "ad75195a5a3049809eb7d0652e942385",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "bda0a4a7077444c98fb81527b9c9d088",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "bfecd7d8694c4f5e84aa1a70a1ee3ca6",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "c0bde9fcfa9e422d99b1ef6475777a90",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "c7fb4e8e5b1d4c8babb7f0527daba6f5",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "c8931cfeef2849a9942326101b6a1e1e",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "cb2fedc4d3014500901985ca64c57f05",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "ccb97b88cb924ec89d43c4472f790140",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d1fcff308e7147fda28163c24ab2b0c4",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d34aadef794b487889333258e6b4aac5",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d8a542210f6c4915beea089edeff1104",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d8d110a9bb0f41c2ac5cc2770a42a50c",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "dd479046e03544d082c3b96d386437fe",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "dee2cc0eec9c4eeebd7aa4eb71a54b14",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "df6705476bd14019b7527f4a41cbb0c0",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "df840eb1ccf141a9b176e15085537233",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "e54c9a57f67c4c18a4358bcd9f33ae0a",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f3b7942e40534d44b5c6d611adb481c3",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f52e5c2509a0422782a2b5c9350886da",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f82f9aeefdde4f458a7451daf84a41c2",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "fc179071e0954234a6db22d3c8050a18",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "fe0a5ef00e86427d87c241ea2ee47048",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 30,
+        "receipts": 30,
+        "audits": [
+          {
+            "action": "03b941195b0d4f8c80b9819e27fbbbb9",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "49aa0e6400f046a9b91562038a77efa8",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "0606991033b247928a5c8904779c3bb7",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "fc179071e0954234a6db22d3c8050a18",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "0b1494c4450c4386a545da5695725564",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "98df46b85780456f9def14f59333d119",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "0e9b544086a04652ae92d32e305b9ce1",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "1f0099a896594fc0aa853430e1fea956",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "1b4a0ff8e3774ed6b0ec1e9e48236591",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "7136b2d898ac47cbbef5aabf66915f24",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "1c8eee576a0f422696f7ca01664dadfb",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "f3b7942e40534d44b5c6d611adb481c3",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "2ba49f7fb63545c990b9a0dcd618baa0",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "6d8728e2524d46858dc3c3f5b6bd8ac9",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "3229b2c641d24e90a0718f411e6b12ef",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "df840eb1ccf141a9b176e15085537233",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "488b5d167d37496185604dcb835c4579",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "ac4dd9d0a8d64f75b69b28541d56a792",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "543c091712dc4cdcbcd2aec194092aa0",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "038339a376754ca1aaf32e84eaf1a9b2",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "56a90c563c5c4ef49cc7e7e231bc1e74",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "dee2cc0eec9c4eeebd7aa4eb71a54b14",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "6f4ee900a8b84343929f4f1598971c13",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "ccb97b88cb924ec89d43c4472f790140",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "7734a2fda8be48ba8925375fa084f5db",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "4a1d8ed0f800404e931f6898c7add188",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "7edd1f83a08a4c3ba07e451cfbae44a2",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "27e753d9907b4f55a14bdc03c4c552bd",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "91c29668bcfd431ba4bcad74abb921ac",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "fe0a5ef00e86427d87c241ea2ee47048",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "94902d4076c644889eccbcb7310dcfb5",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "27132e9ea9e24bf6bed4db7a606a882f",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "aaec9921eb904e2ebcac8750bea32f80",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "19d6617fd46f43d887b75a0a04fad749",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "ad75195a5a3049809eb7d0652e942385",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "86b1894220834f33a70b81e8d678ec70",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "bda0a4a7077444c98fb81527b9c9d088",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "9f4c1b26e91f471cb540c5659af32be8",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "bfecd7d8694c4f5e84aa1a70a1ee3ca6",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "14ce71e349e049258201c137656f6496",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "c8931cfeef2849a9942326101b6a1e1e",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "a3bb110f84e04c04a3f4037e348fc857",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "cb2fedc4d3014500901985ca64c57f05",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "9db234a57f0844c7b99fbd5c102907bb",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "d34aadef794b487889333258e6b4aac5",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "1283eef79dde4b3a9fe33fc5d7932623",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "d8a542210f6c4915beea089edeff1104",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "6f9ae11f43cd4f05946be81b7b7826e1",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "d8d110a9bb0f41c2ac5cc2770a42a50c",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "d1fcff308e7147fda28163c24ab2b0c4",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "dd479046e03544d082c3b96d386437fe",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "7bfaaf24265d426db5d4b9d12ec69676",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "df6705476bd14019b7527f4a41cbb0c0",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "c0bde9fcfa9e422d99b1ef6475777a90",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "e54c9a57f67c4c18a4358bcd9f33ae0a",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "22f1d8743fb34e10858b43c46408007e",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "f52e5c2509a0422782a2b5c9350886da",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "c7fb4e8e5b1d4c8babb7f0527daba6f5",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "f82f9aeefdde4f458a7451daf84a41c2",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "60b298e3a2364191a662df9e7ecf298b",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      },
+      "ledger_data_rows": 30,
+      "replay_created_no_extra_rows": true
+    }
+  },
+  {
+    "case": "test_dead_dependency_cleanup_does_not_block_independent_runnable_action",
+    "observed": {
+      "dead_parents": 30,
+      "blocked_children": 60,
+      "first_claim": {
+        "id": "af6fb4c5d1524a10a6d12fbbe258754e",
+        "request_id": "26b4362a4c6540fba27c5d7fa8f22576",
+        "kind": "create_work_order",
+        "lease": "c064896681e64cf88aac6c421980a746"
+      }
+    }
+  },
+  {
+    "case": "test_dead_dependency_cleanup_does_not_block_independent_runnable_action",
+    "observed": {
+      "after": {
+        "actions": [
+          {
+            "id": "0036240f120c4a9aad5c14750af26b70",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "08ee0e2a20f2405c96004c23105b4031",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "0bb9cc5a887042118eb8d8a1dc1b82ca",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "158734c13eeb4ea9bfd0f45a644defe4",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "17e33fabcc084c719e93bd4aa3d86d1c",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "1bde5cfbf7614871b2984fb343e9fb99",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "23b51f82189b4752a4636c6f6952e13b",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "2536f60ac6cc403e8d6ff8c0a6fa1d7f",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "25581463af484ac1a5559e0b8cda3769",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "285bdfa557004e108f65773cde37bfaf",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "28e2c78438eb4feaba84a28ec6e0a469",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "2a410871e5524498b7ff43a4da92a422",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "2b727669f9184d2ca0223190872bf653",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "2bedb9c8f32d4794b1b43435b9937c6b",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "2bee984ced3c4ab9bec45ab391ca386c",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "30968279fcc94591baba287bdddac66a",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "30d43bd152d749248b7c4c02a6501c5c",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "3884317ed438485ab3442d74a303af89",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "39b37d8a40434bd285c46196b72bf9f5",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "3a1488fc9cb04ff2887f1c1fbb647672",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "3a26d96f08694a2db3ead4f3a01c0389",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "3f4d88baf6af4ad693ce13d4d3358384",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "3f6e6155f569453e98bf32214b54c7b3",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "47768fa01e0246c0be7374ae1df796cf",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "48a326839f64414aa38ac1dbdbfd900b",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "4d81fbabc7f34384b49e05abf66c8194",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "4da7ad9e13af476193ab351629ac7e75",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "4e038300f8eb4fa4bf05a82bea402e93",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "4e1358dfd91b4974a846c51905e3a26d",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "4e620c55419c4feaa83c96ab47ad3f91",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "4fca81b4062c4ca9b8e1e7448e072027",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "522552621c29498697aa1f049aab93a8",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "5678e774a3554f71b0a5ac0a7db21b30",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "59780bd62a2847b29ff3b34a2de47a5c",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "5cd02d4d57f04fa59323c3a2e2ee099f",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "5dd196022465449280b32cb21d982877",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "5e51b2e0d62c4ca69dfbcbfa4b6931d8",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "6a64a04a02ad4407bdca2a75bed3a54a",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "785cd5885ca54cd2811cdaaf8adb678f",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "7e7192a1a8de48fa99b26aa0f5cdb20c",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "81a96f62e610414d87b4fb3afe46aad3",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "847bf39a06ff4bc490f7bc4e786bcfe2",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "8adeeffc34964a74a5ae9b85e04f41f1",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "8d96d0a0b46e4750a813c9ce9e4957ad",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "946afda574484a45845ff3a80596cc01",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "9ceaf5ff75fd4d81a1c7a381b92f154f",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "9e25c042259941dba6a2949a92c2b27e",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "9f99e065447a4069a53420eb6d7641e7",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "9fdecf8a3f9e4a7d81ea78fc02cac5ad",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "a33040f42c834afe923f50f9d0adcc44",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "a4a1aad4f2e14c15b598d88561ed1033",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "a6aa02a3e04f4f4a92b85cd279aee1da",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "a6df9acbb1b04c52a1cd58b5221e63f5",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "a7174e7f6baa4abbac989b1f068f5c94",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "a7e89dd42bc74e0787dc09f6269a8e98",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "ae9131b0af884f27ba2d57d6dd4432c8",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "af6fb4c5d1524a10a6d12fbbe258754e",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "b797cb9d86554ec6a7ae50141cd0cac0",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "ba4860f24721402a8189a4d1d99711b7",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "c19f39a2a8b245e6ab13817a0deef6d7",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "c224b1e4bbae432085d84249c6adb3b9",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "c576323998ca4264b94d79592e2b4fe8",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "c5adbe1057294622a8d12dc3c269b73e",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "cca86e6ac69140d6adef0d239ca41e11",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d0febc2b058b4afb815efcfe8f66e97b",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d2340055c50649fcbafdbd8197275bcd",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d25e91384969459f84c088655f1d7c44",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d2bc6ba8d0cc48808fea7c08adc69b40",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d3144f6f7f8b4c89a0a8105514a1826c",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d6133aed8bae4defa7c5433a642a0a2b",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d628bb70b7a14d049dfbd9e9c011397e",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d74c7454736f428c93253d9b8c8c5cf2",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d761a654bc7943dcbfed1e443f1acc52",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "d832004fcae04d76918f1234498b7b7b",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "dd3c1ea206c34696af51aff7821340d8",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "dda520e87f384f9c985874372bc10aa3",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "dfcc33898c0c40eb804fb059be354580",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "e07284d631ee49ac965a461fcf9ad181",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "e660ed1b6ebc49e2bc4f71dbf4f65627",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "e69c1d5efb64444f848cb6e2baf2a317",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "e72a8ff1fd394f60879919f5bdfea3c0",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "e97b88e46e0e444e826c166c05f34a14",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "eb1028ea1df7441e83eaeda4c94c8acc",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "eb54163b4c104a05b3097c146f3a4a6b",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "eb5de2619621473885cf8d73c7968839",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "ed7e460d159c484c8bf6b310b7a2e563",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "edd7caa38bdd43b39a99f3f0ff4b08de",
+            "kind": "notify_escalation",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "ede946e51a5a48f09b988861f88e812a",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "f52758dc74084d3590fcf22feaf7b57d",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f5a2f82d58404b0180ba95d2f91a5c92",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f5bd6c964b304ef8a22962f889b000f0",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "fe993402df2247a497da9751bd082d09",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "af6fb4c5d1524a10a6d12fbbe258754e",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "f52758dc74084d3590fcf22feaf7b57d",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_child_requires_done_parent_and_dead_parent_blocks_child[READY]",
+    "observed": {
+      "parent_phase": "READY",
+      "claimed": null,
+      "after": {
+        "actions": [
+          {
+            "id": "119ccf6732184cadb4fa3a4511cc9c7a",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d8fe6455e41943f1b0952d93e0b137d4",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      }
+    }
+  },
+  {
+    "case": "test_child_requires_done_parent_and_dead_parent_blocks_child[RUNNING]",
+    "observed": {
+      "parent_phase": "RUNNING",
+      "claimed": null,
+      "after": {
+        "actions": [
+          {
+            "id": "a93db5aaa4b6440490f1926ac83fb4f4",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "dcfa0015a9b045108ccc81b358674783",
+            "kind": "create_work_order",
+            "phase": "RUNNING",
+            "tries": 1,
+            "leased": true,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      }
+    }
+  },
+  {
+    "case": "test_child_requires_done_parent_and_dead_parent_blocks_child[DONE]",
+    "observed": {
+      "parent_phase": "DONE",
+      "claimed": {
+        "id": "33d3c23977394bee855e9682ebe2a04a",
+        "request_id": "b8f809dac3b648b2a67a5bbfb1e49c06",
+        "kind": "export_ledger",
+        "lease": "516b94dc6bbf4e8882a369386f4655a2"
+      },
+      "after": {
+        "actions": [
+          {
+            "id": "33d3c23977394bee855e9682ebe2a04a",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "90a85ec7e9304853ab03b7d7f85ff3b1",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "33d3c23977394bee855e9682ebe2a04a",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_child_requires_done_parent_and_dead_parent_blocks_child[DEAD]",
+    "observed": {
+      "parent_phase": "DEAD",
+      "claimed": null,
+      "after": {
+        "actions": [
+          {
+            "id": "2340637873464150aeca42b687ebe9c6",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "fdec3e75bbf8420cb88ff2074d72ce4a",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      }
+    }
+  },
+  {
+    "case": "test_empty_or_future_due_queue_is_not_claimed",
+    "observed": {
+      "future_due_after": {
+        "actions": [
+          {
+            "id": "0167b673969a4c46a08cf8920f9c271f",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "717af2bd01c04bdebdfa2983a5622ee9",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      }
+    }
+  },
+  {
+    "case": "test_exhausted_ready_action_never_gets_an_extra_attempt",
+    "observed": {
+      "claimed": null,
+      "after": {
+        "actions": [
+          {
+            "id": "305a77bcac4a415b8ba79cfba7e7fb04",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": "Retry budget exhausted"
+          },
+          {
+            "id": "a4aab5bcc03c493f8ca0c9b40ac9ef7e",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      }
+    }
+  },
+  {
+    "case": "test_expired_lease_respects_budget_and_dependency[last-allowed-attempt]",
+    "observed": {
+      "clock": "simulated",
+      "exhausted": false,
+      "after": {
+        "actions": [
+          {
+            "id": "538b9a0ad6c043818259a90d5ac4e6d1",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 3,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "a88977ac328941f9a035b277d1331b25",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "538b9a0ad6c043818259a90d5ac4e6d1",
+            "attempt": 2,
+            "result": "LEASE_EXPIRED"
+          },
+          {
+            "action": "538b9a0ad6c043818259a90d5ac4e6d1",
+            "attempt": 3,
+            "result": "DONE"
+          },
+          {
+            "action": "a88977ac328941f9a035b277d1331b25",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_expired_lease_respects_budget_and_dependency[budget-exhausted]",
+    "observed": {
+      "clock": "simulated",
+      "exhausted": true,
+      "after": {
+        "actions": [
+          {
+            "id": "7348f158badd47a8876c563e8d4c7e65",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          },
+          {
+            "id": "f1a1e0860403480e956594fff5c7737a",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": "Lease expired before completion"
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": [
+          {
+            "action": "f1a1e0860403480e956594fff5c7737a",
+            "attempt": 3,
+            "result": "LEASE_EXPIRED"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_two_serial_workers_claim_distinct_actions_and_stale_lease_is_fenced",
+    "observed": {
+      "execution": "serial SQLite claims, not MySQL concurrency",
+      "claims_distinct": true,
+      "after": {
+        "actions": [
+          {
+            "id": "36e45712d79c4f49a185becf6ed70466",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "db6230a1b3f24ec79bf1e255ff059318",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f0859e08e30d4072bdcc6ed1fbfc5fc2",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f7f5f11364d148adbfd4ae26eedd022f",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 2,
+        "receipts": 2,
+        "audits": [
+          {
+            "action": "f7f5f11364d148adbfd4ae26eedd022f",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "db6230a1b3f24ec79bf1e255ff059318",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "36e45712d79c4f49a185becf6ed70466",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "f0859e08e30d4072bdcc6ed1fbfc5fc2",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_action_failures_dead_letter_then_manual_dependency_recovery",
+    "observed": {
+      "clock": "simulated",
+      "dead_letter": {
+        "actions": [
+          {
+            "id": "7c9c5e53add0483fbca55e1e61fa7116",
+            "kind": "create_work_order",
+            "phase": "DEAD",
+            "tries": 3,
+            "leased": false,
+            "error": "Synthetic tool rejection"
+          },
+          {
+            "id": "ec67984a39624f128cede294e33198f7",
+            "kind": "export_ledger",
+            "phase": "DEAD",
+            "tries": 0,
+            "leased": false,
+            "error": "Dependency failed; retry parent first"
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": [
+          {
+            "action": "7c9c5e53add0483fbca55e1e61fa7116",
+            "attempt": 1,
+            "result": "FAILED"
+          },
+          {
+            "action": "7c9c5e53add0483fbca55e1e61fa7116",
+            "attempt": 2,
+            "result": "FAILED"
+          },
+          {
+            "action": "7c9c5e53add0483fbca55e1e61fa7116",
+            "attempt": 3,
+            "result": "FAILED"
+          }
+        ]
+      },
+      "after_manual_dependency_recovery": {
+        "actions": [
+          {
+            "id": "7c9c5e53add0483fbca55e1e61fa7116",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "ec67984a39624f128cede294e33198f7",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "7c9c5e53add0483fbca55e1e61fa7116",
+            "attempt": 1,
+            "result": "FAILED"
+          },
+          {
+            "action": "7c9c5e53add0483fbca55e1e61fa7116",
+            "attempt": 2,
+            "result": "FAILED"
+          },
+          {
+            "action": "7c9c5e53add0483fbca55e1e61fa7116",
+            "attempt": 3,
+            "result": "FAILED"
+          },
+          {
+            "action": "7c9c5e53add0483fbca55e1e61fa7116",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "ec67984a39624f128cede294e33198f7",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      },
+      "manual_actor_audit": "not implemented"
+    }
+  },
+  {
+    "case": "test_claim_database_recovers_and_completes_real_actions[busy]",
+    "observed": {
+      "fault": "busy",
+      "delays": [
+        0.4,
+        0.8
+      ],
+      "after": {
+        "actions": [
+          {
+            "id": "8ec2e012369e44798c1748782a293392",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "afac45c2d3ba48baaa955d682abec580",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "8ec2e012369e44798c1748782a293392",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "afac45c2d3ba48baaa955d682abec580",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      },
+      "worker": {
+        "state": "stopped",
+        "consecutive_errors": 0,
+        "recoveries": 1,
+        "last_error": "OperationalError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_claim_database_recovers_and_completes_real_actions[deadlock]",
+    "observed": {
+      "fault": "deadlock",
+      "delays": [
+        0.4,
+        0.8
+      ],
+      "after": {
+        "actions": [
+          {
+            "id": "1b1bb1b47ff149c781215147379cc8e8",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "5e81dd97010a4abe9b2d549af09c813d",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "5e81dd97010a4abe9b2d549af09c813d",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "1b1bb1b47ff149c781215147379cc8e8",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      },
+      "worker": {
+        "state": "stopped",
+        "consecutive_errors": 0,
+        "recoveries": 1,
+        "last_error": "OperationalError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_claim_database_recovers_and_completes_real_actions[disconnect]",
+    "observed": {
+      "fault": "disconnect",
+      "delays": [
+        0.4,
+        0.8
+      ],
+      "after": {
+        "actions": [
+          {
+            "id": "7d285f9ab26249e6b57e405f8476289e",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "8b78ae7f1e7d470c97425df41f220c1a",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "7d285f9ab26249e6b57e405f8476289e",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "8b78ae7f1e7d470c97425df41f220c1a",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      },
+      "worker": {
+        "state": "stopped",
+        "consecutive_errors": 0,
+        "recoveries": 1,
+        "last_error": "OperationalError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_claim_database_recovers_and_completes_real_actions[pool]",
+    "observed": {
+      "fault": "pool",
+      "delays": [
+        0.4,
+        0.8
+      ],
+      "after": {
+        "actions": [
+          {
+            "id": "07f8c16fe53849c5a00cd07f52e2f3e1",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "b3f243cc84914bd98e7305dbd7ccd1b9",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "07f8c16fe53849c5a00cd07f52e2f3e1",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "b3f243cc84914bd98e7305dbd7ccd1b9",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      },
+      "worker": {
+        "state": "stopped",
+        "consecutive_errors": 0,
+        "recoveries": 1,
+        "last_error": "TimeoutError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_repeated_transient_errors_use_capped_backoff",
+    "observed": {
+      "fault_count": 9,
+      "scheduled_delays_not_wall_time": [
+        0.4,
+        0.8,
+        1.6,
+        3.2,
+        6.4,
+        12.8,
+        25.6,
+        30.0,
+        30.0
+      ],
+      "after": {
+        "actions": [
+          {
+            "id": "05219442c6d1490692cfea3c458bfbf7",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "2cb6896a362c4da793d2d2025be3543f",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "05219442c6d1490692cfea3c458bfbf7",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "2cb6896a362c4da793d2d2025be3543f",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_permanent_database_or_programming_error_stops_without_retry[schema]",
+    "observed": {
+      "fault": "schema",
+      "claim_calls": 1,
+      "delays": [],
+      "after": {
+        "actions": [
+          {
+            "id": "bb4efed84e8d47788e3555c56ea9a1e9",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d1c460475c0745fa8414b1920e6bef65",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      },
+      "worker": {
+        "state": "failed",
+        "consecutive_errors": 0,
+        "recoveries": 0,
+        "last_error": "OperationalError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_permanent_database_or_programming_error_stops_without_retry[auth]",
+    "observed": {
+      "fault": "auth",
+      "claim_calls": 1,
+      "delays": [],
+      "after": {
+        "actions": [
+          {
+            "id": "d3ca8f5ac8bd40c9a93ba8a80071d9a3",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "f8ebbbe7d268457eac905326f28bd5bf",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      },
+      "worker": {
+        "state": "failed",
+        "consecutive_errors": 0,
+        "recoveries": 0,
+        "last_error": "OperationalError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_permanent_database_or_programming_error_stops_without_retry[constraint]",
+    "observed": {
+      "fault": "constraint",
+      "claim_calls": 1,
+      "delays": [],
+      "after": {
+        "actions": [
+          {
+            "id": "7bfa74b6b67c4eb8973e068992d82ce3",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "9bf56d1b28d84e83993ce42f54c4c30a",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      },
+      "worker": {
+        "state": "failed",
+        "consecutive_errors": 0,
+        "recoveries": 0,
+        "last_error": "IntegrityError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_permanent_database_or_programming_error_stops_without_retry[programming]",
+    "observed": {
+      "fault": "programming",
+      "claim_calls": 1,
+      "delays": [],
+      "after": {
+        "actions": [
+          {
+            "id": "0ff3d0cf3f084db4a4837f463687cfcf",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "96dbd2fcd13d4c9dac72b40e08cf4996",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      },
+      "worker": {
+        "state": "failed",
+        "consecutive_errors": 0,
+        "recoveries": 0,
+        "last_error": "ProgrammingError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_permanent_database_or_programming_error_stops_without_retry[unknown]",
+    "observed": {
+      "fault": "unknown",
+      "claim_calls": 1,
+      "delays": [],
+      "after": {
+        "actions": [
+          {
+            "id": "91933676f92146a9a8bdc49e4d9504b0",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "eb0fda3ad2d44aed8e3ac6d96cd75cff",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      },
+      "worker": {
+        "state": "failed",
+        "consecutive_errors": 0,
+        "recoveries": 0,
+        "last_error": "RuntimeError",
+        "retry_delay": 0.0
+      }
+    }
+  },
+  {
+    "case": "test_finish_database_fault_recovers_without_duplicate_side_effects[before-commit]",
+    "observed": {
+      "fault": "before-commit",
+      "clock": "simulated lease expiry",
+      "delays": [
+        0.4
+      ],
+      "dispatches": [
+        {
+          "kind": "create_work_order",
+          "reused": false
+        },
+        {
+          "kind": "create_work_order",
+          "reused": true
+        },
+        {
+          "kind": "export_ledger",
+          "reused": false
+        }
+      ],
+      "after": {
+        "actions": [
+          {
+            "id": "bde4ce8df31d4971a0d94dee3b23040f",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 2,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "d96975853fd745aab5f1a4b4d7d614f6",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "bde4ce8df31d4971a0d94dee3b23040f",
+            "attempt": 1,
+            "result": "LEASE_EXPIRED"
+          },
+          {
+            "action": "bde4ce8df31d4971a0d94dee3b23040f",
+            "attempt": 2,
+            "result": "DONE"
+          },
+          {
+            "action": "d96975853fd745aab5f1a4b4d7d614f6",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_finish_database_fault_recovers_without_duplicate_side_effects[after-commit]",
+    "observed": {
+      "fault": "after-commit",
+      "clock": "simulated lease expiry",
+      "delays": [
+        0.4
+      ],
+      "dispatches": [
+        {
+          "kind": "create_work_order",
+          "reused": false
+        },
+        {
+          "kind": "export_ledger",
+          "reused": false
+        }
+      ],
+      "after": {
+        "actions": [
+          {
+            "id": "23adc0b96c4c4f4185382a58bbc33ac6",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "34f6399d138644d28398bafe84c3de79",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "23adc0b96c4c4f4185382a58bbc33ac6",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "34f6399d138644d28398bafe84c3de79",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_cancel_during_backoff_then_restart_completes_pending_queue",
+    "observed": {
+      "cancelled_during": "backoff",
+      "before_restart": {
+        "actions": [
+          {
+            "id": "50e1d826e2234fab92ac5cd9009023c1",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "58d46710c3a64d44b70d07a63527eaab",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      },
+      "after_restart": {
+        "actions": [
+          {
+            "id": "50e1d826e2234fab92ac5cd9009023c1",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "58d46710c3a64d44b70d07a63527eaab",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "58d46710c3a64d44b70d07a63527eaab",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "50e1d826e2234fab92ac5cd9009023c1",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_cancel_inflight_preserves_lease_and_restarts_after_expiry",
+    "observed": {
+      "cancelled_during": "async invocation",
+      "clock": "simulated",
+      "before_restart": {
+        "actions": [
+          {
+            "id": "08dc7800aecd4650a0641371f9bb2e01",
+            "kind": "create_work_order",
+            "phase": "RUNNING",
+            "tries": 1,
+            "leased": true,
+            "error": ""
+          },
+          {
+            "id": "abb7d646c7b847fa8d051f8ec4f686f0",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      },
+      "after_restart": {
+        "actions": [
+          {
+            "id": "08dc7800aecd4650a0641371f9bb2e01",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 2,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "abb7d646c7b847fa8d051f8ec4f686f0",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "08dc7800aecd4650a0641371f9bb2e01",
+            "attempt": 1,
+            "result": "LEASE_EXPIRED"
+          },
+          {
+            "action": "08dc7800aecd4650a0641371f9bb2e01",
+            "attempt": 2,
+            "result": "DONE"
+          },
+          {
+            "action": "abb7d646c7b847fa8d051f8ec4f686f0",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_cancel_waits_for_owned_direct_thread_before_restarting",
+    "observed": {
+      "cancelled_during": "real local direct thread",
+      "thread_joined_before_return": true,
+      "before_restart": {
+        "actions": [
+          {
+            "id": "c71fc8a99a55429c9ff53ccbd6de78ab",
+            "kind": "create_work_order",
+            "phase": "RUNNING",
+            "tries": 1,
+            "leased": true,
+            "error": ""
+          },
+          {
+            "id": "fd39f4989f0a4d3ea114346a19d117e7",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 0,
+        "audits": []
+      },
+      "after_restart": {
+        "actions": [
+          {
+            "id": "c71fc8a99a55429c9ff53ccbd6de78ab",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 2,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "fd39f4989f0a4d3ea114346a19d117e7",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "c71fc8a99a55429c9ff53ccbd6de78ab",
+            "attempt": 1,
+            "result": "LEASE_EXPIRED"
+          },
+          {
+            "action": "c71fc8a99a55429c9ff53ccbd6de78ab",
+            "attempt": 2,
+            "result": "DONE"
+          },
+          {
+            "action": "fd39f4989f0a4d3ea114346a19d117e7",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "case": "test_app_lifespan_cleans_worker_and_database[normal-close]",
+    "observed": {
+      "body_error": false,
+      "worker_done": true,
+      "database_disposed": true
+    }
+  },
+  {
+    "case": "test_app_lifespan_cleans_worker_and_database[exceptional-close]",
+    "observed": {
+      "body_error": true,
+      "worker_done": true,
+      "database_disposed": true
+    }
+  },
+  {
+    "case": "test_fatal_background_worker_is_visible_then_fresh_app_recovers",
+    "observed": {
+      "fatal_health": {
+        "status": "degraded",
+        "project": "OpsDesk",
+        "model_mode": "demo",
+        "worker": {
+          "enabled": true,
+          "alive": false,
+          "state": "failed",
+          "consecutive_errors": 0,
+          "recoveries": 0,
+          "last_error": "OperationalError",
+          "retry_delay": 0.0
+        }
+      },
+      "before_restart": {
+        "actions": [
+          {
+            "id": "8a7ac26a16e44415bdffb06cf0cb68e8",
+            "kind": "create_work_order",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "e992641e11614bea943326ed93cd80af",
+            "kind": "export_ledger",
+            "phase": "READY",
+            "tries": 0,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 0,
+        "receipts": 0,
+        "audits": []
+      }
+    }
+  },
+  {
+    "case": "test_fatal_background_worker_is_visible_then_fresh_app_recovers",
+    "observed": {
+      "fresh_app_completed_pending_actions": {
+        "actions": [
+          {
+            "id": "8a7ac26a16e44415bdffb06cf0cb68e8",
+            "kind": "create_work_order",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          },
+          {
+            "id": "e992641e11614bea943326ed93cd80af",
+            "kind": "export_ledger",
+            "phase": "DONE",
+            "tries": 1,
+            "leased": false,
+            "error": ""
+          }
+        ],
+        "work_orders": 1,
+        "receipts": 1,
+        "audits": [
+          {
+            "action": "8a7ac26a16e44415bdffb06cf0cb68e8",
+            "attempt": 1,
+            "result": "DONE"
+          },
+          {
+            "action": "e992641e11614bea943326ed93cd80af",
+            "attempt": 1,
+            "result": "DONE"
+          }
+        ]
+      }
+    }
+  }
+]

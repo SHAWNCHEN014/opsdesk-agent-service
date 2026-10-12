@@ -1,0 +1,119 @@
+{
+  "formal_red": "before-verified/pytest.xml",
+  "formal_green": "after-commit/pytest.xml",
+  "same_test_and_gold_sha256": true,
+  "suites": {
+    "tests.qa.test_evaluation_gate": {
+      "before": {
+        "tests": 18,
+        "passed": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 18,
+        "passed": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "tests.qa.test_final_review": {
+      "before": {
+        "tests": 23,
+        "passed": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 23,
+        "passed": 23,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "tests.qa.test_ledger_text": {
+      "before": {
+        "tests": 12,
+        "passed": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 12,
+        "passed": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "tests.qa.test_stale_vectors": {
+      "before": {
+        "tests": 6,
+        "passed": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 6,
+        "passed": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "tests.reliability.test_queue_scheduling": {
+      "before": {
+        "tests": 12,
+        "passed": 9,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 12,
+        "passed": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "tests.reliability.test_worker_recovery": {
+      "before": {
+        "tests": 18,
+        "passed": 2,
+        "failures": 16,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 18,
+        "passed": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    },
+    "tests.test_service": {
+      "before": {
+        "tests": 20,
+        "passed": 20,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 20,
+        "passed": 20,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      }
+    }
+  }
+}

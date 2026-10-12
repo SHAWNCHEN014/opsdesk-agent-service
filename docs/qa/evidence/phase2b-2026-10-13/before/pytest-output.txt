@@ -1,0 +1,1141 @@
+...........................................................FF.....F....F [ 66%]
+FFFFFFFFFFFF.F.FF....................                                    [100%]
+=================================== FAILURES ===================================
+_ test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10aec56a0>, 'b40327e76d224c9bb52fd42bf68b22e5', '1dd32b70b4d549e38a35a602160fe7f2')
+record = <function record.<locals>.save at 0x10aefc0e0>
+
+    def test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates(runtime, record):
+        config, db, _, _, owner, _ = runtime
+        requests = [operation(db, owner) for _ in range(30)]
+        now = timestamp()
+        with db.session.begin() as session:
+            session.execute(update(QueuedAction).where(QueuedAction.kind == "create_work_order").values(due=now - timedelta(seconds=1)))
+            session.execute(update(QueuedAction).where(QueuedAction.kind == "export_ledger").values(due=now - timedelta(seconds=10)))
+        worker = ActionWorker(db, config)
+        before = snapshot(db)
+        statements = []
+        def observed(*args):
+            statements.append(args[2])
+        event.listen(db.engine, "before_cursor_execute", observed)
+        try:
+            first = worker.claim()
+        finally:
+            event.remove(db.engine, "before_cursor_execute", observed)
+            record({"original_audit_fixture": {"ready": 60, "parents": 30, "older_blocked_children": 30}, "first_claim": first, "claim_sql_count": len(statements), "before": before})
+>       assert first is not None and first["kind"] == "create_work_order"
+E       assert (None is not None)
+
+<REPO>/tests/reliability/test_queue_scheduling.py:33: AssertionError
+___ test_dead_dependency_cleanup_does_not_block_independent_runnable_action ____
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10ad8af90>, '1792e84c52f8490e85b1c7b1f9b92cc5', '3518693fa5044fc79ebfd06b301502bc')
+record = <function record.<locals>.save at 0x10af576a0>
+
+    def test_dead_dependency_cleanup_does_not_block_independent_runnable_action(runtime, record):
+        config, db, _, _, owner, _ = runtime
+        for _ in range(30):
+            operation(db, owner, "P1")
+        now = timestamp()
+        with db.session.begin() as session:
+            session.execute(update(QueuedAction).where(QueuedAction.kind == "create_work_order").values(phase="DEAD", tries=config.max_action_attempts))
+            session.execute(update(QueuedAction).where(QueuedAction.depends_on.is_not(None)).values(due=now - timedelta(seconds=10)))
+        independent = operation(db, owner)
+        worker = ActionWorker(db, config)
+        first = worker.claim()
+        record({"dead_parents": 30, "blocked_children": 60, "first_claim": first})
+>       assert first and first["request_id"] == independent and first["kind"] == "create_work_order"
+E       assert (None)
+
+<REPO>/tests/reliability/test_queue_scheduling.py:67: AssertionError
+___________ test_exhausted_ready_action_never_gets_an_extra_attempt ____________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b0270e0>, '86a07be6c3574c3c946cd019354c9030', 'ef82b09c80f647ee902c24bbd63938c9')
+record = <function record.<locals>.save at 0x10b067880>
+
+    def test_exhausted_ready_action_never_gets_an_extra_attempt(runtime, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        with db.session.begin() as session:
+            session.scalar(select(QueuedAction).where(QueuedAction.kind == "create_work_order")).tries = config.max_action_attempts
+        worker = ActionWorker(db, config)
+        claimed = worker.claim()
+        state = snapshot(db)
+        record({"claimed": claimed, "after": state})
+>       assert claimed is None
+E       AssertionError: assert {'id': 'd20b7d79247c4ee687bf2f9d2ad17809', 'request_id': 'ca1702e2842a475fa379ee1ccc1596e9', 'kind': 'create_work_order', 'lease': '539c0b2280574a73862fffd30f87ff48'} is None
+
+<REPO>/tests/reliability/test_queue_scheduling.py:129: AssertionError
+________ test_claim_database_recovers_and_completes_real_actions[busy] _________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b0522a0>, '64feeb331b0043e58dc3c0f17f7fafac', '09519261f89a4c208827b04f024ba3ca')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b0ad040>
+record = <function record.<locals>.save at 0x10af55940>, kind = 'busy'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) <= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+>       asyncio.run(scenario())
+
+<REPO>/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+<REPO>/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+<REPO>/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+<REPO>/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) <= 2:
+>           raise db_error(kind)
+E           sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) synthetic-private-error-text
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+<REPO>/tests/reliability/test_worker_recovery.py:46: OperationalError
+______ test_claim_database_recovers_and_completes_real_actions[deadlock] _______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10af70500>, 'aba09a70ffdd45a3ac96a8ca9b79f809', 'fed4bb6a851c47f7bc4a537cce101b62')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10af881a0>
+record = <function record.<locals>.save at 0x10ad122a0>, kind = 'deadlock'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) <= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+>       asyncio.run(scenario())
+
+<REPO>/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+<REPO>/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+<REPO>/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+<REPO>/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) <= 2:
+>           raise db_error(kind)
+E           sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (1213, 'synthetic-private-error-text')
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+<REPO>/tests/reliability/test_worker_recovery.py:46: OperationalError
+_____ test_claim_database_recovers_and_completes_real_actions[disconnect] ______
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10af88f50>, '44af7f13ae7b4e2b8810d1c493cb9456', 'bf9af53d891d45cbaf46eebc9c6b88e5')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b0f71a0>
+record = <function record.<locals>.save at 0x10ad2cb80>, kind = 'disconnect'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) <= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+>       asyncio.run(scenario())
+
+<REPO>/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+<REPO>/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+<REPO>/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+<REPO>/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) <= 2:
+>           raise db_error(kind)
+E           sqlalchemy.exc.OperationalError: (pymysql.err.OperationalError) (2003, 'synthetic-private-error-text')
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+<REPO>/tests/reliability/test_worker_recovery.py:46: OperationalError
+________ test_claim_database_recovers_and_completes_real_actions[pool] _________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b0f68a0>, 'a1051d2eff0247f1af96fa52bb920468', 'f9ea1016c1fc4ff5b89eadfd72ad7113')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10af71070>
+record = <function record.<locals>.save at 0x10acefec0>, kind = 'pool'
+
+    @pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
+    def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        claim, delays, attempts = worker.claim, [], []
+    
+        def flaky():
+            attempts.append(True)
+            if len(attempts) <= 2:
+                raise db_error(kind)
+            return claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+    
+        async def scenario():
+            try:
+                await asyncio.wait_for(worker.run(), timeout=2)
+            finally:
+                record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+>       asyncio.run(scenario())
+
+<REPO>/tests/reliability/test_worker_recovery.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+<REPO>/tests/reliability/test_worker_recovery.py:58: in scenario
+    await asyncio.wait_for(worker.run(), timeout=2)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+<REPO>/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+<REPO>/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        attempts.append(True)
+        if len(attempts) <= 2:
+>           raise db_error(kind)
+E           sqlalchemy.exc.TimeoutError: synthetic-private-error-text
+
+<REPO>/tests/reliability/test_worker_recovery.py:46: TimeoutError
+______________ test_repeated_transient_errors_use_capped_backoff _______________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b0f6ae0>, '7ed71f870d6346a6acfc2c480a8528b8', '3468ea8fdd8f44e89f788704a49cef6e')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10acbb410>
+record = <function record.<locals>.save at 0x10afb8180>
+
+    def test_repeated_transient_errors_use_capped_backoff(runtime, monkeypatch, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        stop_after_terminal(worker, db, monkeypatch)
+        real_claim, delays, calls = worker.claim, [], 0
+    
+        def flaky():
+            nonlocal calls
+            calls += 1
+            if calls <= 9:
+                raise db_error("busy")
+            return real_claim()
+    
+        async def pause(delay):
+            delays.append(delay)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "claim", flaky)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        try:
+>           asyncio.run(asyncio.wait_for(worker.run(), 2))
+
+<REPO>/tests/reliability/test_worker_recovery.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: in wait_for
+    return await fut
+           ^^^^^^^^^
+<REPO>/opsdesk/queueing.py:98: in run
+    if not await self.step():
+           ^^^^^^^^^^^^^^^^^
+<REPO>/opsdesk/queueing.py:86: in step
+    action = self.claim()
+             ^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def flaky():
+        nonlocal calls
+        calls += 1
+        if calls <= 9:
+>           raise db_error("busy")
+E           sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) synthetic-private-error-text
+E           [SQL: synthetic]
+E           (Background on this error at: https://sqlalche.me/e/20/e3q8)
+
+<REPO>/tests/reliability/test_worker_recovery.py:84: OperationalError
+___ test_permanent_database_or_programming_error_stops_without_retry[schema] ___
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10acb93a0>, '162b589c82164126a70c566f79bbcee6', 'e6356b71e0af4fc5a36aa139bfb47063')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10aeabcb0>
+record = <function record.<locals>.save at 0x10b03a700>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x10aef9df0>
+kind = 'schema'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+>       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+<REPO>/tests/reliability/test_worker_recovery.py:121: AttributeError
+____ test_permanent_database_or_programming_error_stops_without_retry[auth] ____
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10aeab6e0>, '36d59e52d914450d90dd661e92101c88', 'e0112fd4ab6f47798ac83d14e7431aad')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10aec5eb0>
+record = <function record.<locals>.save at 0x10b044d60>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x10aec5790>
+kind = 'auth'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+>       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+<REPO>/tests/reliability/test_worker_recovery.py:121: AttributeError
+_ test_permanent_database_or_programming_error_stops_without_retry[constraint] _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10a5417c0>, '224f473c2b204c009bcb7f6980061711', '527980b4ffe54665a8e30f3924c32c67')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10aef8ad0>
+record = <function record.<locals>.save at 0x10ad7cd60>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x10ae4c680>
+kind = 'constraint'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+>       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+<REPO>/tests/reliability/test_worker_recovery.py:121: AttributeError
+_ test_permanent_database_or_programming_error_stops_without_retry[programming] _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10aefa4b0>, '63dda54209584a5b97caf2f170fe1ec4', '6c8d318b61084846ad77cc5bfbdadfa4')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b026d50>
+record = <function record.<locals>.save at 0x10b1827a0>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x10b024350>
+kind = 'programming'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+>       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+<REPO>/tests/reliability/test_worker_recovery.py:121: AttributeError
+__ test_permanent_database_or_programming_error_stops_without_retry[unknown] ___
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b0241a0>, 'ad4808924670455cb44ee93f7c2024a8', '807afb9dfd4d4f35b96eebb90e88be3b')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b14e930>
+record = <function record.<locals>.save at 0x10b1cd260>
+caplog = <_pytest.logging.LogCaptureFixture object at 0x10b14d190>
+kind = 'unknown'
+
+    @pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
+    def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        error, calls, delays = db_error(kind), [], []
+    
+        def broken():
+            calls.append(True)
+            raise error
+    
+        async def pause(delay):
+            delays.append(delay)
+    
+        monkeypatch.setattr(worker, "claim", broken)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        with pytest.raises(type(error)):
+            asyncio.run(worker.run())
+        record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
+        assert len(calls) == 1 and not delays
+>       assert worker.observations["state"] == "failed"
+               ^^^^^^^^^^^^^^^^^^^
+E       AttributeError: 'ActionWorker' object has no attribute 'observations'
+
+<REPO>/tests/reliability/test_worker_recovery.py:121: AttributeError
+_ test_finish_database_fault_recovers_without_duplicate_side_effects[before-commit] _
+
+fut = <coroutine object ActionWorker.run at 0x10b0c77c0>, timeout = 2
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+<REPO>/opsdesk/queueing.py:99: in run
+    await asyncio.sleep(0.4)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+delay = 0.4, result = None
+
+    async def sleep(delay, result=None):
+        """Coroutine that completes after a given time (in seconds)."""
+        if delay <= 0:
+            await __sleep0()
+            return result
+    
+        loop = events.get_running_loop()
+        future = loop.create_future()
+        h = loop.call_later(delay,
+                            futures._set_result_unless_cancelled,
+                            future, result)
+        try:
+>           return await future
+                   ^^^^^^^^^^^^
+E           asyncio.exceptions.CancelledError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:665: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b1c7bc0>, '5c7c41fbb6044ed2ad21ef507b058f19', 'a2614df5d25a408a84e2f2c9ad196539')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b14c7a0>
+record = <function record.<locals>.save at 0x10b1b58a0>, when = 'before-commit'
+
+    @pytest.mark.parametrize("when", ["before-commit", "after-commit"])
+    def test_finish_database_fault_recovers_without_duplicate_side_effects(runtime, monkeypatch, record, when):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        clock = Clock()
+        monkeypatch.setattr(queueing, "timestamp", clock)
+        worker = ActionWorker(db, config)
+        finish, invoke, injected, delays, dispatched = worker.finish, worker.invoke, False, [], []
+    
+        async def observed_invoke(action):
+            result = await invoke(action)
+            dispatched.append({"kind": action["kind"], "reused": result.get("reused")})
+            return result
+    
+        def flaky_finish(action, **kwargs):
+            nonlocal injected
+            if action["kind"] == "create_work_order" and not injected:
+                injected = True
+                if when == "after-commit":
+                    finish(action, **kwargs)
+                raise db_error("disconnect")
+            result = finish(action, **kwargs)
+            if all(a["phase"] == "DONE" for a in snapshot(db)["actions"]):
+                worker.stopping = True
+            return result
+    
+        async def pause(delay):
+            delays.append(delay)
+            clock.advance(91)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "invoke", observed_invoke)
+        monkeypatch.setattr(worker, "finish", flaky_finish)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        try:
+>           asyncio.run(asyncio.wait_for(worker.run(), 2))
+
+<REPO>/tests/reliability/test_worker_recovery.py:162: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x10a9e9e40>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/timeouts.py:115: TimeoutError
+_ test_finish_database_fault_recovers_without_duplicate_side_effects[after-commit] _
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x108ac4620>, 'e88b770ab9fa43f4a6ff269fac64c733', '4750342176b24fb4a1544cf3f199896c')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b1c6750>
+record = <function record.<locals>.save at 0x10b197b00>, when = 'after-commit'
+
+    @pytest.mark.parametrize("when", ["before-commit", "after-commit"])
+    def test_finish_database_fault_recovers_without_duplicate_side_effects(runtime, monkeypatch, record, when):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        clock = Clock()
+        monkeypatch.setattr(queueing, "timestamp", clock)
+        worker = ActionWorker(db, config)
+        finish, invoke, injected, delays, dispatched = worker.finish, worker.invoke, False, [], []
+    
+        async def observed_invoke(action):
+            result = await invoke(action)
+            dispatched.append({"kind": action["kind"], "reused": result.get("reused")})
+            return result
+    
+        def flaky_finish(action, **kwargs):
+            nonlocal injected
+            if action["kind"] == "create_work_order" and not injected:
+                injected = True
+                if when == "after-commit":
+                    finish(action, **kwargs)
+                raise db_error("disconnect")
+            result = finish(action, **kwargs)
+            if all(a["phase"] == "DONE" for a in snapshot(db)["actions"]):
+                worker.stopping = True
+            return result
+    
+        async def pause(delay):
+            delays.append(delay)
+            clock.advance(91)
+            await asyncio.sleep(0)
+    
+        monkeypatch.setattr(worker, "invoke", observed_invoke)
+        monkeypatch.setattr(worker, "finish", flaky_finish)
+        monkeypatch.setattr(worker, "_pause", pause, raising=False)
+        try:
+            asyncio.run(asyncio.wait_for(worker.run(), 2))
+        finally:
+            record({"fault": when, "clock": "simulated lease expiry", "delays": delays, "dispatches": dispatched, "after": snapshot(db)})
+>       assert delays == [.4]
+E       assert [] == [0.4]
+E         
+E         Right contains one more item: 0.4
+E         Use -v to get more diff
+
+<REPO>/tests/reliability/test_worker_recovery.py:165: AssertionError
+_______ test_cancel_during_backoff_then_restart_completes_pending_queue ________
+
+fut = <coroutine object Event.wait at 0x10b367220>, timeout = 0.5
+
+    async def wait_for(fut, timeout):
+        """Wait for the single Future or coroutine to complete, with timeout.
+    
+        Coroutine will be wrapped in Task.
+    
+        Returns result of the Future or coroutine.  When a timeout occurs,
+        it cancels the task and raises TimeoutError.  To avoid the task
+        cancellation, wrap it in shield().
+    
+        If the wait is cancelled, the task is also cancelled.
+    
+        If the task suppresses the cancellation and returns a value instead,
+        that value is returned.
+    
+        This function is a coroutine.
+        """
+        # The special case for timeout <= 0 is for the following case:
+        #
+        # async def test_waitfor():
+        #     func_started = False
+        #
+        #     async def func():
+        #         nonlocal func_started
+        #         func_started = True
+        #
+        #     try:
+        #         await asyncio.wait_for(func(), 0)
+        #     except asyncio.TimeoutError:
+        #         assert not func_started
+        #     else:
+        #         assert False
+        #
+        # asyncio.run(test_waitfor())
+    
+    
+        if timeout is not None and timeout <= 0:
+            fut = ensure_future(fut)
+    
+            if fut.done():
+                return fut.result()
+    
+            await _cancel_and_wait(fut)
+            try:
+                return fut.result()
+            except exceptions.CancelledError as exc:
+                raise TimeoutError from exc
+    
+        async with timeouts.timeout(timeout):
+>           return await fut
+                   ^^^^^^^^^
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:520: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <asyncio.locks.Event object at 0x10b3a23f0 [unset]>
+
+    async def wait(self):
+        """Block until the internal flag is true.
+    
+        If the internal flag is true on entry, return True
+        immediately.  Otherwise, block until another coroutine calls
+        set() to set the flag to true, then return True.
+        """
+        if self._value:
+            return True
+    
+        fut = self._get_loop().create_future()
+        self._waiters.append(fut)
+        try:
+>           await fut
+E           asyncio.exceptions.CancelledError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/locks.py:212: CancelledError
+
+The above exception was the direct cause of the following exception:
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b193d70>, '18d6102c31a442e99a3d671afe7c6e15', '2f80a4a8263b4cf3aa95ebf754393f7c')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b3a21b0>
+record = <function record.<locals>.save at 0x10b359f80>
+
+    def test_cancel_during_backoff_then_restart_completes_pending_queue(runtime, monkeypatch, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+    
+        async def scenario():
+            entered = asyncio.Event()
+    
+            def broken():
+                raise db_error("busy")
+    
+            async def pause(delay):
+                entered.set()
+                await asyncio.Event().wait()
+    
+            monkeypatch.setattr(worker, "claim", broken)
+            monkeypatch.setattr(worker, "_pause", pause, raising=False)
+            job = asyncio.create_task(worker.run())
+            try:
+                await asyncio.wait_for(entered.wait(), .5)
+                job.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await job
+                assert worker.observations["state"] == "stopped"
+                before = snapshot(db)
+                assert all(a["phase"] == "READY" and a["tries"] == 0 for a in before["actions"])
+                restarted = ActionWorker(db, config)
+                stop_after_terminal(restarted, db, monkeypatch)
+                await asyncio.wait_for(restarted.run(), 2)
+                assert all(a["phase"] == "DONE" for a in snapshot(db)["actions"])
+                record({"cancelled_during": "backoff", "before_restart": before, "after_restart": snapshot(db)})
+            finally:
+                job.cancel()
+                await asyncio.gather(job, return_exceptions=True)
+>       asyncio.run(scenario())
+
+<REPO>/tests/reliability/test_worker_recovery.py:209: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+<REPO>/tests/reliability/test_worker_recovery.py:194: in scenario
+    await asyncio.wait_for(entered.wait(), .5)
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/tasks.py:519: in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Timeout [expired]>
+exc_type = <class 'asyncio.exceptions.CancelledError'>
+exc_val = CancelledError(), exc_tb = <traceback object at 0x10ad7ba00>
+
+    async def __aexit__(
+        self,
+        exc_type: Optional[Type[BaseException]],
+        exc_val: Optional[BaseException],
+        exc_tb: Optional[TracebackType],
+    ) -> Optional[bool]:
+        assert self._state in (_State.ENTERED, _State.EXPIRING)
+    
+        if self._timeout_handler is not None:
+            self._timeout_handler.cancel()
+            self._timeout_handler = None
+    
+        if self._state is _State.EXPIRING:
+            self._state = _State.EXPIRED
+    
+            if self._task.uncancel() <= self._cancelling and exc_type is exceptions.CancelledError:
+                # Since there are no new cancel requests, we're
+                # handling this.
+>               raise TimeoutError from exc_val
+E               TimeoutError
+
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/timeouts.py:115: TimeoutError
+_________ test_cancel_waits_for_owned_direct_thread_before_restarting __________
+
+runtime = (Configuration(database_url='sqlite:////private/var/folders/4s/bpjg_6m151l9tgkgc85zfz600000gn/T/opsdesk-phase2b-jg1kef....service.SupportService object at 0x10b024e90>, '0b95f023449049b18c708fc7bd9ac273', '45539d5587ef4c07ac9fd7c85fc7f50d')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x10b371c10>
+record = <function record.<locals>.save at 0x10b31b4c0>
+
+    def test_cancel_waits_for_owned_direct_thread_before_restarting(runtime, monkeypatch, record):
+        config, db, _, _, owner, _ = runtime
+        operation(db, owner)
+        worker = ActionWorker(db, config)
+        dispatch = worker.handlers.dispatch
+        started, release, finished = threading.Event(), threading.Event(), threading.Event()
+    
+        def blocked(kind, request_id):
+            result = dispatch(kind, request_id)
+            if kind == "create_work_order":
+                started.set()
+                try:
+                    assert release.wait(2), "Test must release its own thread"
+                finally:
+                    finished.set()
+            return result
+    
+        monkeypatch.setattr(worker.handlers, "dispatch", blocked)
+    
+        async def scenario():
+            job = asyncio.create_task(worker.run())
+            async def unblock():
+                await asyncio.sleep(.05)
+                release.set()
+            unblock_job = None
+            try:
+                assert await asyncio.to_thread(started.wait, 1)
+                unblock_job = asyncio.create_task(unblock())
+                job.cancel()
+                with pytest.raises(asyncio.CancelledError):
+                    await job
+                assert finished.is_set(), "Cancelled worker must not leave its direct thread unowned"
+                before = snapshot(db)
+                assert before["work_orders"] == 1 and any(a["phase"] == "RUNNING" for a in before["actions"])
+                clock = Clock()
+                clock.advance(91)
+                monkeypatch.setattr(queueing, "timestamp", clock)
+                restarted = ActionWorker(db, config)
+                assert await restarted.step() and await restarted.step()
+                state = snapshot(db)
+                assert state["work_orders"] == state["receipts"] == 1
+                assert all(a["phase"] == "DONE" for a in state["actions"])
+                record({"cancelled_during": "real local direct thread", "thread_joined_before_return": True, "before_restart": before, "after_restart": state})
+            finally:
+                release.set()
+                await asyncio.to_thread(finished.wait, 2)
+                job.cancel()
+                await asyncio.gather(job, return_exceptions=True)
+                if unblock_job:
+                    unblock_job.cancel()
+                    await asyncio.gather(unblock_job, return_exceptions=True)
+>       asyncio.run(scenario())
+
+<REPO>/tests/reliability/test_worker_recovery.py:308: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:195: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py:691: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def scenario():
+        job = asyncio.create_task(worker.run())
+        async def unblock():
+            await asyncio.sleep(.05)
+            release.set()
+        unblock_job = None
+        try:
+            assert await asyncio.to_thread(started.wait, 1)
+            unblock_job = asyncio.create_task(unblock())
+            job.cancel()
+            with pytest.raises(asyncio.CancelledError):
+                await job
+>           assert finished.is_set(), "Cancelled worker must not leave its direct thread unowned"
+E           AssertionError: Cancelled worker must not leave its direct thread unowned
+E           assert False
+E            +  where False = is_set()
+E            +    where is_set = <threading.Event at 0x10b36b8f0: unset>.is_set
+
+<REPO>/tests/reliability/test_worker_recovery.py:288: AssertionError
+_______ test_app_lifespan_cleans_worker_and_database[exceptional-close] ________
+  + Exception Group Traceback (most recent call last):
+  |   File "<REPO>/tests/reliability/test_worker_recovery.py", line 349, in test_app_lifespan_cleans_worker_and_database
+  |     asyncio.run(scenario())
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+  |     return runner.run(main)
+  |            ^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+  |     return future.result()
+  |            ^^^^^^^^^^^^^^^
+  |   File "<REPO>/tests/reliability/test_worker_recovery.py", line 335, in scenario
+  |     async with app.router.lifespan_context(app):
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "<REPO>/opsdesk/main.py", line 78, in lifespan
+  |     async with public_mcp.session_manager.run():
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "<REPO>/.venv/lib/python3.12/site-packages/mcp/server/streamable_http_manager.py", line 161, in run
+  |     async with anyio.create_task_group() as tg:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "<REPO>/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "<REPO>/.venv/lib/python3.12/site-packages/mcp/server/streamable_http_manager.py", line 166, in run
+    |     yield  # Let the application run
+    |     ^^^^^
+    |   File "<REPO>/opsdesk/main.py", line 80, in lifespan
+    |     yield
+    |   File "<REPO>/tests/reliability/test_worker_recovery.py", line 338, in scenario
+    |     raise ValueError("Synthetic lifespan body failure")
+    | ValueError: Synthetic lifespan body failure
+    +------------------------------------
+_______ test_fatal_background_worker_is_visible_then_fresh_app_recovers ________
+  + Exception Group Traceback (most recent call last):
+  |   File "<REPO>/tests/reliability/test_worker_recovery.py", line 385, in test_fatal_background_worker_is_visible_then_fresh_app_recovers
+  |     asyncio.run(scenario())
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+  |     return runner.run(main)
+  |            ^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+  |     return self._loop.run_until_complete(task)
+  |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+  |     return future.result()
+  |            ^^^^^^^^^^^^^^^
+  |   File "<REPO>/tests/reliability/test_worker_recovery.py", line 361, in scenario
+  |     async with app.router.lifespan_context(app):
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "<REPO>/opsdesk/main.py", line 78, in lifespan
+  |     async with public_mcp.session_manager.run():
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "/Users/shawn/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/contextlib.py", line 231, in __aexit__
+  |     await self.gen.athrow(value)
+  |   File "<REPO>/.venv/lib/python3.12/site-packages/mcp/server/streamable_http_manager.py", line 161, in run
+  |     async with anyio.create_task_group() as tg:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "<REPO>/.venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 847, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "<REPO>/.venv/lib/python3.12/site-packages/mcp/server/streamable_http_manager.py", line 166, in run
+    |     yield  # Let the application run
+    |     ^^^^^
+    |   File "<REPO>/opsdesk/main.py", line 80, in lifespan
+    |     yield
+    |   File "<REPO>/tests/reliability/test_worker_recovery.py", line 370, in scenario
+    |     assert health.status_code == 503
+    | AssertionError: assert 200 == 503
+    |  +  where 200 = <Response [200 OK]>.status_code
+    +------------------------------------
+=============================== warnings summary ===============================
+../../../../../../..<REPO>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1
+  <REPO>/.venv/lib/python3.12/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED ../../../../../../..<REPO>/tests/reliability/test_queue_scheduling.py::test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates
+FAILED ../../../../../../..<REPO>/tests/reliability/test_queue_scheduling.py::test_dead_dependency_cleanup_does_not_block_independent_runnable_action
+FAILED ../../../../../../..<REPO>/tests/reliability/test_queue_scheduling.py::test_exhausted_ready_action_never_gets_an_extra_attempt
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_claim_database_recovers_and_completes_real_actions[busy]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_claim_database_recovers_and_completes_real_actions[deadlock]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_claim_database_recovers_and_completes_real_actions[disconnect]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_claim_database_recovers_and_completes_real_actions[pool]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_repeated_transient_errors_use_capped_backoff
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_permanent_database_or_programming_error_stops_without_retry[schema]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_permanent_database_or_programming_error_stops_without_retry[auth]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_permanent_database_or_programming_error_stops_without_retry[constraint]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_permanent_database_or_programming_error_stops_without_retry[programming]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_permanent_database_or_programming_error_stops_without_retry[unknown]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_finish_database_fault_recovers_without_duplicate_side_effects[before-commit]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_finish_database_fault_recovers_without_duplicate_side_effects[after-commit]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_cancel_during_backoff_then_restart_completes_pending_queue
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_cancel_waits_for_owned_direct_thread_before_restarting
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_app_lifespan_cleans_worker_and_database[exceptional-close]
+FAILED ../../../../../../..<REPO>/tests/reliability/test_worker_recovery.py::test_fatal_background_worker_is_visible_then_fresh_app_recovers
+19 failed, 90 passed, 1 warning in 13.14s

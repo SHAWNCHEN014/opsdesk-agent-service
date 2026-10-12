@@ -1,0 +1,137 @@
+{
+  "date_local": "2026-10-13",
+  "timezone": "Australia/Melbourne",
+  "phase2a_commit": "cc659a1131ba6a6d9d9066c58a9724a16347abba",
+  "phase2b_source_commit": "6012e8898cc17eb20160bdb0321e12ad3206cbba",
+  "phase2b_source_subject": "fix(queue): recover worker database faults and prevent dependency starvation",
+  "committed_source_files": [
+    "opsdesk/main.py",
+    "opsdesk/queueing.py",
+    "tests/reliability/conftest.py",
+    "tests/reliability/helpers.py",
+    "tests/reliability/test_queue_scheduling.py",
+    "tests/reliability/test_worker_recovery.py"
+  ],
+  "source_commit_matches_full_green_hashes": true,
+  "remote_push_performed": false,
+  "profile": "offline / temporary SQLite / model and vector stubs / no Redis",
+  "new_cases": 30,
+  "phase2a_cases_preserved": 79,
+  "full_result": {
+    "tests": 109,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 10.53,
+    "passed": 109
+  },
+  "full_exit_code": 0,
+  "defects": [
+    {
+      "id": "QA-REL-01",
+      "status": "closed_for_declared_offline_scenarios",
+      "root_causes": [
+        "claim DB faults escape run",
+        "successful tool completion write treated as tool failure",
+        "lifespan cleanup not in finally",
+        "cancelled direct thread loses task ownership"
+      ],
+      "source_files": [
+        "opsdesk/queueing.py",
+        "opsdesk/main.py"
+      ],
+      "functions": [
+        "retryable_database_error",
+        "ActionWorker.run/step/invoke",
+        "create_app.lifespan/health/diagnostics"
+      ],
+      "test_file": "tests/reliability/test_worker_recovery.py",
+      "test_cases": 18,
+      "before": {
+        "tests": 18,
+        "passed": 2,
+        "failures": 16,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 18,
+        "passed": 18,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "evidence": "after-commit/scenario-observations.json"
+    },
+    {
+      "id": "QA-REL-02",
+      "status": "closed_for_declared_offline_scenarios",
+      "root_causes": [
+        "LIMIT before dependency eligibility",
+        "dead parent cleanup consumes candidate window",
+        "READY attempt budget not checked"
+      ],
+      "source_files": [
+        "opsdesk/queueing.py"
+      ],
+      "functions": [
+        "ActionWorker.claim/finish/retry"
+      ],
+      "test_file": "tests/reliability/test_queue_scheduling.py",
+      "test_cases": 12,
+      "before": {
+        "tests": 12,
+        "passed": 9,
+        "failures": 3,
+        "errors": 0,
+        "skipped": 0
+      },
+      "after": {
+        "tests": 12,
+        "passed": 12,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "sixty_task_result": {
+        "first_claim_kind": "create_work_order",
+        "sql_statements_first_claim": 5,
+        "done_actions": 60,
+        "work_orders": 30,
+        "ledger_receipts": 30,
+        "done_audits": 60,
+        "ledger_data_rows": 30,
+        "replay_created_no_extra_rows": true
+      },
+      "evidence": "after-commit/scenario-observations.json"
+    }
+  ],
+  "open_issues": [
+    "QA-OBS-01 manual actor attribution"
+  ],
+  "not_run": [
+    "real Ollama/Chroma",
+    "MySQL/Redis",
+    "Docker",
+    "load/soak",
+    "coverage",
+    "CI deployment",
+    "MCP subprocess reliability faults",
+    "real MySQL concurrent claims and locks",
+    "SMTP delivery/transaction ambiguity",
+    "forced process termination or permanently stuck thread"
+  ],
+  "limits": [
+    "Backoff timings are scheduled values with an injected pause, not wall-time recovery latency",
+    "Lease and retry delays use a logical clock",
+    "Thread cancellation waits for dispatch completion; no hard shutdown deadline guarantee",
+    "Serial SQLite workers do not validate MySQL concurrency",
+    "Local work order and ledger replay do not guarantee external exactly-once"
+  ],
+  "roadmap": {
+    "P0-1": "five behavioral defects closed with Phase 2A and Phase 2B",
+    "QA-GATE-01": "closed in Phase 2A",
+    "P0-4": "partial: JUnit/JSON and isolated execution; coverage and unified protocol suite absent",
+    "P1": "partial: minimal worker state; real database and manual recovery audit absent"
+  }
+}

@@ -1,0 +1,226 @@
+{
+  "algorithm": "sha256",
+  "date_local": "2026-10-13",
+  "report": "docs/qa/PHASE2B_RELIABILITY_CLOSURE.md",
+  "excludes": [
+    "manifest.json (self-reference)",
+    ".DS_Store"
+  ],
+  "files": [
+    {
+      "path": "docs/qa/PHASE2B_RELIABILITY_CLOSURE.md",
+      "bytes": 22278,
+      "sha256": "f73544b8e84582cb4eeb6cb437bbc483f9c5db337c9df6a7a1a626ef9e8358da"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after/pytest-output.txt",
+      "bytes": 683,
+      "sha256": "f8017fd2c6fad9a65d89e3cc6e38a915ce7c446b9f0f28ae86975581e12a222a"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after/pytest.xml",
+      "bytes": 107537,
+      "sha256": "aae5aa2b6db657596b7430b3a9e11eae1b362bbf74578ae3cd999b3ae9625994"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after/run-summary.json",
+      "bytes": 3865,
+      "sha256": "0ab1c09feb7815dd12750240bbb1bdd02cc8705d17268b8190a3fb4d9c2b75bb"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after/scenario-observations.json",
+      "bytes": 92619,
+      "sha256": "67c6ee8312ceae3e319a204ed2b39cc6cc6a3e165dddeb92ed607e03c1461ff5"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-commit/pytest-output.txt",
+      "bytes": 683,
+      "sha256": "6e09245d330eda5f81474794a36d31da16022917c70ceaac80137759a724b2f7"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-commit/pytest.xml",
+      "bytes": 107537,
+      "sha256": "c9fa3e9508b1b86b80eb7f176fa01a0d127de842178c6810cb4891bf985a3787"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-commit/run-summary.json",
+      "bytes": 3798,
+      "sha256": "6d5ccac3004c0906d9e236ab4207f12d2444cb0a6384e6e5a2b979ac80410218"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-commit/scenario-observations.json",
+      "bytes": 92619,
+      "sha256": "ef7f74430bc18a4167fdb9a7c91e0c1b13c9a8867f3fcbede7c73de63fc02157"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-first/pytest-output.txt",
+      "bytes": 3661,
+      "sha256": "ce1b18b4bd7ed2192330587d842da3321713bc484131c0c7f370ea5dee713ba8"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-first/pytest.xml",
+      "bytes": 110106,
+      "sha256": "848c659708fe45c474ec0bcc8d3bf6bf1eb932ca64dc8df9c3e468ffe9838641"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-first/run-summary.json",
+      "bytes": 3586,
+      "sha256": "29f138e1245f3bde80e17ce451598221df5f69892917228900621aba1cfbf89e"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-first/scenario-observations.json",
+      "bytes": 92422,
+      "sha256": "21dfcdee71aada11ea61646e568621ecf8138a320a881afbe0cf4963af3fafe1"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-source/opsdesk/main.py",
+      "bytes": 15587,
+      "sha256": "355a7287b8827d8bc77859c253eb822e4dfb70c12462d01a3646b3e395725763"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-source/opsdesk/queueing.py",
+      "bytes": 10702,
+      "sha256": "d24a11779ab268dd266b17b7f3ed4befbe1d119279716f2ee4a6b54c71902ae0"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-source/tests/reliability/conftest.py",
+      "bytes": 290,
+      "sha256": "aa34cc9b25ebe83637f2d508472e4b3eee5274f81396f5b9d8e2e3026faf5f7a"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-source/tests/reliability/helpers.py",
+      "bytes": 2085,
+      "sha256": "1583a27476c447424e0068f51053728b89828dc3625feb757222fa5ce0644662"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-source/tests/reliability/test_queue_scheduling.py",
+      "bytes": 10644,
+      "sha256": "ea4d0a41611c56f87769c2a76618587dcd01f9b3c68338d5e4c9c99459a61b1a"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/after-source/tests/reliability/test_worker_recovery.py",
+      "bytes": 16788,
+      "sha256": "968967f58b7f40bb9d724d7bcad0135517cb9e9d1917eef4f5743f08cbb9228c"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/baseline.json",
+      "bytes": 11892,
+      "sha256": "8f9b2ce4770d979e8549d12b15d14ff7526f0777930864f587fe16041ed6175d"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before/pytest-output.txt",
+      "bytes": 58274,
+      "sha256": "b34416a4739cf467077088c1a593b2f2f71b6d1aa315a965a2f02c049055c4b1"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before/pytest.xml",
+      "bytes": 109185,
+      "sha256": "87509bbba212c880a83b5c72e3b543011c68e45e18be85b51edd2a3e3791a935"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before/run-summary.json",
+      "bytes": 3586,
+      "sha256": "6faac9dc0c905e8fd68ad097096269fee37fce1ca5b168a5bf9bee5a4710fe5b"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before/scenario-observations.json",
+      "bytes": 37783,
+      "sha256": "d1a0c307a79bc878c805ee8e460b9aa0fcbbe47e5e2c38b32f567b78d072b962"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before-source/opsdesk/main.py",
+      "bytes": 14503,
+      "sha256": "a05db9a49611fa4372bff5ddeb19987214615e78750118c5a056a15cb0152a2b"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before-source/opsdesk/queueing.py",
+      "bytes": 6021,
+      "sha256": "fe0d91627704ed1be5a56d87d6022c511167567ecdce3270166277a79e532b48"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before-verified/pytest-output.txt",
+      "bytes": 61797,
+      "sha256": "88c150d58c96c89531f5f910da27f2a854bfbe0e080049c3e48d2c1fd072cdf1"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before-verified/pytest.xml",
+      "bytes": 111667,
+      "sha256": "30e234cd43a0b0434e8f643d45ae2645a80ec5de100554956371321c6d044eda"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before-verified/run-summary.json",
+      "bytes": 3901,
+      "sha256": "2f2ec6bfa7761cc159c0c893d7f340f0f5e03f4055827cb4f5bfb7c62e9b89e3"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/before-verified/scenario-observations.json",
+      "bytes": 37783,
+      "sha256": "435bebb0495112770a2104fd9392a23700ae60118edaba4e573db89fe077ac93"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/changes.patch",
+      "bytes": 46598,
+      "sha256": "9ba8e4f603a7dca7b1846ccb42ed390ee2f199a1d8221fdb30942461be602516"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/defect-closure.json",
+      "bytes": 4219,
+      "sha256": "115e1fe186972d457dfc6baff6edb6d09a01e10226473d35b3450ddf425d9ce7"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/integrity-check.json",
+      "bytes": 7027,
+      "sha256": "701c20060110925c337f7f226c8b014bad30c47cd8240545c7710960f5637b90"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/phase2a-recheck/pytest-output.txt",
+      "bytes": 681,
+      "sha256": "9bf5935d0164003da715928f50cfc23c9c6a53a28f3e68f8f2e345f1ab8c1c20"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/phase2a-recheck/pytest.xml",
+      "bytes": 10446,
+      "sha256": "fa6f952bade571b30edfe8089f03279901baf3aa162968df564e825c77f5d426"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/phase2a-recheck/run-summary.json",
+      "bytes": 3092,
+      "sha256": "e6cc04c4cade4d13df8fd2917f550f85ade514bf23168b317baa390d5903673c"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/run_pytest.py",
+      "bytes": 6885,
+      "sha256": "ef24b3ab7450e2abc41334d73d21b186538836175a3a21de888551f63c3ef1a8"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/suite-comparison.json",
+      "bytes": 2341,
+      "sha256": "47ca54910faf885180f5ea3b5bee3b164b6cfc1c800819c543c80c3c6eb0debe"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/targeted-after/pytest-output.txt",
+      "bytes": 99,
+      "sha256": "13f9e455aa0e313621cc8523a311ba4a73a90fe62f22f6620eec5cfe1ca7702a"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/targeted-after/pytest.xml",
+      "bytes": 97315,
+      "sha256": "b356f8899143db40fdbe6d3b1d9c4c292452aed49ae6440a5f75bdfc80bd927c"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/targeted-after/run-summary.json",
+      "bytes": 3865,
+      "sha256": "ec7faa4edc6c4f90344476c222fbd4e6a2cb4422bef21278e55f3ba6ee4dedb3"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/targeted-after/scenario-observations.json",
+      "bytes": 92619,
+      "sha256": "08b072c2bd25059ee48f6a74f448c8f53db56091931d47ee19d388342adb050e"
+    },
+    {
+      "path": "docs/qa/evidence/phase2b-2026-10-13/versions.json",
+      "bytes": 587,
+      "sha256": "6de5f99ed4d63506964b2bb58d81af9a2c2b5bf502d6cd1abe05ab468e15c2e0"
+    }
+  ]
+}

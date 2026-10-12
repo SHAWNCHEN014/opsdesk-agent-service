@@ -1,0 +1,955 @@
+diff --git a/opsdesk/main.py b/opsdesk/main.py
+index 031da96..58e82d6 100644
+--- a/opsdesk/main.py
++++ b/opsdesk/main.py
+@@ -1,5 +1,6 @@
+ import asyncio
+ import json
++import logging
+ from contextlib import asynccontextmanager
+ from pathlib import Path
+ from urllib.parse import urlparse
+@@ -26,6 +27,9 @@ from opsdesk.service import SupportService
+ from opsdesk.storage import ActionHistory, Database, DeliveryReceipt, QueuedAction, SupportRequest, WorkOrder, timestamp
+ 
+ 
++logger = logging.getLogger(__name__)
++
++
+ def create_app(config=None):
+     config = config or Configuration()
+     database = Database(config)
+@@ -69,25 +73,44 @@ def create_app(config=None):
+ 
+     @asynccontextmanager
+     async def lifespan(app):
+-        database.initialize()
+-        database.seed_identities(config)
+-        service.recover()
+-        knowledge.seed()
+-        if config.vector_search:
+-            await knowledge.restore_vectors()
+-        async with public_mcp.session_manager.run():
+-            job = asyncio.create_task(worker.run()) if config.worker_enabled else None
+-            yield
+-            await service.close()
+-            worker.stopping = True
+-            if job:
+-                job.cancel()
+-                await asyncio.gather(job, return_exceptions=True)
+-        database.engine.dispose()
++        try:
++            database.initialize()
++            database.seed_identities(config)
++            service.recover()
++            knowledge.seed()
++            if config.vector_search:
++                await knowledge.restore_vectors()
++            async with public_mcp.session_manager.run():
++                job = asyncio.create_task(worker.run()) if config.worker_enabled else None
++                app.state.worker_task = job
++
++                def worker_done(task):
++                    if not task.cancelled():
++                        error = task.exception()
++                        if error is not None:
++                            logger.error("Background worker failed: %s", type(error).__name__)
++
++                if job:
++                    job.add_done_callback(worker_done)
++                try:
++                    yield
++                finally:
++                    worker.stopping = True
++                    if job:
++                        job.cancel()
++                        await asyncio.gather(job, return_exceptions=True)
++                    await service.close()
++        finally:
++            database.engine.dispose()
+ 
+     app = FastAPI(title="OpsDesk independent service desk", version="1.0.0", lifespan=lifespan)
+     app.state.config, app.state.database, app.state.service = config, database, service
+     app.state.knowledge, app.state.worker = knowledge, worker
++    app.state.worker_task = None
++
++    def worker_status():
++        job = app.state.worker_task
++        return {"enabled": config.worker_enabled, "alive": job is not None and not job.done(), **worker.observations}
+ 
+     @app.middleware("http")
+     async def boundary(request, call_next):
+@@ -113,7 +136,10 @@ def create_app(config=None):
+     def health():
+         with database.session() as db:
+             db.execute(text("SELECT 1"))
+-        return {"status": "ok", "project": "OpsDesk", "model_mode": config.model_mode}
++        status = worker_status()
++        unavailable = status["enabled"] and not status["alive"]
++        payload = {"status": "degraded" if unavailable else "ok", "project": "OpsDesk", "model_mode": config.model_mode, "worker": status}
++        return JSONResponse(payload, status_code=503) if unavailable else payload
+ 
+     @app.post("/api/login")
+     def login(body: SignInInput, response: Response):
+@@ -218,7 +244,7 @@ def create_app(config=None):
+             actions = list(db.scalars(select(QueuedAction).order_by(QueuedAction.due.desc()).limit(30)))
+             audits = list(db.scalars(select(ActionHistory).order_by(ActionHistory.id.desc()).limit(30)))
+             receipts = list(db.scalars(select(DeliveryReceipt).order_by(DeliveryReceipt.created.desc()).limit(20)))
+-            return {"database": database.engine.dialect.name, "redis": redis_ok, "memory": memory.observations, "model_mode": config.model_mode, "model": config.model_name, "vector": knowledge.vector_state, "segments": len(knowledge.rows()), "skills": guidance.describe(), "actions": [{"id": job.id, "kind": job.kind, "phase": job.phase, "tries": job.tries, "error": job.last_error} for job in actions], "audits": [{"action_id": item.action_id, "attempt": item.attempt, "result": item.result, "transport": item.transport, "detail": item.detail} for item in audits], "receipts": [{"kind": item.kind, "detail": item.detail} for item in receipts], "mcp": {"endpoint": "/mcp/", "simulation": True}}
++            return {"database": database.engine.dialect.name, "redis": redis_ok, "memory": memory.observations, "model_mode": config.model_mode, "model": config.model_name, "vector": knowledge.vector_state, "segments": len(knowledge.rows()), "skills": guidance.describe(), "actions": [{"id": job.id, "kind": job.kind, "phase": job.phase, "tries": job.tries, "error": job.last_error} for job in actions], "audits": [{"action_id": item.action_id, "attempt": item.attempt, "result": item.result, "transport": item.transport, "detail": item.detail} for item in audits], "receipts": [{"kind": item.kind, "detail": item.detail} for item in receipts], "worker": worker_status(), "mcp": {"endpoint": "/mcp/", "simulation": True}}
+ 
+     @app.post("/api/actions/{action_id}/retry")
+     def retry(action_id: str, user=Depends(engineer)):
+diff --git a/opsdesk/queueing.py b/opsdesk/queueing.py
+index 827394f..2f1e86e 100644
+--- a/opsdesk/queueing.py
++++ b/opsdesk/queueing.py
+@@ -1,18 +1,42 @@
+ import asyncio
+ import json
++import logging
+ import os
++import sqlite3
+ import sys
+ from datetime import timedelta
+ 
+ from mcp import ClientSession, StdioServerParameters
+ from mcp.client.stdio import stdio_client
+-from sqlalchemy import select, update
++from sqlalchemy import or_, select, update
++from sqlalchemy.exc import DBAPIError, TimeoutError as PoolTimeout
++from sqlalchemy.orm import aliased
+ 
+ from opsdesk.actions import ActionHandlers
+ from opsdesk.configuration import PROJECT
+ from opsdesk.storage import ActionHistory, QueuedAction, new_id, timestamp
+ 
+ 
++logger = logging.getLogger(__name__)
++CLAIM_BATCH = 30
++
++
++def retryable_database_error(error):
++    """Retry known contention/connection failures, never guess from error text."""
++    if isinstance(error, PoolTimeout):
++        return True
++    if not isinstance(error, DBAPIError):
++        return False
++    if error.connection_invalidated:
++        return True
++    original = error.orig
++    if isinstance(original, sqlite3.Error):
++        code = getattr(original, "sqlite_errorcode", None)
++        return code is not None and (code & 0xFF) in {sqlite3.SQLITE_BUSY, sqlite3.SQLITE_LOCKED}
++    code = original.args[0] if original.args else None
++    return code in {1040, 1205, 1213, 2002, 2003, 2006, 2013, 2055}
++
++
+ def enqueue(db, request_id, priority):
+     first = QueuedAction(id=new_id(), request_id=request_id, kind="create_work_order")
+     db.add(first)
+@@ -27,32 +51,51 @@ class ActionWorker:
+         self.database, self.config = database, config
+         self.handlers = ActionHandlers(database, config)
+         self.stopping = False
++        self.observations = {"state": "stopped", "consecutive_errors": 0, "recoveries": 0, "last_error": None, "retry_delay": 0.0}
+ 
+     def claim(self):
+         now = timestamp()
+         with self.database.session.begin() as db:
+             # Expired leases become retryable, with an explicit recovery audit.
+-            for action in db.scalars(select(QueuedAction).where(QueuedAction.phase == "RUNNING", QueuedAction.lease_until < now)):
++            for action in db.scalars(select(QueuedAction).where(QueuedAction.phase == "RUNNING", QueuedAction.lease_until < now).order_by(QueuedAction.lease_until, QueuedAction.id).limit(CLAIM_BATCH)):
+                 changed = db.execute(update(QueuedAction).where(QueuedAction.id == action.id, QueuedAction.lease == action.lease, QueuedAction.phase == "RUNNING").values(phase="DEAD" if action.tries >= self.config.max_action_attempts else "READY", lease="", lease_until=None, due=now, last_error="Lease expired before completion"))
+                 if changed.rowcount:
+                     db.add(ActionHistory(action_id=action.id, attempt=action.tries, result="LEASE_EXPIRED", transport=self.config.action_transport, detail={}))
+-            candidates = list(db.scalars(select(QueuedAction).where(QueuedAction.phase == "READY", QueuedAction.due <= now).order_by(QueuedAction.due).limit(30)))
++            exhausted = list(db.scalars(select(QueuedAction.id).where(QueuedAction.phase == "READY", QueuedAction.due <= now, QueuedAction.tries >= self.config.max_action_attempts).order_by(QueuedAction.due, QueuedAction.id).limit(CLAIM_BATCH)))
++            if exhausted:
++                db.execute(update(QueuedAction).where(QueuedAction.id.in_(exhausted), QueuedAction.phase == "READY").values(phase="DEAD", lease="", lease_until=None, last_error="Retry budget exhausted"))
++            parent = aliased(QueuedAction)
++            blocked = list(db.scalars(select(QueuedAction.id).join(parent, QueuedAction.depends_on == parent.id).where(QueuedAction.phase == "READY", QueuedAction.due <= now, parent.phase == "DEAD").order_by(QueuedAction.due, QueuedAction.id).limit(CLAIM_BATCH)))
++            if blocked:
++                db.execute(update(QueuedAction).where(QueuedAction.id.in_(blocked), QueuedAction.phase == "READY").values(phase="DEAD", lease="", lease_until=None, last_error="Dependency failed; retry parent first"))
++            # Apply dependency eligibility before the bounded candidate window.
++            # Cleanup windows cannot displace runnable work or consume retry budgets.
++            candidates = list(db.scalars(select(QueuedAction).outerjoin(parent, QueuedAction.depends_on == parent.id).where(QueuedAction.phase == "READY", QueuedAction.due <= now, QueuedAction.tries < self.config.max_action_attempts, or_(QueuedAction.depends_on.is_(None), parent.phase == "DONE")).order_by(QueuedAction.due, QueuedAction.id).limit(CLAIM_BATCH)))
+             for action in candidates:
+-                parent = db.get(QueuedAction, action.depends_on) if action.depends_on else None
+-                if parent and parent.phase == "DEAD":
+-                    action.phase, action.last_error = "DEAD", "Dependency failed; retry parent first"
+-                    continue
+-                if parent and parent.phase != "DONE":
+-                    continue
+                 lease = new_id()
+-                changed = db.execute(update(QueuedAction).where(QueuedAction.id == action.id, QueuedAction.phase == "READY").values(phase="RUNNING", tries=QueuedAction.tries + 1, lease=lease, lease_until=now + timedelta(seconds=90)))
++                changed = db.execute(update(QueuedAction).where(QueuedAction.id == action.id, QueuedAction.phase == "READY", QueuedAction.due <= now, QueuedAction.tries < self.config.max_action_attempts).values(phase="RUNNING", tries=QueuedAction.tries + 1, lease=lease, lease_until=now + timedelta(seconds=90)))
+                 if changed.rowcount:
+                     return {"id": action.id, "request_id": action.request_id, "kind": action.kind, "lease": lease}
+         return None
+ 
+     async def invoke(self, action):
+         if self.config.action_transport == "direct":
+-            return await asyncio.to_thread(self.handlers.dispatch, action["kind"], action["request_id"])
++            call = asyncio.create_task(asyncio.to_thread(self.handlers.dispatch, action["kind"], action["request_id"]))
++            try:
++                return await asyncio.shield(call)
++            except asyncio.CancelledError:
++                # Threads cannot be killed safely. Keep ownership until dispatch
++                # ends, before shutdown disposes the database or a restart begins.
++                while not call.done():
++                    try:
++                        await asyncio.shield(call)
++                    except asyncio.CancelledError:
++                        continue
++                    except Exception:
++                        break
++                if not call.cancelled() and call.exception() is not None:
++                    logger.warning("Worker dispatch ended during cancellation: %s", type(call.exception()).__name__)
++                raise
+         if self.config.action_transport != "mcp":
+             raise ValueError("Unsupported action transport")
+         env = {**os.environ, **{"OPSDESK_" + key.upper(): str(value).lower() if isinstance(value, bool) else str(value) for key, value in self.config.model_dump().items()}}
+@@ -88,15 +131,47 @@ class ActionWorker:
+             return False
+         try:
+             result = await asyncio.wait_for(self.invoke(action), timeout=60)
+-            self.finish(action, result=result)
+         except Exception as exc:
+             self.finish(action, error=exc)
++        else:
++            # A failed completion write is a database fault, not a failed tool.
++            # Preserve the lease and recover through normal expiry/idempotence.
++            self.finish(action, result=result)
+         return True
+ 
++    async def _pause(self, delay):
++        await asyncio.sleep(delay)
++
+     async def run(self):
+-        while not self.stopping:
+-            if not await self.step():
+-                await asyncio.sleep(0.4)
++        if self.observations["state"] in {"running", "backoff"}:
++            raise RuntimeError("Worker is already running")
++        self.stopping = False
++        self.observations.update(state="running", consecutive_errors=0, retry_delay=0.0)
++        try:
++            while not self.stopping:
++                try:
++                    worked = await self.step()
++                except Exception as exc:
++                    self.observations["last_error"] = type(exc).__name__
++                    if not retryable_database_error(exc):
++                        self.observations["state"] = "failed"
++                        logger.error("Worker stopped; intervention required: %s", type(exc).__name__)
++                        raise
++                    errors = self.observations["consecutive_errors"] + 1
++                    delay = min(30.0, 0.4 * 2 ** min(errors - 1, 7))
++                    self.observations.update(state="backoff", consecutive_errors=errors, retry_delay=delay)
++                    logger.warning("Worker database retry in %.1fs: %s", delay, type(exc).__name__)
++                    await self._pause(delay)
++                    continue
++                if self.observations["consecutive_errors"]:
++                    self.observations["recoveries"] += 1
++                    logger.info("Worker database recovered")
++                self.observations.update(state="running", consecutive_errors=0, retry_delay=0.0)
++                if not worked:
++                    await self._pause(0.4)
++        finally:
++            if self.observations["state"] != "failed":
++                self.observations["state"] = "stopped"
+ 
+     def retry(self, action_id):
+         with self.database.session.begin() as db:
+diff --git a/tests/reliability/conftest.py b/tests/reliability/conftest.py
+new file mode 100644
+index 0000000..e9650f9
+--- /dev/null
++++ b/tests/reliability/conftest.py
+@@ -0,0 +1,11 @@
++import json
++
++import pytest
++
++
++@pytest.fixture
++def record(request):
++    """Keep synthetic state observations in JUnit, including on a red run."""
++    def save(value):
++        request.node.user_properties.append(("reliability_evidence", json.dumps(value, ensure_ascii=False)))
++    return save
+diff --git a/tests/reliability/helpers.py b/tests/reliability/helpers.py
+new file mode 100644
+index 0000000..6396e14
+--- /dev/null
++++ b/tests/reliability/helpers.py
+@@ -0,0 +1,51 @@
++from datetime import timedelta
++
++from sqlalchemy import func, select
++
++from opsdesk.queueing import enqueue
++from opsdesk.storage import ActionHistory, DeliveryReceipt, QueuedAction, SupportRequest, Thread, WorkOrder, new_id, timestamp
++
++
++def operation(db, owner, priority="P2"):
++    request_id, thread = new_id(), new_id()
++    with db.session.begin() as session:
++        session.add(Thread(id=thread, owner=owner))
++        session.flush()
++        session.add(SupportRequest(id=request_id, owner=owner, thread_id=thread, client_key=request_id,
++            input_digest="synthetic", message="电脑无法开机", phase="COMPLETE",
++            outcome={"intake": {"intent": "INCIDENT", "summary": "电脑无法开机"}, "priority": {"level": priority}}))
++        session.flush()
++        enqueue(session, request_id, priority)
++    return request_id
++
++
++def snapshot(db):
++    with db.session() as session:
++        actions = list(session.scalars(select(QueuedAction).order_by(QueuedAction.id)))
++        audits = list(session.scalars(select(ActionHistory).order_by(ActionHistory.id)))
++        return {"actions": [{"id": a.id, "kind": a.kind, "phase": a.phase, "tries": a.tries, "leased": bool(a.lease), "error": a.last_error} for a in actions],
++            "work_orders": session.scalar(select(func.count()).select_from(WorkOrder)),
++            "receipts": session.scalar(select(func.count()).select_from(DeliveryReceipt)),
++            "audits": [{"action": a.action_id, "attempt": a.attempt, "result": a.result} for a in audits]}
++
++
++class Clock:
++    def __init__(self):
++        self.now = timestamp() + timedelta(seconds=1)
++
++    def __call__(self):
++        return self.now
++
++    def advance(self, seconds):
++        self.now += timedelta(seconds=seconds)
++
++
++def stop_after_terminal(worker, db, monkeypatch):
++    finish = worker.finish
++
++    def wrapped(*args, **kwargs):
++        result = finish(*args, **kwargs)
++        if all(a["phase"] in {"DONE", "DEAD"} for a in snapshot(db)["actions"]):
++            worker.stopping = True
++        return result
++    monkeypatch.setattr(worker, "finish", wrapped)
+diff --git a/tests/reliability/test_queue_scheduling.py b/tests/reliability/test_queue_scheduling.py
+new file mode 100644
+index 0000000..28174d3
+--- /dev/null
++++ b/tests/reliability/test_queue_scheduling.py
+@@ -0,0 +1,211 @@
++import asyncio
++from datetime import timedelta
++
++import pytest
++from openpyxl import load_workbook
++from sqlalchemy import event, select, update
++
++from opsdesk import queueing
++from opsdesk.actions import ActionHandlers
++from opsdesk.queueing import ActionWorker
++from opsdesk.storage import QueuedAction, timestamp
++from tests.reliability.helpers import Clock, operation, snapshot
++
++
++def test_sixty_task_blocked_window_drains_in_dependency_order_without_duplicates(runtime, record):
++    config, db, _, _, owner, _ = runtime
++    requests = [operation(db, owner) for _ in range(30)]
++    now = timestamp()
++    with db.session.begin() as session:
++        session.execute(update(QueuedAction).where(QueuedAction.kind == "create_work_order").values(due=now - timedelta(seconds=1)))
++        session.execute(update(QueuedAction).where(QueuedAction.kind == "export_ledger").values(due=now - timedelta(seconds=10)))
++    worker = ActionWorker(db, config)
++    before = snapshot(db)
++    statements = []
++    def observed(*args):
++        statements.append(args[2])
++    event.listen(db.engine, "before_cursor_execute", observed)
++    try:
++        first = worker.claim()
++    finally:
++        event.remove(db.engine, "before_cursor_execute", observed)
++        record({"original_audit_fixture": {"ready": 60, "parents": 30, "older_blocked_children": 30}, "first_claim": first, "claim_sql_count": len(statements), "before": before})
++    assert first is not None and first["kind"] == "create_work_order"
++    assert len(statements) <= 8, "Claim should not query each blocked child's parent separately"
++
++    async def drain():
++        worker.finish(first, result=await worker.invoke(first))
++        for _ in range(59):
++            assert await worker.step()
++        assert not await worker.step()
++    asyncio.run(drain())
++    state = snapshot(db)
++    assert len(state["actions"]) == 60 and all(a["phase"] == "DONE" and a["tries"] == 1 for a in state["actions"])
++    assert state["work_orders"] == state["receipts"] == 30
++    assert len(state["audits"]) == 60 and all(a["result"] == "DONE" for a in state["audits"])
++    tools = ActionHandlers(db, config)
++    assert tools.create_work_order(requests[0])["reused"] and tools.export_ledger(requests[0])["reused"]
++    workbook = load_workbook(config.ledger_file)
++    assert workbook.active.max_row == 31
++    workbook.close()
++    assert snapshot(db)["work_orders"] == 30 and snapshot(db)["receipts"] == 30
++    record({"after_draining": state, "ledger_data_rows": 30, "replay_created_no_extra_rows": True})
++
++
++def test_dead_dependency_cleanup_does_not_block_independent_runnable_action(runtime, record):
++    config, db, _, _, owner, _ = runtime
++    for _ in range(30):
++        operation(db, owner, "P1")
++    now = timestamp()
++    with db.session.begin() as session:
++        session.execute(update(QueuedAction).where(QueuedAction.kind == "create_work_order").values(phase="DEAD", tries=config.max_action_attempts))
++        session.execute(update(QueuedAction).where(QueuedAction.depends_on.is_not(None)).values(due=now - timedelta(seconds=10)))
++    independent = operation(db, owner)
++    worker = ActionWorker(db, config)
++    first = worker.claim()
++    record({"dead_parents": 30, "blocked_children": 60, "first_claim": first})
++    assert first and first["request_id"] == independent and first["kind"] == "create_work_order"
++    async def scenario():
++        worker.finish(first, result=await worker.invoke(first))
++        assert await worker.step()
++        for _ in range(3):
++            assert not await worker.step()
++    asyncio.run(scenario())
++    state = snapshot(db)
++    assert sum(a["phase"] == "DEAD" for a in state["actions"]) == 90
++    assert sum(a["phase"] == "DONE" for a in state["actions"]) == 2
++    assert state["work_orders"] == state["receipts"] == 1
++    record({"after": state})
++
++
++@pytest.mark.parametrize("parent_phase", ["READY", "RUNNING", "DONE", "DEAD"])
++def test_child_requires_done_parent_and_dead_parent_blocks_child(runtime, record, parent_phase):
++    config, db, _, _, owner, _ = runtime
++    request_id = operation(db, owner)
++    now = timestamp()
++    with db.session.begin() as session:
++        parent = session.scalar(select(QueuedAction).where(QueuedAction.kind == "create_work_order"))
++        parent.phase, parent.due = parent_phase, now + timedelta(hours=1)
++        if parent_phase == "RUNNING":
++            parent.lease, parent.lease_until, parent.tries = "synthetic", now + timedelta(hours=1), 1
++    worker = ActionWorker(db, config)
++    if parent_phase == "DONE":
++        worker.handlers.create_work_order(request_id)
++    claimed = worker.claim()
++    if parent_phase == "DONE":
++        assert claimed and claimed["kind"] == "export_ledger"
++        worker.finish(claimed, result=asyncio.run(worker.invoke(claimed)))
++        assert snapshot(db)["receipts"] == 1
++    else:
++        assert claimed is None
++        child = next(a for a in snapshot(db)["actions"] if a["kind"] == "export_ledger")
++        assert child["phase"] == ("DEAD" if parent_phase == "DEAD" else "READY")
++        assert child["tries"] == 0 and not child["leased"]
++    record({"parent_phase": parent_phase, "claimed": claimed, "after": snapshot(db)})
++
++
++def test_empty_or_future_due_queue_is_not_claimed(runtime, record):
++    config, db, _, _, owner, _ = runtime
++    worker = ActionWorker(db, config)
++    assert worker.claim() is None
++    operation(db, owner)
++    with db.session.begin() as session:
++        session.execute(update(QueuedAction).values(due=timestamp() + timedelta(hours=1)))
++    assert worker.claim() is None
++    state = snapshot(db)
++    assert all(a["phase"] == "READY" and a["tries"] == 0 and not a["leased"] for a in state["actions"])
++    record({"future_due_after": state})
++
++
++def test_exhausted_ready_action_never_gets_an_extra_attempt(runtime, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    with db.session.begin() as session:
++        session.scalar(select(QueuedAction).where(QueuedAction.kind == "create_work_order")).tries = config.max_action_attempts
++    worker = ActionWorker(db, config)
++    claimed = worker.claim()
++    state = snapshot(db)
++    record({"claimed": claimed, "after": state})
++    assert claimed is None
++    assert all(a["phase"] == "DEAD" for a in state["actions"])
++    assert next(a for a in state["actions"] if a["kind"] == "create_work_order")["tries"] == config.max_action_attempts
++
++
++@pytest.mark.parametrize("exhausted", [False, True], ids=["last-allowed-attempt", "budget-exhausted"])
++def test_expired_lease_respects_budget_and_dependency(runtime, monkeypatch, record, exhausted):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    clock = Clock()
++    monkeypatch.setattr(queueing, "timestamp", clock)
++    with db.session.begin() as session:
++        parent = session.scalar(select(QueuedAction).where(QueuedAction.kind == "create_work_order"))
++        parent.phase, parent.lease, parent.lease_until = "RUNNING", "expired", clock() - timedelta(seconds=1)
++        parent.tries = config.max_action_attempts if exhausted else config.max_action_attempts - 1
++        old = {"id": parent.id, "lease": parent.lease}
++    worker = ActionWorker(db, config)
++    claim = worker.claim()
++    if exhausted:
++        assert claim is None and all(a["phase"] == "DEAD" for a in snapshot(db)["actions"])
++    else:
++        assert claim and claim["kind"] == "create_work_order" and claim["lease"] != "expired"
++        worker.finish(claim, result=asyncio.run(worker.invoke(claim)))
++        assert asyncio.run(worker.step())
++        assert all(a["phase"] == "DONE" for a in snapshot(db)["actions"])
++    assert not worker.finish(old, result={"stale": True})
++    state = snapshot(db)
++    assert sum(a["result"] == "LEASE_EXPIRED" for a in state["audits"]) == 1
++    assert next(a for a in state["actions"] if a["kind"] == "create_work_order")["tries"] == config.max_action_attempts
++    record({"clock": "simulated", "exhausted": exhausted, "after": state})
++
++
++def test_two_serial_workers_claim_distinct_actions_and_stale_lease_is_fenced(runtime, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    operation(db, owner)
++    first_worker, second_worker = ActionWorker(db, config), ActionWorker(db, config)
++    first, second = first_worker.claim(), second_worker.claim()
++    assert first and second and first["id"] != second["id"]
++    assert not first_worker.finish({"id": first["id"], "lease": "wrong"}, result={})
++    async def scenario():
++        first_worker.finish(first, result=await first_worker.invoke(first))
++        second_worker.finish(second, result=await second_worker.invoke(second))
++        assert await first_worker.step() and await second_worker.step()
++    asyncio.run(scenario())
++    state = snapshot(db)
++    assert all(a["phase"] == "DONE" and a["tries"] == 1 for a in state["actions"])
++    assert state["work_orders"] == state["receipts"] == 2
++    record({"execution": "serial SQLite claims, not MySQL concurrency", "claims_distinct": True, "after": state})
++
++
++def test_action_failures_dead_letter_then_manual_dependency_recovery(runtime, monkeypatch, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    clock = Clock()
++    monkeypatch.setattr(queueing, "timestamp", clock)
++    worker = ActionWorker(db, config)
++    actual_invoke, calls = worker.invoke, []
++    async def broken(action):
++        calls.append(action["kind"])
++        raise ValueError("Synthetic tool rejection")
++    monkeypatch.setattr(worker, "invoke", broken)
++    for _ in range(config.max_action_attempts):
++        assert asyncio.run(worker.step())
++        clock.advance(61)
++    assert worker.claim() is None
++    failed = snapshot(db)
++    assert all(a["phase"] == "DEAD" for a in failed["actions"])
++    assert calls == ["create_work_order"] * config.max_action_attempts
++    assert len(failed["audits"]) == config.max_action_attempts and all(a["result"] == "FAILED" for a in failed["audits"])
++    parent = next(a for a in failed["actions"] if a["kind"] == "create_work_order")
++    child = next(a for a in failed["actions"] if a["kind"] == "export_ledger")
++    with pytest.raises(ValueError):
++        worker.retry(child["id"])
++    monkeypatch.setattr(worker, "invoke", actual_invoke)
++    worker.retry(parent["id"])
++    assert asyncio.run(worker.step())
++    worker.retry(child["id"])
++    assert asyncio.run(worker.step())
++    state = snapshot(db)
++    assert all(a["phase"] == "DONE" and a["tries"] == 1 for a in state["actions"])
++    assert state["work_orders"] == state["receipts"] == 1
++    record({"clock": "simulated", "dead_letter": failed, "after_manual_dependency_recovery": state, "manual_actor_audit": "not implemented"})
+diff --git a/tests/reliability/test_worker_recovery.py b/tests/reliability/test_worker_recovery.py
+new file mode 100644
+index 0000000..4908155
+--- /dev/null
++++ b/tests/reliability/test_worker_recovery.py
+@@ -0,0 +1,394 @@
++import asyncio
++import sqlite3
++import threading
++
++import httpx
++import pytest
++from openpyxl import load_workbook
++from pymysql.err import OperationalError as MySQLError
++from sqlalchemy.exc import IntegrityError, OperationalError, ProgrammingError, TimeoutError as PoolTimeout
++
++from opsdesk import queueing
++from opsdesk.main import create_app
++from opsdesk.queueing import ActionWorker
++from opsdesk.storage import QueuedAction
++from tests.reliability.helpers import Clock, operation, snapshot, stop_after_terminal
++
++
++def db_error(kind):
++    if kind in {"busy", "schema"}:
++        original = sqlite3.OperationalError("synthetic-private-error-text")
++        original.sqlite_errorcode = sqlite3.SQLITE_BUSY if kind == "busy" else sqlite3.SQLITE_ERROR
++        return OperationalError("synthetic", None, original)
++    if kind in {"deadlock", "disconnect", "auth"}:
++        code = {"deadlock": 1213, "disconnect": 2003, "auth": 1045}[kind]
++        return OperationalError("synthetic", None, MySQLError(code, "synthetic-private-error-text"))
++    if kind == "pool":
++        return PoolTimeout("synthetic-private-error-text")
++    if kind == "constraint":
++        return IntegrityError("synthetic", None, ValueError("synthetic-private-error-text"))
++    if kind == "programming":
++        return ProgrammingError("synthetic", None, ValueError("synthetic-private-error-text"))
++    return RuntimeError("synthetic-private-error-text")
++
++
++@pytest.mark.parametrize("kind", ["busy", "deadlock", "disconnect", "pool"])
++def test_claim_database_recovers_and_completes_real_actions(runtime, monkeypatch, record, kind):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    worker = ActionWorker(db, config)
++    stop_after_terminal(worker, db, monkeypatch)
++    claim, delays, attempts = worker.claim, [], []
++
++    def flaky():
++        attempts.append(True)
++        if len(attempts) <= 2:
++            raise db_error(kind)
++        return claim()
++
++    async def pause(delay):
++        delays.append(delay)
++        await asyncio.sleep(0)
++
++    monkeypatch.setattr(worker, "claim", flaky)
++    monkeypatch.setattr(worker, "_pause", pause, raising=False)
++
++    async def scenario():
++        try:
++            await asyncio.wait_for(worker.run(), timeout=2)
++        finally:
++            record({"fault": kind, "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
++    asyncio.run(scenario())
++    assert delays == [.4, .8]
++    state = snapshot(db)
++    assert all(a["phase"] == "DONE" and a["tries"] == 1 and not a["leased"] for a in state["actions"])
++    assert state["work_orders"] == state["receipts"] == 1
++    assert [a["result"] for a in state["audits"]] == ["DONE", "DONE"]
++    assert worker.observations["recoveries"] == 1 and worker.observations["consecutive_errors"] == 0
++    workbook = load_workbook(config.ledger_file)
++    assert workbook.active.max_row == 2
++    workbook.close()
++
++
++def test_repeated_transient_errors_use_capped_backoff(runtime, monkeypatch, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    worker = ActionWorker(db, config)
++    stop_after_terminal(worker, db, monkeypatch)
++    real_claim, delays, calls = worker.claim, [], 0
++
++    def flaky():
++        nonlocal calls
++        calls += 1
++        if calls <= 9:
++            raise db_error("busy")
++        return real_claim()
++
++    async def pause(delay):
++        delays.append(delay)
++        await asyncio.sleep(0)
++
++    monkeypatch.setattr(worker, "claim", flaky)
++    monkeypatch.setattr(worker, "_pause", pause, raising=False)
++    try:
++        asyncio.run(asyncio.wait_for(worker.run(), 2))
++    finally:
++        record({"fault_count": 9, "scheduled_delays_not_wall_time": delays, "after": snapshot(db)})
++    assert delays == [.4, .8, 1.6, 3.2, 6.4, 12.8, 25.6, 30, 30]
++    assert all(a["phase"] == "DONE" for a in snapshot(db)["actions"])
++
++
++@pytest.mark.parametrize("kind", ["schema", "auth", "constraint", "programming", "unknown"])
++def test_permanent_database_or_programming_error_stops_without_retry(runtime, monkeypatch, record, caplog, kind):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    worker = ActionWorker(db, config)
++    error, calls, delays = db_error(kind), [], []
++
++    def broken():
++        calls.append(True)
++        raise error
++
++    async def pause(delay):
++        delays.append(delay)
++
++    monkeypatch.setattr(worker, "claim", broken)
++    monkeypatch.setattr(worker, "_pause", pause, raising=False)
++    with pytest.raises(type(error)):
++        asyncio.run(worker.run())
++    record({"fault": kind, "claim_calls": len(calls), "delays": delays, "after": snapshot(db), "worker": getattr(worker, "observations", None)})
++    assert len(calls) == 1 and not delays
++    assert worker.observations["state"] == "failed"
++    assert worker.observations["last_error"] == type(error).__name__
++    assert "worker" in caplog.text.lower() and "synthetic-private-error-text" not in caplog.text
++    assert all(a["phase"] == "READY" and a["tries"] == 0 for a in snapshot(db)["actions"])
++
++
++@pytest.mark.parametrize("when", ["before-commit", "after-commit"])
++def test_finish_database_fault_recovers_without_duplicate_side_effects(runtime, monkeypatch, record, when):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    clock = Clock()
++    monkeypatch.setattr(queueing, "timestamp", clock)
++    worker = ActionWorker(db, config)
++    finish, invoke, injected, delays, dispatched = worker.finish, worker.invoke, False, [], []
++
++    async def observed_invoke(action):
++        result = await invoke(action)
++        dispatched.append({"kind": action["kind"], "reused": result.get("reused")})
++        return result
++
++    def flaky_finish(action, **kwargs):
++        nonlocal injected
++        if action["kind"] == "create_work_order" and not injected:
++            injected = True
++            if when == "after-commit":
++                finish(action, **kwargs)
++            raise db_error("disconnect")
++        result = finish(action, **kwargs)
++        if all(a["phase"] == "DONE" for a in snapshot(db)["actions"]):
++            worker.stopping = True
++        return result
++
++    async def pause(delay):
++        delays.append(delay)
++        clock.advance(91)
++        await asyncio.sleep(0)
++
++    monkeypatch.setattr(worker, "invoke", observed_invoke)
++    monkeypatch.setattr(worker, "finish", flaky_finish)
++    monkeypatch.setattr(worker, "_pause", pause, raising=False)
++    try:
++        asyncio.run(asyncio.wait_for(worker.run(), 2))
++    finally:
++        record({"fault": when, "clock": "simulated lease expiry", "delays": delays, "dispatches": dispatched, "after": snapshot(db)})
++    assert delays == [.4]
++    state = snapshot(db)
++    assert all(a["phase"] == "DONE" for a in state["actions"])
++    assert state["work_orders"] == state["receipts"] == 1
++    assert "FAILED" not in [a["result"] for a in state["audits"]]
++    creations = [a for a in dispatched if a["kind"] == "create_work_order"]
++    assert [a["reused"] for a in creations] == ([False, True] if when == "before-commit" else [False])
++    assert sum(a["result"] == "LEASE_EXPIRED" for a in state["audits"]) == int(when == "before-commit")
++
++
++def test_cancel_during_backoff_then_restart_completes_pending_queue(runtime, monkeypatch, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    worker = ActionWorker(db, config)
++
++    async def scenario():
++        entered = asyncio.Event()
++
++        def broken():
++            raise db_error("busy")
++
++        async def pause(delay):
++            entered.set()
++            await asyncio.Event().wait()
++
++        monkeypatch.setattr(worker, "claim", broken)
++        monkeypatch.setattr(worker, "_pause", pause, raising=False)
++        job = asyncio.create_task(worker.run())
++        try:
++            await asyncio.wait_for(entered.wait(), .5)
++            job.cancel()
++            with pytest.raises(asyncio.CancelledError):
++                await job
++            assert worker.observations["state"] == "stopped"
++            before = snapshot(db)
++            assert all(a["phase"] == "READY" and a["tries"] == 0 for a in before["actions"])
++            restarted = ActionWorker(db, config)
++            stop_after_terminal(restarted, db, monkeypatch)
++            await asyncio.wait_for(restarted.run(), 2)
++            assert all(a["phase"] == "DONE" for a in snapshot(db)["actions"])
++            record({"cancelled_during": "backoff", "before_restart": before, "after_restart": snapshot(db)})
++        finally:
++            job.cancel()
++            await asyncio.gather(job, return_exceptions=True)
++    asyncio.run(scenario())
++
++
++def test_cancel_inflight_preserves_lease_and_restarts_after_expiry(runtime, monkeypatch, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    clock = Clock()
++    monkeypatch.setattr(queueing, "timestamp", clock)
++    worker = ActionWorker(db, config)
++
++    async def scenario():
++        entered, exited = asyncio.Event(), asyncio.Event()
++
++        async def blocked(action):
++            entered.set()
++            try:
++                await asyncio.Event().wait()
++            finally:
++                exited.set()
++
++        monkeypatch.setattr(worker, "invoke", blocked)
++        job = asyncio.create_task(worker.run())
++        try:
++            await asyncio.wait_for(entered.wait(), .5)
++            job.cancel()
++            with pytest.raises(asyncio.CancelledError):
++                await job
++            assert exited.is_set()
++            before = snapshot(db)
++            with db.session() as session:
++                row = next(a for a in session.query(QueuedAction) if a.phase == "RUNNING")
++                stale = {"id": row.id, "lease": row.lease}
++            restarted = ActionWorker(db, config)
++            assert restarted.claim() is None
++            clock.advance(91)
++            assert await restarted.step() and await restarted.step()
++            assert not worker.finish(stale, result={"stale": True})
++            state = snapshot(db)
++            assert state["work_orders"] == state["receipts"] == 1
++            assert all(a["phase"] == "DONE" for a in state["actions"])
++            assert sum(a["result"] == "LEASE_EXPIRED" for a in state["audits"]) == 1
++            record({"cancelled_during": "async invocation", "clock": "simulated", "before_restart": before, "after_restart": state})
++        finally:
++            job.cancel()
++            await asyncio.gather(job, return_exceptions=True)
++    asyncio.run(scenario())
++
++
++def test_cancel_waits_for_owned_direct_thread_before_restarting(runtime, monkeypatch, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    worker = ActionWorker(db, config)
++    dispatch = worker.handlers.dispatch
++    started, release, finished = threading.Event(), threading.Event(), threading.Event()
++
++    def blocked(kind, request_id):
++        result = dispatch(kind, request_id)
++        if kind == "create_work_order":
++            started.set()
++            try:
++                assert release.wait(2), "Test must release its own thread"
++            finally:
++                finished.set()
++        return result
++
++    monkeypatch.setattr(worker.handlers, "dispatch", blocked)
++
++    async def scenario():
++        job = asyncio.create_task(worker.run())
++        async def unblock():
++            await asyncio.sleep(.05)
++            release.set()
++        unblock_job = None
++        try:
++            assert await asyncio.to_thread(started.wait, 1)
++            unblock_job = asyncio.create_task(unblock())
++            job.cancel()
++            with pytest.raises(asyncio.CancelledError):
++                await job
++            assert finished.is_set(), "Cancelled worker must not leave its direct thread unowned"
++            before = snapshot(db)
++            assert before["work_orders"] == 1 and any(a["phase"] == "RUNNING" for a in before["actions"])
++            clock = Clock()
++            clock.advance(91)
++            monkeypatch.setattr(queueing, "timestamp", clock)
++            restarted = ActionWorker(db, config)
++            assert await restarted.step() and await restarted.step()
++            state = snapshot(db)
++            assert state["work_orders"] == state["receipts"] == 1
++            assert all(a["phase"] == "DONE" for a in state["actions"])
++            record({"cancelled_during": "real local direct thread", "thread_joined_before_return": True, "before_restart": before, "after_restart": state})
++        finally:
++            release.set()
++            await asyncio.to_thread(finished.wait, 2)
++            job.cancel()
++            await asyncio.gather(job, return_exceptions=True)
++            if unblock_job:
++                unblock_job.cancel()
++                await asyncio.gather(unblock_job, return_exceptions=True)
++    asyncio.run(scenario())
++
++
++@pytest.mark.parametrize("body_error", [False, True], ids=["normal-close", "exceptional-close"])
++def test_app_lifespan_cleans_worker_and_database(runtime, monkeypatch, record, body_error):
++    config = runtime[0]
++    config.worker_enabled = True
++    app = create_app(config)
++    worker = app.state.worker
++    dispose, disposed = app.state.database.engine.dispose, []
++    monkeypatch.setattr(app.state.database.engine, "dispose", lambda: (disposed.append(True), dispose())[-1])
++
++    async def scenario():
++        entered, exited = asyncio.Event(), asyncio.Event()
++        captured = []
++
++        async def held():
++            captured.append(asyncio.current_task())
++            entered.set()
++            try:
++                await asyncio.Event().wait()
++            finally:
++                exited.set()
++
++        monkeypatch.setattr(worker, "run", held)
++        try:
++            try:
++                async with app.router.lifespan_context(app):
++                    await asyncio.wait_for(entered.wait(), .5)
++                    if body_error:
++                        raise ValueError("Synthetic lifespan body failure")
++            except* ValueError as errors:
++                # MCP's AnyIO task group wraps the original body error. Accept
++                # that documented shape without masking unrelated exceptions.
++                assert body_error
++                pending = list(errors.exceptions)
++                while pending:
++                    error = pending.pop()
++                    if isinstance(error, BaseExceptionGroup):
++                        pending.extend(error.exceptions)
++                    else:
++                        assert str(error) == "Synthetic lifespan body failure"
++            assert exited.is_set() and captured[0].done()
++            assert disposed
++            record({"body_error": body_error, "worker_done": captured[0].done(), "database_disposed": bool(disposed)})
++        finally:
++            for task in captured:
++                task.cancel()
++            await asyncio.gather(*captured, return_exceptions=True)
++            dispose()
++    asyncio.run(scenario())
++
++
++def test_fatal_background_worker_is_visible_then_fresh_app_recovers(runtime, monkeypatch, record):
++    config, db, _, _, owner, _ = runtime
++    operation(db, owner)
++    config.worker_enabled = True
++    app = create_app(config)
++    worker = app.state.worker
++    monkeypatch.setattr(worker, "claim", lambda: (_ for _ in ()).throw(db_error("schema")))
++
++    async def scenario():
++        async with app.router.lifespan_context(app):
++            # Await the owned task if available, without suppressing the final assertions.
++            job = getattr(app.state, "worker_task", None)
++            if job:
++                await asyncio.gather(job, return_exceptions=True)
++            else:
++                await asyncio.sleep(0)
++            async with httpx.AsyncClient(transport=httpx.ASGITransport(app=app), base_url="http://testserver") as client:
++                health = await client.get("/api/health")
++                assert health.status_code == 503
++                assert health.json()["worker"]["state"] == "failed"
++                await client.post("/api/login", json={"username": "engineer", "password": config.engineer_password})
++                diagnostics = (await client.get("/api/diagnostics")).json()
++                assert diagnostics["worker"]["alive"] is False
++                assert diagnostics["worker"]["last_error"] == "OperationalError"
++                record({"fatal_health": health.json(), "before_restart": snapshot(db)})
++        fresh = create_app(config)
++        stop_after_terminal(fresh.state.worker, fresh.state.database, monkeypatch)
++        async with fresh.router.lifespan_context(fresh):
++            await asyncio.wait_for(fresh.state.worker_task, 2)
++            state = snapshot(fresh.state.database)
++            assert all(a["phase"] == "DONE" for a in state["actions"])
++            assert state["work_orders"] == state["receipts"] == 1
++            record({"fresh_app_completed_pending_actions": state})
++    asyncio.run(scenario())

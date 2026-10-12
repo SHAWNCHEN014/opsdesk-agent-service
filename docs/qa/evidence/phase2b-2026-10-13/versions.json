@@ -1,0 +1,15 @@
+{
+  "phase2a_commit": "cc659a1131ba6a6d9d9066c58a9724a16347abba",
+  "phase2b_source_commit": "6012e8898cc17eb20160bdb0321e12ad3206cbba",
+  "phase2b_source_subject": "fix(queue): recover worker database faults and prevent dependency starvation",
+  "committed_source_files": [
+    "opsdesk/main.py",
+    "opsdesk/queueing.py",
+    "tests/reliability/conftest.py",
+    "tests/reliability/helpers.py",
+    "tests/reliability/test_queue_scheduling.py",
+    "tests/reliability/test_worker_recovery.py"
+  ],
+  "source_commit_matches_full_green_hashes": true,
+  "remote_push_performed": false
+}
