@@ -1,12 +1,12 @@
 # OpsDesk AI Quality Engineering：交付导航
 
-更新：2026-10-13，Phase3A。仅对应独立新版OpsDesk；历史阶段结论保留当时状态。本轮按要求未push，新增报告目前在本地；同步后下列Phase3A Raw链接才能读取。
+更新：2026-10-13，Phase3A。仅对应独立新版OpsDesk；历史阶段结论保留当时状态。Phase3A源码、报告及证据已按用户授权推送GitHub；下列Raw链接可读取最新交付。
 
 ## 给GPT阅读
 
-- **[最新Phase3A完整报告](PHASE3A_REAL_AI_EVALUATION.md)**：[同步后Raw纯文本](https://raw.githubusercontent.com/SHAWNCHEN014/opsdesk-agent-service/main/docs/qa/PHASE3A_REAL_AI_EVALUATION.md)。
+- **[最新Phase3A完整报告](PHASE3A_REAL_AI_EVALUATION.md)**：[Raw纯文本](https://raw.githubusercontent.com/SHAWNCHEN014/opsdesk-agent-service/main/docs/qa/PHASE3A_REAL_AI_EVALUATION.md)。
 - **[22条独立人工核验表](evidence/phase3a-2026-10-13/real-final/HUMAN_REVIEW.md)**：包含输入、预期、实际答案及检索片段，全部待人工评分。
-- **[全部阶段全文合并](DELIVERY_BUNDLE.md)**：[Raw纯文本](https://raw.githubusercontent.com/SHAWNCHEN014/opsdesk-agent-service/main/docs/qa/DELIVERY_BUNDLE.md)。本地最新合并六份原文；远程未同步前仍为五份历史报告。
+- **[全部阶段全文合并](DELIVERY_BUNDLE.md)**：[Raw纯文本](https://raw.githubusercontent.com/SHAWNCHEN014/opsdesk-agent-service/main/docs/qa/DELIVERY_BUNDLE.md)。合并六份原文，已同步GitHub。
 - [版本及文件哈希](delivery-manifest.json)。如需固定某次交付，请使用GitHub页面的永久链接（将main换成该次完整commit），避免未来更新影响引用。
 
 可把Raw链接直接交给支持网页访问的GPT，并说明：“请读取全文，以实际报告和证据为准；区分历史阶段与最新结果。如果无法访问或全文未读取，请明确告知，不要推测。”链接本身不保证所有GPT都具有网页读取权限。
@@ -42,7 +42,7 @@
 
 Phase2C最终实测业务版本：`1e801a300a0e0e7205fe2a7999a36022dc1939a4`；历史证据文档提交：`a4208a811d82cd02ba34cd94bb55236227fbbf13`。导航和合并文件不改变已验证业务代码。
 
-**真实性边界：** Phase2C的138项是离线执行用例；Phase3A的174项包含原138项和新增36项，覆盖率82.03%/70.19%仍包含Mock和临时SQLite。Phase3A真实模型评测单独保存，不代表MySQL并发/Redis恢复验收。Phase2C历史版本首次Linux远程138项通过见[独立记录](evidence/phase3a-2026-10-13/previous-ci-confirmation.json)；本轮新增版本未push/未远程执行。历史报告不改写。没有银行生产上线、获奖、全面防注入或性能提升结论。
+**真实性边界：** Phase2C的138项是离线执行用例；Phase3A的174项包含原138项和新增36项，覆盖率82.03%/70.19%仍包含Mock和临时SQLite。Phase3A真实模型评测单独保存，不代表MySQL并发/Redis恢复验收。Phase2C历史版本首次Linux远程138项通过见[独立记录](evidence/phase3a-2026-10-13/previous-ci-confirmation.json)；Phase3A交付版本7d3f3c已完成Linux远程174项离线回归，全部通过；见[同步与CI验证](GITHUB_SYNC.md)。历史报告不改写。没有银行生产上线、获奖、全面防注入或性能提升结论。
 
 ## 本地复跑
 
@@ -60,3 +60,7 @@ python scripts/qa/real_ai.py --profile real_ai_full --output artifacts/real-ai/n
 ```
 
 支持real_rag、real_llm、real_ai_full及offline。目录必须新建；不下载模型。环境缺失退出2、确定性缺陷退出1，语义评审待完成也不能返回完整验收通过。详细前置条件及独立命令见Phase3A报告。
+
+## GitHub同步约定
+
+根据用户2026-10-13授权，今后本项目完成并验证的工作默认提交并推送现有origin。发布记录如实区分离线通过、真实AI失败及待人审结果。最新同步与CI证据见[GITHUB_SYNC.md](GITHUB_SYNC.md)。

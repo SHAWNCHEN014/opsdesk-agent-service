@@ -1,0 +1,55 @@
+{
+  "note": "Original downloaded reports retained byte for byte; excludes this manifest.",
+  "files": [
+    {
+      "path": "confirmation.json",
+      "bytes": 2438,
+      "sha256": "ae9022eb214cef494d3637ec96a7e07cf40f1be614f8796a529c7738ff394f34"
+    },
+    {
+      "path": "coverage.json",
+      "bytes": 279254,
+      "sha256": "4bd8358486a30d9d1fd861c444b4a7b43dc3cfbf90435958b5a9daa94ae7da9a"
+    },
+    {
+      "path": "coverage.txt",
+      "bytes": 1734,
+      "sha256": "b69edf93c65fc64ccb156b6dfa825ca67bda0eb6d7a4fe400e49c8483a2f6691"
+    },
+    {
+      "path": "coverage.xml",
+      "bytes": 58563,
+      "sha256": "48e5d158bb64a26c58ea247db3f34001aef2a7c8557871627b77eecc9ecf7d69"
+    },
+    {
+      "path": "evaluation.json",
+      "bytes": 8468,
+      "sha256": "3f1d8008b7fc57bf7056df4863eed9703b358dca248f8eee4ca7654bf77d0508"
+    },
+    {
+      "path": "junit.xml",
+      "bytes": 119053,
+      "sha256": "c5050c282741bfd81fd8923e51b82b7143fd37fe164f962e8e92cd549a311875"
+    },
+    {
+      "path": "pytest-output.txt",
+      "bytes": 802,
+      "sha256": "15fd1b9dbc503b55c4270b2ecabfa31dd4c9b9e204f88c0a08e623fd2d7114db"
+    },
+    {
+      "path": "quality-report.md",
+      "bytes": 2250,
+      "sha256": "42542804e4d0ee10bb880ee3c3867ef2de7e9261f9c86658c1e5a6558e74e27a"
+    },
+    {
+      "path": "run.json",
+      "bytes": 2168,
+      "sha256": "cf7a0cc67cd076e7e913939c1112205653690e05acaf1eb4e852d73cc339ed9f"
+    },
+    {
+      "path": "summary.json",
+      "bytes": 41743,
+      "sha256": "760571603a4d960eac0eaa369279cd2a256d47f8d368282903acd2f174c1fe40"
+    }
+  ]
+}

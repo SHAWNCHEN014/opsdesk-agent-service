@@ -2,7 +2,7 @@
   "generated_on": "2026-10-13",
   "phase3a_tested_business_commit": "d2916aedb9e16fd46243221abe746ebf22dcfcd6",
   "phase2c_tested_business_commit": "1e801a300a0e0e7205fe2a7999a36022dc1939a4",
-  "note": "Excludes itself. Historical source reports unchanged. Phase3A local commits not pushed; real gate remains failed and 22 independent human reviews pending.",
+  "note": "Excludes itself. Historical reports unchanged. Phase3A published; GitHub offline CI at 7d3f3c passed 174. Real AI gate remains failed and 22 independent human reviews pending.",
   "files": [
     {
       "path": "docs/qa/OPSDesk_QA_AUDIT.md",
@@ -36,23 +36,35 @@
     },
     {
       "path": "docs/qa/README.md",
-      "bytes": 5588,
-      "sha256": "4fe725c2bf5ec154ea84fa11fef791afb12d0278254bae8a850711c29786e56c"
+      "bytes": 5885,
+      "sha256": "d9d2489362ee96226f3c2719807050d34cec77ca7f8dc7fb11214b76c7d9af12"
     },
     {
       "path": "docs/qa/DELIVERY_BUNDLE.md",
-      "bytes": 145161,
-      "sha256": "69b191ec52aa573c532a957fc023ebc61e245ef1190bec51076fbc29ed2e4ada"
+      "bytes": 145332,
+      "sha256": "26ee48f438cda23aaa44469bd1bfe9dd15870b8fdf7aa5c23ff10cf7a8419371"
     },
     {
       "path": "docs/qa/quality-status.json",
-      "bytes": 4284,
-      "sha256": "0a178fb54a5df38a1af04f0a5bf7379724e29a44029ea404419476526851e37e"
+      "bytes": 4483,
+      "sha256": "7dedd815189866e72548a76ce7a6a382fb931fcc278e73985123b2abc75cdd18"
     },
     {
       "path": "docs/qa/evidence/phase3a-2026-10-13/manifest.json",
       "bytes": 17997,
       "sha256": "0130629b1b81103716a5302c9f5db698d56863ab435696d87663e010789e97fa"
+    },
+    {
+      "path": "docs/qa/GITHUB_SYNC.md",
+      "bytes": 1957,
+      "sha256": "499aef90e58633853ddccdd4e6290e700e934d15f407383b0eea8f2a10034b95"
+    },
+    {
+      "path": "docs/qa/evidence/github-sync-2026-10-13/manifest.json",
+      "bytes": 1596,
+      "sha256": "26537b93ec34f2721a541b5ef42e286f9de0f04a6d7a8a663b6d0ea39de06675"
     }
-  ]
+  ],
+  "published_phase3a_commit": "7d3f3cdc10a0f3c4fb965ae704beedd2613f1dca",
+  "remote_ci_run": "https://github.com/SHAWNCHEN014/opsdesk-agent-service/actions/runs/38331550278"
 }

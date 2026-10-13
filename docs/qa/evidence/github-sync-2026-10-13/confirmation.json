@@ -1,0 +1,65 @@
+{
+  "run_url": "https://github.com/SHAWNCHEN014/opsdesk-agent-service/actions/runs/38331550278",
+  "head_sha": "7d3f3cdc10a0f3c4fb965ae704beedd2613f1dca",
+  "conclusion": "success",
+  "environment": {
+    "python": "3.12.15",
+    "system": "Linux",
+    "dependencies": {
+      "pytest": "9.1.1",
+      "coverage": "7.16.2",
+      "SQLAlchemy": "2.0.54",
+      "FastAPI": "0.141.1",
+      "httpx": "0.28.1",
+      "openpyxl": "3.1.5",
+      "mcp": "1.30.0",
+      "anyio": "4.15.1",
+      "PyMySQL": "1.2.3"
+    }
+  },
+  "pytest": {
+    "tests": 174,
+    "passed": 174,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "original_138_all_passed": true,
+  "coverage": {
+    "status": "completed",
+    "scope": "opsdesk/*.py in Pytest process; model/vector stubs and temporary SQLite",
+    "line": {
+      "covered": 1077,
+      "total": 1313,
+      "percent": 82.02589489718203
+    },
+    "branch": {
+      "covered": 226,
+      "total": 322,
+      "percent": 70.1863354037267
+    },
+    "partial_branches": 46,
+    "combined_percent": 79.69418960244649,
+    "threshold": null,
+    "gate_policy": "Measurement required; no invented percentage threshold"
+  },
+  "gate": {
+    "status": "passed",
+    "exit_code": 0,
+    "reasons": [],
+    "scope": "offline deterministic checks only; not a production release approval"
+  },
+  "scope": "GitHub Ubuntu offline deterministic gate only; no real model/database or branch protection validation",
+  "registry_note": "Artifacts retain the registry at 7d3f3c, including the then historical remote_ci not_run entry. This subsequent run independently verifies remote CI.",
+  "artifacts": {
+    "coverage.json": "4bd8358486a30d9d1fd861c444b4a7b43dc3cfbf90435958b5a9daa94ae7da9a",
+    "coverage.txt": "b69edf93c65fc64ccb156b6dfa825ca67bda0eb6d7a4fe400e49c8483a2f6691",
+    "coverage.xml": "48e5d158bb64a26c58ea247db3f34001aef2a7c8557871627b77eecc9ecf7d69",
+    "evaluation.json": "3f1d8008b7fc57bf7056df4863eed9703b358dca248f8eee4ca7654bf77d0508",
+    "junit.xml": "c5050c282741bfd81fd8923e51b82b7143fd37fe164f962e8e92cd549a311875",
+    "pytest-output.txt": "15fd1b9dbc503b55c4270b2ecabfa31dd4c9b9e204f88c0a08e623fd2d7114db",
+    "quality-report.md": "42542804e4d0ee10bb880ee3c3867ef2de7e9261f9c86658c1e5a6558e74e27a",
+    "run.json": "cf7a0cc67cd076e7e913939c1112205653690e05acaf1eb4e852d73cc339ed9f",
+    "summary.json": "760571603a4d960eac0eaa369279cd2a256d47f8d368282903acd2f174c1fe40"
+  }
+}

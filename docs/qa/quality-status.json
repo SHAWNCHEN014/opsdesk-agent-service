@@ -111,11 +111,6 @@
       "id": "load_soak",
       "status": "not_run",
       "reason": "未建立负载与长稳基线"
-    },
-    {
-      "id": "remote_ci",
-      "status": "not_run",
-      "reason": "Phase3A新版本按要求未push，远程CI未运行；历史2edce8e的138项Linux通过记录见Phase3A previous-ci-confirmation.json"
     }
   ],
   "real_ai_snapshot": {
@@ -127,5 +122,16 @@
     "agent_passed": 21,
     "agent_inconclusive": 1,
     "human_review_pending": 22
+  },
+  "remote_ci_snapshot": {
+    "tested_commit": "7d3f3cdc10a0f3c4fb965ae704beedd2613f1dca",
+    "run_url": "https://github.com/SHAWNCHEN014/opsdesk-agent-service/actions/runs/38331550278",
+    "status": "passed",
+    "exit_code": 0,
+    "passed": 174,
+    "failed": 0,
+    "skipped": 0,
+    "evidence": "evidence/github-sync-2026-10-13/confirmation.json",
+    "scope": "offline deterministic GitHub Actions only"
   }
 }
